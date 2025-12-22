@@ -129,12 +129,12 @@ export default function Registry() {
               </div>
             </DialogTrigger>
             
-            <DialogContent className="max-w-[90vw] w-full max-h-[90vh] flex flex-col p-6 bg-neutral-50/95 backdrop-blur-3xl border-neutral-200">
+            <DialogContent className="max-w-[90vw] sm:max-w-[90vw] w-full max-h-[90vh] flex flex-col p-6 bg-neutral-50/95 backdrop-blur-3xl border-neutral-200">
               <DialogHeader className="pb-4 border-b border-neutral-200/50 mb-4">
                 <DialogTitle className="text-3xl font-light text-center">{t('registry.browseBtn')}</DialogTitle>
               </DialogHeader>
               <div className="overflow-y-auto px-2 py-2 flex-1 scrollbar-hide">
-                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                    {GIFTS.map((gift) => {
                      const isFullyFunded = gift.collected >= gift.price;
                      const percent = Math.min((gift.collected / gift.price) * 100, 100);
