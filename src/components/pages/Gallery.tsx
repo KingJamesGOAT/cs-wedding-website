@@ -18,9 +18,14 @@ export default function Gallery() {
           <h2 className="text-4xl sm:text-5xl font-serif mb-4 text-white">
             {t('gallery.title')}
           </h2>
-          <p className="text-neutral-400 max-w-2xl mx-auto text-lg">
+          <p className="text-neutral-400 max-w-2xl mx-auto text-lg mb-8">
             {t('gallery.subtitle')}
           </p>
+          <div className="max-w-md mx-auto text-wrap">
+            <h3 className="text-xl sm:text-2xl font-serif text-white/90 italic">
+              {t('gallery.officialPhotos')}
+            </h3>
+          </div>
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

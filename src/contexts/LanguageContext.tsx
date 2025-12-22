@@ -13,7 +13,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 const translations: Record<string, Record<Language, string>> = {
   // Navigation
   'nav.home': { en: 'Home', fr: 'Accueil' },
-  'nav.details': { en: 'Details', fr: 'Infos Pratiques' }, // Added
+  'nav.details': { en: 'Details', fr: 'Infos Pratiques' },
   'nav.rsvp': { en: 'RSVP', fr: 'RSVP' },
   'nav.registry': { en: 'Registry', fr: 'Liste de mariage' },
   'nav.venue': { en: 'Venue', fr: 'Lieux' },
@@ -27,13 +27,13 @@ const translations: Record<string, Record<Language, string>> = {
   },
   'home.saveDate': { en: 'Save the Date!', fr: 'Réservez la date !' },
   
-  // Details Section (NEW)
+  // Details Section
   'details.title': { en: 'Wedding Details', fr: 'Détails du Mariage' },
   'details.subtitle': { en: 'Useful information for our guests', fr: 'Informations utiles pour nos invités' },
   'details.accommodation.title': { en: 'Where to Stay', fr: 'Où dormir' },
   'details.accommodation.description': { 
-    en: 'We recommend staying in Fribourg (approx. 15 min drive). Here are a few suggestions:', 
-    fr: 'Nous recommandons de séjourner à Fribourg (env. 15 min de route). Voici quelques suggestions :' 
+    en: 'We recommend staying in Fribourg (15 min drive). Here are a few suggestions:', 
+    fr: 'Nous recommandons de séjourner à Fribourg (15 min de route). Voici quelques suggestions :' 
   },
   'details.book': { en: 'Book Now', fr: 'Réserver' },
   'details.qa.title': { en: 'Common Questions', fr: 'Questions Fréquentes' },
@@ -41,18 +41,18 @@ const translations: Record<string, Record<Language, string>> = {
   // Q&A Specifics
   'details.qa.dressCode.question': { en: 'What is the dress code?', fr: 'Quel est le dress code ?' },
   'details.qa.dressCode.answer': { 
-    en: 'Cocktail Attire. We want you to feel comfortable but look your best!', 
-    fr: 'Tenue de cocktail. Soyez élégants et à l\'aise !' 
+    en: 'Cocktail Attire.', 
+    fr: 'Tenue de cocktail.' 
   },
   'details.qa.transport.question': { en: 'Parking & Transport', fr: 'Parking et Transport' },
   'details.qa.transport.answer': { 
-    en: 'We recommend arriving by car. Free parking is available at Guglerahof. Taxis are available from Fribourg.', 
-    fr: 'Nous recommandons de venir en voiture. Un parking gratuit est disponible au Guglerahof. Des taxis sont disponibles depuis Fribourg.' 
+    en: 'Free parking at Guglerahof. Taxis available from Fribourg.', 
+    fr: 'Parking gratuit au Guglerahof. Taxis disponibles depuis Fribourg.' 
   },
   'details.qa.children.question': { en: 'Are children invited?', fr: 'Les enfants sont-ils invités ?' },
   'details.qa.children.answer': { 
-    en: 'We love your little ones, but this will be an adults-only celebration.', 
-    fr: 'Nous adorons vos enfants, mais la fête sera réservée aux adultes.' 
+    en: 'Yes! Children are invited. We look forward to celebrating with your whole family.', 
+    fr: 'Oui ! Les enfants sont les bienvenus. Nous avons hâte de célébrer avec toute la famille.' 
   },
   'details.qa.rsvp.question': { en: 'When should I RSVP?', fr: 'Quand répondre ?' },
   'details.qa.rsvp.answer': { en: 'Please RSVP by May 1st, 2026.', fr: 'Merci de répondre avant le 1er mai 2026.' },
@@ -89,8 +89,8 @@ const translations: Record<string, Record<Language, string>> = {
   'venue.directions': { en: 'Get Directions', fr: 'Itinéraire' },
   'venue.ceremonyTime': { en: 'June 27, 2026 at 14:00', fr: '27 juin 2026 à 14h00' },
   'venue.ceremonyNote': {
-    en: 'Ceremony will begin promptly at 14:00, please arrive 10 minutes early.',
-    fr: 'La cérémonie débutera à 14h00 précises, merci d\'arriver 10 minutes en avance.'
+    en: 'Ceremony will begin promptly at 14:00 (please arrive 10 minutes early).',
+    fr: 'La cérémonie débutera à 14h00 précises (merci d\'arriver 10 minutes en avance).'
   },
   'venue.receptionTime': {
     en: 'Reception to follow at 5:00 PM',
@@ -104,6 +104,10 @@ const translations: Record<string, Record<Language, string>> = {
   // Gallery
   'gallery.title': { en: 'Photo Gallery', fr: 'Galerie Photos' },
   'gallery.subtitle': { en: 'A collection of our favorite moments', fr: 'Une collection de nos moments préférés' },
+  'gallery.officialPhotos': { 
+    en: 'Official photos arriving after the wedding!', 
+    fr: 'Les photos officielles arriveront après le mariage !' 
+  },
   'gallery.comingSoon': { en: 'Photo Coming Soon', fr: 'Photo à venir bientôt' },
   
   // Contribute
@@ -126,7 +130,6 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
   };
 
   const t = (key: string): string => {
-    // If the translation exists, return it. Otherwise, return the key itself so we can see what's missing.
     return translations[key]?.[language] || key;
   };
 
