@@ -63,6 +63,9 @@ const translations: Record<string, Record<Language, string>> = {
     en: "Please RSVP by filling out the form below. We kindly request your response at your earliest convenience so we can plan accordingly. Merci!",
     fr: "Merci de remplir le formulaire ci-dessous pour confirmer votre présence. Nous vous remercions de votre réponse rapide afin que nous puissions nous organiser au mieux. Merci !"
   },
+  'rsvp.attending': { en: 'Will you be attending?', fr: 'Serez-vous présent(e) ?' },
+  'rsvp.attending.yes': { en: 'Joyfully Accept', fr: 'Avec plaisir' },
+  'rsvp.attending.no': { en: 'Regretfully Decline', fr: 'Je ne pourrai pas venir' },
   'rsvp.firstName': { en: 'First Name', fr: 'Prénom' },
   'rsvp.lastName': { en: 'Last Name', fr: 'Nom' },
   'rsvp.email': { en: 'Email Address', fr: 'Adresse e-mail' },
@@ -72,6 +75,13 @@ const translations: Record<string, Record<Language, string>> = {
     fr: "Nombre d'enfants" 
   },
   'rsvp.dietary': { en: 'Dietary Restrictions', fr: 'Restrictions alimentaires' },
+  'rsvp.dietaryType': { en: 'Dietary Requirements', fr: 'Préférences alimentaires' },
+  'rsvp.dietaryType.none': { en: 'None', fr: 'Aucune' },
+  'rsvp.dietaryType.vegetarian': { en: 'Vegetarian', fr: 'Végé (lacto-ovo)' },
+  'rsvp.dietaryType.vegan': { en: 'Vegan', fr: 'Végétalien' },
+  'rsvp.dietaryType.glutenFree': { en: 'Gluten-Free', fr: 'Sans gluten' },
+  'rsvp.dietaryType.nutAllergy': { en: 'Nut Allergy', fr: 'Allergie aux noix' },
+  'rsvp.dietaryType.other': { en: 'Other (specify below)', fr: 'Autre (préciser ci-dessous)' },
   'rsvp.submit': { en: 'Submit RSVP', fr: 'Envoyer' },
   'rsvp.success': { 
     en: "Thank you for your RSVP! We've received your response.",
