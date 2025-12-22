@@ -22,10 +22,14 @@ const translations: Record<string, Record<Language, string>> = {
   
   // Home
   'home.welcome': { 
-    en: "Welcome to our wedding website! We're so excited to celebrate our special day with you. Feel free to explore the site for all the details – see you in Fribourg on our big day!",
-    fr: "Bienvenue sur notre site de mariage ! Nous sommes ravis de pouvoir célébrer ce grand jour avec vous. Parcourez le site pour toutes les informations – à très bientôt à Fribourg !"
+    en: "Welcome to our wedding website! We're so excited to celebrate our special day with you. Feel free to explore the site for all the details. We can't wait to see you in Fribourg!",
+    fr: "Bienvenue sur notre site de mariage ! Nous sommes ravis de pouvoir célébrer ce grand jour avec vous. Parcourez le site pour toutes les informations. Nous avons hâte de vous voir à Fribourg !"
   },
   'home.saveDate': { en: 'Save the Date!', fr: 'Réservez la date !' },
+  'home.days': { en: 'Days', fr: 'Jours' },
+  'home.hours': { en: 'Hours', fr: 'Heures' },
+  'home.minutes': { en: 'Minutes', fr: 'Minutes' },
+  'home.seconds': { en: 'Seconds', fr: 'Secondes' },
   
   // Details Section
   'details.title': { en: 'Wedding Details', fr: 'Détails du Mariage' },
@@ -60,7 +64,7 @@ const translations: Record<string, Record<Language, string>> = {
   // RSVP Page
   'rsvp.title': { en: 'RSVP', fr: 'RSVP' },
   'rsvp.intro': {
-    en: "Please RSVP by filling out the form below. We kindly request your response at your earliest convenience so we can plan accordingly. Merci!",
+    en: "Please RSVP by filling out the form below. Please respond as soon as possible so we can plan accordingly. Merci!",
     fr: "Merci de remplir le formulaire ci-dessous pour confirmer votre présence. Nous vous remercions de votre réponse rapide afin que nous puissions nous organiser au mieux. Merci !"
   },
   'rsvp.attending': { en: 'Will you be attending?', fr: 'Serez-vous présent(e) ?' },
