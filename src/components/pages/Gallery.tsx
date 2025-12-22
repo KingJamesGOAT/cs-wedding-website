@@ -29,14 +29,14 @@ export default function Gallery() {
         </motion.div>
 
         <div className="grid grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-6">
-          {[...Array(6)].map((_, i) => (
+          {[...Array(10)].map((_, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               viewport={{ once: true }}
-              className="aspect-[4/5] bg-neutral-800/50 rounded-xl border border-neutral-700/50 flex flex-col items-center justify-center group hover:bg-neutral-800 transition-colors"
+              className={`aspect-[4/5] bg-neutral-800/50 rounded-xl border border-neutral-700/50 flex flex-col items-center justify-center group hover:bg-neutral-800 transition-colors ${i === 9 ? 'hidden lg:flex' : 'flex'}`}
             >
               <div className="w-16 h-16 rounded-full bg-neutral-700/50 flex items-center justify-center mb-4 group-hover:bg-neutral-700 transition-colors">
                 <Camera className="w-8 h-8 text-neutral-500 group-hover:text-neutral-400" />
