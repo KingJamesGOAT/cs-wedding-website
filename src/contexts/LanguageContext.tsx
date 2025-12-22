@@ -111,7 +111,7 @@ const translations: Record<string, Record<Language, string>> = {
   'gallery.comingSoon': { en: 'Photo Coming Soon', fr: 'Photo à venir bientôt' },
   
   // Contribute
-  'contribute.sectionTitle': { en: 'Or Contribute Directly', fr: 'Ou contribuer directement' },
+  'contribute.sectionTitle': { en: 'Contribute Directly', fr: 'Contribuer directement' },
   'contribute.sectionIntro': {
     en: "If you prefer to give a monetary contribution instead, we've made it easy for you.",
     fr: "Si vous préférez offrir une contribution financière, nous avons facilité les choses pour vous."
