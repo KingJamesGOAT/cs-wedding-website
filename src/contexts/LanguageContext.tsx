@@ -117,6 +117,10 @@ const translations: Record<string, Record<Language, string>> = {
     fr: "Si vous préférez offrir une contribution financière, nous avons facilité les choses pour vous."
   },
   'contribute.bank': { en: 'Bank Transfer', fr: 'Virement bancaire' },
+  'contribute.thanks': { 
+    en: 'Thank you for your generosity!', 
+    fr: 'Merci pour votre générosité !' 
+  },
   
   // Footer
   'footer.contact': { en: 'Contact Us', fr: 'Nous contacter' },
