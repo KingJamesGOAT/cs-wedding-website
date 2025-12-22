@@ -10,7 +10,8 @@ import { CheckCircle2 } from 'lucide-react';
 export default function RSVP() {
   const { t } = useLanguage();
   const [formData, setFormData] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
     guests: '',
     children: '',
@@ -23,6 +24,15 @@ export default function RSVP() {
     e.preventDefault();
     setIsSubmitting(true);
     
+    // Combine first and last name for the backend to maintain compatibility
+    const submissionData = {
+      name: `${formData.firstName} ${formData.lastName}`.trim(),
+      email: formData.email,
+      guests: formData.guests,
+      children: formData.children,
+      dietary: formData.dietary
+    };
+    
     try {
       await fetch('https://script.google.com/macros/s/AKfycbz06IfaoPFh1kpwyfANLVt4YUPDBa6jODhf9AEufCUcAVWL_WVJNCtbscP5eTuakLHo/exec', {
         method: 'POST',
@@ -30,7 +40,7 @@ export default function RSVP() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(submissionData),
       });
 
       // Since mode is no-cors, we get an opaque response.
@@ -39,7 +49,7 @@ export default function RSVP() {
       
       // Reset form after 3 seconds
       setTimeout(() => {
-        setFormData({ name: '', email: '', guests: '', children: '', dietary: '' });
+        setFormData({ firstName: '', lastName: '', email: '', guests: '', children: '', dietary: '' });
         setSubmitted(false);
       }, 3000);
     } catch (error) {
@@ -73,17 +83,34 @@ export default function RSVP() {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6 bg-white rounded-lg border border-neutral-200 p-8 shadow-sm">
-          <div className="space-y-2">
-            <Label htmlFor="name">{t('rsvp.name')}</Label>
-            <Input
-              id="name"
-              type="text"
-              required
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full"
-              disabled={isSubmitting}
-            />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <Label htmlFor="firstName">{t('rsvp.firstName')}</Label>
+              <Input
+                id="firstName"
+                type="text"
+                required
+                placeholder="John"
+                value={formData.firstName}
+                onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                className="w-full"
+                disabled={isSubmitting}
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="lastName">{t('rsvp.lastName')}</Label>
+              <Input
+                id="lastName"
+                type="text"
+                required
+                placeholder="Doe"
+                value={formData.lastName}
+                onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                className="w-full"
+                disabled={isSubmitting}
+              />
+            </div>
           </div>
 
           <div className="space-y-2">

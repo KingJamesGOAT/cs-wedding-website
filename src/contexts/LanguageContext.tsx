@@ -63,7 +63,8 @@ const translations: Record<string, Record<Language, string>> = {
     en: "Please RSVP by filling out the form below. We kindly request your response at your earliest convenience so we can plan accordingly. Merci!",
     fr: "Merci de remplir le formulaire ci-dessous pour confirmer votre présence. Nous vous remercions de votre réponse rapide afin que nous puissions nous organiser au mieux. Merci !"
   },
-  'rsvp.name': { en: 'Full Name', fr: 'Nom complet' },
+  'rsvp.firstName': { en: 'First Name', fr: 'Prénom' },
+  'rsvp.lastName': { en: 'Last Name', fr: 'Nom' },
   'rsvp.email': { en: 'Email Address', fr: 'Adresse e-mail' },
   'rsvp.guests': { en: 'Number of Guests', fr: "Nombre d'invités" },
   'rsvp.children': { 
