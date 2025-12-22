@@ -6,7 +6,45 @@ import { Label } from '../ui/label';
 import { Textarea } from '../ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, AlertTriangle } from 'lucide-react';
+import { Alert, AlertDescription, AlertTitle } from '../ui/alert';
+
+// Defined Lists
+const SAVORY_OPTIONS = [
+  "Quiche / Tart",
+  "Puff Pastry Twists (Flûtes)",
+  "Mini Pizzas",
+  "Cheese Platter / Cubes",
+  "Charcuterie / Saucisson",
+  "Vegetable Sticks & Dip",
+  "Tapenade & Crackers",
+  "Mini Sandwiches",
+  "Tortilla / Spanish Omelet",
+  "Cherry Tomatoes & Mozzarella",
+  "Savory Cake (Cake Salé)",
+  "Hummus & Pita",
+  "Gougères (Cheese Puffs)",
+  "Deviled Eggs (Oeufs Mimosa)",
+  "Bruschetta"
+];
+
+const SWEET_OPTIONS = [
+  "Chocolate Brownies",
+  "Homemade Cookies",
+  "Fruit Salad / Skewers",
+  "Apple Tart",
+  "Muffins / Cupcakes",
+  "Lemon Tart",
+  "Madeleines",
+  "Macarons",
+  "Swiss Roll",
+  "Mini Donuts",
+  "Cheesecake Bites",
+  "Chocolate Mousse",
+  "Tiramisu",
+  "Banana Bread",
+  "Meringues"
+];
 
 export default function RSVP() {
   const { t } = useLanguage();
@@ -19,6 +57,11 @@ export default function RSVP() {
     children: '0',
     dietaryType: 'none',
     dietary: '',
+    // New Apero Fields
+    aperoContribution: 'no',
+    aperoType: '',
+    aperoItem: '',
+    aperoDetails: ''
   });
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -27,14 +70,29 @@ export default function RSVP() {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // If not attending, clear irrelevant fields
-    const finalData = formData.attending === 'no' ? {
-      ...formData,
-      guests: '0',
-      children: '0',
-      dietaryType: '',
-      dietary: ''
-    } : formData;
+    // Prepare final payload
+    const finalData = { ...formData };
+    
+    // Clean up data based on logic
+    if (finalData.attending === 'no') {
+       finalData.guests = '0';
+       finalData.children = '0';
+       finalData.dietaryType = '';
+       finalData.dietary = '';
+       finalData.aperoContribution = 'no';
+       finalData.aperoType = '';
+       finalData.aperoItem = '';
+       finalData.aperoDetails = '';
+    } else if (finalData.aperoContribution === 'no') {
+       finalData.aperoType = '';
+       finalData.aperoItem = '';
+       finalData.aperoDetails = '';
+    } else {
+       // If they selected a preset item (not custom), ensure aperoDetails has a value for safety
+       if (finalData.aperoItem !== 'custom' && finalData.aperoItem !== '') {
+          finalData.aperoDetails = finalData.aperoItem; 
+       }
+    }
 
     try {
       await fetch('https://script.google.com/macros/s/AKfycbz06IfaoPFh1kpwyfANLVt4YUPDBa6jODhf9AEufCUcAVWL_WVJNCtbscP5eTuakLHo/exec', {
@@ -44,6 +102,7 @@ export default function RSVP() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          // Maps to Google Sheet Columns
           attending: finalData.attending,
           firstName: finalData.firstName,
           lastName: finalData.lastName,
@@ -51,12 +110,13 @@ export default function RSVP() {
           guests: finalData.guests,
           children: finalData.children,
           dietaryType: finalData.dietaryType,
-          dietary: finalData.dietary
+          dietary: finalData.dietary,
+          aperoType: finalData.aperoType,
+          aperoItem: finalData.aperoItem,
+          aperoDetails: finalData.aperoDetails
         }),
       });
 
-      // Since mode is no-cors, we get an opaque response.
-      // We assume success if no error was thrown.
       setSubmitted(true);
       
       // Reset form after 3 seconds
@@ -69,13 +129,16 @@ export default function RSVP() {
           guests: '0', 
           children: '0', 
           dietaryType: 'none', 
-          dietary: '' 
+          dietary: '',
+          aperoContribution: 'no',
+          aperoType: '',
+          aperoItem: '',
+          aperoDetails: ''
         });
         setSubmitted(false);
-      }, 3000);
+      }, 5000); // 5 seconds to read success msg
     } catch (error) {
       console.error('Error submitting form:', error);
-      // Ideally show an error message to user, but for now we follow instructions
     } finally {
       setIsSubmitting(false);
     }
@@ -101,25 +164,34 @@ export default function RSVP() {
         <div className="text-center mb-12">
           <h2 className="text-4xl mb-4">{t('rsvp.title')}</h2>
           <p className="text-neutral-600 max-w-xl mx-auto">{t('rsvp.intro')}</p>
+          
+          <div className="mt-6 bg-amber-50 border border-amber-200 p-4 rounded-xl inline-block text-left relative">
+             <div className="flex gap-3">
+                 <AlertTriangle className="h-5 w-5 text-amber-600 flex-shrink-0 mt-0.5" />
+                 <p className="text-sm text-amber-900 font-medium">
+                   {t('rsvp.foodNote')}
+                 </p>
+             </div>
+          </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6 bg-white rounded-lg border border-neutral-200 p-8 shadow-sm">
+        <form onSubmit={handleSubmit} className="space-y-8 bg-white rounded-2xl border border-neutral-200 p-6 md:p-10 shadow-sm">
           
           {/* Attendance Radio Buttons */}
-          <div className="space-y-3 mb-6">
-            <Label className="text-lg font-medium">{t('rsvp.attending')}</Label>
+          <div className="space-y-4">
+            <Label className="text-lg font-medium block">{t('rsvp.attending')}</Label>
             <RadioGroup 
               value={formData.attending} 
               onValueChange={(value: string) => setFormData({ ...formData, attending: value })}
-              className="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-6"
+              className="flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-8"
             >
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-3">
                 <RadioGroupItem value="yes" id="r1" />
-                <Label htmlFor="r1">{t('rsvp.attending.yes')}</Label>
+                <Label htmlFor="r1" className="cursor-pointer">{t('rsvp.attending.yes')}</Label>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-3">
                 <RadioGroupItem value="no" id="r2" />
-                <Label htmlFor="r2">{t('rsvp.attending.no')}</Label>
+                <Label htmlFor="r2" className="cursor-pointer">{t('rsvp.attending.no')}</Label>
               </div>
             </RadioGroup>
           </div>
@@ -169,34 +241,142 @@ export default function RSVP() {
 
           {/* Conditional Fields - Only show if Attending is NOT "no" */}
           {formData.attending !== 'no' && (
-            <div className="space-y-6 pt-4 border-t border-neutral-100">
-              <div className="space-y-2">
-                <Label htmlFor="guests">{t('rsvp.guests')} {t('rsvp.includingYou')}</Label>
-                <Select value={formData.guests} onValueChange={(value: string) => setFormData({ ...formData, guests: value })}>
-                  <SelectTrigger className="w-full" disabled={isSubmitting}>
-                    <SelectValue placeholder="Select number" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {[0, 1, 2, 3, 4, 5].map((num) => (
-                      <SelectItem key={num} value={num.toString()}>
-                        {num}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+            <div className="space-y-8 pt-6 border-t border-neutral-100 animate-in fade-in slide-in-from-top-4 duration-500">
               
-              <div className="space-y-2">
-                <Label htmlFor="children">{t('rsvp.children')}</Label>
-                <Input
-                  id="children"
-                  type="number"
-                  min="0"
-                  value={formData.children}
-                  onChange={(e) => setFormData({ ...formData, children: e.target.value })}
-                  className="w-full"
-                  disabled={isSubmitting}
-                />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <Label htmlFor="guests">{t('rsvp.guests')} {t('rsvp.includingYou')}</Label>
+                  <Select value={formData.guests} onValueChange={(value: string) => setFormData({ ...formData, guests: value })}>
+                    <SelectTrigger className="w-full" disabled={isSubmitting}>
+                      <SelectValue placeholder="Select number" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {[0, 1, 2, 3, 4, 5].map((num) => (
+                        <SelectItem key={num} value={num.toString()}>
+                          {num}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="children">{t('rsvp.children')}</Label>
+                  <Input
+                    id="children"
+                    type="number"
+                    min="0"
+                    value={formData.children}
+                    onChange={(e) => setFormData({ ...formData, children: e.target.value })}
+                    className="w-full"
+                    disabled={isSubmitting}
+                  />
+                </div>
+              </div>
+
+              {/* APERO SECTION */}
+              <div className="bg-neutral-50 p-6 rounded-xl border border-neutral-100 space-y-6">
+                  <div className="space-y-3">
+                    <Label className="text-lg font-medium block text-neutral-900">{t('rsvp.aperoQuestion')}</Label>
+                    <RadioGroup 
+                      value={formData.aperoContribution} 
+                      onValueChange={(value: string) => setFormData({ ...formData, aperoContribution: value })}
+                      className="space-y-3"
+                    >
+                      <div className="flex items-center space-x-3">
+                        <RadioGroupItem value="yes" id="apero-yes" />
+                        <Label htmlFor="apero-yes" className="cursor-pointer">{t('rsvp.aperoYes')}</Label>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <RadioGroupItem value="no" id="apero-no" />
+                        <Label htmlFor="apero-no" className="cursor-pointer">{t('rsvp.aperoNo')}</Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
+
+                  {formData.aperoContribution === 'yes' && (
+                     <div className="space-y-6 pt-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                        
+                        <Alert className="bg-amber-100 border-amber-300">
+                          <AlertTriangle className="h-4 w-4 text-amber-600" />
+                          <AlertTitle className="text-amber-800 font-semibold ml-2">{t('rsvp.aperoWarningTitle')}</AlertTitle>
+                          <AlertDescription className="text-amber-700 ml-2 mt-1">
+                            {t('rsvp.aperoWarning')}
+                          </AlertDescription>
+                        </Alert>
+
+                        <div className="space-y-3">
+                            <Label className="font-medium">{t('rsvp.aperoTypeLabel')}</Label>
+                            <RadioGroup 
+                              value={formData.aperoType} 
+                              onValueChange={(value: string) => setFormData({ ...formData, aperoType: value })}
+                              className="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-6"
+                            >
+                              <div className="flex items-center space-x-2">
+                                <RadioGroupItem value="Savory" id="type-savory" />
+                                <Label htmlFor="type-savory">{t('rsvp.typeSavory')}</Label>
+                              </div>
+                              <div className="flex items-center space-x-2">
+                                <RadioGroupItem value="Sweet" id="type-sweet" />
+                                <Label htmlFor="type-sweet">{t('rsvp.typeSweet')}</Label>
+                              </div>
+                            </RadioGroup>
+                        </div>
+                        
+                        {formData.aperoType && (
+                           <div className="space-y-4 animate-in fade-in duration-300">
+                              <div className="space-y-2">
+                                 <Label>{t('rsvp.aperoItemLabel')}</Label>
+                                 <Select 
+                                   value={formData.aperoItem} 
+                                   onValueChange={(value: string) => {
+                                      // If switching away from custom, clear details
+                                      const updates: any = { aperoItem: value };
+                                      if (value !== 'custom') {
+                                        updates.aperoDetails = value; // Default details to item name
+                                      } else {
+                                        updates.aperoDetails = '';
+                                      }
+                                      setFormData({ ...formData, ...updates });
+                                   }}
+                                 >
+                                    <SelectTrigger className="w-full bg-white">
+                                      <SelectValue placeholder="Select an option" />
+                                    </SelectTrigger>
+                                    <SelectContent className="max-h-[300px]">
+                                       {formData.aperoType === 'Savory' ? (
+                                          SAVORY_OPTIONS.map((opt) => (
+                                            <SelectItem key={opt} value={opt}>{opt}</SelectItem>
+                                          ))
+                                       ) : (
+                                          SWEET_OPTIONS.map((opt) => (
+                                            <SelectItem key={opt} value={opt}>{opt}</SelectItem>
+                                          ))
+                                       )}
+                                       <SelectItem value="custom" className="font-bold border-t border-neutral-100 mt-1 pt-1">
+                                          {t('rsvp.aperoChoiceCustom')}
+                                       </SelectItem>
+                                    </SelectContent>
+                                 </Select>
+                              </div>
+
+                              {formData.aperoItem === 'custom' && (
+                                 <div className="space-y-2 animate-in fade-in duration-300">
+                                    <Label htmlFor="aperoDetails">{t('rsvp.aperoCustomLabel')}</Label>
+                                    <Input
+                                      id="aperoDetails"
+                                      value={formData.aperoDetails}
+                                      onChange={(e) => setFormData({ ...formData, aperoDetails: e.target.value })}
+                                      className="w-full bg-white"
+                                      placeholder="Ex: Homemade Focaccia"
+                                      required
+                                    />
+                                 </div>
+                              )}
+                           </div>
+                        )}
+                     </div>
+                  )}
               </div>
 
               <div className="space-y-2">
@@ -230,7 +410,7 @@ export default function RSVP() {
             </div>
           )}
 
-          <Button type="submit" className="w-full bg-neutral-900 hover:bg-neutral-800" disabled={isSubmitting}>
+          <Button type="submit" className="w-full bg-neutral-900 hover:bg-neutral-800 h-12 text-lg" disabled={isSubmitting}>
             {isSubmitting ? 'Sending...' : t('rsvp.submit')}
           </Button>
         </form>

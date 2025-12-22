@@ -92,6 +92,21 @@ const translations: Record<string, Record<Language, string>> = {
     en: "Thank you for your RSVP! We've received your response.",
     fr: "Merci pour votre réponse ! Nous avons bien reçu votre confirmation."
   },
+  'rsvp.aperoQuestion': { en: 'Would you like to bring something for the Apero?', fr: 'Souhaitez-vous apporter quelque chose pour l\'Apéro ?' },
+  'rsvp.aperoYes': { en: 'Yes, I will bring something', fr: 'Oui, j\'apporte quelque chose' },
+  'rsvp.aperoNo': { en: 'No, I will just enjoy', fr: 'Non, je viendrai juste profiter' },
+  'rsvp.aperoWarningTitle': { en: 'Important Timing Info', fr: 'Information Importante' },
+  'rsvp.aperoWarning': { 
+    en: 'Since you are bringing food, please arrive earlier at 13:00 at the Farm to drop it off (Ceremony starts at 14:00).', 
+    fr: 'Comme vous apportez de la nourriture, merci d\'arriver plus tôt à 13h00 à la Ferme pour le dépôt (La cérémonie commence à 14h00).' 
+  },
+  'rsvp.aperoTypeLabel': { en: 'What type of food?', fr: 'Quel type de nourriture ?' },
+  'rsvp.typeSavory': { en: 'Savory (Salty)', fr: 'Salé' },
+  'rsvp.typeSweet': { en: 'Sweet', fr: 'Sucré' },
+  'rsvp.aperoItemLabel': { en: 'What specifically?', fr: 'Quoi exactement ?' },
+  'rsvp.aperoCustomLabel': { en: 'Please specify what you are bringing:', fr: 'Veuillez préciser ce que vous apportez :' },
+  'rsvp.aperoChoiceCustom': { en: 'Something else (My own choice)', fr: 'Autre chose (Mon propre choix)' },
+  'rsvp.foodNote': { en: 'Please use this form to RSVP for the wedding AND to sign up for the Apero food.', fr: 'Utilisez ce formulaire pour répondre à l\'invitation ET pour vous inscrire au repas de l\'Apéro.' },
   
   // Registry
   'registry.title': { en: 'Gifts', fr: 'Cadeaux' },
