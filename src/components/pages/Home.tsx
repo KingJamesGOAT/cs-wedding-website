@@ -39,7 +39,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.2 }}
-              className="text-6xl sm:text-7xl lg:text-9xl text-white mb-6 font-serif tracking-in-expand hero-text-shadow"
+              className="text-4xl sm:text-7xl lg:text-9xl text-white mb-6 font-serif tracking-in-expand hero-text-shadow"
             >
               Steve & Cynthia
             </motion.h1>

@@ -147,9 +147,9 @@ export default function Registry() {
   };
 
   return (
-    <section id="registry" className="py-20 px-4 sm:px-6 lg:px-8 bg-[url('https://images.unsplash.com/photo-1520013577341-a20c35ef294f?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center min-h-[800px] flex items-center">
+    <section id="registry" className="py-12 md:py-20 px-4 sm:px-6 lg:px-8 bg-[url('https://images.unsplash.com/photo-1520013577341-a20c35ef294f?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center min-h-[600px] md:min-h-[800px] flex items-center">
       <div className="max-w-7xl mx-auto w-full flex flex-col items-center">
-        <div className="text-center mb-16 bg-white/80 backdrop-blur-md p-8 rounded-3xl shadow-sm max-w-3xl">
+        <div className="text-center mb-10 md:mb-16 bg-white/80 backdrop-blur-md p-6 md:p-8 rounded-3xl shadow-sm max-w-3xl">
           <h2 className="text-4xl mb-4 text-neutral-900">{t('registry.title')}</h2>
           <p className="text-neutral-600">{t('registry.intro')}</p>
         </div>
@@ -160,16 +160,16 @@ export default function Registry() {
           {/* OPTION 1: BROWSE GIFTS */}
           <Dialog open={isBrowseOpen} onOpenChange={setIsBrowseOpen}>
             <DialogTrigger asChild>
-              <div className="group bg-white/70 backdrop-blur-xl border border-white/50 p-12 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer flex flex-col items-center justify-center text-center items-center h-[450px] transform hover:-translate-y-2 w-full">
-                <div className="w-32 h-32 bg-rose-100/50 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500 group-hover:bg-rose-100">
-                  <ShoppingBag className="w-16 h-16 text-rose-500" />
+              <div className="group bg-white/70 backdrop-blur-xl border border-white/50 p-8 md:p-12 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer flex flex-col items-center justify-center text-center items-center min-h-[300px] md:h-[450px] transform hover:-translate-y-2 w-full">
+                <div className="w-24 h-24 md:w-32 md:h-32 bg-rose-100/50 rounded-full flex items-center justify-center mb-6 md:mb-8 group-hover:scale-110 transition-transform duration-500 group-hover:bg-rose-100">
+                  <ShoppingBag className="w-12 h-12 md:w-16 md:h-16 text-rose-500" />
                 </div>
-                <h3 className="text-3xl font-light mb-4 text-neutral-900">{t('registry.browseBtn')}</h3>
-                <p className="text-neutral-600 text-lg max-w-xs">{t('registry.browseBtn') === 'Browse Gift Wishlist' ? 'Explore our curated list of items for our new home.' : 'Découvrez notre liste de cadeaux pour notre future maison.'}</p>
+                <h3 className="text-2xl md:text-3xl font-light mb-4 text-neutral-900">{t('registry.browseBtn')}</h3>
+                <p className="text-neutral-600 text-base md:text-lg max-w-xs">{t('registry.browseBtn') === 'Browse Gift Wishlist' ? 'Explore our curated list of items for our new home.' : 'Découvrez notre liste de cadeaux pour notre future maison.'}</p>
               </div>
             </DialogTrigger>
             
-            <DialogContent className="max-w-[90vw] sm:max-w-[90vw] w-full max-h-[90vh] flex flex-col p-6 bg-neutral-50/95 backdrop-blur-3xl border-neutral-200">
+            <DialogContent className="max-w-[95vw] md:max-w-[90vw] w-full max-h-[85vh] flex flex-col p-4 md:p-6 bg-neutral-50/95 backdrop-blur-3xl border-neutral-200">
               <DialogHeader className="pb-4 border-b border-neutral-200/50 mb-4">
                 <DialogTitle className="text-3xl font-light text-center">{t('registry.browseBtn')}</DialogTitle>
               </DialogHeader>
@@ -224,13 +224,13 @@ export default function Registry() {
           {/* OPTION 2: CASH FUND */}
           <div 
              onClick={() => handleOpenPledge({ title: 'Cash Fund', description: t('registry.cashDesc'), suggestedAmounts: [50, 100, 200, 500] })}
-             className="group bg-white/70 backdrop-blur-xl border border-white/50 p-12 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer flex flex-col items-center justify-center text-center items-center h-[450px] transform hover:-translate-y-2"
+             className="group bg-white/70 backdrop-blur-xl border border-white/50 p-8 md:p-12 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer flex flex-col items-center justify-center text-center items-center min-h-[300px] md:h-[450px] transform hover:-translate-y-2"
           >
-            <div className="w-32 h-32 bg-emerald-100/50 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500 group-hover:bg-emerald-100">
-               <DollarSign className="w-16 h-16 text-emerald-600" />
+            <div className="w-24 h-24 md:w-32 md:h-32 bg-emerald-100/50 rounded-full flex items-center justify-center mb-6 md:mb-8 group-hover:scale-110 transition-transform duration-500 group-hover:bg-emerald-100">
+               <DollarSign className="w-12 h-12 md:w-16 md:h-16 text-emerald-600" />
             </div>
-            <h3 className="text-3xl font-light mb-4 text-neutral-900">{t('registry.cashBtn')}</h3>
-            <p className="text-neutral-600 text-lg max-w-xs">{t('registry.cashDesc')}</p>
+            <h3 className="text-2xl md:text-3xl font-light mb-4 text-neutral-900">{t('registry.cashBtn')}</h3>
+            <p className="text-neutral-600 text-base md:text-lg max-w-xs">{t('registry.cashDesc')}</p>
           </div>
 
         </div>

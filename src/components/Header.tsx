@@ -109,7 +109,7 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
                       onNavigate(item.key);
                       setIsMenuOpen(false);
                     }}
-                    className={`block w-full text-center px-4 py-3 text-sm uppercase tracking-widest transition-colors ${
+                    className={`block w-full text-center px-4 py-4 text-sm uppercase tracking-widest transition-colors ${
                       activeSection === item.key
                         ? 'bg-gray-50 text-gray-900 font-semibold'
                         : 'text-gray-600 hover:bg-gray-50'
