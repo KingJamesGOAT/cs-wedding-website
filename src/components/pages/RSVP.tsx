@@ -34,13 +34,13 @@ export default function RSVP() {
     };
     
     try {
-      await fetch('https://script.google.com/macros/s/AKfycbyzCPu0hy-pOEEgJSDIr4dEcLJDrVOVw2IBR9hrjYU/exec', {
+      await fetch('https://script.google.com/macros/s/AKfycbz06IfaoPFh1kpwyfANLVt4YUPDBa6jODhf9AEufCUcAVWL_WVJNCtbscP5eTuakLHo/exec', {
         method: 'POST',
         mode: 'no-cors',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
         },
-        body: new URLSearchParams(submissionData as any).toString(),
+        body: JSON.stringify(submissionData),
       });
 
       // Since mode is no-cors, we get an opaque response.
