@@ -108,19 +108,19 @@ export default function Registry() {
 
   return (
     <section id="registry" className="py-20 px-4 sm:px-6 lg:px-8 bg-[url('https://images.unsplash.com/photo-1520013577341-a20c35ef294f?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center min-h-[800px] flex items-center">
-      <div className="max-w-6xl mx-auto w-full">
-        <div className="text-center mb-16 bg-white/80 backdrop-blur-md p-8 rounded-3xl inline-block mx-auto shadow-sm">
+      <div className="max-w-7xl mx-auto w-full flex flex-col items-center">
+        <div className="text-center mb-16 bg-white/80 backdrop-blur-md p-8 rounded-3xl shadow-sm max-w-3xl">
           <h2 className="text-4xl mb-4 text-neutral-900">{t('registry.title')}</h2>
-          <p className="text-neutral-600 max-w-2xl mx-auto">{t('registry.intro')}</p>
+          <p className="text-neutral-600">{t('registry.intro')}</p>
         </div>
 
         {/* MAIN LAYOUT: Clickable Containers */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 w-full max-w-6xl">
           
           {/* OPTION 1: BROWSE GIFTS */}
           <Dialog open={isBrowseOpen} onOpenChange={setIsBrowseOpen}>
             <DialogTrigger asChild>
-              <div className="group bg-white/70 backdrop-blur-xl border border-white/50 p-12 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer flex flex-col items-center justify-center text-center items-center h-[450px] transform hover:-translate-y-2">
+              <div className="group bg-white/70 backdrop-blur-xl border border-white/50 p-12 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer flex flex-col items-center justify-center text-center items-center h-[450px] transform hover:-translate-y-2 w-full">
                 <div className="w-32 h-32 bg-rose-100/50 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500 group-hover:bg-rose-100">
                   <ShoppingBag className="w-16 h-16 text-rose-500" />
                 </div>
@@ -129,7 +129,7 @@ export default function Registry() {
               </div>
             </DialogTrigger>
             
-            <DialogContent className="max-w-5xl max-h-[90vh] flex flex-col p-6 bg-neutral-50/95 backdrop-blur-3xl border-neutral-200">
+            <DialogContent className="max-w-[90vw] w-full max-h-[90vh] flex flex-col p-6 bg-neutral-50/95 backdrop-blur-3xl border-neutral-200">
               <DialogHeader className="pb-4 border-b border-neutral-200/50 mb-4">
                 <DialogTitle className="text-3xl font-light text-center">{t('registry.browseBtn')}</DialogTitle>
               </DialogHeader>
