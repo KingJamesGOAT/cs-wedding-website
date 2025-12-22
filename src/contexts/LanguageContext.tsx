@@ -97,8 +97,8 @@ const translations: Record<string, Record<Language, string>> = {
   'rsvp.aperoNo': { en: 'No, I will just enjoy', fr: 'Non, je viendrai juste profiter' },
   'rsvp.aperoWarningTitle': { en: 'Important Timing Info', fr: 'Information Importante' },
   'rsvp.aperoWarning': { 
-    en: 'Since you are bringing food, please arrive earlier at 13:00 at the Farm to drop it off (Ceremony starts at 14:00).', 
-    fr: 'Comme vous apportez de la nourriture, merci d\'arriver plus tôt à 13h00 à la Ferme pour le dépôt (La cérémonie commence à 14h00).' 
+    en: 'Since you are bringing food, please arrive earlier at 13:00 at Guglerahof Farm (Guglera 6, 1735 Giffers) to drop it off (Ceremony starts at 14:00).', 
+    fr: 'Comme vous apportez de la nourriture, merci d\'arriver plus tôt à 13h00 à la Ferme Guglerahof (Guglera 6, 1735 Giffers) pour le dépôt (La cérémonie commence à 14h00).' 
   },
   'rsvp.aperoTypeLabel': { en: 'What type of food?', fr: 'Quel type de nourriture ?' },
   'rsvp.typeSavory': { en: 'Savory (Salty)', fr: 'Salé' },
