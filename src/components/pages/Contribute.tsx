@@ -8,15 +8,15 @@ export default function Contribute() {
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
-    toast.success(language === 'en' ? 'Copied to clipboard!' : 'Copié dans le presse-papiers !');
+    toast.success(t('contribute.copied'));
   };
 
   return (
-    <section id="contribute" className="py-20 px-4 sm:px-6 lg:px-8">
+    <section id="contribute" className="py-12 sm:py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-4xl mb-4">{t('contribute.title')}</h2>
-          <p className="text-neutral-600 max-w-2xl mx-auto">{t('contribute.intro')}</p>
+          <h2 className="text-3xl sm:text-4xl mb-4">{t('registry.contributeTitle')}</h2>
+          <p className="text-neutral-600 max-w-2xl mx-auto">{t('registry.contributeIntro')}</p>
           <p className="text-sm text-neutral-500 mt-2">{t('contribute.currency')}</p>
         </div>
 
@@ -30,19 +30,21 @@ export default function Contribute() {
               <div className="flex-1">
                 <h3 className="text-xl mb-2">PayPal</h3>
                 <p className="text-sm text-neutral-600 mb-4">
-                  {language === 'en'
-                    ? 'Send your gift securely through PayPal. Click the button below to get started.'
-                    : 'Envoyez votre cadeau en toute sécurité via PayPal. Cliquez sur le bouton ci-dessous pour commencer.'}
+                  {t('contribute.paypalDesc')}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3">
-                  <Button className="bg-blue-600 hover:bg-blue-700">
-                    {t('contribute.paypal')}
+                  <Button 
+                    className="bg-blue-600 hover:bg-blue-700" 
+                    onClick={() => window.open('https://paypal.me/stevecynthia', '_blank')}
+                  >
+                    {t('registry.contribute')}
                   </Button>
-                  <div className="flex items-center gap-2 text-sm text-neutral-600">
-                    <span>PayPal: steve.cynthia@example.com</span>
+                  <div className="flex items-center gap-2 text-sm text-neutral-600 bg-neutral-50 px-3 py-2 rounded-md">
+                    <span className="truncate max-w-[200px] sm:max-w-none">steve.cynthia@example.com</span>
                     <button
                       onClick={() => copyToClipboard('steve.cynthia@example.com')}
-                      className="p-1 hover:bg-neutral-100 rounded"
+                      className="p-1 hover:bg-neutral-200 rounded transition-colors"
+                      title={t('contribute.copy')}
                     >
                       <Copy className="w-4 h-4" />
                     </button>
@@ -61,19 +63,27 @@ export default function Contribute() {
               <div className="flex-1">
                 <h3 className="text-xl mb-2">Twint</h3>
                 <p className="text-sm text-neutral-600 mb-4">
-                  {t('contribute.twint')}
+                  {t('contribute.twintDesc')}
                 </p>
-                <div className="flex flex-col sm:flex-row items-start gap-4">
+                <div className="flex flex-col sm:flex-row items-start gap-6">
                   <div className="w-32 h-32 bg-white border-2 border-neutral-300 rounded-lg flex items-center justify-center">
                     <div className="text-center">
                       <Smartphone className="w-8 h-8 mx-auto mb-1 text-neutral-400" />
                       <p className="text-xs text-neutral-500">QR Code</p>
                     </div>
                   </div>
-                  <div className="flex-1">
-                    <p className="text-sm text-neutral-600">
-                      {language === 'en' ? 'Twint number:' : 'Numéro Twint :'} +41 79 123 45 67
-                    </p>
+                  <div className="flex-1 space-y-2">
+                    <p className="text-sm font-medium">{language === 'en' ? 'Twint Number:' : 'Numéro Twint :'}</p>
+                    <div className="flex items-center gap-2 text-sm text-neutral-600 bg-neutral-50 px-3 py-2 rounded-md w-fit">
+                      <span>+41 79 123 45 67</span>
+                      <button
+                        onClick={() => copyToClipboard('+41791234567')}
+                        className="p-1 hover:bg-neutral-200 rounded transition-colors"
+                        title={t('contribute.copy')}
+                      >
+                        <Copy className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -89,32 +99,31 @@ export default function Contribute() {
               <div className="flex-1">
                 <h3 className="text-xl mb-2">{t('contribute.bank')}</h3>
                 <p className="text-sm text-neutral-600 mb-4">
-                  {language === 'en'
-                    ? 'For wire transfers, please use the following bank details:'
-                    : 'Pour les virements bancaires, veuillez utiliser les coordonnées suivantes :'}
+                  {t('contribute.bankDesc')}
                 </p>
-                <div className="space-y-2 bg-neutral-50 rounded p-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm">IBAN:</span>
+                <div className="space-y-3 bg-neutral-50 rounded-lg p-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                    <span className="text-xs uppercase tracking-wider text-neutral-500">IBAN</span>
                     <div className="flex items-center gap-2">
-                      <code className="text-sm">CH00 1234 5678 9012 3456 7</code>
+                      <code className="text-sm font-mono">CH00 1234 5678 9012 3456 7</code>
                       <button
                         onClick={() => copyToClipboard('CH0012345678901234567')}
-                        className="p-1 hover:bg-neutral-200 rounded"
+                        className="p-1 hover:bg-neutral-200 rounded transition-colors"
+                        title={t('contribute.copy')}
                       >
                         <Copy className="w-4 h-4" />
                       </button>
                     </div>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm">
-                      {language === 'en' ? 'Account Name:' : 'Nom du compte :'}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                    <span className="text-xs uppercase tracking-wider text-neutral-500">
+                      {language === 'en' ? 'Account Name' : 'Nom du compte'}
                     </span>
                     <span className="text-sm">Steve Lastname & Cynthia Lastname</span>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm">
-                      {language === 'en' ? 'Bank:' : 'Banque :'}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                    <span className="text-xs uppercase tracking-wider text-neutral-500">
+                      {language === 'en' ? 'Bank' : 'Banque'}
                     </span>
                     <span className="text-sm">Credit Suisse, Geneva</span>
                   </div>
@@ -125,8 +134,8 @@ export default function Contribute() {
         </div>
 
         {/* Thank You Message */}
-        <div className="mt-8 text-center p-6 bg-neutral-50 rounded-lg">
-          <p className="text-neutral-700">{t('contribute.thanks')}</p>
+        <div className="mt-8 text-center p-6">
+          <p className="text-neutral-700 font-medium italic">"{t('contribute.thanks')}"</p>
         </div>
       </div>
     </section>

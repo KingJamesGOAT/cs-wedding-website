@@ -96,6 +96,11 @@ const translations: Record<string, Record<Language, string>> = {
   },
   'registry.contribute': { en: 'Contribute', fr: 'Contribuer' },
   'registry.howTo': { en: 'How to contribute:', fr: 'Comment contribuer :' },
+  'registry.contributeTitle': { en: 'Contributions', fr: 'Contributions' },
+  'registry.contributeIntro': {
+    en: 'If you prefer to support us with a monetary gift, we have set up the following options:',
+    fr: 'Si vous préférez nous soutenir avec un don, voici les options disponibles :'
+  },
   
   // Venue
   'venue.title': { en: 'Venue Information', fr: 'Lieux' },
@@ -136,6 +141,21 @@ const translations: Record<string, Record<Language, string>> = {
     en: 'Thank you for your generosity!', 
     fr: 'Merci pour votre générosité !' 
   },
+  'contribute.currency': { en: 'CHF', fr: 'CHF' },
+  'contribute.paypalDesc': { 
+    en: 'Fast and secure online transfer.', 
+    fr: 'Transfert en ligne rapide et sécurisé.' 
+  },
+  'contribute.twintDesc': { 
+    en: 'Scan via the Twint app (Switzerland).', 
+    fr: 'Scannez via l\'application Twint (Suisse).' 
+  },
+  'contribute.bankDesc': { 
+    en: 'Traditional bank transfer details.', 
+    fr: 'Coordonnées bancaires pour virement.' 
+  },
+  'contribute.copy': { en: 'Copy', fr: 'Copier' },
+  'contribute.copied': { en: 'Copied!', fr: 'Copié !' },
   
   // Footer
   'footer.contact': { en: 'Contact Us', fr: 'Nous contacter' },
