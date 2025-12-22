@@ -13,21 +13,21 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 
-// Real data with prices and simulated collection status
+// Real data with realistic prices and 0 collected (fresh start)
 const GIFTS = [
-  { id: 'mixer', title: 'KitchenAid Artisan Mixer', description: 'Classic stand mixer for baking.', price: 650, collected: 650, suggestedAmounts: [50, 100, 250], icon: ChefHat },
-  { id: 'dyson', title: 'Dyson V15 Detect', description: 'Cordless vacuum cleaner.', price: 799, collected: 200, suggestedAmounts: [50, 100, 200], icon: Zap },
-  { id: 'lecreuset', title: 'Le Creuset Casserole 24cm', description: 'Cast iron signature pot.', price: 340, collected: 0, suggestedAmounts: [50, 100, 240], icon: Utensils },
-  { id: 'roborock', title: 'Roborock S8', description: 'Robot vacuum & mop.', price: 600, collected: 150, suggestedAmounts: [50, 100, 200], icon: Home },
-  { id: 'sonos', title: 'Sonos Era 100', description: 'Smart speaker for our living room.', price: 250, collected: 250, suggestedAmounts: [50, 90, 180], icon: Speaker },
-  { id: 'linens', title: 'Luxury Bed Linens', description: 'High-thread-count sheets.', price: 300, collected: 50, suggestedAmounts: [50, 100, 200], icon: Bed },
-  { id: 'dinner', title: 'Romantic Dinner', description: 'A special dinner on our honeymoon.', price: 250, collected: 0, suggestedAmounts: [50, 100, 200], icon: Utensils },
-  { id: 'spa', title: 'Couples Spa Day', description: 'Massage and relaxation.', price: 400, collected: 120, suggestedAmounts: [60, 120, 250], icon: Flower2 },
-  { id: 'coffee', title: 'Coffee Machine', description: 'Automatic espresso machine.', price: 800, collected: 0, suggestedAmounts: [50, 100, 300], icon: Coffee },
-  { id: 'wine', title: 'Wine Subscription', description: 'Monthly wine delivery.', price: 300, collected: 100, suggestedAmounts: [40, 80, 150], icon: Wine },
-  { id: 'plants', title: 'Indoor Plants', description: 'Greenery for our home.', price: 150, collected: 150, suggestedAmounts: [30, 60, 100], icon: Flower2 },
-  { id: 'art', title: 'Wall Art', description: 'Decor for the living room.', price: 500, collected: 0, suggestedAmounts: [50, 100, 200], icon: Palette },
-  { id: 'flight', title: 'Flight Upgrade', description: 'Upgrade for honeymoon flights.', price: 1000, collected: 300, suggestedAmounts: [50, 150, 300], icon: Plane }
+  { id: 'mixer', title: 'KitchenAid Artisan Mixer', description: 'Classic stand mixer for baking.', price: 450, collected: 0, suggestedAmounts: [50, 100, 200], icon: ChefHat },
+  { id: 'dyson', title: 'Dyson V15 Detect', description: 'Cordless vacuum cleaner.', price: 600, collected: 0, suggestedAmounts: [50, 100, 200], icon: Zap },
+  { id: 'lecreuset', title: 'Le Creuset Casserole 24cm', description: 'Cast iron signature pot.', price: 250, collected: 0, suggestedAmounts: [50, 100, 150], icon: Utensils },
+  { id: 'roborock', title: 'Roborock S8', description: 'Robot vacuum & mop.', price: 500, collected: 0, suggestedAmounts: [50, 100, 200], icon: Home },
+  { id: 'sonos', title: 'Sonos Era 100', description: 'Smart speaker for our living room.', price: 250, collected: 0, suggestedAmounts: [50, 100, 150], icon: Speaker },
+  { id: 'linens', title: 'Luxury Bed Linens', description: 'High-thread-count sheets.', price: 200, collected: 0, suggestedAmounts: [50, 100, 200], icon: Bed },
+  { id: 'dinner', title: 'Romantic Dinner', description: 'A special dinner on our honeymoon.', price: 200, collected: 0, suggestedAmounts: [50, 100, 200], icon: Utensils },
+  { id: 'spa', title: 'Couples Spa Day', description: 'Massage and relaxation.', price: 300, collected: 0, suggestedAmounts: [60, 120, 150], icon: Flower2 },
+  { id: 'coffee', title: 'Coffee Machine', description: 'Automatic espresso machine.', price: 500, collected: 0, suggestedAmounts: [50, 100, 250], icon: Coffee },
+  { id: 'wine', title: 'Wine Subscription', description: 'Monthly wine delivery.', price: 200, collected: 0, suggestedAmounts: [40, 80, 100], icon: Wine },
+  { id: 'plants', title: 'Indoor Plants', description: 'Greenery for our home.', price: 100, collected: 0, suggestedAmounts: [20, 50, 100], icon: Flower2 },
+  { id: 'art', title: 'Wall Art', description: 'Decor for the living room.', price: 300, collected: 0, suggestedAmounts: [50, 100, 150], icon: Palette },
+  { id: 'flight', title: 'Flight Upgrade', description: 'Upgrade for honeymoon flights.', price: 600, collected: 0, suggestedAmounts: [50, 150, 300], icon: Plane }
 ];
 
 export default function Registry() {
