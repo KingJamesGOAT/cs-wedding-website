@@ -172,7 +172,7 @@ const translations: Record<string, Record<Language, string>> = {
   'registry.amountLabel': { en: 'Amount (CHF)', fr: 'Montant (CHF)' },
   'registry.customAmount': { en: 'Custom Amount', fr: 'Montant libre' },
   'registry.messageLabel': { en: 'Short Message (Optional)', fr: 'Petit message (Optionnel)' },
-  'registry.confirmBtn': { en: 'Confirm Pledge', fr: 'Confirmer la promesse' },
+  'registry.confirmBtn': { en: 'Confirm Contribution', fr: 'Confirmer la promesse' },
   'registry.sending': { en: 'Processing...', fr: 'Traitement...' },
   'registry.thankYou': { en: 'Thank You, {name}!', fr: 'Merci, {name} !' },
   'registry.paymentInstructions': { 
