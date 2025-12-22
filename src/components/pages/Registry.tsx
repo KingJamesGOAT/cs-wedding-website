@@ -4,47 +4,38 @@ import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { Textarea } from '../ui/textarea';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '../ui/dialog';
-import { Gift, CreditCard, Smartphone, Building2, Copy, Check, QrCode, Loader2 } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from '../ui/dialog';
+import { Gift, CreditCard, Smartphone, Building2, Copy, Check, QrCode, Loader2, DollarSign, ShoppingBag } from 'lucide-react';
 import { toast } from 'sonner';
 
+// Real data with researched CHF prices
 const GIFTS = [
-  {
-    id: 'mixer',
-    title: 'Kitchen Aid Stand Mixer',
-    description: 'A top-quality mixer for our future kitchen.',
-    suggestedAmounts: [50, 100, 500],
-    image: 'kitchen mixer'
-  },
-  {
-    id: 'linens',
-    title: 'Luxury Bed Linens',
-    description: 'Soft, high-thread-count sheets for our bedroom.',
-    suggestedAmounts: [50, 100, 200],
-    image: 'luxury bedding'
-  },
-  {
-    id: 'cookware',
-    title: 'Professional Cookware Set',
-    description: 'Professional cookware set for our home.',
-    suggestedAmounts: [50, 100, 300],
-    image: 'cookware pots'
-  },
-  {
-    id: 'honeymoon',
-    title: 'Honeymoon Fund – Beach Dinner',
-    description: 'Contribute to a special dinner on our honeymoon.',
-    suggestedAmounts: [50, 100, 200],
-    image: 'beach dinner romantic'
-  }
+  { id: 'mixer', title: 'KitchenAid Artisan Mixer', description: 'Classic stand mixer for baking.', suggestedAmounts: [50, 100, 250], image: 'kitchen mixer' },
+  { id: 'dyson', title: 'Dyson V15 Detect', description: 'Cordless vacuum cleaner.', suggestedAmounts: [50, 100, 200], image: 'vacuum cleaner' }, // Placeholder image mapping
+  { id: 'lecreuset', title: 'Le Creuset Casserole 24cm', description: 'Cast iron signature pot.', suggestedAmounts: [50, 100, 240], image: 'cookware pots' },
+  { id: 'roborock', title: 'Roborock S8', description: 'Robot vacuum & mop.', suggestedAmounts: [50, 100, 200], image: 'robot vacuum' }, // Placeholder
+  { id: 'sonos', title: 'Sonos Era 100', description: 'Smart speaker for our living room.', suggestedAmounts: [50, 90, 180], image: 'speaker' }, // Placeholder
+  { id: 'linens', title: 'Luxury Bed Linens', description: 'High-thread-count sheets.', suggestedAmounts: [50, 100, 200], image: 'luxury bedding' },
+  { id: 'dinner', title: 'Romantic Dinner', description: 'A special dinner on our honeymoon.', suggestedAmounts: [50, 100, 200], image: 'beach dinner romantic' },
+  { id: 'spa', title: 'Couples Spa Day', description: 'Massage and relaxation.', suggestedAmounts: [60, 120, 250], image: 'spa treatment' }, // Placeholder
+  { id: 'coffee', title: 'Coffee Machine', description: 'Automatic espresso machine.', suggestedAmounts: [50, 100, 300], image: 'coffee machine' }, // Placeholder
+  { id: 'wine', title: 'Wine Subscription', description: 'Monthly wine delivery.', suggestedAmounts: [40, 80, 150], image: 'wine glasses' }, // Placeholder
+  { id: 'plants', title: 'Indoor Plants', description: 'Greenery for our home.', suggestedAmounts: [30, 60, 100], image: 'plant pot' }, // Placeholder
+  { id: 'art', title: 'Wall Art', description: 'Decor for the living room.', suggestedAmounts: [50, 100, 200], image: 'art piece' }, // Placeholder
+  { id: 'flight', title: 'Flight Upgrade', description: 'Upgrade for honeymoon flights.', suggestedAmounts: [50, 150, 300], image: 'airplane window' } // Placeholder
 ];
 
 export default function Registry() {
   const { language, t } = useLanguage();
+  
+  // State for Pledge Flow
   const [selectedGift, setSelectedGift] = useState<any>(null);
   const [pledgeStep, setPledgeStep] = useState<'form' | 'success'>('form');
   const [amountType, setAmountType] = useState<'suggested' | 'custom'>('suggested');
   
+  // State for Browsing Modal
+  const [isBrowseOpen, setIsBrowseOpen] = useState(false);
+
   // Form State
   const [formData, setFormData] = useState({
     name: '',
@@ -60,6 +51,7 @@ export default function Registry() {
     setPledgeStep('form');
     setFormData({ name: '', email: '', amount: '', message: '' });
     setAmountType('suggested');
+    // Keep browse modal open if it was open, or just open pledge dialog logic handled by conditional rendering
   };
 
   const generateRefCode = () => {
@@ -96,7 +88,6 @@ export default function Registry() {
         }),
       });
 
-      // Optimistic success (no-cors opaque response)
       setPledgeStep('success');
     } catch (error) {
       console.error('Error submitting pledge:', error);
@@ -112,39 +103,70 @@ export default function Registry() {
   };
 
   return (
-    <section id="registry" className="py-20 px-4 sm:px-6 lg:px-8 bg-neutral-50">
-      <div className="max-w-6xl mx-auto">
+    <section id="registry" className="py-20 px-4 sm:px-6 lg:px-8 bg-neutral-50 min-h-[600px]">
+      <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-4xl mb-4">{t('registry.title')}</h2>
           <p className="text-neutral-600 max-w-2xl mx-auto">{t('registry.intro')}</p>
         </div>
 
-        {/* Gift Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-          {GIFTS.map((gift) => (
-            <div key={gift.id} className="bg-white rounded-xl border border-neutral-200 overflow-hidden hover:shadow-lg transition-shadow duration-300">
-              <div className="p-6 flex flex-col sm:flex-row gap-6">
-                <div className="flex-shrink-0 flex items-center justify-center bg-neutral-100 rounded-lg w-24 h-24 sm:w-32 sm:h-32">
-                   <Gift className="w-10 h-10 text-neutral-400" />
+        {/* MAIN LAYOUT: Clickable Containers */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          
+          {/* OPTION 1: BROWSE GIFTS */}
+          <Dialog open={isBrowseOpen} onOpenChange={setIsBrowseOpen}>
+            <DialogTrigger asChild>
+              <div className="bg-white rounded-xl border border-neutral-200 p-10 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer group flex flex-col items-center justify-center text-center h-80">
+                <div className="w-20 h-20 bg-rose-50 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <ShoppingBag className="w-10 h-10 text-rose-400" />
                 </div>
-                <div className="flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="text-xl font-medium mb-2">{gift.title}</h3>
-                    <p className="text-neutral-600 text-sm mb-4">{gift.description}</p>
-                  </div>
-                  <Button 
-                    onClick={() => handleOpenPledge(gift)}
-                    className="w-full sm:w-auto bg-neutral-900 hover:bg-neutral-800 self-start"
-                  >
-                    {t('registry.pledgeBtn')}
-                  </Button>
-                </div>
+                <h3 className="text-2xl font-light mb-2">{t('registry.browseBtn')}</h3>
+                <p className="text-neutral-500 text-sm">Discover items we'd love for our home.</p>
               </div>
+            </DialogTrigger>
+            
+            <DialogContent className="max-w-4xl max-h-[85vh] overflow-hidden flex flex-col">
+              <DialogHeader>
+                <DialogTitle className="text-2xl text-center pb-4">{t('registry.browseBtn')}</DialogTitle>
+              </DialogHeader>
+              <div className="overflow-y-auto px-1 py-4 flex-1">
+                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                   {GIFTS.map((gift) => (
+                     <div key={gift.id} className="bg-neutral-50 rounded-lg p-4 flex flex-col items-center text-center border border-neutral-100 hover:border-neutral-300 transition-colors">
+                        <div className="w-24 h-24 bg-white rounded-lg flex items-center justify-center mb-3">
+                           <Gift className="w-10 h-10 text-neutral-300" />
+                        </div>
+                        <h4 className="font-medium mb-1">{gift.title}</h4>
+                        <p className="text-xs text-neutral-500 mb-4 line-clamp-2">{gift.description}</p>
+                        <Button
+                          size="sm"
+                          className="mt-auto w-full bg-neutral-900 hover:bg-neutral-800"
+                          onClick={() => handleOpenPledge(gift)}
+                        >
+                          {t('registry.pledgeBtn')}
+                        </Button>
+                     </div>
+                   ))}
+                 </div>
+              </div>
+            </DialogContent>
+          </Dialog>
+
+          {/* OPTION 2: CASH FUND */}
+          <div 
+             onClick={() => handleOpenPledge({ title: 'Cash Fund', description: t('registry.cashDesc'), suggestedAmounts: [50, 100, 200, 500] })}
+             className="bg-white rounded-xl border border-neutral-200 p-10 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer group flex flex-col items-center justify-center text-center h-80"
+          >
+            <div className="w-20 h-20 bg-emerald-50 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+               <DollarSign className="w-10 h-10 text-emerald-500" />
             </div>
-          ))}
+            <h3 className="text-2xl font-light mb-2">{t('registry.cashBtn')}</h3>
+            <p className="text-neutral-500 text-sm">{t('registry.cashDesc')}</p>
+          </div>
+
         </div>
 
-        {/* Pledge Dialog */}
+        {/* PLEDGE DIALOG (Handles both flows) */}
         <Dialog open={!!selectedGift} onOpenChange={(open) => !open && setSelectedGift(null)}>
           <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto">
             
@@ -159,12 +181,11 @@ export default function Registry() {
                 </DialogHeader>
 
                 <form onSubmit={handleSubmit} className="space-y-6 pt-4">
-                  
                   {/* Amount Selection */}
                   <div className="space-y-3">
                     <Label>{t('registry.amountLabel')}</Label>
                     <div className="flex flex-wrap gap-2">
-                      {selectedGift.suggestedAmounts.map((amt: number) => (
+                      {selectedGift.suggestedAmounts ? selectedGift.suggestedAmounts.map((amt: number) => (
                          <Button
                            key={amt}
                            type="button"
@@ -176,7 +197,7 @@ export default function Registry() {
                          >
                            CHF {amt}
                          </Button>
-                      ))}
+                      )) : null}
                       <Button
                         type="button"
                         variant={amountType === 'custom' ? 'default' : 'outline'}
@@ -292,8 +313,8 @@ export default function Registry() {
                                 <div className="flex flex-col justify-center">
                                    <span className="text-xs text-neutral-500">Send to:</span>
                                    <div className="flex items-center gap-2">
-                                      <span className="font-mono text-sm">+41 79 123 45 67</span>
-                                      <button onClick={() => copyToClipboard('+41791234567')} className="p-1 hover:bg-neutral-100 rounded">
+                                      <span className="font-mono text-sm">+41 78 635 03 07</span>
+                                      <button onClick={() => copyToClipboard('+41786350307')} className="p-1 hover:bg-neutral-100 rounded">
                                          <Copy className="h-3 w-3 text-neutral-400" />
                                       </button>
                                    </div>
@@ -313,15 +334,23 @@ export default function Registry() {
                                 <div className="flex items-center justify-between">
                                    <span className="text-xs text-neutral-500">IBAN</span>
                                    <div className="flex items-center gap-2">
-                                      <span className="font-mono text-xs">CH00 1234 5678 9012 3456 7</span>
-                                      <button onClick={() => copyToClipboard('CH0012345678901234567')} className="p-1 hover:bg-neutral-100 rounded">
+                                      <span className="font-mono text-xs">CH54 0024 3243 5109 5140 Q</span>
+                                      <button onClick={() => copyToClipboard('CH540024324351095140Q')} className="p-1 hover:bg-neutral-100 rounded">
                                          <Copy className="h-3 w-3 text-neutral-400" />
                                       </button>
                                    </div>
                                 </div>
                                 <div className="flex items-center justify-between">
-                                   <span className="text-xs text-neutral-500">Account</span>
-                                   <span className="text-xs font-medium">Steve & Cynthia</span>
+                                   <span className="text-xs text-neutral-500">BIC</span>
+                                   <span className="text-xs font-mono">UBSWCHZH80A</span>
+                                </div>
+                                <div className="flex flex-col mt-2 pt-2 border-t border-dashed">
+                                   <span className="text-xs text-neutral-500 mb-1">Account Holder</span>
+                                   <span className="text-xs text-neutral-800 leading-tight">
+                                     Monsieur Steve Benjamin<br/>
+                                     Chemin En Craux 14<br/>
+                                     1030 Bussigny-près-Lausanne
+                                   </span>
                                 </div>
                              </div>
                           </div>
@@ -338,6 +367,7 @@ export default function Registry() {
 
           </DialogContent>
         </Dialog>
+
       </div>
     </section>
   );

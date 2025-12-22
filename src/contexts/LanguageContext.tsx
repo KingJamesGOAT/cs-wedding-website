@@ -158,6 +158,12 @@ const translations: Record<string, Record<Language, string>> = {
   'contribute.copied': { en: 'Copied!', fr: 'Copié !' },
 
   // Registry Pledge Flow
+  'registry.browseBtn': { en: 'Browse Gift Wishlist', fr: 'Parcourir la liste de mariage' },
+  'registry.cashBtn': { en: 'Contribute to Cash Fund', fr: 'Participer à la cagnotte' },
+  'registry.cashDesc': { 
+    en: 'Help us build our future with a monetary contribution.',
+    fr: 'Aidez-nous à construire notre avenir avec une contribution financière.' 
+  },
   'registry.pledgeBtn': { en: 'Contribute', fr: 'Contribuer' },
   'registry.pledgeTitle': { en: 'Make a Contribution', fr: 'Faire un don' },
   'registry.pledgeSubtitle': { en: 'Contributing towards: ', fr: 'Participation pour : ' },
