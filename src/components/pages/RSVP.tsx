@@ -34,7 +34,7 @@ export default function RSVP() {
     };
     
     try {
-      await fetch('https://script.google.com/macros/s/AKfycbz06IfaoPFh1kpwyfANLVt4YUPDBa6jODhf9AEufCUcAVWL_WVJNCtbscP5eTuakLHo/exec', {
+      await fetch('https://script.google.com/macros/s/AKfycbyzCPu0hy-pOEEgJSDIr4dEcLJDrVOVw2IBR9hrjYU/exec', {
         method: 'POST',
         mode: 'no-cors',
         headers: {
