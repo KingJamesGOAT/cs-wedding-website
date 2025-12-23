@@ -41,7 +41,7 @@ export default function Gallery() {
               <div className="w-16 h-16 rounded-full bg-neutral-700/50 flex items-center justify-center mb-4 group-hover:bg-neutral-700 transition-colors">
                 <Camera className="w-8 h-8 text-neutral-500 group-hover:text-neutral-400" />
               </div>
-              <span className="text-neutral-500 font-medium text-sm tracking-wide uppercase group-hover:text-neutral-400">
+              <span className="text-neutral-500 font-medium text-sm tracking-wide uppercase group-hover:text-neutral-400 text-center px-2">
                 {t('gallery.comingSoon')}
               </span>
             </motion.div>

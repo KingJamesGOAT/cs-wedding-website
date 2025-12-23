@@ -61,24 +61,22 @@ export default function Details() {
               {t('details.accommodation.description')}
             </p>
 
-            <div className="space-y-6">
+            <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6">
               {hotels.map((hotel, index) => (
                 <div 
                   key={index}
-                  className="bg-white p-6 rounded-xl border border-neutral-200 shadow-sm hover:shadow-md transition-shadow"
+                  className="bg-white p-2 sm:p-4 md:p-6 rounded-lg sm:rounded-xl border border-neutral-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between h-full"
                 >
-                  <div className="flex justify-between items-start sm:items-center flex-col sm:flex-row gap-4">
-                    <div>
-                      <h4 className="text-lg font-medium">{hotel.name}</h4>
-                      <p className="text-neutral-500 text-sm">{hotel.description}</p>
-                    </div>
-                    <Button asChild variant="outline" size="sm" className="shrink-0">
-                      <a href={hotel.url} target="_blank" rel="noopener noreferrer">
-                        {t('details.book')} 
-                        <ExternalLink className="w-4 h-4 ml-2" />
-                      </a>
-                    </Button>
+                  <div className="mb-2 sm:mb-0">
+                    <h4 className="text-xs sm:text-lg font-bold sm:font-medium leading-tight mb-1">{hotel.name}</h4>
+                    <p className="text-[10px] sm:text-sm text-neutral-500 leading-tight">{hotel.description}</p>
                   </div>
+                  <Button asChild variant="outline" size="sm" className="w-full mt-2 h-7 text-[10px] px-0 sm:h-9 sm:text-sm sm:px-3">
+                    <a href={hotel.url} target="_blank" rel="noopener noreferrer">
+                      {t('details.book')} 
+                      <ExternalLink className="w-3 h-3 ml-1 sm:ml-2 hidden sm:inline" />
+                    </a>
+                  </Button>
                 </div>
               ))}
             </div>

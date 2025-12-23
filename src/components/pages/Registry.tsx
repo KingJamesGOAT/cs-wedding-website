@@ -155,17 +155,17 @@ export default function Registry() {
         </div>
 
         {/* MAIN LAYOUT: Clickable Containers */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 w-full max-w-6xl">
+        <div className="grid grid-cols-2 gap-4 md:gap-16 w-full max-w-6xl">
           
           {/* OPTION 1: BROWSE GIFTS */}
           <Dialog open={isBrowseOpen} onOpenChange={setIsBrowseOpen}>
             <DialogTrigger asChild>
-              <div className="group bg-white/70 backdrop-blur-xl border border-white/50 p-8 md:p-12 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer flex flex-col items-center justify-center text-center items-center min-h-[300px] md:h-[450px] transform hover:-translate-y-2 w-full">
-                <div className="w-24 h-24 md:w-32 md:h-32 bg-rose-100/50 rounded-full flex items-center justify-center mb-6 md:mb-8 group-hover:scale-110 transition-transform duration-500 group-hover:bg-rose-100">
-                  <ShoppingBag className="w-12 h-12 md:w-16 md:h-16 text-rose-500" />
+              <div className="group bg-white/70 backdrop-blur-xl border border-white/50 p-4 md:p-12 rounded-2xl md:rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer flex flex-col items-center justify-center text-center items-center h-[200px] md:h-[450px] transform hover:-translate-y-2 w-full">
+                <div className="w-12 h-12 md:w-32 md:h-32 bg-rose-100/50 rounded-full flex items-center justify-center mb-3 md:mb-8 group-hover:scale-110 transition-transform duration-500 group-hover:bg-rose-100">
+                  <ShoppingBag className="w-6 h-6 md:w-16 md:h-16 text-rose-500" />
                 </div>
-                <h3 className="text-2xl md:text-3xl font-light mb-4 text-neutral-900">{t('registry.browseBtn')}</h3>
-                <p className="text-neutral-600 text-base md:text-lg max-w-xs">{t('registry.browseBtn') === 'Browse Gift Wishlist' ? 'Explore our curated list of items for our new home.' : 'Découvrez notre liste de cadeaux pour notre future maison.'}</p>
+                <h3 className="text-sm md:text-3xl font-light mb-2 text-neutral-900 leading-tight">{t('registry.browseBtn')}</h3>
+                <p className="text-neutral-600 text-[10px] md:text-lg max-w-xs">{t('registry.browseBtn') === 'Browse Gift Wishlist' ? 'Explore our curated list of items for our new home.' : 'Découvrez notre liste de cadeaux pour notre future maison.'}</p>
               </div>
             </DialogTrigger>
             
@@ -174,41 +174,41 @@ export default function Registry() {
                 <DialogTitle className="text-3xl font-light text-center">{t('registry.browseBtn')}</DialogTitle>
               </DialogHeader>
               <div className="overflow-y-auto px-2 py-2 flex-1 scrollbar-hide">
-                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                 <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6">
                    {gifts.map((gift) => {
                      const isFullyFunded = gift.collected >= gift.price;
                      const percent = Math.min((gift.collected / gift.price) * 100, 100);
                      const Icon = gift.icon;
 
                      return (
-                       <div key={gift.id} className="bg-white rounded-2xl p-6 flex flex-col border border-neutral-100 hover:border-neutral-300 hover:shadow-lg transition-all duration-300 relative overflow-hidden group">
+                       <div key={gift.id} className="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-6 flex flex-col border border-neutral-100 hover:border-neutral-300 hover:shadow-lg transition-all duration-300 relative overflow-hidden group">
                           {isFullyFunded && (
-                            <div className="absolute top-4 right-4 bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1 shadow-sm z-10">
-                              <Check className="w-3 h-3" /> {t('registry.fullyFunded')}
+                            <div className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-green-100 text-green-700 text-[10px] sm:text-xs font-bold px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full flex items-center gap-1 shadow-sm z-10">
+                              <Check className="w-2 h-2 sm:w-3 sm:h-3" /> {t('registry.fullyFunded')}
                             </div>
                           )}
                           
-                          <div className="w-16 h-16 bg-neutral-50 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
-                             <Icon className={`w-8 h-8 ${isFullyFunded ? 'text-green-500' : 'text-neutral-600'}`} />
+                          <div className="w-10 h-10 sm:w-16 sm:h-16 bg-neutral-50 rounded-xl flex items-center justify-center mb-2 sm:mb-4 group-hover:scale-105 transition-transform duration-300">
+                             <Icon className={`w-5 h-5 sm:w-8 sm:h-8 ${isFullyFunded ? 'text-green-500' : 'text-neutral-600'}`} />
                           </div>
                           
                           <div className="flex-1">
-                            <h4 className="font-medium text-lg mb-1 leading-tight">{gift.title}</h4>
-                            <p className="text-sm text-neutral-500 mb-4 line-clamp-2">{gift.description}</p>
+                            <h4 className="font-medium text-xs sm:text-lg mb-1 leading-tight">{gift.title}</h4>
+                            <p className="text-[10px] sm:text-sm text-neutral-500 mb-2 sm:mb-4 line-clamp-2">{gift.description}</p>
                           </div>
 
-                          <div className="mt-4 space-y-2">
-                             <div className="flex justify-between text-xs font-medium text-neutral-900">
+                          <div className="mt-2 sm:mt-4 space-y-1 sm:space-y-2">
+                             <div className="flex justify-between text-[10px] sm:text-xs font-medium text-neutral-900 flex-col sm:flex-row gap-0.5">
                                 <span>{isFullyFunded ? t('registry.fullyFunded') : `${t('registry.raised')} CHF ${gift.collected}`}</span>
                                 <span>{t('registry.goal')} CHF {gift.price}</span>
                              </div>
-                             <Progress value={percent} className={`h-2 ${isFullyFunded ? 'bg-green-100' : 'bg-neutral-100'}`} indicatorClassName={isFullyFunded ? 'bg-green-500' : 'bg-neutral-900'} />
+                             <Progress value={percent} className={`h-1.5 sm:h-2 ${isFullyFunded ? 'bg-green-100' : 'bg-neutral-100'}`} indicatorClassName={isFullyFunded ? 'bg-green-500' : 'bg-neutral-900'} />
                           </div>
 
                           <Button
                             size="sm"
                             disabled={isFullyFunded}
-                            className={`mt-4 w-full ${isFullyFunded ? 'bg-green-50 text-green-700 hover:bg-green-100 opacity-100' : 'bg-neutral-900 hover:bg-neutral-800'}`}
+                            className={`mt-2 sm:mt-4 w-full h-8 text-xs sm:h-9 sm:text-sm ${isFullyFunded ? 'bg-green-50 text-green-700 hover:bg-green-100 opacity-100' : 'bg-neutral-900 hover:bg-neutral-800'}`}
                             onClick={() => !isFullyFunded && handleOpenPledge(gift)}
                           >
                             {isFullyFunded ? t('registry.fullyFunded') : t('registry.pledgeBtn')}
@@ -224,13 +224,13 @@ export default function Registry() {
           {/* OPTION 2: CASH FUND */}
           <div 
              onClick={() => handleOpenPledge({ title: 'Cash Fund', description: t('registry.cashDesc'), suggestedAmounts: [20, 50, 100] })}
-             className="group bg-white/70 backdrop-blur-xl border border-white/50 p-8 md:p-12 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer flex flex-col items-center justify-center text-center items-center min-h-[300px] md:h-[450px] transform hover:-translate-y-2"
+             className="group bg-white/70 backdrop-blur-xl border border-white/50 p-4 md:p-12 rounded-2xl md:rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer flex flex-col items-center justify-center text-center items-center h-[200px] md:h-[450px] transform hover:-translate-y-2"
           >
-            <div className="w-24 h-24 md:w-32 md:h-32 bg-emerald-100/50 rounded-full flex items-center justify-center mb-6 md:mb-8 group-hover:scale-110 transition-transform duration-500 group-hover:bg-emerald-100">
-               <DollarSign className="w-12 h-12 md:w-16 md:h-16 text-emerald-600" />
+            <div className="w-12 h-12 md:w-32 md:h-32 bg-emerald-100/50 rounded-full flex items-center justify-center mb-3 md:mb-8 group-hover:scale-110 transition-transform duration-500 group-hover:bg-emerald-100">
+               <DollarSign className="w-6 h-6 md:w-16 md:h-16 text-emerald-600" />
             </div>
-            <h3 className="text-2xl md:text-3xl font-light mb-4 text-neutral-900">{t('registry.cashBtn')}</h3>
-            <p className="text-neutral-600 text-base md:text-lg max-w-xs">{t('registry.cashDesc')}</p>
+            <h3 className="text-sm md:text-3xl font-light mb-2 text-neutral-900 leading-tight">{t('registry.cashBtn')}</h3>
+            <p className="text-neutral-600 text-[10px] md:text-lg max-w-xs">{t('registry.cashDesc')}</p>
           </div>
 
         </div>
