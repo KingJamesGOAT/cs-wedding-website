@@ -6,6 +6,10 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../ui/dialog';
 import ceremonyImage from '../../assets/2c1a399487b0eaf24b4eb22a66fb37e1c381bf12.png';
 import receptionImage from '../../assets/cbe880ec8c3cdfbbf3a2b6dbf42c2851ff18806c.png';
 
+import FloralTitle from '../ui/FloralTitle';
+import flower1 from '../../assets/flowers/1.svg';
+import flower2 from '../../assets/flowers/2.svg';
+
 export default function Venue() {
   const { language, t } = useLanguage();
   const [activeMap, setActiveMap] = useState<'ceremony' | 'reception' | null>(null);
@@ -24,8 +28,10 @@ export default function Venue() {
   return (
     <section id="venue" className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl mb-4">{t('venue.title')}</h2>
+        <div className="mb-12">
+            <FloralTitle leftIcon={flower1} rightIcon={flower2}>
+              {t('venue.title')}
+            </FloralTitle>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

@@ -9,6 +9,10 @@ import {
 import { Button } from '../ui/button';
 import { ExternalLink, Car, Baby, Clock, Shirt } from 'lucide-react';
 
+import FloralTitle from '../ui/FloralTitle';
+import flower3 from '../../assets/flowers/3.svg';
+import flower4 from '../../assets/flowers/4.svg';
+
 export default function Details() {
   const { t } = useLanguage();
 
@@ -40,7 +44,11 @@ export default function Details() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl sm:text-5xl font-serif mb-4">{t('details.title')}</h2>
+          <div className="mb-4">
+             <FloralTitle leftIcon={flower3} rightIcon={flower4}>
+                {t('details.title')}
+             </FloralTitle>
+          </div>
           <p className="text-neutral-600 max-w-2xl mx-auto">
             {t('details.subtitle')}
           </p>

@@ -9,6 +9,10 @@ import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { CheckCircle2, AlertTriangle } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '../ui/alert';
 
+import FloralTitle from '../ui/FloralTitle';
+import flower5 from '../../assets/flowers/5.svg';
+import flower6 from '../../assets/flowers/6.svg';
+
 // Defined Lists
 const SAVORY_OPTIONS = [
   "Quiche / Tart",
@@ -202,11 +206,17 @@ export default function RSVP() {
     );
   }
 
+
+
   return (
     <section id="rsvp" className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-4xl mb-4">{t('rsvp.title')}</h2>
+          <div className="mb-4">
+             <FloralTitle leftIcon={flower5} rightIcon={flower6}>
+                 {t('rsvp.title')}
+             </FloralTitle>
+          </div>
           <p className="text-neutral-600 max-w-xl mx-auto">{t('rsvp.intro')}</p>
           
           <div className="mt-6 bg-amber-50 border border-amber-200 p-4 rounded-xl inline-block text-left relative">

@@ -13,6 +13,10 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 
+import FloralTitle from '../ui/FloralTitle';
+import flower7 from '../../assets/flowers/7.svg';
+import flower8 from '../../assets/flowers/8.svg';
+
 // Real data with realistic prices and 0 collected (fresh start)
 const INITIAL_GIFTS = [
   { id: 'towels', title: 'Bath Towel Set', description: 'A set of standard bath towels for the bathroom.', price: 60, collected: 0, suggestedAmounts: [10, 20, 40, 60], icon: Bath },
@@ -146,11 +150,17 @@ export default function Registry() {
     toast.success(t('registry.copied'));
   };
 
+
+
   return (
     <section id="registry" className="py-12 md:py-20 px-4 sm:px-6 lg:px-8 bg-[url('https://images.unsplash.com/photo-1520013577341-a20c35ef294f?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center min-h-[600px] md:min-h-[800px] flex items-center">
       <div className="max-w-7xl mx-auto w-full flex flex-col items-center">
         <div className="text-center mb-10 md:mb-16 bg-white/80 backdrop-blur-md p-6 md:p-8 rounded-3xl shadow-sm max-w-3xl">
-          <h2 className="text-4xl mb-4 text-neutral-900">{t('registry.title')}</h2>
+          <div className="mb-4">
+             <FloralTitle leftIcon={flower7} rightIcon={flower8}>
+                 {t('registry.title')}
+             </FloralTitle>
+          </div>
           <p className="text-neutral-600">{t('registry.intro')}</p>
         </div>
 
