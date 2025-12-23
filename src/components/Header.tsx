@@ -40,7 +40,10 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
         <div className="flex justify-between items-center h-16">
           {/* Logo/Names */}
           <button
-            onClick={() => onNavigate('home')}
+            onClick={() => {
+              onNavigate('home');
+              setIsMenuOpen(false);
+            }}
             className={`text-2xl font-serif tracking-widest hover:opacity-70 transition-opacity ${isScrolled ? 'text-gray-900' : 'text-white'}`}
           >
             Steve & Cynthia
@@ -109,7 +112,7 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
                       onNavigate(item.key);
                       setIsMenuOpen(false);
                     }}
-                    className={`block w-full text-center px-4 py-4 text-sm uppercase tracking-widest transition-colors ${
+                    className={`block w-full text-center px-4 py-4 text-sm uppercase tracking-widest transition-colors cursor-pointer ${
                       activeSection === item.key
                         ? 'bg-gray-50 text-gray-900 font-semibold'
                         : 'text-gray-600 hover:bg-gray-50'
