@@ -38,10 +38,10 @@ export default function Gallery() {
               viewport={{ once: true }}
               className={`aspect-[4/5] bg-neutral-800/50 rounded-xl border border-neutral-700/50 flex flex-col items-center justify-center group hover:bg-neutral-800 transition-colors ${i === 9 ? 'hidden lg:flex' : 'flex'}`}
             >
-              <div className="w-16 h-16 rounded-full bg-neutral-700/50 flex items-center justify-center mb-4 group-hover:bg-neutral-700 transition-colors">
-                <Camera className="w-8 h-8 text-neutral-500 group-hover:text-neutral-400" />
+              <div className="w-10 h-10 sm:w-16 sm:h-16 rounded-full bg-neutral-700/50 flex items-center justify-center mb-2 sm:mb-4 group-hover:bg-neutral-700 transition-colors">
+                <Camera className="w-5 h-5 sm:w-8 sm:h-8 text-neutral-500 group-hover:text-neutral-400" />
               </div>
-              <span className="text-neutral-500 font-medium text-sm tracking-wide uppercase group-hover:text-neutral-400 text-center px-2">
+              <span className="text-neutral-500 font-medium text-[10px] sm:text-sm tracking-wide uppercase group-hover:text-neutral-400 text-center px-1 sm:px-2 leading-tight">
                 {t('gallery.comingSoon')}
               </span>
             </motion.div>
