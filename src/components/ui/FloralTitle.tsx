@@ -30,7 +30,7 @@ const FloralTitle: React.FC<FloralTitleProps> = ({ children, leftIcon, rightIcon
           WebkitMaskRepeat: 'no-repeat',
           maskPosition: 'center',
           WebkitMaskPosition: 'center',
-          background: 'radial-gradient(closest-side, #FDBF47, #FB9846, #F67C65, #F0647D, #D54673)',
+          background: 'radial-gradient(closest-side, #FF9966, #FF8070, #FF6680, #FF4D90, #FF3399)',
         }}
       />
       
@@ -55,7 +55,7 @@ const FloralTitle: React.FC<FloralTitleProps> = ({ children, leftIcon, rightIcon
           WebkitMaskRepeat: 'no-repeat',
           maskPosition: 'center',
           WebkitMaskPosition: 'center',
-          background: 'radial-gradient(closest-side, #FDBF47, #FB9846, #F67C65, #F0647D, #D54673)',
+          background: 'radial-gradient(closest-side, #FF9966, #FF8070, #FF6680, #FF4D90, #FF3399)',
           transform: 'scaleX(-1)' // Mirror for symmetry
         }}
       />
