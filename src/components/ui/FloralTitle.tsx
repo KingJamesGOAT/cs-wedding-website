@@ -6,9 +6,10 @@ interface FloralTitleProps {
   leftIcon: string;
   rightIcon: string;
   className?: string; // Allow passing margin/text styles
+  textClassName?: string; // Specific class for the text element
 }
 
-const FloralTitle: React.FC<FloralTitleProps> = ({ children, leftIcon, rightIcon, className = '' }) => {
+const FloralTitle: React.FC<FloralTitleProps> = ({ children, leftIcon, rightIcon, className = '', textClassName = 'text-4xl sm:text-5xl' }) => {
   // Alfalfa Purple Filter
 
 
@@ -35,7 +36,7 @@ const FloralTitle: React.FC<FloralTitleProps> = ({ children, leftIcon, rightIcon
       />
       
       {/* Title */}
-      <div className="text-4xl sm:text-5xl font-serif text-neutral-900 text-center">
+      <div className={`${textClassName} font-serif text-neutral-900 text-center`}>
         {children}
       </div>
 

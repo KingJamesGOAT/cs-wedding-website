@@ -14,7 +14,7 @@ import flower3 from '../../assets/flowers/3.svg';
 import flower4 from '../../assets/flowers/4.svg';
 
 export default function Details() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const hotels = [
     {
@@ -45,7 +45,11 @@ export default function Details() {
           className="text-center mb-16"
         >
           <div className="mb-4">
-             <FloralTitle leftIcon={flower3} rightIcon={flower4}>
+             <FloralTitle 
+              leftIcon={flower3} 
+              rightIcon={flower4}
+              textClassName={language === 'fr' ? 'text-2xl sm:text-5xl' : undefined}
+             >
                 {t('details.title')}
              </FloralTitle>
           </div>
