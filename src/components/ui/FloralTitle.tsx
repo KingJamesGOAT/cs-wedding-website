@@ -13,7 +13,7 @@ const FloralTitle: React.FC<FloralTitleProps> = ({ children, leftIcon, rightIcon
 
 
   return (
-    <div className={`flex items-center justify-center gap-3 sm:gap-6 ${className}`}>
+    <div className={`flex items-center justify-center gap-1 sm:gap-6 ${className}`}>
       {/* Left Flower */}
       <motion.div
         initial={{ opacity: 0, x: 20 }}
