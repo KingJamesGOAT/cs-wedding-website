@@ -46,7 +46,7 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
             }}
             className={`text-2xl font-serif tracking-widest hover:opacity-70 transition-opacity ${isScrolled ? 'text-gray-900' : 'text-white'}`}
           >
-            Steve & Cynthia
+            Cynthia & Steve
           </button>
 
           {/* Desktop Navigation */}

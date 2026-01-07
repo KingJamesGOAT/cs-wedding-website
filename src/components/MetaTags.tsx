@@ -4,7 +4,7 @@ import { getOGImageDataURL } from './OGImage';
 export default function MetaTags() {
   useEffect(() => {
     // Set the page title
-    document.title = 'Steve & Cynthia - Wedding Website';
+    document.title = 'Cynthia & Steve - Wedding Website';
 
     // Get or create meta tags
     const setMetaTag = (property: string, content: string) => {
@@ -28,22 +28,22 @@ export default function MetaTags() {
     };
 
     // Open Graph tags
-    setMetaTag('og:title', 'Steve & Cynthia - Wedding Website');
+    setMetaTag('og:title', 'Cynthia & Steve - Wedding Website');
     setMetaTag('og:description', 'Join us in celebrating our special day on June 27, 2026 in Fribourg, Switzerland');
     setMetaTag('og:type', 'website');
     setMetaTag('og:image', getOGImageDataURL());
     setMetaTag('og:image:width', '1200');
     setMetaTag('og:image:height', '630');
-    setMetaTag('og:image:alt', 'Steve & Cynthia Wedding - SC Monogram');
+    setMetaTag('og:image:alt', 'Cynthia & Steve Wedding - SC Monogram');
     
     // Twitter Card tags
     setMetaTagName('twitter:card', 'summary_large_image');
-    setMetaTagName('twitter:title', 'Steve & Cynthia - Wedding Website');
+    setMetaTagName('twitter:title', 'Cynthia & Steve - Wedding Website');
     setMetaTagName('twitter:description', 'Join us in celebrating our special day on June 27, 2026 in Fribourg, Switzerland');
     setMetaTagName('twitter:image', getOGImageDataURL());
     
     // Standard meta tags
-    setMetaTagName('description', 'Join us in celebrating Steve & Cynthia\'s wedding on June 27, 2026 in Fribourg, Switzerland. RSVP, view venue details, and explore our gift registry.');
+    setMetaTagName('description', 'Join us in celebrating Cynthia & Steve\'s wedding on June 27, 2026 in Fribourg, Switzerland. RSVP, view venue details, and explore our gift registry.');
   }, []);
 
   return null; // This component doesn't render anything

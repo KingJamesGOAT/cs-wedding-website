@@ -386,7 +386,7 @@ export default function Registry() {
                           <div className="flex-1">
                              <h4 className="font-medium mb-1">Twint</h4>
                              <div className="flex flex-col justify-center mt-1">
-                                <span className="text-xs text-neutral-500">Send to:</span>
+                                <span className="text-xs text-neutral-500">{t('registry.sendTo')}</span>
                                 <div className="flex items-center gap-2">
                                    <span className="font-mono text-sm">+41 78 635 03 07</span>
                                    <button onClick={() => copyToClipboard('+41786350307')} className="p-1 hover:bg-neutral-100 rounded">

@@ -92,7 +92,7 @@ const translations: Record<string, Record<Language, string>> = {
     en: "Thank you for your RSVP! We've received your response.",
     fr: "Merci pour votre réponse ! Nous avons bien reçu votre confirmation."
   },
-  'rsvp.aperoQuestion': { en: 'Would you like to bring something for the Apero?', fr: 'Souhaitez-vous apporter quelque chose pour l\'Apéro ?' },
+  'rsvp.aperoQuestion': { en: 'Would you like to bring something for the Apero for 10 people', fr: 'Souhaitez-vous apporter quelque chose pour l\'Apéro pour 10 personnes' },
   'rsvp.aperoYes': { en: 'Yes, I will bring something', fr: 'Oui, j\'apporte quelque chose' },
   'rsvp.aperoNo': { en: 'No, I will just enjoy', fr: 'Non, je viendrai juste profiter' },
   'rsvp.aperoWarningTitle': { en: 'Important Timing Info', fr: 'Information Importante' },
@@ -212,6 +212,7 @@ const translations: Record<string, Record<Language, string>> = {
     en: 'To finalize your gift, please send the amount via Twint or Bank Transfer using the reference code below.', 
     fr: "Pour finaliser, merci d'envoyer le montant via Twint ou virement avec le code ci-dessous." 
   },
+  'registry.sendTo': { en: 'Send to Steve:', fr: 'Envoyer à Steve :' },
   'registry.refCode': { 
     en: 'Reference Code (Please add this to your payment message)', 
     fr: 'Code de référence (À mettre dans le message de paiement)' 

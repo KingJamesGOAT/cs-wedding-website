@@ -1,7 +1,7 @@
 import { useLanguage } from '../../contexts/LanguageContext';
 import { Button } from '../ui/button';
 import { CreditCard, Smartphone, Building2, Copy } from 'lucide-react';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 
 export default function Contribute() {
   const { language, t } = useLanguage();
@@ -73,11 +73,11 @@ export default function Contribute() {
                     </div>
                   </div>
                   <div className="flex-1 space-y-2">
-                    <p className="text-sm font-medium">{language === 'en' ? 'Twint Number:' : 'Numéro Twint :'}</p>
+                    <p className="text-sm font-medium">{t('registry.sendTo')}</p>
                     <div className="flex items-center gap-2 text-sm text-neutral-600 bg-neutral-50 px-3 py-2 rounded-md w-fit">
-                      <span>+41 79 123 45 67</span>
+                      <span>+41 78 635 03 07</span>
                       <button
-                        onClick={() => copyToClipboard('+41791234567')}
+                        onClick={() => copyToClipboard('+41786350307')}
                         className="p-1 hover:bg-neutral-200 rounded transition-colors"
                         title={t('contribute.copy')}
                       >
@@ -119,7 +119,7 @@ export default function Contribute() {
                     <span className="text-xs uppercase tracking-wider text-neutral-500">
                       {language === 'en' ? 'Account Name' : 'Nom du compte'}
                     </span>
-                    <span className="text-sm">Steve Lastname & Cynthia Lastname</span>
+                    <span className="text-sm">Cynthia Lastname & Steve Lastname</span>
                   </div>
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                     <span className="text-xs uppercase tracking-wider text-neutral-500">
