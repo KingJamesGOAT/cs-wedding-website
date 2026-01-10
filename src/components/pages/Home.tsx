@@ -1,13 +1,26 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import CountdownTimer from '../CountdownTimer';
 import heroImageDesktop from '../../assets/hero-image-v3.jpg';
+import heroImageV4 from '../../assets/hero-image-v4.jpg';
 import heroImageMobile from '../../assets/hero-image-mobile-v2.jpg';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+
+const desktopImages = [heroImageDesktop, heroImageV4];
 
 export default function Home() {
   const { language, t } = useLanguage();
   const ref = useRef(null);
+  
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % desktopImages.length);
+    }, 30000); // 30 seconds
+
+    return () => clearInterval(interval);
+  }, []);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"]
@@ -28,11 +41,20 @@ export default function Home() {
           alt="Cynthia & Steve"
           className="w-full h-full object-cover md:hidden blur-[1px]"
         />
-        <img
-          src={heroImageDesktop}
-          alt="Cynthia & Steve"
-          className="hidden md:block w-full h-full object-cover"
-        />
+        <div className="hidden md:block w-full h-full relative">
+          <AnimatePresence mode="popLayout">
+            <motion.img
+              key={currentImageIndex}
+              src={desktopImages[currentImageIndex]}
+              alt="Cynthia & Steve"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          </AnimatePresence>
+        </div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60" />
       </motion.div>
 
