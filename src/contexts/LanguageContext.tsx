@@ -30,6 +30,11 @@ const translations: Record<string, Record<Language, string>> = {
   'home.hours': { en: 'Hours', fr: 'Heures' },
   'home.minutes': { en: 'Minutes', fr: 'Minutes' },
   'home.seconds': { en: 'Seconds', fr: 'Secondes' },
+  'home.quote': { 
+    en: "To love is to give everything and to give oneself.", 
+    fr: "Aimer, c'est tout donner et se donner soi-même." 
+  },
+  'home.quoteAuthor': { en: 'St Thérèse of Lisieux', fr: 'Ste Thérèse de Lisieux' },
   
   // Details Section
   'details.title': { en: 'Wedding Details', fr: 'Détails du Mariage' },

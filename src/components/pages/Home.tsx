@@ -90,9 +90,18 @@ export default function Home() {
              transition={{ duration: 1, delay: 1 }}
              className="mb-16 max-w-2xl mx-auto"
           >
-            <p className="text-lg sm:text-xl text-white leading-relaxed font-normal md:font-semibold italic">
+            <p className="text-lg sm:text-xl text-white leading-relaxed font-normal md:font-semibold italic text-edge-glow">
               {t('home.welcome')}
             </p>
+            
+            <div className="mt-12">
+              <p className="text-xl sm:text-3xl text-white font-serif italic mb-3 tracking-wide text-edge-glow leading-relaxed">
+                "{t('home.quote')}"
+              </p>
+              <p className="text-base sm:text-lg text-white/90 text-edge-glow font-medium">
+                ~ {t('home.quoteAuthor')}
+              </p>
+            </div>
           </motion.div>
 
           {/* Countdown Timer */}
