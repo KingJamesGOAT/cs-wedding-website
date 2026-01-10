@@ -25,7 +25,7 @@ export default function Home() {
         <img
           src={heroImage}
           alt="Cynthia & Steve"
-          className="w-full h-full object-cover object-[35%_50%]"
+          className="w-full h-full object-cover object-[65%_50%]"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60" />
       </motion.div>
