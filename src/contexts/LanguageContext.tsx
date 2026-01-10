@@ -167,9 +167,13 @@ const translations: Record<string, Record<Language, string>> = {
     en: 'Apéro to follow at 16:00',
     fr: 'Apéro à suivre à 16h00'
   },
-  'venue.receptionNote': {
-    en: 'Dinner, drinks, and dancing will be at this location.',
-    fr: 'Le dîner, les boissons et la soirée dansante auront lieu à cette adresse.'
+  'venue.receptionNote.standard': {
+    en: 'Drinks and apero will be at this location.',
+    fr: 'Les boissons et l\'apéro auront lieu à cette adresse.'
+  },
+  'venue.receptionNote.dinner': {
+    en: 'Drinks, apero, dinner, and dancing will be at this location.',
+    fr: 'L\'apéro, le dîner et la soirée dansante auront lieu à cette adresse.'
   },
   
   // Gallery

@@ -13,6 +13,15 @@ import flower2 from '../../assets/flowers/2.svg';
 export default function Venue() {
   const { language, t } = useLanguage();
   const [activeMap, setActiveMap] = useState<'ceremony' | 'reception' | null>(null);
+  const [isDinnerGuest, setIsDinnerGuest] = useState(false);
+
+  // Check for Magic Link (?invite=dinner)
+  useState(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('invite') === 'dinner') {
+      setIsDinnerGuest(true);
+    }
+  });
 
   const maps = {
     ceremony: {
@@ -86,7 +95,9 @@ export default function Venue() {
               <p className="text-neutral-600 mb-1">Guglera 6</p>
               <p className="text-neutral-600 mb-3">1735 Giffers, Switzerland</p>
               <p className="mb-3">{t('venue.receptionTime')}</p>
-              <p className="text-sm text-neutral-600 mb-4">{t('venue.receptionNote')}</p>
+              <p className="text-sm text-neutral-600 mb-4">
+                {isDinnerGuest ? t('venue.receptionNote.dinner') : t('venue.receptionNote.standard')}
+              </p>
               <Button
                 className="w-full bg-neutral-900 hover:bg-neutral-800"
                 onClick={() => setActiveMap('reception')}
