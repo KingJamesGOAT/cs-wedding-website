@@ -12,7 +12,7 @@ export default function Home() {
   const { language, t } = useLanguage();
   const ref = useRef(null);
   
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(() => Math.floor(Math.random() * desktopImages.length));
 
   useEffect(() => {
     const interval = setInterval(() => {

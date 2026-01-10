@@ -14,9 +14,15 @@ import { Toaster } from './components/ui/sonner';
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
+  const [homeKey, setHomeKey] = useState(0);
 
   const handleNavigate = (section: string) => {
     setActiveSection(section);
+    
+    if (section === 'home') {
+      setHomeKey(prev => prev + 1);
+    }
+
     const element = document.getElementById(section);
     if (element) {
       const headerOffset = 80;
@@ -58,7 +64,7 @@ export default function App() {
         <Header activeSection={activeSection} onNavigate={handleNavigate} />
         
         <main>
-          <Home />
+          <Home key={homeKey} />
           <Venue />
           <Details />
           <RSVP />
