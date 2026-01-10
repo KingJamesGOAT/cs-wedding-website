@@ -68,7 +68,7 @@ export default function Home() {
              transition={{ duration: 1, delay: 1 }}
              className="mb-16 max-w-2xl mx-auto"
           >
-            <p className="text-lg sm:text-xl text-white leading-relaxed font-semibold italic">
+            <p className="text-lg sm:text-xl text-white leading-relaxed font-normal md:font-semibold italic">
               {t('home.welcome')}
             </p>
           </motion.div>
