@@ -232,19 +232,23 @@ export default function RSVP() {
                  {t('rsvp.title')}
              </FloralTitle>
           </div>
-          <p className="text-neutral-600 max-w-xl mx-auto">{t('rsvp.intro')}</p>
-          
-          <div className="flex justify-center mt-2 mb-4">
-            <Tooltip delayDuration={0}>
-              <TooltipTrigger asChild>
-                <button type="button" className="text-neutral-400 hover:text-neutral-600 transition-colors p-2">
-                  <Info className="h-5 w-5" />
-                </button>
-              </TooltipTrigger>
-              <TooltipContent className="max-w-[280px] text-center bg-white p-3 shadow-md border-neutral-100">
-                <p>{t('rsvp.updateInfo')}</p>
-              </TooltipContent>
-            </Tooltip>
+          <div className="text-neutral-600 max-w-xl mx-auto">
+            {t('rsvp.intro')}
+            <span className="inline-flex align-middle ml-2">
+              <Tooltip delayDuration={0}>
+                <TooltipTrigger asChild>
+                  <button type="button" className="text-neutral-400 hover:text-neutral-600 transition-colors">
+                    <Info className="h-5 w-5" />
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent 
+                  side="top" 
+                  className="z-[100] max-w-[280px] text-center bg-white text-neutral-900 p-3 shadow-xl border border-neutral-200"
+                >
+                  <p>{t('rsvp.updateInfo')}</p>
+                </TooltipContent>
+              </Tooltip>
+            </span>
           </div>
           
           <div className="mt-6 bg-amber-50 border border-amber-200 p-4 rounded-xl inline-block text-left relative">
