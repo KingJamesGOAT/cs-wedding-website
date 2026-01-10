@@ -6,8 +6,13 @@ import { Label } from '../ui/label';
 import { Textarea } from '../ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
-import { CheckCircle2, AlertTriangle } from 'lucide-react';
+import { CheckCircle2, AlertTriangle, Info } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '../ui/alert';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "../ui/popover"
 
 import FloralTitle from '../ui/FloralTitle';
 import flower5 from '../../assets/flowers/5.svg';
@@ -292,7 +297,19 @@ export default function RSVP() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="email">{t('rsvp.email')}</Label>
+            <div className="flex items-center gap-2">
+              <Label htmlFor="email">{t('rsvp.email')}</Label>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <button type="button" className="text-neutral-400 hover:text-neutral-600 transition-colors">
+                    <Info className="h-4 w-4" />
+                  </button>
+                </PopoverTrigger>
+                <PopoverContent className="w-64 text-sm text-neutral-600 bg-white p-3">
+                  {t('rsvp.updateInfo')}
+                </PopoverContent>
+              </Popover>
+            </div>
             <Input
               id="email"
               type="email"

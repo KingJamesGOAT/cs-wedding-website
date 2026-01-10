@@ -78,6 +78,10 @@ const translations: Record<string, Record<Language, string>> = {
   'rsvp.firstName': { en: 'First Name', fr: 'Prénom' },
   'rsvp.lastName': { en: 'Last Name', fr: 'Nom' },
   'rsvp.email': { en: 'Email Address', fr: 'Adresse e-mail' },
+  'rsvp.updateInfo': { 
+    en: 'Made a mistake? Simply submit again with the same email to update your response.', 
+    fr: 'Une erreur ? Soumettez à nouveau avec le même email pour mettre à jour votre réponse.' 
+  },
   'rsvp.guests': { en: 'Number of Guests', fr: "Nombre d'invités" },
   'rsvp.includingYou': { en: '(Including you)', fr: '(Vous inclus)' },
   'rsvp.children': { 
