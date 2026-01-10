@@ -42,7 +42,7 @@ export default function CountdownTimer() {
 
   return (
     <div className="flex flex-col items-center gap-6">
-      <h3 className="text-lg tracking-wide text-white/90">{t('home.saveDate')}</h3>
+      <h3 className="text-3xl md:text-4xl tracking-wide text-white font-bold mb-4">{t('home.saveDate')}</h3>
       <div className="grid grid-cols-4 gap-3 sm:gap-6">
         {timeUnits.map((unit, index) => (
           <div
