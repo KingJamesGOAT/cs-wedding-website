@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import CountdownTimer from '../CountdownTimer';
-import heroImage from '../../assets/hero-image.jpg';
+import heroImage from '../../assets/hero-image-v2.jpg';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function Home() {
@@ -25,7 +25,7 @@ export default function Home() {
         <img
           src={heroImage}
           alt="Cynthia & Steve"
-          className="w-full h-full object-cover object-[20%_50%]"
+          className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60" />
       </motion.div>
