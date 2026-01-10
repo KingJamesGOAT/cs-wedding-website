@@ -133,11 +133,11 @@ const translations: Record<string, Record<Language, string>> = {
   'rsvp.foodNote.bold': { en: "If you'd like, you can also sign up to bring something for the Apero.", fr: 'Vous pouvez aussi, si vous le souhaitez, vous inscrire pour apporter quelque chose à l\'Apéro.' },
   'rsvp.taken': { en: '(Already Taken)', fr: '(Déjà pris)' },
   'rsvp.dinnerQuestion': { 
-    en: "We'd love for you to join us for the Evening Dinner! Will you be staying for the celebration?", 
+    en: "We'd love for you to join us for the Evening Dinner! Will you be staying for the evening?", 
     fr: "Nous serions ravis de vous compter parmi nous pour le Repas du Soir ! Serez-vous des nôtres ?" 
   },
   'rsvp.dinnerYes': { en: "Yes, looking forward to it!", fr: "Oui, avec grand plaisir !" },
-  'rsvp.dinnerNo': { en: "No, unfortunately just the ceremony", fr: "Non, malheureusement juste la cérémonie" },
+  'rsvp.dinnerNo': { en: "No, unfortunately just the ceremony and the apero", fr: "Non, malheureusement juste la cérémonie et l'apéro" },
   
   // Registry
   'registry.title': { en: 'Gifts', fr: 'Cadeaux' },
