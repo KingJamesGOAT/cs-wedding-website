@@ -105,35 +105,34 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
           </div>
         </div>
 
-        {/* Mobile Navigation Overlay */}
+        {/* Mobile Navigation */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.nav
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-40 bg-white/60 backdrop-blur-xl md:hidden flex flex-col items-center justify-center pt-16"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              className="md:hidden overflow-hidden bg-white/95 backdrop-blur-md rounded-b-xl border-t border-gray-100 shadow-xl"
             >
-              <div className="flex flex-col items-center gap-8 p-8 w-full max-w-sm">
-                {navItems.map((item, index) => (
-                  <motion.button
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.1 + index * 0.05 }}
+              <div className="py-4 space-y-2">
+                {navItems.map((item) => (
+                  <button
                     key={item.key}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
                       setIsMenuOpen(false);
-                      onNavigate(item.key);
+                      // Small delay to allow menu to close/start closing before scrolling
+                      setTimeout(() => onNavigate(item.key), 100);
                     }}
-                    className={`text-2xl uppercase tracking-[0.2em] transition-all ${
+                    className={`block w-full text-center px-4 py-4 text-sm uppercase tracking-widest transition-colors cursor-pointer ${
                       activeSection === item.key
-                        ? 'text-gray-900 font-semibold scale-110'
-                        : 'text-gray-600 hover:text-gray-900'
+                        ? 'bg-gray-50 text-gray-900 font-semibold'
+                        : 'text-gray-600 hover:bg-gray-50'
                     }`}
                   >
                     {item.label}
-                  </motion.button>
+                  </button>
                 ))}
               </div>
             </motion.nav>
