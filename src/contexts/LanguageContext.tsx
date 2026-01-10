@@ -75,7 +75,7 @@ const translations: Record<string, Record<Language, string>> = {
   'rsvp.title': { en: 'RSVP', fr: 'RSVP' },
   'rsvp.intro': {
     en: "Please RSVP by filling out the form below. Please respond as soon as possible so we can plan accordingly. Merci!",
-    fr: "Merci de remplir le formulaire ci-dessous pour confirmer votre présence. Nous vous remercions de votre réponse rapide afin que nous puissions nous organiser au mieux. Merci !"
+    fr: "Merci de confirmer votre présence ci-dessous. Une réponse rapide nous aiderait grandement pour l'organisation. Merci !"
   },
   'rsvp.attending': { en: 'Will you be attending?', fr: 'Serez-vous présent(e) ?' },
   'rsvp.attending.yes': { en: 'Joyfully Accept', fr: 'Avec plaisir' },

@@ -13,6 +13,11 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "../ui/tooltip"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "../ui/popover"
 
 import FloralTitle from '../ui/FloralTitle';
 import flower5 from '../../assets/flowers/5.svg';
@@ -235,19 +240,41 @@ export default function RSVP() {
           <div className="text-neutral-600 max-w-xl mx-auto">
             {t('rsvp.intro')}
             <span className="inline-flex align-middle ml-2">
-              <Tooltip delayDuration={0}>
-                <TooltipTrigger asChild>
-                  <button type="button" className="text-neutral-400 hover:text-neutral-600 transition-colors focus:outline-none outline-none cursor-pointer md:cursor-default">
-                    <Info className="h-5 w-5" />
-                  </button>
-                </TooltipTrigger>
-                <TooltipContent 
-                  side="top" 
-                  className="z-[100] max-w-[280px] text-center bg-white text-neutral-900 p-3 shadow-xl border border-neutral-200"
-                >
-                  <p>{t('rsvp.updateInfo')}</p>
-                </TooltipContent>
-              </Tooltip>
+              {/* Mobile: Popover (Click behavior) */}
+              <span className="md:hidden">
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <button type="button" className="text-neutral-400 hover:text-neutral-600 transition-colors focus:outline-none outline-none cursor-pointer">
+                      <Info className="h-5 w-5" />
+                    </button>
+                  </PopoverTrigger>
+                  <PopoverContent 
+                    align="center"
+                    side="top"
+                    sideOffset={5}
+                    className="max-w-[280px] text-center bg-white text-neutral-900 p-3 shadow-xl border border-neutral-200"
+                  >
+                    <p className="text-sm">{t('rsvp.updateInfo')}</p>
+                  </PopoverContent>
+                </Popover>
+              </span>
+
+              {/* Desktop: Tooltip (Hover behavior) */}
+              <span className="hidden md:inline-block">
+                <Tooltip delayDuration={0}>
+                  <TooltipTrigger asChild>
+                    <button type="button" className="text-neutral-400 hover:text-neutral-600 transition-colors focus:outline-none outline-none cursor-default">
+                      <Info className="h-5 w-5" />
+                    </button>
+                  </TooltipTrigger>
+                  <TooltipContent 
+                    side="top" 
+                    className="z-[100] max-w-[280px] text-center bg-white text-neutral-900 p-3 shadow-xl border border-neutral-200"
+                  >
+                    <p>{t('rsvp.updateInfo')}</p>
+                  </TooltipContent>
+                </Tooltip>
+              </span>
             </span>
           </div>
           
