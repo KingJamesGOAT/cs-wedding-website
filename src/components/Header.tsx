@@ -13,6 +13,16 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
+  // Scroll locking effect
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => { document.body.style.overflow = 'unset'; };
+  }, [isMenuOpen]);
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -33,18 +43,18 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled ? 'glass-header py-2' : 'bg-transparent py-6 md:py-4'
+        isScrolled || isMenuOpen ? 'glass-header py-2' : 'bg-transparent py-6 md:py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-16 relative z-50">
           {/* Logo/Names */}
           <button
             onClick={() => {
               onNavigate('home');
               setIsMenuOpen(false);
             }}
-            className={`text-2xl font-serif tracking-widest hover:opacity-70 transition-opacity ${isScrolled ? 'text-gray-900' : 'text-white'}`}
+            className={`text-2xl font-serif tracking-widest hover:opacity-70 transition-opacity ${isScrolled || isMenuOpen ? 'text-gray-900' : 'text-white'}`}
           >
             Cynthia & Steve
           </button>
@@ -77,7 +87,7 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
             <button
               onClick={toggleLanguage}
               className={`px-3 py-1 text-xs uppercase tracking-wider border rounded hover:bg-white/10 transition-colors ${
-                isScrolled ? 'border-gray-300 text-gray-900' : 'border-white/50 text-white'
+                isScrolled || isMenuOpen ? 'border-gray-300 text-gray-900' : 'border-white/50 text-white'
               }`}
             >
               {language === 'en' ? 'FR' : 'EN'}
@@ -87,7 +97,7 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className={`md:hidden p-2 rounded transition-colors ${
-                 isScrolled ? 'text-gray-900 hover:bg-gray-100' : 'text-white hover:bg-white/10'
+                 isScrolled || isMenuOpen ? 'text-gray-900 hover:bg-gray-100' : 'text-white hover:bg-white/10'
               }`}
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -95,34 +105,35 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation Overlay */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.nav
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="md:hidden overflow-hidden bg-white/95 backdrop-blur-md rounded-b-xl border-t border-gray-100 shadow-xl"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-40 bg-white/60 backdrop-blur-xl md:hidden flex flex-col items-center justify-center pt-16"
             >
-              <div className="py-4 space-y-2">
-                {navItems.map((item) => (
-                  <button
+              <div className="flex flex-col items-center gap-8 p-8 w-full max-w-sm">
+                {navItems.map((item, index) => (
+                  <motion.button
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.1 + index * 0.05 }}
                     key={item.key}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
+                    onClick={() => {
                       setIsMenuOpen(false);
-                      // Small delay to allow menu to close/start closing before scrolling
-                      setTimeout(() => onNavigate(item.key), 100);
+                      onNavigate(item.key);
                     }}
-                    className={`block w-full text-center px-4 py-4 text-sm uppercase tracking-widest transition-colors cursor-pointer ${
+                    className={`text-2xl uppercase tracking-[0.2em] transition-all ${
                       activeSection === item.key
-                        ? 'bg-gray-50 text-gray-900 font-semibold'
-                        : 'text-gray-600 hover:bg-gray-50'
+                        ? 'text-gray-900 font-semibold scale-110'
+                        : 'text-gray-600 hover:text-gray-900'
                     }`}
                   >
                     {item.label}
-                  </button>
+                  </motion.button>
                 ))}
               </div>
             </motion.nav>
