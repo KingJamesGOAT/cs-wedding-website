@@ -236,7 +236,7 @@ export default function Registry() {
              onClick={() => handleOpenPledge({ title: 'Cash Fund', description: t('registry.cashDesc'), suggestedAmounts: [20, 50, 100] })}
              className="group bg-white/70 backdrop-blur-xl border border-white/50 p-4 md:p-12 rounded-2xl md:rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer flex flex-col items-center justify-center text-center items-center h-[200px] md:h-[450px] transform hover:-translate-y-2"
           >
-            <div className="w-12 h-12 md:w-32 md:h-32 bg-[#FA8072]/20 rounded-full flex items-center justify-center mb-3 md:mb-8 group-hover:scale-110 transition-transform duration-500 group-hover:bg-[#FA8072]/30">
+            <div className="w-12 h-12 md:w-32 md:h-32 bg-[#FA8072]/10 rounded-full flex items-center justify-center mb-3 md:mb-8 group-hover:scale-110 transition-transform duration-500 group-hover:bg-[#FA8072]/20">
                <DollarSign className="w-6 h-6 md:w-16 md:h-16 text-[#FA8072]" />
             </div>
             <h3 className="text-sm md:text-3xl font-light mb-2 text-neutral-900 leading-tight">{t('registry.cashBtn')}</h3>
