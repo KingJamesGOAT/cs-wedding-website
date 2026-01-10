@@ -59,7 +59,7 @@ const translations: Record<string, Record<Language, string>> = {
     fr: 'Oui ! Les enfants sont les bienvenus. Nous avons hâte de célébrer avec toute la famille.' 
   },
   'details.qa.rsvp.question': { en: 'When should I RSVP?', fr: 'Quand répondre ?' },
-  'details.qa.rsvp.answer': { en: 'Please RSVP by May 1st, 2026.', fr: 'Merci de répondre avant le 1er mai 2026.' },
+  'details.qa.rsvp.answer': { en: 'Please RSVP before March 29th, 2026.', fr: 'Merci de répondre avant le 29 mars 2026.' },
 
   // RSVP Page
   'rsvp.title': { en: 'RSVP', fr: 'RSVP' },
