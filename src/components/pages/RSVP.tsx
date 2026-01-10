@@ -84,6 +84,25 @@ export default function RSVP() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [takenItems, setTakenItems] = useState<string[]>([]);
   const [isDinnerGuest, setIsDinnerGuest] = useState(false);
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+
+  // Auto-close Popover on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isPopoverOpen) {
+        setIsPopoverOpen(false);
+      }
+    };
+
+    if (isPopoverOpen) {
+      // Add passive listener for better performance
+      window.addEventListener('scroll', handleScroll, { passive: true });
+    }
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isPopoverOpen]);
 
   // Check for Magic Link (?invite=dinner)
   useEffect(() => {
@@ -242,7 +261,7 @@ export default function RSVP() {
             <span className="inline-flex align-middle ml-2">
               {/* Mobile: Popover (Click behavior) */}
               <span className="md:hidden">
-                <Popover>
+                <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
                   <PopoverTrigger asChild>
                     <button type="button" className="text-neutral-400 hover:text-neutral-600 transition-colors focus:outline-none outline-none cursor-pointer">
                       <Info className="h-5 w-5" />
