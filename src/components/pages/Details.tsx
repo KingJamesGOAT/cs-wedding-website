@@ -25,12 +25,12 @@ export default function Details() {
     {
       name: "Hotel Hine Adon",
       description: "Modern apartments",
-      url: "https://www.hineadon.ch"
+      url: "https://hineadon.com/"
     },
     {
       name: "Hotel Alpha",
       description: "Budget friendly",
-      url: "https://alpha-hotel.ch"
+      url: "https://www.online-reservations.com/?hotelid=241215&gacc=gmcc&gad_source=1&gad_campaignid=20880334758&gbraid=0AAAAACsYb7nOh7harOChs_aHdaNAcFDDK&gclid=CjwKCAiAjojLBhAlEiwAcjhrDuOZPlG2G68C7NIIC8zElH7FKmt1BCc9JhxfHjbVb2AVoiYiElSYbRoCBVIQAvD_BwE"
     }
   ];
 
