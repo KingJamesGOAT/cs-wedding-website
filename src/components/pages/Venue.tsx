@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { Button } from '../ui/button';
-import { MapPin, Church, Home } from 'lucide-react';
+import { MapPin, Church, Home, Copy, Check } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../ui/dialog';
 import ceremonyImage from '../../assets/2c1a399487b0eaf24b4eb22a66fb37e1c381bf12.png';
 import receptionImage from '../../assets/cbe880ec8c3cdfbbf3a2b6dbf42c2851ff18806c.png';
@@ -22,6 +22,14 @@ export default function Venue() {
       setIsDinnerGuest(true);
     }
   });
+
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+
+  const handleCopy = (text: string, id: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedId(id);
+    setTimeout(() => setCopiedId(null), 2000);
+  };
 
   const maps = {
     ceremony: {
@@ -60,8 +68,23 @@ export default function Venue() {
                 <h3 className="text-2xl">{t('venue.ceremony')}</h3>
               </div>
               <h4 className="mb-2">Basilique Notre-Dame de Fribourg</h4>
-              <p className="text-neutral-600 mb-1">Rue de Morat 12</p>
-              <p className="text-neutral-600 mb-3">1700 Fribourg, Switzerland</p>
+              <div className="flex items-start justify-between gap-4 mb-3">
+                <div>
+                  <p className="text-neutral-600 mb-1">Rue de Morat 12</p>
+                  <p className="text-neutral-600">1700 Fribourg, Switzerland</p>
+                </div>
+                <button
+                  onClick={() => handleCopy("Rue de Morat 12, 1700 Fribourg, Switzerland", "ceremony")}
+                  className="p-2 hover:bg-neutral-100 rounded-full transition-colors text-neutral-500 hover:text-neutral-900 focus:outline-none"
+                  title="Copy Address"
+                >
+                  {copiedId === 'ceremony' ? (
+                    <Check className="w-4 h-4 text-green-600" />
+                  ) : (
+                    <Copy className="w-4 h-4" />
+                  )}
+                </button>
+              </div>
               <p className="mb-3">{t('venue.ceremonyTime')}</p>
               <p className="text-sm text-neutral-600 mb-4">{t('venue.ceremonyNote')}</p>
               <Button
@@ -92,8 +115,23 @@ export default function Venue() {
               <h4 className="mb-2">
                 {language === 'en' ? 'Guglerahof Farm' : 'Ferme Guglerahof'}
               </h4>
-              <p className="text-neutral-600 mb-1">Guglera 6</p>
-              <p className="text-neutral-600 mb-3">1735 Giffers, Switzerland</p>
+              <div className="flex items-start justify-between gap-4 mb-3">
+                <div>
+                  <p className="text-neutral-600 mb-1">Guglera 6</p>
+                  <p className="text-neutral-600">1735 Giffers, Switzerland</p>
+                </div>
+                <button
+                  onClick={() => handleCopy("Guglera 6, 1735 Giffers, Switzerland", "reception")}
+                  className="p-2 hover:bg-neutral-100 rounded-full transition-colors text-neutral-500 hover:text-neutral-900 focus:outline-none"
+                  title="Copy Address"
+                >
+                  {copiedId === 'reception' ? (
+                    <Check className="w-4 h-4 text-green-600" />
+                  ) : (
+                    <Copy className="w-4 h-4" />
+                  )}
+                </button>
+              </div>
               <p className="mb-3">{t('venue.receptionTime')}</p>
               <p className="text-sm text-neutral-600 mb-4">
                 {isDinnerGuest ? t('venue.receptionNote.dinner') : t('venue.receptionNote.standard')}
