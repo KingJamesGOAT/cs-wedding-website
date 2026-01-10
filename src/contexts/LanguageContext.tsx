@@ -97,6 +97,7 @@ const translations: Record<string, Record<Language, string>> = {
     en: "Thank you for your RSVP! We've received your response.",
     fr: "Merci pour votre réponse ! Nous avons bien reçu votre confirmation."
   },
+  'rsvp.goToGifts': { en: 'Go to Gifts', fr: 'Aller aux Cadeaux' },
   'rsvp.aperoQuestion': { en: 'Would you like to bring something for the Apero for 10 people', fr: 'Souhaitez-vous apporter quelque chose pour l\'Apéro pour 10 personnes' },
   'rsvp.aperoYes': { en: 'Yes, I will bring something', fr: 'Oui, j\'apporte quelque chose' },
   'rsvp.aperoNo': { en: 'No, I will just enjoy', fr: 'Non, je viendrai juste profiter' },
