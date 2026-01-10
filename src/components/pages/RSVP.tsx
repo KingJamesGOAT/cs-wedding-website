@@ -6,7 +6,7 @@ import { Label } from '../ui/label';
 import { Textarea } from '../ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
-import { CheckCircle2, AlertTriangle, Gift } from 'lucide-react';
+import { CheckCircle2, AlertTriangle } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '../ui/alert';
 
 import FloralTitle from '../ui/FloralTitle';
@@ -210,20 +210,6 @@ export default function RSVP() {
             <CheckCircle2 className="w-16 h-16 text-green-600 mx-auto mb-4" />
             <h2 className="text-2xl mb-2">{t('rsvp.title')}</h2>
             <p className="text-green-800">{t('rsvp.success')}</p>
-            
-            <Button 
-              variant="outline"
-              className="mt-6 border-green-600 text-green-700 hover:bg-green-100 dark:hover:bg-green-900"
-              onClick={() => {
-                const registrySection = document.getElementById('registry');
-                if (registrySection) {
-                  registrySection.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
-            >
-              <Gift className="w-4 h-4 mr-2" />
-              {t('rsvp.goToGifts')}
-            </Button>
           </div>
         </div>
       </section>
