@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import CountdownTimer from '../CountdownTimer';
 import heroImageDesktop from '../../assets/hero-image-v3.jpg';
-import heroImageMobile from '../../assets/hero-image-mobile.jpg';
+import heroImageMobile from '../../assets/hero-image-mobile-v2.jpg';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function Home() {
@@ -26,7 +26,7 @@ export default function Home() {
         <img
           src={heroImageMobile}
           alt="Cynthia & Steve"
-          className="w-full h-full object-cover md:hidden"
+          className="w-full h-full object-cover md:hidden blur-[1px]"
         />
         <img
           src={heroImageDesktop}
