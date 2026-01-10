@@ -9,10 +9,10 @@ import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { CheckCircle2, AlertTriangle, Info } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '../ui/alert';
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "../ui/popover"
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "../ui/tooltip"
 
 import FloralTitle from '../ui/FloralTitle';
 import flower5 from '../../assets/flowers/5.svg';
@@ -234,6 +234,19 @@ export default function RSVP() {
           </div>
           <p className="text-neutral-600 max-w-xl mx-auto">{t('rsvp.intro')}</p>
           
+          <div className="flex justify-center mt-2 mb-4">
+            <Tooltip delayDuration={0}>
+              <TooltipTrigger asChild>
+                <button type="button" className="text-neutral-400 hover:text-neutral-600 transition-colors p-2">
+                  <Info className="h-5 w-5" />
+                </button>
+              </TooltipTrigger>
+              <TooltipContent className="max-w-[280px] text-center bg-white p-3 shadow-md border-neutral-100">
+                <p>{t('rsvp.updateInfo')}</p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
+          
           <div className="mt-6 bg-amber-50 border border-amber-200 p-4 rounded-xl inline-block text-left relative">
              <div className="flex gap-3">
                  <AlertTriangle className="h-5 w-5 text-amber-600 flex-shrink-0 mt-0.5" />
@@ -297,19 +310,7 @@ export default function RSVP() {
           </div>
 
           <div className="space-y-2">
-            <div className="flex items-center gap-2">
-              <Label htmlFor="email">{t('rsvp.email')}</Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <button type="button" className="text-neutral-400 hover:text-neutral-600 transition-colors">
-                    <Info className="h-4 w-4" />
-                  </button>
-                </PopoverTrigger>
-                <PopoverContent className="w-64 text-sm text-neutral-600 bg-white p-3">
-                  {t('rsvp.updateInfo')}
-                </PopoverContent>
-              </Popover>
-            </div>
+            <Label htmlFor="email">{t('rsvp.email')}</Label>
             <Input
               id="email"
               type="email"

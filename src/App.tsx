@@ -10,6 +10,7 @@ import Details from './components/pages/Details';
 import Gallery from './components/pages/Gallery';
 import MetaTags from './components/MetaTags';
 import { Toaster } from './components/ui/sonner';
+import { TooltipProvider } from './components/ui/tooltip';
 
 
 export default function App() {
@@ -59,7 +60,8 @@ export default function App() {
 
   return (
     <LanguageProvider>
-   <MetaTags />
+      <TooltipProvider>
+       <MetaTags />
       <div className="min-h-screen bg-white">
         <Header activeSection={activeSection} onNavigate={handleNavigate} />
         
@@ -75,6 +77,7 @@ export default function App() {
 
         <Toaster />
       </div>
+      </TooltipProvider>
     </LanguageProvider>
   );
 }
