@@ -132,9 +132,12 @@ const translations: Record<string, Record<Language, string>> = {
   'rsvp.foodNote.intro': { en: 'Please use this form to RSVP for the wedding. ', fr: 'Utilisez ce formulaire pour répondre à l\'invitation. ' },
   'rsvp.foodNote.bold': { en: "If you'd like, you can also sign up to bring something for the Apero.", fr: 'Vous pouvez aussi, si vous le souhaitez, vous inscrire pour apporter quelque chose à l\'Apéro.' },
   'rsvp.taken': { en: '(Already Taken)', fr: '(Déjà pris)' },
-  'rsvp.dinnerQuestion': { en: 'Will you join us for the Reception (Evening Dinner)?', fr: 'Serez-vous des nôtres pour la Réception (Repas du soir) ?' },
-  'rsvp.dinnerYes': { en: 'Yes, with pleasure', fr: 'Oui, avec plaisir' },
-  'rsvp.dinnerNo': { en: 'No, ceremony only', fr: 'Non, cérémonie uniquement' },
+  'rsvp.dinnerQuestion': { 
+    en: "We'd love for you to join us for the Evening Dinner! Will you be staying for the celebration?", 
+    fr: "Nous serions ravis de vous compter parmi nous pour le Repas du Soir ! Serez-vous des nôtres ?" 
+  },
+  'rsvp.dinnerYes': { en: "Yes, looking forward to it!", fr: "Oui, avec grand plaisir !" },
+  'rsvp.dinnerNo': { en: "No, unfortunately just the ceremony", fr: "Non, malheureusement juste la cérémonie" },
   
   // Registry
   'registry.title': { en: 'Gifts', fr: 'Cadeaux' },
