@@ -1,7 +1,8 @@
 import { useRef } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import CountdownTimer from '../CountdownTimer';
-import heroImage from '../../assets/hero-image-v3.jpg';
+import heroImageDesktop from '../../assets/hero-image-v3.jpg';
+import heroImageMobile from '../../assets/hero-image-mobile.jpg';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function Home() {
@@ -23,9 +24,14 @@ export default function Home() {
         className="absolute inset-0 z-0"
       >
         <img
-          src={heroImage}
+          src={heroImageMobile}
           alt="Cynthia & Steve"
-          className="w-full h-full object-cover object-[35%_50%] md:object-center"
+          className="w-full h-full object-cover md:hidden"
+        />
+        <img
+          src={heroImageDesktop}
+          alt="Cynthia & Steve"
+          className="hidden md:block w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60" />
       </motion.div>
