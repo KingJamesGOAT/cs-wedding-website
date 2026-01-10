@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import CountdownTimer from '../CountdownTimer';
-import heroImage from '../../assets/0d1cd457186d307d42955abe79608185de75d7aa.png';
+import heroImage from '../../assets/hero-image.jpg';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function Home() {
