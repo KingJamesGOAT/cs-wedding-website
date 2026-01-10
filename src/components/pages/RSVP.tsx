@@ -237,7 +237,7 @@ export default function RSVP() {
             <span className="inline-flex align-middle ml-2">
               <Tooltip delayDuration={0}>
                 <TooltipTrigger asChild>
-                  <button type="button" className="text-neutral-400 hover:text-neutral-600 transition-colors">
+                  <button type="button" className="text-neutral-400 hover:text-neutral-600 transition-colors focus:outline-none outline-none">
                     <Info className="h-5 w-5" />
                   </button>
                 </TooltipTrigger>
