@@ -7,7 +7,7 @@ import {
   AccordionTrigger,
 } from '../ui/accordion';
 import { Button } from '../ui/button';
-import { ExternalLink, Car, Baby, Clock, Shirt } from 'lucide-react';
+import { ExternalLink, Car, Baby, Clock, Shirt, Utensils } from 'lucide-react';
 
 import FloralTitle from '../ui/FloralTitle';
 import flower3 from '../../assets/flowers/3.svg';
@@ -106,6 +106,30 @@ export default function Details() {
             </h3>
             
             <Accordion type="single" collapsible className="w-full">
+              <AccordionItem value="rsvp">
+                <AccordionTrigger>
+                  <span className="flex items-center gap-3">
+                    <Clock className="w-5 h-5 text-neutral-500" />
+                    {t('details.qa.rsvp.question')}
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="text-neutral-600 leading-relaxed">
+                  {t('details.qa.rsvp.answer')}
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="apero">
+                <AccordionTrigger>
+                  <span className="flex items-center gap-3">
+                    <Utensils className="w-5 h-5 text-neutral-500" />
+                    {t('details.qa.apero.question')}
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="text-neutral-600 leading-relaxed">
+                  {t('details.qa.apero.answer')}
+                </AccordionContent>
+              </AccordionItem>
+
               <AccordionItem value="dress-code">
                 <AccordionTrigger>
                   <span className="flex items-center gap-3">
@@ -115,18 +139,6 @@ export default function Details() {
                 </AccordionTrigger>
                 <AccordionContent className="text-neutral-600 leading-relaxed">
                   {t('details.qa.dressCode.answer')}
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem value="transport">
-                <AccordionTrigger>
-                  <span className="flex items-center gap-3">
-                    <Car className="w-5 h-5 text-neutral-500" />
-                    {t('details.qa.transport.question')}
-                  </span>
-                </AccordionTrigger>
-                <AccordionContent className="text-neutral-600 leading-relaxed">
-                  {t('details.qa.transport.answer')}
                 </AccordionContent>
               </AccordionItem>
 
@@ -142,15 +154,15 @@ export default function Details() {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="rsvp">
+              <AccordionItem value="transport">
                 <AccordionTrigger>
                   <span className="flex items-center gap-3">
-                    <Clock className="w-5 h-5 text-neutral-500" />
-                    {t('details.qa.rsvp.question')}
+                    <Car className="w-5 h-5 text-neutral-500" />
+                    {t('details.qa.transport.question')}
                   </span>
                 </AccordionTrigger>
                 <AccordionContent className="text-neutral-600 leading-relaxed">
-                  {t('details.qa.rsvp.answer')}
+                  {t('details.qa.transport.answer')}
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
