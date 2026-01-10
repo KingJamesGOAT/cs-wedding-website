@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { getOGImageDataURL } from './OGImage';
 
 export default function MetaTags() {
   useEffect(() => {
@@ -31,16 +30,16 @@ export default function MetaTags() {
     setMetaTag('og:title', 'Cynthia & Steve - Wedding Website');
     setMetaTag('og:description', 'Join us in celebrating our special day on June 27, 2026 in Fribourg, Switzerland');
     setMetaTag('og:type', 'website');
-    setMetaTag('og:image', getOGImageDataURL());
+    setMetaTag('og:image', '/og-image.jpg');
     setMetaTag('og:image:width', '1200');
     setMetaTag('og:image:height', '630');
-    setMetaTag('og:image:alt', 'Cynthia & Steve Wedding - SC Monogram');
+    setMetaTag('og:image:alt', 'Cynthia & Steve Wedding');
     
     // Twitter Card tags
     setMetaTagName('twitter:card', 'summary_large_image');
     setMetaTagName('twitter:title', 'Cynthia & Steve - Wedding Website');
     setMetaTagName('twitter:description', 'Join us in celebrating our special day on June 27, 2026 in Fribourg, Switzerland');
-    setMetaTagName('twitter:image', getOGImageDataURL());
+    setMetaTagName('twitter:image', '/og-image.jpg');
     
     // Standard meta tags
     setMetaTagName('description', 'Join us in celebrating Cynthia & Steve\'s wedding on June 27, 2026 in Fribourg, Switzerland. RSVP, view venue details, and explore our gift registry.');
