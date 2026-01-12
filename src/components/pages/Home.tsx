@@ -87,7 +87,7 @@ export default function Home({ onHeroTitleVisibilityChange }: HomeProps) {
       </motion.div>
 
       {/* Content */}
-      <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 py-20">
+      <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 pt-32 pb-20 md:py-20">
         <div className="max-w-4xl mx-auto">
           {/* Names & Date */}
           <div className="mb-12">
@@ -119,7 +119,10 @@ export default function Home({ onHeroTitleVisibilityChange }: HomeProps) {
              transition={{ duration: 1, delay: 1 }}
              className="mb-16 max-w-2xl mx-auto"
           >
-            <p className="text-lg sm:text-xl text-white leading-relaxed font-normal md:font-semibold italic text-edge-glow">
+            <p className="md:hidden text-lg sm:text-xl text-white leading-relaxed font-normal md:font-semibold italic text-edge-glow">
+              {t('home.welcome_mobile')}
+            </p>
+            <p className="hidden md:block text-lg sm:text-xl text-white leading-relaxed font-normal md:font-semibold italic text-edge-glow">
               {t('home.welcome')}
             </p>
             
