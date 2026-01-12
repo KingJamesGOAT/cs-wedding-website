@@ -6,9 +6,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 interface HeaderProps {
   activeSection: string;
   onNavigate: (section: string) => void;
+  isHeroTitleVisible?: boolean;
 }
 
-export default function Header({ activeSection, onNavigate }: HeaderProps) {
+export default function Header({ activeSection, onNavigate, isHeroTitleVisible = false }: HeaderProps) {
   const { language, toggleLanguage, t } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -54,7 +55,10 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
               onNavigate('home');
               setIsMenuOpen(false);
             }}
-            className={`text-2xl font-serif tracking-widest hover:opacity-70 transition-opacity ${isScrolled || isMenuOpen ? 'text-gray-900' : 'text-white'}`}
+            className={`text-2xl font-serif tracking-widest transition-all duration-500
+              ${isScrolled || isMenuOpen ? 'text-gray-900' : 'text-white'}
+              ${!isMenuOpen && isHeroTitleVisible ? 'opacity-0 pointer-events-none md:opacity-100 md:pointer-events-auto' : 'opacity-100 hover:opacity-70'}
+            `}
           >
             Cynthia & Steve
           </button>

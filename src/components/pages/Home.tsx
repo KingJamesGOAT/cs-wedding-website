@@ -8,11 +8,39 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 
 const desktopImages = [heroImageDesktop, heroImageV4];
 
-export default function Home() {
+interface HomeProps {
+  onHeroTitleVisibilityChange?: (isVisible: boolean) => void;
+}
+
+export default function Home({ onHeroTitleVisibilityChange }: HomeProps) {
   const { language, t } = useLanguage();
   const ref = useRef(null);
+  const titleRef = useRef(null);
   
   const [currentImageIndex, setCurrentImageIndex] = useState(() => Math.floor(Math.random() * desktopImages.length));
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (onHeroTitleVisibilityChange) {
+          onHeroTitleVisibilityChange(entry.isIntersecting);
+        }
+      },
+      {
+        threshold: 0.1, // Trigger when at least 10% of the title is visible
+      }
+    );
+
+    if (titleRef.current) {
+      observer.observe(titleRef.current);
+    }
+
+    return () => {
+      if (titleRef.current) {
+        observer.unobserve(titleRef.current);
+      }
+    };
+  }, [onHeroTitleVisibilityChange]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -64,6 +92,7 @@ export default function Home() {
           {/* Names & Date */}
           <div className="mb-12">
             <motion.h1 
+              ref={titleRef}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.2 }}

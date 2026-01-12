@@ -16,6 +16,7 @@ import { TooltipProvider } from './components/ui/tooltip';
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [homeKey, setHomeKey] = useState(0);
+  const [isHeroTitleVisible, setIsHeroTitleVisible] = useState(false);
 
   const handleNavigate = (section: string) => {
     setActiveSection(section);
@@ -63,10 +64,10 @@ export default function App() {
       <TooltipProvider>
        <MetaTags />
       <div className="min-h-screen bg-white">
-        <Header activeSection={activeSection} onNavigate={handleNavigate} />
+        <Header activeSection={activeSection} onNavigate={handleNavigate} isHeroTitleVisible={isHeroTitleVisible} />
         
         <main>
-          <Home key={homeKey} />
+          <Home key={homeKey} onHeroTitleVisibilityChange={setIsHeroTitleVisible} />
           <Venue />
           <Details />
           <RSVP />
