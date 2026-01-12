@@ -127,7 +127,10 @@ export default function Home({ onHeroTitleVisibilityChange }: HomeProps) {
             </p>
             
             <div className="mt-12">
-              <p className="text-xl sm:text-3xl text-white font-serif italic mb-3 tracking-wide text-edge-glow leading-relaxed">
+              <p className="md:hidden text-xl sm:text-3xl text-white font-serif italic mb-1 tracking-wide text-edge-glow leading-relaxed whitespace-pre-line">
+                "{t('home.quote_mobile')}"
+              </p>
+              <p className="hidden md:block text-xl sm:text-3xl text-white font-serif italic mb-2 tracking-wide text-edge-glow leading-relaxed">
                 "{t('home.quote')}"
               </p>
               <p className="text-base sm:text-lg text-white/90 text-edge-glow font-medium">
