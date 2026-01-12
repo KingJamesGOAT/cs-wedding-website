@@ -1,17 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
 import { LanguageProvider } from './contexts/LanguageContext';
 import Header from './components/Header';
-
-import Home from './components/pages/Home';
-import RSVP from './components/pages/RSVP';
-import Registry from './components/pages/Registry';
-import Venue from './components/pages/Venue';
-import Details from './components/pages/Details';
-import Gallery from './components/pages/Gallery';
+import Home from './components/pages/Home'; // Home is critical, keep eager
 import MetaTags from './components/MetaTags';
 import { Toaster } from './components/ui/sonner';
 import { TooltipProvider } from './components/ui/tooltip';
+import LoadingSpinner from './components/ui/LoadingSpinner';
 
+// Lazy load heavy components
+const Venue = lazy(() => import('./components/pages/Venue'));
+const Details = lazy(() => import('./components/pages/Details'));
+const RSVP = lazy(() => import('./components/pages/RSVP'));
+const Registry = lazy(() => import('./components/pages/Registry'));
+const Gallery = lazy(() => import('./components/pages/Gallery'));
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
@@ -38,25 +39,37 @@ export default function App() {
     }
   };
 
+  // Performance: Use IntersectionObserver instead of scroll listener
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['home', 'venue', 'details', 'rsvp', 'registry', 'gallery'];
-      const scrollPosition = window.scrollY + 200;
-
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
+    const observerOptions = {
+      root: null,
+      rootMargin: '-50% 0px -50% 0px', // Active when element is in the middle of viewport
+      threshold: 0
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    const sections = ['home', 'venue', 'details', 'rsvp', 'registry', 'gallery'];
+
+    // Small delay to ensure DOM elements are mounted largely irrelevant with React but safe for ref-less integration
+    const timeoutId = setTimeout(() => {
+      sections.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) observer.observe(element);
+      });
+    }, 100);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   return (
@@ -68,13 +81,27 @@ export default function App() {
         
         <main>
           <Home key={homeKey} onHeroTitleVisibilityChange={setIsHeroTitleVisible} />
-          <Venue />
-          <Details />
-          <RSVP />
-          <Registry />
-          <Gallery />
+          
+          <Suspense fallback={<LoadingSpinner />}>
+            <Venue />
+          </Suspense>
+          
+          <Suspense fallback={<LoadingSpinner />}>
+            <Details />
+          </Suspense>
+          
+          <Suspense fallback={<LoadingSpinner />}>
+            <RSVP />
+          </Suspense>
+          
+          <Suspense fallback={<LoadingSpinner />}>
+            <Registry />
+          </Suspense>
+          
+          <Suspense fallback={<LoadingSpinner />}>
+            <Gallery />
+          </Suspense>
         </main>
-
 
         <Toaster />
       </div>
