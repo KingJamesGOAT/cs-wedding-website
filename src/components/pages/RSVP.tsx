@@ -25,42 +25,44 @@ import flower5 from '../../assets/flowers/5.svg';
 import flower6 from '../../assets/flowers/6.svg';
 
 // Defined Lists with Limits
-const SAVORY_OPTIONS = [
-  { label: "Croissants jambon", limit: 2 },
-  { label: "Mini sandwichs jambon fromage", limit: 2 },
-  { label: "Wraps roulés saumon / Philadelphia", limit: 1 },
-  { label: "Dips légumes + sauces", limit: 2 },
-  { label: "Mini sandwichs faux gras", limit: 1 },
-  { label: "Blinis substitut saumon", limit: 1 },
-  { label: "Petits cakes légumes", limit: 2 },
-  { label: "Mini chaussons épinards", limit: 1 },
-  { label: "Blinis faux-saumon", limit: 1 },
-  { label: "Petits cakes lardons fromage", limit: 2 },
-  { label: "Blinis saumon", limit: 1 },
-  { label: "Brochettes Tomates + Mozarella", limit: 1 },
-  { label: "Brochettes melon–jambon cru", limit: 1 },
+// Defined Lists with Limits (Labels are now Translation Keys)
+const SAVORY_OPTIONS_KEYS = [
+  { key: "food.savory.croissants", limit: 2 },
+  { key: "food.savory.sandwich", limit: 2 },
+  { key: "food.savory.wraps", limit: 1 },
+  { key: "food.savory.dips", limit: 2 },
+  { key: "food.savory.fauxgras", limit: 1 },
+  { key: "food.savory.blinis_sub", limit: 1 },
+  { key: "food.savory.cakes_veg", limit: 2 },
+  { key: "food.savory.spinach", limit: 1 },
+  { key: "food.savory.blinis_faux", limit: 1 },
+  { key: "food.savory.cakes_bacon", limit: 2 },
+  { key: "food.savory.blinis_salm", limit: 1 },
+  { key: "food.savory.skewers_tom", limit: 1 },
+  { key: "food.savory.skewers_mel", limit: 1 },
 ];
 
-const SWEET_OPTIONS = [
-  { label: "Brochettes de fruits", limit: 1 },
-  { label: "Brownies", limit: 1 },
-  { label: "Mini muffins", limit: 1 },
-  { label: "Tartelettes citron", limit: 1 },
-  { label: "Grosse pastèque coupées triangle", limit: 1 },
-  { label: "Choux garnis", limit: 1 },
-  { label: "Biscuits fait maison", limit: 1 },
-  { label: "Mini cookies", limit: 1 },
-  { label: "Sablés", limit: 1 },
-  { label: "Mini Cupcake", limit: 1 },
-  { label: "Verrines fruits", limit: 1 },
+const SWEET_OPTIONS_KEYS = [
+  { key: "food.sweet.skewers", limit: 1 },
+  { key: "food.sweet.brownies", limit: 1 },
+  { key: "food.sweet.muffins", limit: 1 },
+  { key: "food.sweet.tart_lemon", limit: 1 },
+  { key: "food.sweet.watermelon", limit: 1 },
+  { key: "food.sweet.choux", limit: 1 },
+  { key: "food.sweet.biscuits", limit: 1 },
+  { key: "food.sweet.cookies", limit: 1 },
+  { key: "food.sweet.sables", limit: 1 },
+  { key: "food.sweet.cupcake", limit: 1 },
+  { key: "food.sweet.verrines", limit: 1 },
 ];
 
 interface SelectedItem {
   id: string;
   label: string;
   type: 'Savory' | 'Sweet' | 'Custom';
-  quantity: number; // 1 = 50 bites, 2 = 100 bites (if allowed)
+  quantity: number; 
   customDetails?: string;
+  key?: string; // Track the translation key for consistency if needed
 }
 
 export default function RSVP() {
@@ -371,7 +373,10 @@ export default function RSVP() {
   };
 
   // Determine available options for the dialog
-  const currentOptions = addDialogType === 'Savory' ? SAVORY_OPTIONS : SWEET_OPTIONS;
+  // Map keys to translated labels dynamically
+  const currentOptions = addDialogType === 'Savory' 
+    ? SAVORY_OPTIONS_KEYS.map(opt => ({ ...opt, label: t(opt.key) })) 
+    : SWEET_OPTIONS_KEYS.map(opt => ({ ...opt, label: t(opt.key) }));
 
   return (
     <section id="rsvp" className="py-20 px-4 sm:px-6 lg:px-8">

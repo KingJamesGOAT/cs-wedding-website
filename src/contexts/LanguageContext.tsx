@@ -178,6 +178,35 @@ const translations: Record<string, Record<Language, string>> = {
   'summary.gifts.refCode': { en: 'Ref Code', fr: 'Code Ref' },
   'summary.gifts.amount': { en: 'Amount', fr: 'Montant' },
   'summary.rsvp.updateHint': { en: 'Mistake? Refill RSVP using the same email to update.', fr: 'Une erreur ? Remplissez à nouveau le RSVP avec le même email pour mettre à jour.' },
+  
+  // Savory Options
+  'food.savory.croissants': { en: 'Ham Croissants', fr: 'Croissants jambon' },
+  'food.savory.sandwich': { en: 'Mini Ham & Cheese Sandwiches', fr: 'Mini sandwichs jambon fromage' },
+  'food.savory.wraps': { en: 'Salmon / Philadelphia Wraps', fr: 'Wraps roulés saumon / Philadelphia' },
+  'food.savory.dips': { en: 'Vegetable Dips + Sauces', fr: 'Dips légumes + sauces' },
+  'food.savory.fauxgras': { en: 'Mini Faux Gras Sandwiches', fr: 'Mini sandwichs faux gras' },
+  'food.savory.blinis_sub': { en: 'Salmon Substitute Blinis', fr: 'Blinis substitut saumon' },
+  'food.savory.cakes_veg': { en: 'Small Vegetable Cakes', fr: 'Petits cakes légumes' },
+  'food.savory.spinach': { en: 'Mini Spinach Turnovers', fr: 'Mini chaussons épinards' },
+  'food.savory.blinis_faux': { en: 'Faux-Salmon Blinis', fr: 'Blinis faux-saumon' },
+  'food.savory.cakes_bacon': { en: 'Bacon & Cheese Cakes', fr: 'Petits cakes lardons fromage' },
+  'food.savory.blinis_salm': { en: 'Salmon Blinis', fr: 'Blinis saumon' },
+  'food.savory.skewers_tom': { en: 'Tomato & Mozzarella Skewers', fr: 'Brochettes Tomates + Mozarella' },
+  'food.savory.skewers_mel': { en: 'Melon & Prosciutto Skewers', fr: 'Brochettes melon–jambon cru' },
+
+  // Sweet Options
+  'food.sweet.skewers': { en: 'Fruit Skewers', fr: 'Brochettes de fruits' },
+  'food.sweet.brownies': { en: 'Brownies', fr: 'Brownies' },
+  'food.sweet.muffins': { en: 'Mini Muffins', fr: 'Mini muffins' },
+  'food.sweet.tart_lemon': { en: 'Lemon Tarts', fr: 'Tartelettes citron' },
+  'food.sweet.watermelon': { en: 'Watermelon Triangles', fr: 'Grosse pastèque coupées triangle' },
+  'food.sweet.choux': { en: 'Cream Puffs', fr: 'Choux garnis' },
+  'food.sweet.biscuits': { en: 'Homemade Biscuits', fr: 'Biscuits fait maison' },
+  'food.sweet.cookies': { en: 'Mini Cookies', fr: 'Mini cookies' },
+  'food.sweet.sables': { en: 'Shortbread', fr: 'Sablés' },
+  'food.sweet.cupcake': { en: 'Mini Cupcake', fr: 'Mini Cupcake' },
+  'food.sweet.verrines': { en: 'Fruit Verrines', fr: 'Verrines fruits' },
+
 
   
   // Registry

@@ -13,6 +13,8 @@ export default function UserSummaryButton({ activeSection }: UserSummaryButtonPr
   const [userData, setUserData] = useState<any>(null);
   const [isOpen, setIsOpen] = useState(false);
 
+  const [isExpanded, setIsExpanded] = useState(false);
+
   // Load data from LocalStorage on open AND verify with backend
   useEffect(() => {
     if (isOpen) {
@@ -20,21 +22,20 @@ export default function UserSummaryButton({ activeSection }: UserSummaryButtonPr
       if (stored) {
         const parsed = JSON.parse(stored);
         setUserData(parsed);
-        
-        // Verify if this user still exists in the sheet
-        if (parsed.rsvp && parsed.rsvp.email) {
-            verifyUserStatus(parsed.rsvp.email);
-        }
+        if (parsed.rsvp && parsed.rsvp.email) verifyUserStatus(parsed.rsvp.email);
       }
+    } else {
+        setIsExpanded(false); // Reset on close
     }
   }, [isOpen]);
+  // ... (useEffect for storage loaded above)
 
+  // Verify User Status Function
   const verifyUserStatus = async (email: string) => {
       try {
           const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyfVDsivhWotNQbGJN65SzF2xwFlzulSjD2WaVYb2Hx8hKG118J-JzoO5tMCjye1JVb/exec';
           
           // Use POST to verify
-          // Note: Backend must return JSON and handle CORS (ContentService.createTextOutput...setMimeType(JSON))
           const response = await fetch(SCRIPT_URL, {
             method: 'POST',
             body: JSON.stringify({ type: 'verify', email: email })
@@ -43,21 +44,19 @@ export default function UserSummaryButton({ activeSection }: UserSummaryButtonPr
           if (response.ok) {
               const data = await response.json();
               if (data.status === 'success' && data.exists === false) {
-                  console.log('User not found in backend (deleted from sheet). Clearing local dashboard.');
-                  // USER DELETED FROM SHEET -> WIPE LOCAL DATA
+                  console.log('User not found in backend. Clearing local dashboard.');
                   localStorage.removeItem('wedding_user_data');
                   setUserData(null);
-                  setIsOpen(false); // Close the sheet if it was just opened and data vanished
+                  setIsOpen(false);
                   window.dispatchEvent(new Event('wedding-data-updated'));
               }
           }
       } catch (e) {
-          // Silent fail - if network is down or backend script not updated yet, we keep the data.
-          console.warn("Could not verify user status with backend (Script might need update):", e);
+          console.warn("Could not verify user status:", e);
       }
   };
 
-  // Listen for custom event to reload data (if we trigger it on submission)
+  // Listen for custom event
   useEffect(() => {
     const handleStorageUpdate = () => {
         const stored = localStorage.getItem('wedding_user_data');
@@ -80,13 +79,13 @@ export default function UserSummaryButton({ activeSection }: UserSummaryButtonPr
 
   const hasRsvp = userData && userData.rsvp;
   const hasGifts = userData && userData.gifts && userData.gifts.length > 0;
-  // Check both the flag AND if there are selected items, to be safe.
   const hasApero = userData && userData.rsvp && (userData.rsvp.aperoContribution === 'yes' || (userData.rsvp.selectedItems && userData.rsvp.selectedItems.length > 0));
 
   return (
     <div className="fixed top-32 right-0 z-40 animate-in slide-in-from-right-10 duration-700">
        <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
+             {/* ... Trigger Button (unchanged) ... */}
              <button className="
                 bg-white/90 backdrop-blur-md border border-neutral-200 border-r-0
                 shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all 
@@ -105,23 +104,50 @@ export default function UserSummaryButton({ activeSection }: UserSummaryButtonPr
           </SheetTrigger>
           <SheetContent 
              side="right" 
-             className="
+             className={`
                w-[90vw] sm:max-w-md 
                bg-white/95 backdrop-blur-xl border border-neutral-200 
                shadow-2xl 
                rounded-2xl 
-               h-auto max-h-[55vh] sm:max-h-[85vh]
+               h-auto sm:max-h-[85vh]
+               ${isExpanded ? 'max-h-[85vh] sm:h-auto' : 'max-h-[55vh]'}
+               transition-[max-height] duration-500 ease-in-out
                top-1/2 -translate-y-1/2 
                right-2 sm:right-6 
                p-0 overflow-hidden
                data-[state=open]:!slide-in-from-right-0 data-[state=closed]:!slide-out-to-right-0
                data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0
-             "
+             `}
           >
              <div className="flex flex-col h-full max-h-full">
-               <SheetHeader className="p-6 pb-2 shrink-0 bg-white/50 border-b border-neutral-100">
-                  <SheetTitle className="text-2xl font-light font-serif text-neutral-900">{t('summary.title')}</SheetTitle>
-                  <p className="text-sm text-neutral-500">{t('summary.subtitle')}</p>
+               <SheetHeader className="p-6 pb-2 shrink-0 bg-white/50 border-b border-neutral-100 flex flex-row items-center justify-between space-y-0">
+                  <div>
+                    <SheetTitle className="text-2xl font-light font-serif text-neutral-900 text-left">{t('summary.title')}</SheetTitle>
+                    <p className="text-sm text-neutral-500 text-left">{t('summary.subtitle')}</p>
+                  </div>
+                  <button 
+                    onClick={() => setIsExpanded(!isExpanded)}
+                    className="p-2 hover:bg-neutral-100 rounded-full transition-colors hidden sm:hidden" // Only visible on mobile (hidden on sm up? No, user said for mobile. But usually small screens need it. Let's show on all or just mobile?)
+                    // Actually, on desktop sm:max-w-md is already tall. The height restriction is mainly mobile. 
+                    // Let's make it visible only when the restriction applies (mobile).
+                    // sm:hidden ensures it hides on desktop where max-h is usually fine or fixed.
+                  >
+                    {isExpanded ? (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-minimize-2 text-neutral-400"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+                    ) : (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-maximize-2 text-neutral-400"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+                    )}
+                  </button>
+                  <button 
+                    onClick={() => setIsExpanded(!isExpanded)}
+                    className="p-2 hover:bg-neutral-100 rounded-full transition-colors sm:hidden" 
+                  >
+                    {isExpanded ? (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-minimize-2 text-neutral-400"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+                    ) : (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-maximize-2 text-neutral-400"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+                    )}
+                  </button>
                </SheetHeader>
 
                <div className="flex-1 overflow-y-auto px-6">
