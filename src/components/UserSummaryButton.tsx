@@ -64,7 +64,7 @@ export default function UserSummaryButton({ activeSection }: UserSummaryButtonPr
                 <div className="bg-neutral-100 p-1.5 rounded-full group-hover:bg-neutral-200 transition-colors">
                    <User className="w-4 h-4 text-neutral-600" />
                 </div>
-                <span className="text-[10px] uppercase tracking-wider font-medium text-neutral-500 hidden md:block group-hover:text-neutral-900 writing-mode-vertical-rl rotate-180">
+                <span className="text-[10px] uppercase tracking-wider font-medium text-neutral-500 hidden md:block group-hover:text-neutral-900 writing-mode-vertical-rl">
                    {t('dashboard.button')}
                 </span>
              </button>
@@ -80,6 +80,8 @@ export default function UserSummaryButton({ activeSection }: UserSummaryButtonPr
                top-0 sm:top-1/2 sm:-translate-y-1/2 
                right-0 sm:right-6 
                p-0 overflow-hidden
+               data-[state=open]:!slide-in-from-right-0 data-[state=closed]:!slide-out-to-right-0
+               data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0
              "
           >
              <div className="flex flex-col h-full max-h-full">
