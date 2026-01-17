@@ -13,15 +13,49 @@ export default function UserSummaryButton({ activeSection }: UserSummaryButtonPr
   const [userData, setUserData] = useState<any>(null);
   const [isOpen, setIsOpen] = useState(false);
 
-  // Load data from LocalStorage on open
+  // Load data from LocalStorage on open AND verify with backend
   useEffect(() => {
     if (isOpen) {
       const stored = localStorage.getItem('wedding_user_data');
       if (stored) {
-        setUserData(JSON.parse(stored));
+        const parsed = JSON.parse(stored);
+        setUserData(parsed);
+        
+        // Verify if this user still exists in the sheet
+        if (parsed.rsvp && parsed.rsvp.email) {
+            verifyUserStatus(parsed.rsvp.email);
+        }
       }
     }
   }, [isOpen]);
+
+  const verifyUserStatus = async (email: string) => {
+      try {
+          const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxpq_jKgykf6Ss1U-5kSybzOq3Fz1-yuhADQyy-Fp2WJJNin7KYbD5qr4KKEyVhDuTM/exec';
+          
+          // Use POST to verify
+          // Note: Backend must return JSON and handle CORS (ContentService.createTextOutput...setMimeType(JSON))
+          const response = await fetch(SCRIPT_URL, {
+            method: 'POST',
+            body: JSON.stringify({ type: 'verify', email: email })
+          });
+          
+          if (response.ok) {
+              const data = await response.json();
+              if (data.status === 'success' && data.exists === false) {
+                  console.log('User not found in backend (deleted from sheet). Clearing local dashboard.');
+                  // USER DELETED FROM SHEET -> WIPE LOCAL DATA
+                  localStorage.removeItem('wedding_user_data');
+                  setUserData(null);
+                  setIsOpen(false); // Close the sheet if it was just opened and data vanished
+                  window.dispatchEvent(new Event('wedding-data-updated'));
+              }
+          }
+      } catch (e) {
+          // Silent fail - if network is down or backend script not updated yet, we keep the data.
+          console.warn("Could not verify user status with backend (Script might need update):", e);
+      }
+  };
 
   // Listen for custom event to reload data (if we trigger it on submission)
   useEffect(() => {
