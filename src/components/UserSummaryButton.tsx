@@ -109,8 +109,13 @@ export default function UserSummaryButton({ activeSection }: UserSummaryButtonPr
                bg-white/95 backdrop-blur-xl border border-neutral-200 
                shadow-2xl 
                rounded-2xl 
-               h-auto sm:max-h-[85vh]
-               ${isExpanded ? 'max-h-[85vh] sm:h-auto' : 'max-h-[55vh]'}
+               
+               /* Mobile: Fixed 55vh, Auto height (up to limit) */
+               h-auto max-h-[55vh]
+
+               /* Desktop: Expands from 55vh to 85vh */
+               ${isExpanded ? 'sm:max-h-[85vh]' : 'sm:max-h-[55vh]'}
+               
                transition-[max-height] duration-500 ease-in-out
                top-1/2 -translate-y-1/2 
                right-2 sm:right-6 
@@ -125,22 +130,12 @@ export default function UserSummaryButton({ activeSection }: UserSummaryButtonPr
                     <SheetTitle className="text-2xl font-light font-serif text-neutral-900 text-left">{t('summary.title')}</SheetTitle>
                     <p className="text-sm text-neutral-500 text-left">{t('summary.subtitle')}</p>
                   </div>
+                  
+                  {/* EXPAND BUTTON: Hidden on Mobile, Visible on Desktop (sm+) */}
                   <button 
                     onClick={() => setIsExpanded(!isExpanded)}
-                    className="p-2 hover:bg-neutral-100 rounded-full transition-colors hidden sm:hidden" // Only visible on mobile (hidden on sm up? No, user said for mobile. But usually small screens need it. Let's show on all or just mobile?)
-                    // Actually, on desktop sm:max-w-md is already tall. The height restriction is mainly mobile. 
-                    // Let's make it visible only when the restriction applies (mobile).
-                    // sm:hidden ensures it hides on desktop where max-h is usually fine or fixed.
-                  >
-                    {isExpanded ? (
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-minimize-2 text-neutral-400"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
-                    ) : (
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-maximize-2 text-neutral-400"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
-                    )}
-                  </button>
-                  <button 
-                    onClick={() => setIsExpanded(!isExpanded)}
-                    className="p-2 hover:bg-neutral-100 rounded-full transition-colors sm:hidden" 
+                    className="p-2 hover:bg-neutral-100 rounded-full transition-colors hidden sm:block" 
+                    title={isExpanded ? "Minimize" : "Maximize"}
                   >
                     {isExpanded ? (
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-minimize-2 text-neutral-400"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
