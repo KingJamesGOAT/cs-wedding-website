@@ -86,7 +86,7 @@ export default function Home({ onHeroTitleVisibilityChange }: HomeProps) {
       </motion.div>
 
       {/* Top Content: Names & Date */}
-      <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 pt-24 w-full">
+      <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 pt-24 md:pt-12 w-full">
         <div className="max-w-4xl mx-auto">
           <motion.h1 
             ref={titleRef}
