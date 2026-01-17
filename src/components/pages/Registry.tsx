@@ -363,19 +363,38 @@ export default function Registry() {
                        {/* For specific items, maybe defaults aren't needed unless it's cash fund. */}
                        {/* We can offer the full price as a shortcut if it's not too high? Or just standard chips */}
                        
-                       {[20, 50, 100, selectedGift.price].sort((a,b) => a-b).filter(val => val && val > 0 && val <= (selectedGift.price || 1000)).map((amt: number) => (
-                           <Button
-                             key={amt}
-                             type="button"
-                             variant={formData.amount === amt.toString() && amountType === 'suggested' ? 'default' : 'outline'}
-                             onClick={() => {
-                               setFormData({ ...formData, amount: amt.toString() });
-                               setAmountType('suggested');
-                             }}
-                           >
-                             CHF {amt}
-                           </Button>
-                        ))}
+                       {/* Payment Options Logic */}
+                       {(() => {
+                          const remaining = (selectedGift.price || 1000) - (selectedGift.collected || 0);
+                          let options: number[] = [];
+
+                          if (selectedGift.price && selectedGift.price < 50) {
+                             // Under 50: Only full price (or remaining) allowed
+                             options = [remaining];
+                          } else {
+                             // Above 50: Standard options + remaining, but strictly capped at remaining
+                             // If remaining is small (e.g. 30), it becomes the only option naturally via filter
+                             const standards = [50, 100, 200];
+                             options = [...standards, remaining]
+                               .filter(val => val <= remaining && val > 0)
+                               .filter((val, index, self) => self.indexOf(val) === index) // Unique
+                               .sort((a, b) => a - b);
+                          }
+
+                          return options.map((amt: number) => (
+                            <Button
+                              key={amt}
+                              type="button"
+                              variant={formData.amount === amt.toString() && amountType === 'suggested' ? 'default' : 'outline'}
+                              onClick={() => {
+                                setFormData({ ...formData, amount: amt.toString() });
+                                setAmountType('suggested');
+                              }}
+                            >
+                              CHF {amt}
+                            </Button>
+                          ));
+                       })()}
                       
                       <Button
                         type="button"
