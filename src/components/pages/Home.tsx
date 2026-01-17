@@ -2,11 +2,10 @@ import { useRef, useState, useEffect } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import CountdownTimer from '../CountdownTimer';
 import heroImageDesktop from '../../assets/hero-image-v3.jpg';
-import heroImageV4 from '../../assets/hero-image-v4.jpg';
 import heroImageMobile from '../../assets/hero-image-mobile-v2.jpg';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 
-const desktopImages = [heroImageDesktop, heroImageV4];
+const desktopImages = [heroImageDesktop];
 
 interface HomeProps {
   onHeroTitleVisibilityChange?: (isVisible: boolean) => void;
