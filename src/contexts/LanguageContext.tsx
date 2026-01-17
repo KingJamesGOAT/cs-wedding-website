@@ -124,16 +124,16 @@ const translations: Record<string, Record<Language, string>> = {
   'rsvp.aperoNo': { en: 'No, I will just enjoy', fr: 'Non, je viendrai juste profiter' },
   'rsvp.aperoWarningTitle': { en: 'Important Timing Info', fr: 'Information Importante' },
   'rsvp.aperoWarning.intro': { 
-    en: 'Since you are bringing food, please arrive earlier at ', 
-    fr: 'Comme vous apportez de la nourriture, merci d\'arriver plus tôt à ' 
+    en: 'Since you are bringing food, please arrive ', 
+    fr: 'Comme vous apportez de la nourriture, merci d\'arriver ' 
   },
   'rsvp.aperoWarning.bold': { 
-    en: '13:00 at Guglerahof Farm Guglera 6, 1735 Giffers to drop it off', 
-    fr: '13h00 à la Ferme Guglerahof Guglera 6, 1735 Giffers pour le dépôt' 
+    en: 'between 12:30 and 13:30 at Guglerahof Farm Guglera 6, 1735 Giffers to drop it off', 
+    fr: 'entre 12h30 et 13h30 à la Ferme Guglerahof Guglera 6, 1735 Giffers pour le dépôt' 
   },
   'rsvp.aperoWarning.outro': { 
-    en: ' (Ceremony starts at 14:00). Please label your plate/dish so we know what it is.', 
-    fr: ' (La cérémonie commence à 14h00). Merci d\'étiqueter votre plat pour que nous sachions ce que c\'est.' 
+    en: ' (Ceremony starts at 14:00 at Basilique Notre-Dame de Fribourg). Please label your plate.', 
+    fr: ' (La cérémonie commence à 14h00 à Basilique Notre-Dame de Fribourg). Merci d\'étiqueter votre plat.' 
   },
   'rsvp.aperoTypeLabel': { en: 'What type of food?', fr: 'Quel type de nourriture ?' },
   'rsvp.typeSavory': { en: 'Savory (Salty)', fr: 'Salé' },
