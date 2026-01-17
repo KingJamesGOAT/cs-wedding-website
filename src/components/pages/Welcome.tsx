@@ -24,7 +24,7 @@ export default function Welcome() {
           {/* Welcome Message */}
           <div className="space-y-6">
             <h2 className="text-3xl md:text-4xl font-serif text-stone-800 mb-8">
-              Welcome
+              {t('welcome.title')}
             </h2>
             <p className="md:hidden text-lg text-stone-600 leading-relaxed italic">
               {t('home.welcome_mobile')}

@@ -21,6 +21,7 @@ const translations: Record<string, Record<Language, string>> = {
   'nav.contribute': { en: 'Contribute', fr: 'Contribuer' },
   
   // Home
+  'welcome.title': { en: 'Welcome', fr: 'Bienvenue' },
   'home.welcome': { 
     en: "Welcome to our wedding website! We're so excited to celebrate our special day with you. Feel free to explore the site for all the details. We can't wait to see you in Fribourg!",
     fr: "Bienvenue sur notre site de mariage ! Nous sommes ravis de pouvoir célébrer ce grand jour avec vous. Parcourez le site pour toutes les informations. Nous avons hâte de vous voir à Fribourg !"
