@@ -6,7 +6,7 @@ import { Label } from '../ui/label';
 import { Textarea } from '../ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
-import { CheckCircle2, AlertTriangle, Info } from 'lucide-react';
+import { CheckCircle2, AlertTriangle, Info, Plus, Trash2, X } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '../ui/alert';
 import {
   Tooltip,
@@ -18,6 +18,13 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "../ui/popover"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog"
 
 import FloralTitle from '../ui/FloralTitle';
 import flower5 from '../../assets/flowers/5.svg';
@@ -54,6 +61,14 @@ const SWEET_OPTIONS = [
   { label: "Verrines fruits", limit: 1 },
 ];
 
+interface SelectedItem {
+  id: string;
+  label: string;
+  type: 'Savory' | 'Sweet' | 'Custom';
+  quantity: number; // 1 = 50 bites, 2 = 100 bites (if allowed)
+  customDetails?: string;
+}
+
 export default function RSVP() {
   const { t } = useLanguage();
   const [formData, setFormData] = useState({
@@ -65,52 +80,44 @@ export default function RSVP() {
     children: '0',
     dietaryType: 'none',
     dietary: '',
-    // Dinner Field
-    dinnerAttendance: '', // 'yes' or 'no' (only for VIPs)
-    // Apero Fields
+    dinnerAttendance: '',
     aperoContribution: 'no',
+    // We will keep these for backend compatibility but populate them on submit
     aperoType: '',
     aperoItem: '',
     aperoDetails: ''
   });
   
+  const [selectedItems, setSelectedItems] = useState<SelectedItem[]>([]);
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [takenItems, setTakenItems] = useState<string[]>([]);
   const [isDinnerGuest, setIsDinnerGuest] = useState(false);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  
+  // Dialog State
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+  const [addDialogType, setAddDialogType] = useState<'Savory' | 'Sweet'>('Savory');
+  const [tempItem, setTempItem] = useState('');
+  const [tempQuantity, setTempQuantity] = useState('1'); // '1' or '2'
+  const [tempCustomDetails, setTempCustomDetails] = useState('');
 
   // Auto-close Popover on scroll
   useEffect(() => {
     const handleScroll = () => {
-      if (isPopoverOpen) {
-        setIsPopoverOpen(false);
-      }
+      if (isPopoverOpen) setIsPopoverOpen(false);
     };
-
-    if (isPopoverOpen) {
-      // Add passive listener for better performance
-      window.addEventListener('scroll', handleScroll, { passive: true });
-    }
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    if (isPopoverOpen) window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [isPopoverOpen]);
 
-  // Check for Magic Link (?invite=dinner)
+  // Check for Magic Link
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    if (params.get('invite') === 'dinner') {
-      setIsDinnerGuest(true);
-      // Default dinner attendance to 'yes' if they are invited? Or leave empty?
-      // Let's leave it empty or default 'yes' as per user preference. 
-      // User didn't specify default, but standard UI pattern is empty or default.
-      // We'll initialize it as empty string above, user must select.
-    }
+    if (params.get('invite') === 'dinner') setIsDinnerGuest(true);
   }, []);
 
-  // Fetch taken items on mount
+  // Fetch taken items
   useEffect(() => {
     const fetchTakenItems = async () => {
       try {
@@ -130,21 +137,77 @@ export default function RSVP() {
   useEffect(() => {
     if (submitted) {
       const rsvpElement = document.getElementById('rsvp');
-      if (rsvpElement) {
-        rsvpElement.scrollIntoView({ behavior: 'smooth' });
-      }
+      if (rsvpElement) rsvpElement?.scrollIntoView({ behavior: 'smooth' });
     }
   }, [submitted]);
+
+  // Helper to count taken spots for an item (from server + local selection)
+  const getTakenCount = (label: string) => {
+    // 1. Count from server (naive exact match + some heuristic for "x2")
+    // NOTE: This logic depends on how we format the string sent to the server.
+    // We will stick to the format "Item (x2)" or just "Item".
+    
+    let serverCount = 0;
+    takenItems.forEach(itemStr => {
+      if (itemStr.includes(label)) {
+        if (itemStr.includes('(x2)') || itemStr.includes('quantity: 100')) {
+          serverCount += 2;
+        } else {
+          serverCount += 1;
+        }
+      }
+    });
+
+    // 2. Count from local current selection
+    const localCount = selectedItems
+      .filter(item => item.label === label)
+      .reduce((acc, item) => acc + item.quantity, 0);
+
+    return serverCount + localCount;
+  };
+
+  const handleAddItem = () => {
+    if (tempItem === 'custom') {
+      const newItem: SelectedItem = {
+        id: Date.now().toString(),
+        label: 'Custom',
+        type: 'Custom',
+        quantity: 1, // Custom doesn't really have a 'limit' in the same way
+        customDetails: tempCustomDetails
+      };
+      setSelectedItems([...selectedItems, newItem]);
+    } else {
+      const newItem: SelectedItem = {
+        id: Date.now().toString(),
+        label: tempItem,
+        type: addDialogType,
+        quantity: parseInt(tempQuantity)
+      };
+      setSelectedItems([...selectedItems, newItem]);
+    }
+    closeAddDialog();
+  };
+
+  const closeAddDialog = () => {
+    setIsAddDialogOpen(false);
+    setTempItem('');
+    setTempQuantity('1');
+    setTempCustomDetails('');
+  };
+
+  const handleRemoveItem = (id: string) => {
+    setSelectedItems(selectedItems.filter(item => item.id !== id));
+  };
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Prepare final payload
     const finalData = { ...formData };
     
-    // Clean up data based on logic
     if (finalData.attending === 'no') {
+      // Clear all
        finalData.guests = '0';
        finalData.children = '0';
        finalData.dietaryType = '';
@@ -155,21 +218,38 @@ export default function RSVP() {
        finalData.aperoItem = '';
        finalData.aperoDetails = '';
     } else {
-       // If not dinner guest, ensure dinnerAttendance is empty/handled
-       if (!isDinnerGuest) {
-          finalData.dinnerAttendance = '';
-          // We no longer clear dietary here, as it is now available for everyone.
-       }
+       if (!isDinnerGuest) finalData.dinnerAttendance = '';
 
        if (finalData.aperoContribution === 'no') {
           finalData.aperoType = '';
           finalData.aperoItem = '';
           finalData.aperoDetails = '';
        } else {
-          // If they selected a preset item (not custom), ensure aperoDetails has a value for safety
-          if (finalData.aperoItem !== 'custom' && finalData.aperoItem !== '') {
-             finalData.aperoDetails = finalData.aperoItem; 
-          }
+          // Format the multiple items into the legacy fields
+          const savoryCount = selectedItems.filter(i => i.type === 'Savory').length;
+          const sweetCount = selectedItems.filter(i => i.type === 'Sweet').length;
+          const hasCustom = selectedItems.some(i => i.customDetails);
+
+          // Determine generalized Type
+          let typeStr = '';
+          if (savoryCount > 0 && sweetCount > 0) typeStr = 'Mixed';
+          else if (savoryCount > 0) typeStr = 'Savory';
+          else if (sweetCount > 0) typeStr = 'Sweet';
+          else if (hasCustom) typeStr = 'Custom';
+          finalData.aperoType = typeStr;
+
+          // Build Item String
+          const itemStrings = selectedItems.map(item => {
+            if (item.label === 'Custom') {
+              return `${item.customDetails} (Custom)`;
+            }
+            if (item.quantity > 1) {
+              return `${item.label} (x${item.quantity})`;
+            }
+            return item.label;
+          });
+          finalData.aperoItem = itemStrings.join(', ');
+          finalData.aperoDetails = finalData.aperoItem; // Redundant backup
        }
     }
 
@@ -177,11 +257,8 @@ export default function RSVP() {
       await fetch('https://script.google.com/macros/s/AKfycbxpq_jKgykf6Ss1U-5kSybzOq3Fz1-yuhADQyy-Fp2WJJNin7KYbD5qr4KKEyVhDuTM/exec', {
         method: 'POST',
         mode: 'no-cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          // Maps to Google Sheet Columns
           attending: finalData.attending,
           firstName: finalData.firstName,
           lastName: finalData.lastName,
@@ -190,7 +267,7 @@ export default function RSVP() {
           children: finalData.children,
           dietaryType: finalData.dietaryType,
           dietary: finalData.dietary,
-          dinnerAttendance: finalData.dinnerAttendance, // New Field
+          dinnerAttendance: finalData.dinnerAttendance,
           aperoType: finalData.aperoType,
           aperoItem: finalData.aperoItem,
           aperoDetails: finalData.aperoDetails
@@ -198,8 +275,6 @@ export default function RSVP() {
       });
 
       setSubmitted(true);
-      
-      // Reset form after 5 seconds
       setTimeout(() => {
         setFormData({ 
           attending: 'yes',
@@ -216,8 +291,7 @@ export default function RSVP() {
           aperoItem: '',
           aperoDetails: ''
         });
-        setTakenItems([]); // Allow re-submission? Or should we refetch?
-        // Refetching would be better but not critical for this specific flow immediately.
+        setSelectedItems([]);
         setSubmitted(false);
       }, 5000); 
     } catch (error) {
@@ -241,11 +315,15 @@ export default function RSVP() {
     );
   }
 
-  // Calculate if an item is fully taken
-  const isTaken = (label: string, limit: number) => {
-      const count = takenItems.filter(item => item === label).length;
-      return count >= limit;
+  const openAddDialog = (type: 'Savory' | 'Sweet') => {
+    setAddDialogType(type);
+    setTempItem('');
+    setTempQuantity('1');
+    setIsAddDialogOpen(true);
   };
+
+  // Determine available options for the dialog
+  const currentOptions = addDialogType === 'Savory' ? SAVORY_OPTIONS : SWEET_OPTIONS;
 
   return (
     <section id="rsvp" className="py-20 px-4 sm:px-6 lg:px-8">
@@ -259,7 +337,6 @@ export default function RSVP() {
           <div className="text-neutral-600 max-w-xl mx-auto">
             {t('rsvp.intro')}
             <span className="inline-flex align-middle ml-2">
-              {/* Mobile: Popover (Click behavior) */}
               <span className="md:hidden">
                 <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
                   <PopoverTrigger asChild>
@@ -267,18 +344,11 @@ export default function RSVP() {
                       <Info className="h-5 w-5" />
                     </button>
                   </PopoverTrigger>
-                  <PopoverContent 
-                    align="center"
-                    side="top"
-                    sideOffset={5}
-                    className="max-w-[280px] text-center bg-white text-neutral-900 p-3 shadow-xl border border-neutral-200"
-                  >
+                  <PopoverContent align="center" side="top" sideOffset={5} className="max-w-[280px] text-center bg-white text-neutral-900 p-3 shadow-xl border border-neutral-200">
                     <p className="text-sm">{t('rsvp.updateInfo')}</p>
                   </PopoverContent>
                 </Popover>
               </span>
-
-              {/* Desktop: Tooltip (Hover behavior) */}
               <span className="hidden md:inline-block">
                 <Tooltip delayDuration={0}>
                   <TooltipTrigger asChild>
@@ -286,10 +356,7 @@ export default function RSVP() {
                       <Info className="h-5 w-5" />
                     </button>
                   </TooltipTrigger>
-                  <TooltipContent 
-                    side="top" 
-                    className="z-[100] max-w-[280px] text-center bg-white text-neutral-900 p-3 shadow-xl border border-neutral-200"
-                  >
+                  <TooltipContent side="top" className="z-[100] max-w-[280px] text-center bg-white text-neutral-900 p-3 shadow-xl border border-neutral-200">
                     <p>{t('rsvp.updateInfo')}</p>
                   </TooltipContent>
                 </Tooltip>
@@ -310,7 +377,6 @@ export default function RSVP() {
 
         <form onSubmit={handleSubmit} className="space-y-8 bg-white rounded-2xl border border-neutral-200 p-6 md:p-10 shadow-sm">
           
-          {/* Attendance Radio Buttons */}
           <div className="space-y-4">
             <Label className="text-lg font-medium block">{t('rsvp.attending')}</Label>
             <RadioGroup 
@@ -332,47 +398,19 @@ export default function RSVP() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <Label htmlFor="firstName">{t('rsvp.firstName')}</Label>
-              <Input
-                id="firstName"
-                type="text"
-                required
-                placeholder="John"
-                value={formData.firstName}
-                onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                className="w-full"
-                disabled={isSubmitting}
-              />
+              <Input id="firstName" type="text" required placeholder="John" value={formData.firstName} onChange={(e) => setFormData({ ...formData, firstName: e.target.value })} className="w-full" disabled={isSubmitting} />
             </div>
-            
             <div className="space-y-2">
               <Label htmlFor="lastName">{t('rsvp.lastName')}</Label>
-              <Input
-                id="lastName"
-                type="text"
-                required
-                placeholder="Doe"
-                value={formData.lastName}
-                onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                className="w-full"
-                disabled={isSubmitting}
-              />
+              <Input id="lastName" type="text" required placeholder="Doe" value={formData.lastName} onChange={(e) => setFormData({ ...formData, lastName: e.target.value })} className="w-full" disabled={isSubmitting} />
             </div>
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="email">{t('rsvp.email')}</Label>
-            <Input
-              id="email"
-              type="email"
-              required
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="w-full"
-              disabled={isSubmitting}
-            />
+            <Input id="email" type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="w-full" disabled={isSubmitting} />
           </div>
 
-          {/* Conditional Fields - Only show if Attending is NOT "no" */}
           {formData.attending !== 'no' && (
             <div className="space-y-8 pt-6 border-t border-neutral-100 animate-in fade-in slide-in-from-top-4 duration-500">
               
@@ -385,29 +423,17 @@ export default function RSVP() {
                     </SelectTrigger>
                     <SelectContent>
                       {[0, 1, 2, 3, 4, 5].map((num) => (
-                        <SelectItem key={num} value={num.toString()}>
-                          {num}
-                        </SelectItem>
+                        <SelectItem key={num} value={num.toString()}>{num}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
                 </div>
-                
                 <div className="space-y-2">
                   <Label htmlFor="children">{t('rsvp.children')}</Label>
-                  <Input
-                    id="children"
-                    type="number"
-                    min="0"
-                    value={formData.children}
-                    onChange={(e) => setFormData({ ...formData, children: e.target.value })}
-                    className="w-full"
-                    disabled={isSubmitting}
-                  />
+                  <Input id="children" type="number" min="0" value={formData.children} onChange={(e) => setFormData({ ...formData, children: e.target.value })} className="w-full" disabled={isSubmitting} />
                 </div>
               </div>
 
-               {/* MAGIC LINK DINNER OPTION */}
                {isDinnerGuest && (
                  <div className="space-y-4 bg-rose-50 p-6 rounded-xl border border-rose-100 animate-in fade-in slide-in-from-top-2">
                     <Label className="text-lg font-medium block text-rose-900">{t('rsvp.dinnerQuestion')}</Label>
@@ -427,8 +453,6 @@ export default function RSVP() {
                     </RadioGroup>
                  </div>
                )}
-
-
 
               {/* APERO SECTION */}
               <div className="bg-neutral-50 p-6 rounded-xl border border-neutral-100 space-y-6">
@@ -463,86 +487,148 @@ export default function RSVP() {
                           </AlertDescription>
                         </Alert>
 
+                        {/* List of Selected Items */}
                         <div className="space-y-3">
-                            <Label className="font-medium">{t('rsvp.aperoTypeLabel')}</Label>
-                            <RadioGroup 
-                              value={formData.aperoType} 
-                              onValueChange={(value: string) => setFormData({ ...formData, aperoType: value })}
-                              className="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-6"
-                            >
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="Savory" id="type-savory" />
-                                <Label htmlFor="type-savory">{t('rsvp.typeSavory')}</Label>
-                              </div>
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="Sweet" id="type-sweet" />
-                                <Label htmlFor="type-sweet">{t('rsvp.typeSweet')}</Label>
-                              </div>
-                            </RadioGroup>
+                          <div className="flex justify-between items-center">
+                            <Label className="text-base font-medium">{t('rsvp.yourSelection')}</Label>
+                          </div>
+                          
+                          {selectedItems.length === 0 ? (
+                            <div className="text-sm text-neutral-500 italic p-3 border border-dashed border-neutral-300 rounded-lg text-center bg-white/50">
+                              {t('rsvp.noItems')}
+                            </div>
+                          ) : (
+                            <div className="space-y-2">
+                              {selectedItems.map((item) => (
+                                <div key={item.id} className="flex items-center justify-between p-3 bg-white rounded-lg border border-neutral-200 shadow-sm animate-in fade-in slide-in-from-left-2">
+                                  <div>
+                                    <div className="font-medium text-sm text-neutral-900">
+                                      {item.label === 'Custom' ? item.customDetails : item.label}
+                                    </div>
+                                    <div className="text-xs text-neutral-500 mt-0.5">
+                                      {item.label === 'Custom' ? 'Custom' : item.type} • {item.quantity * 50} {t('rsvp.bites')}
+                                    </div>
+                                  </div>
+                                  <Button
+                                    type="button"
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={() => handleRemoveItem(item.id)}
+                                    className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                                  >
+                                    <Trash2 className="h-4 w-4" />
+                                  </Button>
+                                </div>
+                              ))}
+                            </div>
+                          )}
                         </div>
-                        
-                        {formData.aperoType && (
-                           <div className="space-y-4 animate-in fade-in duration-300">
-                              <div className="space-y-2">
-                                 <Label>{t('rsvp.aperoItemLabel')}</Label>
-                                 <Select 
-                                   value={formData.aperoItem} 
-                                   onValueChange={(value: string) => {
-                                      // If switching away from custom, clear details
-                                      const updates: any = { aperoItem: value };
-                                      if (value !== 'custom') {
-                                        updates.aperoDetails = value; // Default details to item name
-                                      } else {
-                                        updates.aperoDetails = '';
-                                      }
-                                      setFormData({ ...formData, ...updates });
-                                   }}
-                                 >
-                                    <SelectTrigger className="w-full bg-white">
-                                      <SelectValue placeholder="Select an option" />
-                                    </SelectTrigger>
-                                    <SelectContent className="max-h-[300px]">
-                                       {formData.aperoType === 'Savory' ? (
-                                          SAVORY_OPTIONS.map((opt) => {
-                                            const taken = isTaken(opt.label, opt.limit);
-                                            return (
-                                              <SelectItem key={opt.label} value={opt.label} disabled={taken}>
-                                                {opt.label} {taken ? t('rsvp.taken') : ''}
-                                              </SelectItem>
-                                            );
-                                          })
-                                       ) : (
-                                          SWEET_OPTIONS.map((opt) => {
-                                            const taken = isTaken(opt.label, opt.limit);
-                                            return (
-                                              <SelectItem key={opt.label} value={opt.label} disabled={taken}>
-                                                {opt.label} {taken ? t('rsvp.taken') : ''}
-                                              </SelectItem>
-                                            );
-                                          })
-                                       )}
-                                       <SelectItem value="custom" className="font-bold border-t border-neutral-100 mt-1 pt-1">
-                                          {t('rsvp.aperoChoiceCustom')}
-                                       </SelectItem>
-                                    </SelectContent>
-                                 </Select>
-                              </div>
 
-                              {formData.aperoItem === 'custom' && (
-                                 <div className="space-y-2 animate-in fade-in duration-300">
-                                    <Label htmlFor="aperoDetails">{t('rsvp.aperoCustomLabel')}</Label>
-                                    <Input
-                                      id="aperoDetails"
-                                      value={formData.aperoDetails}
-                                      onChange={(e) => setFormData({ ...formData, aperoDetails: e.target.value })}
-                                      className="w-full bg-white"
-                                      placeholder="Ex: Homemade Focaccia"
-                                      required
-                                    />
-                                 </div>
-                              )}
-                           </div>
-                        )}
+                        {/* Add Buttons */}
+                        <div className="flex gap-3 pt-2">
+                           <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
+                              <div className="flex gap-3 w-full">
+                                <Button type="button" onClick={() => openAddDialog('Savory')} className="flex-1 bg-white border border-neutral-300 text-neutral-900 hover:bg-neutral-50">
+                                  <Plus className="h-4 w-4 mr-2" />
+                                  {t('rsvp.addSavory')}
+                                </Button>
+                                <Button type="button" onClick={() => openAddDialog('Sweet')} className="flex-1 bg-white border border-neutral-300 text-neutral-900 hover:bg-neutral-50">
+                                  <Plus className="h-4 w-4 mr-2" />
+                                  {t('rsvp.addSweet')}
+                                </Button>
+                              </div>
+                              <DialogContent>
+                                <DialogHeader>
+                                  <DialogTitle>{addDialogType === 'Savory' ? t('rsvp.addSavory') : t('rsvp.addSweet')}</DialogTitle>
+                                </DialogHeader>
+                                <div className="space-y-4 pt-4">
+                                  <div className="space-y-2">
+                                    <Label>{t('rsvp.aperoItemLabel')}</Label>
+                                    <Select 
+                                      value={tempItem} 
+                                      onValueChange={(val) => {
+                                        setTempItem(val);
+                                        setTempQuantity('1'); // Reset quantity on item change
+                                      }}
+                                    >
+                                      <SelectTrigger>
+                                        <SelectValue placeholder="Select an option" />
+                                      </SelectTrigger>
+                                      <SelectContent className="max-h-[300px]">
+                                         {currentOptions.map((opt) => {
+                                            const takenCount = getTakenCount(opt.label);
+                                            const remaining = opt.limit - takenCount;
+                                            const isFullyTaken = remaining <= 0;
+                                            return (
+                                              <SelectItem key={opt.label} value={opt.label} disabled={isFullyTaken}>
+                                                {opt.label} {isFullyTaken ? t('rsvp.taken') : (remaining === 1 && opt.limit > 1 ? '(50 bites left)' : '')}
+                                              </SelectItem>
+                                            );
+                                         })}
+                                         <SelectItem value="custom" className="font-bold border-t border-neutral-100 mt-1 pt-1">
+                                            {t('rsvp.aperoChoiceCustom')}
+                                         </SelectItem>
+                                      </SelectContent>
+                                    </Select>
+                                  </div>
+                                  
+                                  {tempItem === 'custom' ? (
+                                     <div className="space-y-2">
+                                        <Label>{t('rsvp.aperoCustomLabel')}</Label>
+                                        <Input
+                                          value={tempCustomDetails}
+                                          onChange={(e) => setTempCustomDetails(e.target.value)}
+                                          placeholder={t('rsvp.customItemPlaceholder')}
+                                        />
+                                     </div>
+                                  ) : tempItem && (
+                                     <div className="space-y-2">
+                                        <Label>{t('rsvp.quantity')}</Label>
+                                        <div className="flex items-center gap-4">
+                                           <div className={`
+                                              flex-1 p-3 border rounded-lg cursor-pointer transition-all
+                                              ${tempQuantity === '1' ? 'border-neutral-900 bg-neutral-50 ring-1 ring-neutral-900' : 'border-neutral-200 hover:border-neutral-300'}
+                                           `} onClick={() => setTempQuantity('1')}>
+                                              <div className="font-medium">50 {t('rsvp.bites')}</div>
+                                              <div className="text-xs text-neutral-500">Standard Portion</div>
+                                           </div>
+                                           
+                                           {/* Only show 100 bites option if limit allows and enough remaining */}
+                                           {(() => {
+                                              const opt = currentOptions.find(o => o.label === tempItem);
+                                              if (!opt || opt.limit < 2) return null;
+                                              const takenCount = getTakenCount(opt.label); // Note: this includes current user's *committed* items, but we are in a dialog
+                                              // We need to permit selecting 2 if remaining >= 2
+                                              const remaining = opt.limit - takenCount;
+                                              if (remaining < 2) return null;
+
+                                              return (
+                                                <div className={`
+                                                    flex-1 p-3 border rounded-lg cursor-pointer transition-all
+                                                    ${tempQuantity === '2' ? 'border-neutral-900 bg-neutral-50 ring-1 ring-neutral-900' : 'border-neutral-200 hover:border-neutral-300'}
+                                                `} onClick={() => setTempQuantity('2')}>
+                                                    <div className="font-medium">100 {t('rsvp.bites')}</div>
+                                                    <div className="text-xs text-neutral-500">Double Portion</div>
+                                                </div>
+                                              );
+                                           })()}
+                                        </div>
+                                     </div>
+                                  )}
+
+                                  <div className="pt-2">
+                                    <Button 
+                                      className="w-full bg-neutral-900 hover:bg-neutral-800"
+                                      disabled={!tempItem || (tempItem === 'custom' && !tempCustomDetails)}
+                                      onClick={handleAddItem}
+                                    >
+                                      Add to Selection
+                                    </Button>
+                                  </div>
+                                </div>
+                              </DialogContent>
+                           </Dialog>
+                        </div>
                      </div>
                   )}
               </div>
@@ -566,14 +652,7 @@ export default function RSVP() {
 
               <div className="space-y-2">
                 <Label htmlFor="dietary">{t('rsvp.dietary')} (Notes)</Label>
-                <Textarea
-                  id="dietary"
-                  value={formData.dietary}
-                  onChange={(e) => setFormData({ ...formData, dietary: e.target.value })}
-                  className="w-full min-h-[100px]"
-                  placeholder="Additional details..."
-                  disabled={isSubmitting}
-                />
+                <Textarea id="dietary" value={formData.dietary} onChange={(e) => setFormData({ ...formData, dietary: e.target.value })} className="w-full min-h-[100px]" placeholder="Additional details..." disabled={isSubmitting} />
               </div>
             </div>
           )}
@@ -586,3 +665,4 @@ export default function RSVP() {
     </section>
   );
 }
+

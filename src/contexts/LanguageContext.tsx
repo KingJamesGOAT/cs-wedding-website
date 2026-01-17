@@ -144,6 +144,15 @@ const translations: Record<string, Record<Language, string>> = {
   'rsvp.foodNote.intro': { en: 'Please use this form to RSVP for the wedding. ', fr: 'Utilisez ce formulaire pour répondre à l\'invitation. ' },
   'rsvp.foodNote.bold': { en: "If you'd like, you can also sign up to bring something for the Apero.", fr: 'Vous pouvez aussi, si vous le souhaitez, vous inscrire pour apporter quelque chose à l\'Apéro.' },
   'rsvp.taken': { en: '(Already Taken)', fr: '(Déjà pris)' },
+  'rsvp.addSavory': { en: 'Add Savory Item', fr: 'Ajouter Salé' },
+  'rsvp.addSweet': { en: 'Add Sweet Item', fr: 'Ajouter Sucré' },
+  'rsvp.yourSelection': { en: 'Your Selection', fr: 'Votre Choix' },
+  'rsvp.quantity': { en: 'Quantity', fr: 'Quantité' },
+  'rsvp.bites': { en: 'bites', fr: 'bouchées' },
+  'rsvp.remove': { en: 'Remove', fr: 'Retirer' },
+  'rsvp.noItems': { en: 'No items selected yet', fr: 'Aucun article sélectionné' },
+  'rsvp.customItemPlaceholder': { en: 'Item Name & Quantity', fr: 'Nom de l\'article & Quantité' },
+  'rsvp.maxReached': { en: 'Max limit reached', fr: 'Limite atteinte' },
   'rsvp.dinnerQuestion': { 
     en: "We'd love for you to join us for the Evening Dinner! Will you be staying for the evening?", 
     fr: "Nous serions ravis de vous compter parmi nous pour le Repas du Soir ! Serez-vous des nôtres ?" 
