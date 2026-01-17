@@ -399,6 +399,7 @@ export default function Registry() {
                       <Button
                         type="button"
                         variant={amountType === 'custom' ? 'default' : 'outline'}
+                        className={(!selectedGift.price || ((selectedGift.price - (selectedGift.collected || 0)) >= 50)) ? '' : 'hidden'}
                         onClick={() => {
                           setFormData({ ...formData, amount: '' });
                           setAmountType('custom');
@@ -407,7 +408,7 @@ export default function Registry() {
                        {t('registry.customAmount')}
                       </Button>
                     </div>
-                    {amountType === 'custom' && (
+                    {amountType === 'custom' && (!selectedGift.price || ((selectedGift.price - (selectedGift.collected || 0)) >= 50)) && (
                       <Input
                         type="number"
                         placeholder="Enter amount"
