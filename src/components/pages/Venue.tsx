@@ -3,8 +3,8 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { Button } from '../ui/button';
 import { MapPin, Church, Home, Copy, Check } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../ui/dialog';
-import ceremonyImage from '../../assets/2c1a399487b0eaf24b4eb22a66fb37e1c381bf12.png';
-import receptionImage from '../../assets/cbe880ec8c3cdfbbf3a2b6dbf42c2851ff18806c.png';
+import ceremonyImage from '../../assets/hero-desktop-large-2.png';
+import receptionImage from '../../assets/hero-mobile-large.png';
 
 import FloralTitle from '../ui/FloralTitle';
 import flower1 from '../../assets/flowers/1.svg';
