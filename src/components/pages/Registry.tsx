@@ -368,12 +368,15 @@ export default function Registry() {
                           const remaining = (selectedGift.price || 1000) - (selectedGift.collected || 0);
                           let options: number[] = [];
 
-                          if (selectedGift.price && selectedGift.price < 50) {
+                          if (!selectedGift.price) {
+                              // Honeymoon / Cash Fund (No fixed price)
+                              // Use suggested amounts if provided, or defaults. Do NOT add 'remaining' as it defaults to 1000.
+                              options = selectedGift.suggestedAmounts || [50, 100, 200];
+                          } else if (selectedGift.price < 50) {
                              // Under 50: Only full price (or remaining) allowed
                              options = [remaining];
                           } else {
                              // Above 50: Standard options + remaining, but strictly capped at remaining
-                             // If remaining is small (e.g. 30), it becomes the only option naturally via filter
                              const standards = [50, 100, 200];
                              options = [...standards, remaining]
                                .filter(val => val <= remaining && val > 0)
