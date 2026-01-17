@@ -9,7 +9,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, Di
 import { 
   Smartphone, Building2, Copy, Check, Loader2, 
   DollarSign, ShoppingBag, ChefHat, Zap, Utensils, Bed, Coffee, Wine, 
-  Hammer, Bath, Box, Sofa, Armchair, Lamp, Scissors 
+  Hammer, Bath, Box, Sofa, Armchair, Lamp 
 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -81,7 +81,6 @@ const INITIAL_GIFTS: GiftItem[] = [
 
   // SALLE DE BAIN
   { id: 'sb1', category: 'bathroom', title: { en: 'Bath Towels 100x150', fr: 'linge de bain 100 * 150' }, price: 100, collected: 0, icon: Bath },
-  { id: 'sb2', category: 'bathroom', title: { en: 'Hand Towels 40x60', fr: 'serviettes toilette 40 * 60' }, price: 1, collected: 0, icon: Bath },
   { id: 'sb3', category: 'bathroom', title: { en: 'Laundry Basket', fr: 'panier à linge' }, price: 50, collected: 0, icon: Box },
 ];
 
@@ -229,7 +228,7 @@ export default function Registry() {
         </div>
 
         {/* MAIN LAYOUT: Clickable Containers */}
-        <div className="grid grid-cols-2 gap-4 md:gap-16 w-full max-w-6xl">
+        <div className="grid grid-cols-2 gap-4 md:gap-16 w-full max-w-[90vw] md:max-w-[85vw]">
           
           {/* OPTION 1: BROWSE GIFTS */}
           <Dialog open={isBrowseOpen} onOpenChange={setIsBrowseOpen}>
@@ -243,7 +242,7 @@ export default function Registry() {
               </div>
             </DialogTrigger>
             
-            <DialogContent className="max-w-[95vw] w-full max-h-[90vh] flex flex-col p-0 bg-neutral-50/95 backdrop-blur-3xl border-neutral-200 overflow-hidden rounded-t-xl md:rounded-xl">
+            <DialogContent className="max-w-[95vw] sm:max-w-[85vw] w-full max-h-[90vh] flex flex-col p-0 bg-neutral-50/95 backdrop-blur-3xl border-neutral-200 overflow-hidden rounded-t-xl md:rounded-xl">
               <div className="p-4 md:p-6 pb-2 border-b border-neutral-200/50 bg-white/50">
                 <DialogTitle className="text-2xl md:text-3xl font-light text-center font-serif">{t('registry.browseBtn')}</DialogTitle>
               </div>
@@ -265,7 +264,7 @@ export default function Registry() {
                            <div className="h-px bg-neutral-200 flex-1 ml-4" />
                          </div>
 
-                         <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 md:gap-6">
                            {giftsByCategory[category.id].map((gift) => {
                              const isFullyFunded = gift.collected >= gift.price;
                              const percent = Math.min((gift.collected / gift.price) * 100, 100);

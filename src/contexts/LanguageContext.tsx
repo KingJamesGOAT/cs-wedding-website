@@ -225,8 +225,8 @@ const translations: Record<string, Record<Language, string>> = {
   'registry.browseBtn': { en: 'Browse Gift Wishlist', fr: 'Parcourir la liste de mariage' },
   'registry.cashBtn': { en: 'Contribute to Cash Fund', fr: 'Participer à la cagnotte' },
   'registry.cashDesc': { 
-    en: 'Help us build our future with a monetary contribution.',
-    fr: 'Aidez-nous à construire notre avenir avec une contribution financière.' 
+    en: 'Help us create unforgettable memories on our honeymoon.',
+    fr: 'Aidez-nous à créer des souvenirs inoubliables pour notre voyage de noces.'
   },
   'registry.pledgeBtn': { en: 'Contribute', fr: 'Contribuer' },
   'registry.pledgeTitle': { en: 'Make a Contribution', fr: 'Faire un don' },
