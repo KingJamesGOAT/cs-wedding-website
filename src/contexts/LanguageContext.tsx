@@ -223,10 +223,10 @@ const translations: Record<string, Record<Language, string>> = {
 
   // Registry Pledge Flow
   'registry.browseBtn': { en: 'Browse Gift Wishlist', fr: 'Parcourir la liste de mariage' },
-  'registry.cashBtn': { en: 'Contribute to Cash Fund', fr: 'Participer à la cagnotte' },
+  'registry.cashBtn': { en: 'Contribute to our Honeymoon', fr: 'Participer à notre voyage de noces' },
   'registry.cashDesc': { 
-    en: 'Help us create unforgettable memories on our honeymoon.',
-    fr: 'Aidez-nous à créer des souvenirs inoubliables pour notre voyage de noces.'
+    en: 'Help us create unforgettable memories.',
+    fr: 'Aidez-nous à créer des souvenirs inoubliables.'
   },
   'registry.pledgeBtn': { en: 'Contribute', fr: 'Contribuer' },
   'registry.pledgeTitle': { en: 'Make a Contribution', fr: 'Faire un don' },

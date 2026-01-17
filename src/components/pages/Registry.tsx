@@ -8,7 +8,7 @@ import { Progress } from '../ui/progress';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from '../ui/dialog';
 import { 
   Smartphone, Building2, Copy, Check, Loader2, 
-  DollarSign, ShoppingBag, ChefHat, Zap, Utensils, Bed, Coffee, Wine, 
+  Plane, ShoppingBag, ChefHat, Zap, Utensils, Bed, Coffee, Wine, 
   Hammer, Bath, Box, Sofa, Armchair, Lamp 
 } from 'lucide-react';
 import { toast } from 'sonner';
@@ -264,52 +264,53 @@ export default function Registry() {
                            <div className="h-px bg-neutral-200 flex-1 ml-4" />
                          </div>
 
-                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 md:gap-6">
+                         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-6">
                            {giftsByCategory[category.id].map((gift) => {
                              const isFullyFunded = gift.collected >= gift.price;
                              const percent = Math.min((gift.collected / gift.price) * 100, 100);
                              const Icon = gift.icon;
 
                              return (
-                               <div key={gift.id} className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 flex flex-col border border-neutral-100 hover:border-neutral-300 hover:shadow-xl transition-all duration-300 relative overflow-hidden group">
+                               <div key={gift.id} className="bg-white rounded-xl p-3 md:p-6 flex flex-col border border-neutral-100 hover:border-neutral-300 hover:shadow-xl transition-all duration-300 relative overflow-hidden group">
                                   {isFullyFunded && (
-                                    <div className="absolute top-3 right-3 bg-green-100 text-green-700 text-[10px] sm:text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1 shadow-sm z-10">
-                                      <Check className="w-3 h-3" /> {t('registry.fullyFunded')}
+                                    <div className="absolute top-2 right-2 md:top-3 md:right-3 bg-green-100 text-green-700 text-[10px] sm:text-xs font-bold px-1.5 py-0.5 md:px-2 md:py-1 rounded-full flex items-center gap-1 shadow-sm z-10">
+                                      <Check className="w-2.5 h-2.5 md:w-3 md:h-3" /> <span className="hidden sm:inline">{t('registry.fullyFunded')}</span>
+                                      <span className="sm:hidden">Done</span>
                                     </div>
                                   )}
                                   
-                                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-neutral-50 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 self-start">
-                                     <Icon className={`w-6 h-6 sm:w-8 sm:h-8 ${isFullyFunded ? 'text-green-500' : 'text-neutral-600'}`} />
+                                  <div className="w-10 h-10 md:w-16 md:h-16 bg-neutral-50 rounded-xl md:rounded-2xl flex items-center justify-center mb-2 md:mb-4 group-hover:scale-110 transition-transform duration-300 self-start">
+                                     <Icon className={`w-5 h-5 md:w-8 md:h-8 ${isFullyFunded ? 'text-green-500' : 'text-neutral-600'}`} />
                                   </div>
                                   
-                                  <div className="flex-1 min-h-[60px]">
-                                    <h4 className="font-medium text-sm sm:text-base md:text-lg mb-1 leading-snug">{gift.title[language]}</h4>
-                                    <div className="text-lg md:text-xl font-light text-neutral-900 mt-2">
+                                  <div className="flex-1 min-h-[50px] md:min-h-[60px]">
+                                    <h4 className="font-medium text-xs md:text-lg mb-0.5 leading-snug line-clamp-2 md:line-clamp-none">{gift.title[language]}</h4>
+                                    <div className="text-sm md:text-xl font-light text-neutral-900 mt-1">
                                       CHF {gift.price}
                                     </div>
                                   </div>
 
-                                  <div className="mt-4 sm:mt-6 pt-4 border-t border-neutral-100">
-                                     {/* Progress Bar (Only nice to have, maybe cleaner without for modern look? keeping for utility) */}
+                                  <div className="mt-3 md:mt-6 pt-3 border-t border-neutral-100">
+                                     {/* Progress Bar */}
                                      {gift.collected > 0 && !isFullyFunded && (
-                                       <div className="mb-3">
-                                         <div className="flex justify-between text-[10px] sm:text-xs font-medium text-neutral-500 mb-1">
+                                       <div className="mb-2 md:mb-3">
+                                         <div className="flex justify-between text-[10px] md:text-xs font-medium text-neutral-500 mb-1">
                                             <span>{Math.round(percent)}%</span>
-                                            <span>CHF {gift.collected} {t('registry.raised').toLowerCase()}</span>
+                                            <span>CHF {gift.collected}</span>
                                          </div>
-                                         <Progress value={percent} className="h-1.5 bg-neutral-100" />
+                                         <Progress value={percent} className="h-1 md:h-1.5 bg-neutral-100" />
                                        </div>
                                      )}
 
                                      <Button
                                        size="sm"
                                        disabled={isFullyFunded}
-                                       className={`w-full ${isFullyFunded 
+                                       className={`w-full h-8 text-xs md:h-9 md:text-sm ${isFullyFunded 
                                          ? 'bg-neutral-100 text-neutral-400 hover:bg-neutral-100 cursor-default' 
                                          : 'bg-neutral-900 text-white hover:bg-neutral-800'}`}
                                        onClick={() => !isFullyFunded && handleOpenPledge(gift)}
                                      >
-                                       {isFullyFunded ? t('registry.fullyFunded') : t('registry.pledgeBtn')}
+                                       {isFullyFunded ? (language === 'en' ? 'Funded' : 'Financé') : t('registry.pledgeBtn')}
                                      </Button>
                                   </div>
                                </div>
@@ -327,11 +328,11 @@ export default function Registry() {
 
           {/* OPTION 2: CASH FUND */}
           <div 
-             onClick={() => handleOpenPledge({ title: { en: 'Cash Fund', fr: 'Cagnotte de Mariage' }, description: t('registry.cashDesc'), suggestedAmounts: [20, 50, 100] })}
+             onClick={() => handleOpenPledge({ title: { en: 'Honeymoon Fund', fr: 'Voyage de noces' }, description: t('registry.cashDesc'), suggestedAmounts: [20, 50, 100] })}
              className="group bg-white/70 backdrop-blur-xl border border-white/50 p-4 md:p-12 rounded-2xl md:rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer flex flex-col items-center justify-center text-center items-center h-[200px] md:h-[450px] transform hover:-translate-y-2"
           >
             <div className="w-12 h-12 md:w-32 md:h-32 bg-[#FA8072]/10 rounded-full flex items-center justify-center mb-3 md:mb-8 group-hover:scale-110 transition-transform duration-500 group-hover:bg-[#FA8072]/20">
-               <DollarSign className="w-6 h-6 md:w-16 md:h-16 text-[#FA8072]" />
+               <Plane className="w-6 h-6 md:w-16 md:h-16 text-[#FA8072]" />
             </div>
             <h3 className="text-sm md:text-3xl font-light mb-2 text-neutral-900 leading-tight">{t('registry.cashBtn')}</h3>
             <p className="text-neutral-600 text-[10px] md:text-lg max-w-xs">{t('registry.cashDesc')}</p>
