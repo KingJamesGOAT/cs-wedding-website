@@ -309,7 +309,9 @@ export default function RSVP() {
                email: finalData.email,
                attending: finalData.attending,
                guests: finalData.guests,
+               children: finalData.children,
                dinnerAttendance: finalData.dinnerAttendance,
+               dietaryType: finalData.dietaryType,
                dietary: finalData.dietary,
                aperoContribution: finalData.aperoContribution,
                selectedItems: selectedItems // Save the rich object structure

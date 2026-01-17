@@ -184,6 +184,11 @@ export default function UserSummaryButton({ activeSection }: UserSummaryButtonPr
                                     <div className="bg-neutral-50 p-2 rounded-lg">
                                        <span className="text-neutral-400 block text-[10px] uppercase tracking-wider mb-0.5">{t('summary.rsvp.guestCount')}</span>
                                        <span className="font-medium text-neutral-900">{userData.rsvp.guests}</span>
+                                       {userData.rsvp.children && parseInt(userData.rsvp.children) > 0 && (
+                                           <span className="text-xs text-neutral-500 ml-1">
+                                              (+ {userData.rsvp.children} {t('summary.rsvp.children').toLowerCase()})
+                                           </span>
+                                        )}
                                     </div>
                                     {/* Only show dinner if explicitly set (Yes/No) */}
                                     {userData.rsvp.dinnerAttendance && (
@@ -193,12 +198,20 @@ export default function UserSummaryButton({ activeSection }: UserSummaryButtonPr
                                        </div>
                                     )}
                                  </div>
-                                 {userData.rsvp.dietary && (
+                                 {(userData.rsvp.dietaryType && userData.rsvp.dietaryType !== 'none') || userData.rsvp.dietary ? (
                                     <div className="text-sm bg-yellow-50/50 p-3 rounded-lg border border-yellow-100/50 ml-2">
                                        <span className="text-yellow-600/80 block text-[10px] uppercase tracking-wider mb-1 font-bold">{t('summary.rsvp.dietary')}</span>
-                                       <p className="text-neutral-800 text-sm italic">"{userData.rsvp.dietary}"</p>
+                                       
+                                       {userData.rsvp.dietaryType && userData.rsvp.dietaryType !== 'none' && (
+                                          <p className="text-neutral-900 font-medium mb-1">
+                                             {t(`rsvp.dietaryType.${userData.rsvp.dietaryType}`)}
+                                          </p>
+                                       )}
+                                       {userData.rsvp.dietary && (
+                                          <p className="text-neutral-800 text-sm italic">"{userData.rsvp.dietary}"</p>
+                                       )}
                                     </div>
-                                 )}
+                                 ) : null}
                                  
                                  <div className="mt-3 pt-3 border-t border-neutral-100/50">
                                    <p className="text-[10px] text-neutral-400 italic text-center">
