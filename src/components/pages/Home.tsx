@@ -67,7 +67,7 @@ export default function Home({ onHeroTitleVisibilityChange }: HomeProps) {
         <img
           src={heroImageMobile}
           alt="Cynthia & Steve"
-          className="w-full h-full object-cover md:hidden blur-[1px]"
+          className="w-full h-full object-cover md:hidden"
         />
         <div className="hidden md:block w-full h-full relative">
           <AnimatePresence mode="popLayout">
