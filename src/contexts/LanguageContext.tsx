@@ -169,6 +169,8 @@ const translations: Record<string, Record<Language, string>> = {
   'summary.rsvp.attending': { en: 'Attending', fr: 'Présent' },
   'summary.rsvp.notAttending': { en: 'Not Attending', fr: 'Absent' },
   'summary.rsvp.guestCount': { en: 'Guests', fr: 'Invités' },
+  'summary.rsvp.adults': { en: 'Adults', fr: 'Adultes' },
+  'summary.rsvp.children': { en: 'Children', fr: 'Enfants' },
   'summary.rsvp.dinner': { en: 'Dinner', fr: 'Souper' },
   'summary.rsvp.dietary': { en: 'Dietary Notes', fr: 'Notes Alimentaires' },
   'summary.rsvp.apero': { en: 'Apero Contributions', fr: 'Contributions Apéro' },
