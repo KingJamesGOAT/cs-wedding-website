@@ -87,17 +87,18 @@ export default function UserSummaryButton({ activeSection }: UserSummaryButtonPr
           <SheetTrigger asChild>
              {/* ... Trigger Button (unchanged) ... */}
              <button className="
-                bg-white/90 backdrop-blur-md border border-neutral-200 border-r-0
-                shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all 
+                bg-gradient-to-br from-rose-50 via-white to-rose-100/50
+                backdrop-blur-md border border-rose-200/60 border-r-0
+                shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_8px_30px_rgb(255,228,230,0.5)] transition-all 
                 py-3 pl-3 pr-2 rounded-l-2xl
                 flex flex-col items-center gap-1
                 group
                 hover:pr-4
              ">
-                <div className="bg-neutral-100 p-1.5 rounded-full group-hover:bg-neutral-200 transition-colors">
-                   <User className="w-4 h-4 text-neutral-600" />
+                <div className="bg-white/80 p-1.5 rounded-full group-hover:bg-rose-50 transition-colors shadow-sm ring-1 ring-rose-100">
+                   <User className="w-4 h-4 text-rose-400 group-hover:text-rose-500" />
                 </div>
-                <span className="text-[10px] uppercase tracking-wider font-medium text-neutral-500 hidden md:block group-hover:text-neutral-900 writing-mode-vertical-rl">
+                <span className="text-[10px] uppercase tracking-wider font-medium text-rose-900/60 hidden md:block group-hover:text-rose-900 writing-mode-vertical-rl">
                    {t('dashboard.button')}
                 </span>
              </button>
