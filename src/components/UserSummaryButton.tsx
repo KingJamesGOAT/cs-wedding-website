@@ -109,10 +109,10 @@ export default function UserSummaryButton({ activeSection }: UserSummaryButtonPr
                w-[90vw] sm:max-w-md 
                bg-white/95 backdrop-blur-xl border border-neutral-200 
                shadow-2xl 
-               rounded-l-2xl sm:rounded-2xl 
-               h-[95vh] sm:h-auto sm:max-h-[85vh] 
-               top-0 sm:top-1/2 sm:-translate-y-1/2 
-               right-0 sm:right-6 
+               rounded-2xl 
+               h-auto max-h-[85vh] sm:max-h-[85vh]
+               top-1/2 -translate-y-1/2 
+               right-2 sm:right-6 
                p-0 overflow-hidden
                data-[state=open]:!slide-in-from-right-0 data-[state=closed]:!slide-out-to-right-0
                data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0
