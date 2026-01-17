@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
 import { User, Gift, Grape, AlertTriangle } from 'lucide-react';
-import { ScrollArea } from './ui/scroll-area';
 import { Separator } from './ui/separator';
 
 interface UserSummaryButtonProps {
@@ -91,7 +90,7 @@ export default function UserSummaryButton({ activeSection }: UserSummaryButtonPr
                   <p className="text-sm text-neutral-500">{t('summary.subtitle')}</p>
                </SheetHeader>
 
-               <ScrollArea className="flex-1 px-6">
+               <div className="flex-1 overflow-y-auto px-6">
                   <div className="space-y-8 py-6">
                      
                      {/* RSVP SECTION */}
@@ -219,7 +218,7 @@ export default function UserSummaryButton({ activeSection }: UserSummaryButtonPr
                      </div>
 
                   </div>
-               </ScrollArea>
+               </div>
                
                <div className="p-4 border-t border-neutral-100 bg-neutral-50/50 text-center text-[10px] text-neutral-400 shrink-0">
                   Dashboard auto-updates when you submit new forms.
