@@ -114,7 +114,7 @@ export default function Registry() {
   useEffect(() => {
     const fetchTotals = async () => {
       try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbxpq_jKgykf6Ss1U-5kSybzOq3Fz1-yuhADQyy-Fp2WJJNin7KYbD5qr4KKEyVhDuTM/exec');
+        const response = await fetch('https://script.google.com/macros/s/AKfycbyfVDsivhWotNQbGJN65SzF2xwFlzulSjD2WaVYb2Hx8hKG118J-JzoO5tMCjye1JVb/exec');
         const data = await response.json();
         
         if (data && data.items) {
@@ -164,7 +164,7 @@ export default function Registry() {
     setReferenceCode(code);
 
     try {
-      await fetch('https://script.google.com/macros/s/AKfycbxpq_jKgykf6Ss1U-5kSybzOq3Fz1-yuhADQyy-Fp2WJJNin7KYbD5qr4KKEyVhDuTM/exec', {
+      await fetch('https://script.google.com/macros/s/AKfycbyfVDsivhWotNQbGJN65SzF2xwFlzulSjD2WaVYb2Hx8hKG118J-JzoO5tMCjye1JVb/exec', {
         method: 'POST',
         mode: 'no-cors',
         headers: {
