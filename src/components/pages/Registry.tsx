@@ -191,6 +191,32 @@ export default function Registry() {
               }
               return gift;
           }));
+
+          // Save to LocalStorage for User Summary
+          try {
+             const existingDataStr = localStorage.getItem('wedding_user_data');
+             const existingData = existingDataStr ? JSON.parse(existingDataStr) : {};
+             
+             const newGift = {
+                item: selectedGift.title.en, // Use English title for consistency
+                amount: pledgedAmount,
+                refCode: code,
+                date: new Date().toISOString()
+             };
+
+             const updatedData = {
+                ...existingData,
+                gifts: [...(existingData.gifts || []), newGift]
+             };
+             
+             localStorage.setItem('wedding_user_data', JSON.stringify(updatedData));
+             
+             // Dispatch event to update UI immediately
+             window.dispatchEvent(new Event('wedding-data-updated'));
+             window.dispatchEvent(new Event('storage'));
+          } catch (err) {
+             console.error("Failed to save local gift data", err);
+          }
       }
 
       setPledgeStep('success');

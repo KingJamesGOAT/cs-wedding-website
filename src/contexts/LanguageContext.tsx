@@ -155,10 +155,28 @@ const translations: Record<string, Record<Language, string>> = {
   'rsvp.maxReached': { en: 'Max limit reached', fr: 'Limite atteinte' },
   'rsvp.dinnerQuestion': { 
     en: "We'd love for you to join us for the Evening Dinner! Will you be staying for the evening?", 
-    fr: "Nous serions ravis de vous compter parmi nous pour le Repas du Soir ! Serez-vous des nôtres ?" 
+    fr: "Nous serions ravis que vous vous joigniez à nous pour le souper ! Restez-vous pour la soirée ?" 
   },
-  'rsvp.dinnerYes': { en: "Yes, looking forward to it!", fr: "Oui, avec grand plaisir !" },
-  'rsvp.dinnerNo': { en: "No, unfortunately just the ceremony and the apero", fr: "Non, malheureusement juste la cérémonie et l'apéro" },
+  'rsvp.dinnerYes': { en: "Yes, I/We will stay for dinner", fr: "Oui, je/nous restons pour le souper" },
+  'rsvp.dinnerNo': { en: "No, unfortunately I/We can't stay", fr: "Non, malheureusement je/nous ne pouvons pas rester" },
+
+  // User Summary Panel
+  'summary.title': { en: 'Your Wedding Dashboard', fr: 'Votre Tableau de Bord' },
+  'summary.subtitle': { en: 'Here is a summary of your contributions and RSVP status.', fr: 'Voici un résumé de vos contributions et statut RSVP.' },
+  'summary.rsvp.title': { en: 'Your RSVP', fr: 'Votre RSVP' },
+  'summary.rsvp.notFound': { en: 'No RSVP found on this device.', fr: 'Aucun RSVP trouvé sur cet appareil.' },
+  'summary.rsvp.attending': { en: 'Attending', fr: 'Présent' },
+  'summary.rsvp.notAttending': { en: 'Not Attending', fr: 'Absent' },
+  'summary.rsvp.guestCount': { en: 'Guests', fr: 'Invités' },
+  'summary.rsvp.dinner': { en: 'Dinner', fr: 'Souper' },
+  'summary.rsvp.dietary': { en: 'Dietary Notes', fr: 'Notes Alimentaires' },
+  'summary.rsvp.apero': { en: 'Apero Contributions', fr: 'Contributions Apéro' },
+  'summary.rsvp.aperoWarning': { en: 'Please drop off at Guglerahof Farm (12:30-13:30) before the ceremony.', fr: 'Merci de déposer à la Ferme Guglerahof (12h30-13h30) avant la cérémonie.' },
+  'summary.gifts.title': { en: 'Your Pledged Gifts', fr: 'Vos Cadeaux' },
+  'summary.gifts.none': { en: 'No gifts pledged yet.', fr: 'Aucun cadeau promis pour le moment.' },
+  'summary.gifts.refCode': { en: 'Ref Code', fr: 'Code Ref' },
+  'summary.gifts.amount': { en: 'Amount', fr: 'Montant' },
+
   
   // Registry
   'registry.title': { en: 'Gifts', fr: 'Cadeaux' },

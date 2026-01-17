@@ -9,6 +9,10 @@ import LoadingSpinner from './components/ui/LoadingSpinner';
 
 
 
+import UserSummaryButton from './components/UserSummaryButton';
+
+// ... (existing imports)
+
 // Lazy load heavy components
 const Welcome = lazy(() => import('./components/pages/Welcome'));
 const Venue = lazy(() => import('./components/pages/Venue'));
@@ -82,9 +86,13 @@ export default function App() {
       <div className="min-h-screen bg-white">
         <Header activeSection={activeSection} onNavigate={handleNavigate} isHeroTitleVisible={isHeroTitleVisible} />
         
+        {/* Floating User Summary Button */}
+        <UserSummaryButton />
+
         <main>
           <Home key={homeKey} onHeroTitleVisibilityChange={setIsHeroTitleVisible} />
           
+          {/* ... (existing suspense components) */}
           <Suspense fallback={<LoadingSpinner />}>
             <Welcome />
           </Suspense>

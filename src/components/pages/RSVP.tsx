@@ -287,6 +287,36 @@ export default function RSVP() {
       });
 
       setSubmitted(true);
+
+      // Save to LocalStorage for User Summary
+      try {
+         const existingDataStr = localStorage.getItem('wedding_user_data');
+         const existingData = existingDataStr ? JSON.parse(existingDataStr) : {};
+         
+         const updatedData = {
+            ...existingData,
+            rsvp: {
+               firstName: finalData.firstName,
+               lastName: finalData.lastName,
+               email: finalData.email,
+               attending: finalData.attending,
+               guests: finalData.guests,
+               dinnerAttendance: finalData.dinnerAttendance,
+               dietary: finalData.dietary,
+               aperoContribution: finalData.aperoContribution,
+               selectedItems: selectedItems // Save the rich object structure
+            }
+         };
+         
+         localStorage.setItem('wedding_user_data', JSON.stringify(updatedData));
+         
+         // Dispatch event to update UI immediately
+         window.dispatchEvent(new Event('wedding-data-updated'));
+         window.dispatchEvent(new Event('storage')); // Fallback
+      } catch (err) {
+         console.error("Failed to save local user data", err);
+      }
+
       setTimeout(() => {
         setFormData({ 
           attending: 'yes',
