@@ -173,7 +173,7 @@ const translations: Record<string, Record<Language, string>> = {
   'summary.rsvp.dietary': { en: 'Dietary Notes', fr: 'Notes Alimentaires' },
   'summary.rsvp.apero': { en: 'Apero Contributions', fr: 'Contributions Apéro' },
   'summary.rsvp.aperoWarning': { en: 'Please drop off at Guglerahof Farm (12:30-13:30) before the ceremony.', fr: 'Merci de déposer à la Ferme Guglerahof (12h30-13h30) avant la cérémonie.' },
-  'summary.gifts.title': { en: 'Your Pledged Gifts', fr: 'Vos Cadeaux' },
+  'summary.gifts.title': { en: 'Your Gifts', fr: 'Vos Cadeaux' },
   'summary.gifts.none': { en: 'No gifts pledged yet.', fr: 'Aucun cadeau.' },
   'summary.gifts.refCode': { en: 'Ref Code', fr: 'Code Ref' },
   'summary.gifts.amount': { en: 'Amount', fr: 'Montant' },
