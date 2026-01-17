@@ -9,7 +9,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, Di
 import { 
   Smartphone, Building2, Copy, Check, Loader2, CreditCard, ExternalLink,
   Plane, ShoppingBag, ChefHat, Zap, Utensils, Bed, Coffee, Wine, 
-  Hammer, Bath, Box, Sofa, Armchair, Lamp 
+  Bath, Box, Sofa, Armchair, Lamp 
 } from 'lucide-react';
 import { toast } from 'sonner';
 

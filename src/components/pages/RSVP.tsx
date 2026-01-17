@@ -6,7 +6,7 @@ import { Label } from '../ui/label';
 import { Textarea } from '../ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
-import { CheckCircle2, AlertTriangle, Info, Plus, Trash2, X } from 'lucide-react';
+import { CheckCircle2, AlertTriangle, Info, Plus, Trash2 } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '../ui/alert';
 import {
   Tooltip,
@@ -18,13 +18,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "../ui/popover"
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "../ui/dialog"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../ui/dialog';
 
 import FloralTitle from '../ui/FloralTitle';
 import flower5 from '../../assets/flowers/5.svg';

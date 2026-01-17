@@ -87,7 +87,7 @@ export default function App() {
         <Header activeSection={activeSection} onNavigate={handleNavigate} isHeroTitleVisible={isHeroTitleVisible} />
         
         {/* Floating User Summary Button */}
-        <UserSummaryButton />
+        <UserSummaryButton activeSection={activeSection} />
 
         <main>
           <Home key={homeKey} onHeroTitleVisibilityChange={setIsHeroTitleVisible} />

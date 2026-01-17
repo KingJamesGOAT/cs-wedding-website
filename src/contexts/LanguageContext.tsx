@@ -161,6 +161,7 @@ const translations: Record<string, Record<Language, string>> = {
   'rsvp.dinnerNo': { en: "No, unfortunately I/We can't stay", fr: "Non, malheureusement je/nous ne pouvons pas rester" },
 
   // User Summary Panel
+  'dashboard.button': { en: 'Dashboard', fr: 'Tableau de bord' },
   'summary.title': { en: 'Your Wedding Dashboard', fr: 'Votre Tableau de Bord' },
   'summary.subtitle': { en: 'Here is a summary of your contributions and RSVP status.', fr: 'Voici un résumé de vos contributions et statut RSVP.' },
   'summary.rsvp.title': { en: 'Your RSVP', fr: 'Votre RSVP' },
