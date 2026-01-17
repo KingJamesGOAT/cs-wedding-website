@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
@@ -9,7 +9,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, Di
 import { 
   Smartphone, Building2, Copy, Check, Loader2, 
   DollarSign, ShoppingBag, ChefHat, Zap, Utensils, Bed, Coffee, Wine, 
-  Hammer, Bath, Box
+  Hammer, Bath, Box, Sofa, Armchair, Lamp, Scissors 
 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -17,24 +17,76 @@ import FloralTitle from '../ui/FloralTitle';
 import flower7 from '../../assets/flowers/7.svg';
 import flower8 from '../../assets/flowers/8.svg';
 
-// Real data with realistic prices and 0 collected (fresh start)
-const INITIAL_GIFTS = [
-  { id: 'towels', title: 'Bath Towel Set', description: 'A set of standard bath towels for the bathroom.', price: 60, collected: 0, suggestedAmounts: [10, 20, 40, 60], icon: Bath },
-  { id: 'knife', title: 'Kitchen Knife', description: 'A sharp chef\'s knife for daily cooking.', price: 70, collected: 0, suggestedAmounts: [10, 20, 40, 70], icon: ChefHat },
-  { id: 'pan', title: 'Frying Pan', description: 'A durable non-stick pan for cooking.', price: 60, collected: 0, suggestedAmounts: [10, 20, 40, 60], icon: Utensils },
-  { id: 'sheets', title: 'Bed Sheets', description: 'A standard set of sheets and pillowcases.', price: 80, collected: 0, suggestedAmounts: [10, 20, 50, 80], icon: Bed },
-  { id: 'blender', title: 'Hand Blender', description: 'For making soups and smoothies.', price: 50, collected: 0, suggestedAmounts: [10, 20, 30, 50], icon: Zap },
-  { id: 'glasses', title: 'Wine Glasses', description: 'A set of 6 glasses for wine or water.', price: 50, collected: 0, suggestedAmounts: [10, 20, 30, 50], icon: Wine },
-  { id: 'toolkit', title: 'Basic Tool Kit', description: 'Screwdrivers, hammer, and tape measure.', price: 70, collected: 0, suggestedAmounts: [10, 20, 40, 70], icon: Hammer },
-  { id: 'plates', title: 'Dinner Plates', description: 'A simple set of plates and bowls.', price: 90, collected: 0, suggestedAmounts: [10, 20, 50, 90], icon: Utensils },
-  { id: 'containers', title: 'Food Containers', description: 'Glass containers for storing leftovers.', price: 50, collected: 0, suggestedAmounts: [10, 20, 30, 50], icon: Box },
-  { id: 'cuttingboard', title: 'Cutting Board', description: 'A solid wooden board for chopping food.', price: 50, collected: 0, suggestedAmounts: [10, 20, 30, 50], icon: Utensils },
-  { id: 'grinder', title: 'Coffee Grinder', description: 'Small machine to grind coffee beans.', price: 50, collected: 0, suggestedAmounts: [10, 20, 30, 50], icon: Coffee },
-  { id: 'iron', title: 'Iron', description: 'Standard steam iron for clothes.', price: 60, collected: 0, suggestedAmounts: [10, 20, 40, 60], icon: Zap }
+// Categories
+type Category = 'kitchen' | 'living' | 'bedroom' | 'bathroom';
+
+interface GiftItem {
+  id: string;
+  category: Category;
+  title: { en: string; fr: string };
+  price: number;
+  collected: number;
+  suggestedAmounts?: number[];
+  icon: any;
+}
+
+const CATEGORIES: { id: Category; label: { en: string; fr: string }; icon: any }[] = [
+  { id: 'kitchen', label: { en: 'Kitchen', fr: 'Cuisine' }, icon: ChefHat },
+  { id: 'living', label: { en: 'Living Room', fr: 'Salon' }, icon: Sofa },
+  { id: 'bedroom', label: { en: 'Bedroom', fr: 'Chambre' }, icon: Bed },
+  { id: 'bathroom', label: { en: 'Bathroom', fr: 'Salle de bain' }, icon: Bath },
+];
+
+const INITIAL_GIFTS: GiftItem[] = [
+  // CUISINE
+  { id: 'c1', category: 'kitchen', title: { en: 'Matte Dark Grey Dinnerware Set', fr: 'Ensemble de vaisselle mat gris foncé' }, price: 50, collected: 0, icon: Utensils },
+  { id: 'c2', category: 'kitchen', title: { en: 'Pots and Pans Set', fr: 'Ensemble de casseroles et poêles' }, price: 80, collected: 0, icon: ChefHat },
+  { id: 'c3', category: 'kitchen', title: { en: 'Wok', fr: 'Wok' }, price: 30, collected: 0, icon: ChefHat },
+  { id: 'c4', category: 'kitchen', title: { en: 'Sauté Pan with Lid', fr: 'Sauteuse avec couvercle' }, price: 40, collected: 0, icon: ChefHat },
+  { id: 'c5', category: 'kitchen', title: { en: 'Set of 6 Water Glasses', fr: 'Ensemble de 6 verres à eau' }, price: 10, collected: 0, icon: Coffee },
+  { id: 'c6', category: 'kitchen', title: { en: 'Set of 6 Wine Glasses', fr: 'Ensemble de 6 verres à vin' }, price: 13, collected: 0, icon: Wine },
+  { id: 'c7', category: 'kitchen', title: { en: 'Water Pitcher', fr: 'Pichet à eau' }, price: 7, collected: 0, icon: Coffee },
+  { id: 'c8', category: 'kitchen', title: { en: '30-Piece Cutlery Set', fr: 'Ensemble de 30 couverts' }, price: 40, collected: 0, icon: Utensils },
+  { id: 'c9', category: 'kitchen', title: { en: 'Set of 6 Cups & Saucers', fr: 'Ensemble 6 tasses + soucoupes' }, price: 24, collected: 0, icon: Coffee },
+  { id: 'c10', category: 'kitchen', title: { en: 'Set of 8 Bowls', fr: 'Ensemble de 8 bols' }, price: 20, collected: 0, icon: Utensils },
+  { id: 'c11', category: 'kitchen', title: { en: '2 Cutting Boards', fr: '2 Planches à découper' }, price: 34, collected: 0, icon: Utensils },
+  { id: 'c12', category: 'kitchen', title: { en: '3 Carving Knives', fr: '3 Couteaux à découper' }, price: 50, collected: 0, icon: Utensils },
+  { id: 'c13', category: 'kitchen', title: { en: 'Colander', fr: 'Passoire' }, price: 17, collected: 0, icon: Utensils },
+  { id: 'c14', category: 'kitchen', title: { en: 'Glass Salad Bowl', fr: 'Saladier en verre' }, price: 6, collected: 0, icon: Utensils },
+  { id: 'c15', category: 'kitchen', title: { en: 'Salad Servers', fr: 'Couverts à salade' }, price: 17, collected: 0, icon: Utensils },
+  { id: 'c16', category: 'kitchen', title: { en: 'Ladles, Spatulas & Spoons Set', fr: 'Ensemble louches-spatules-et-cuilleres' }, price: 19, collected: 0, icon: Utensils },
+  { id: 'c17', category: 'kitchen', title: { en: 'Teapot', fr: 'Théière' }, price: 25, collected: 0, icon: Coffee },
+  { id: 'c18', category: 'kitchen', title: { en: 'Toaster', fr: 'Grille-pain' }, price: 28, collected: 0, icon: Zap },
+  { id: 'c19', category: 'kitchen', title: { en: 'Bread Knife', fr: 'Couteau à pain' }, price: 30, collected: 0, icon: Utensils },
+  { id: 'c20', category: 'kitchen', title: { en: 'Raclette Grill', fr: 'Appareil à raclette' }, price: 65, collected: 0, icon: Zap },
+  { id: 'c21', category: 'kitchen', title: { en: 'Glass Kettle', fr: 'Bouilloire en verre' }, price: 30, collected: 0, icon: Zap },
+  { id: 'c22', category: 'kitchen', title: { en: 'Kitchen Knives & Cutting Board', fr: 'Couteaux de cuisine et planche à découper' }, price: 100, collected: 0, icon: Utensils },
+  { id: 'c23', category: 'kitchen', title: { en: 'Simple Microwave', fr: 'Micro-onde simple' }, price: 70, collected: 0, icon: Zap },
+  { id: 'c24', category: 'kitchen', title: { en: 'Microwave Air Fryer', fr: 'Micro – onde – Air fryer' }, price: 190, collected: 0, icon: Zap },
+
+  // SALON
+  { id: 's1', category: 'living', title: { en: 'Convertible 3-Seater Sofa', fr: 'Canapé 3 places convertible' }, price: 500, collected: 0, icon: Sofa },
+  { id: 's2', category: 'living', title: { en: '6 Chairs', fr: '6 chaises' }, price: 300, collected: 0, icon: Armchair },
+  { id: 's3', category: 'living', title: { en: 'Dining Table', fr: 'Table' }, price: 250, collected: 0, icon: Building2 },
+  { id: 's4', category: 'living', title: { en: 'Side Table', fr: 'Table bas coût' }, price: 40, collected: 0, icon: Building2 },
+  { id: 's5', category: 'living', title: { en: 'Coffee Table', fr: 'table basse' }, price: 50, collected: 0, icon: Building2 },
+
+  // CHAMBRE
+  { id: 'ch1', category: 'bedroom', title: { en: 'Bed 160x200', fr: 'Lit 160 x 200' }, price: 320, collected: 0, icon: Bed },
+  { id: 'ch2', category: 'bedroom', title: { en: 'Pocket Spring Mattress 80x200', fr: 'Matelas à ressorts ensachés 80 x 200' }, price: 380, collected: 0, icon: Bed },
+  { id: 'ch3', category: 'bedroom', title: { en: 'Bedding Set', fr: 'Parure de lit Housse de couette et 2 taies, blanc' }, price: 80, collected: 0, icon: Bed },
+  { id: 'ch4', category: 'bedroom', title: { en: 'All-Season Duvet 240x220 cm', fr: 'Couette toutes saisons, 240x220 cm' }, price: 160, collected: 0, icon: Bed },
+  { id: 'ch5', category: 'bedroom', title: { en: 'Nightstands', fr: 'Chevets' }, price: 80, collected: 0, icon: Box },
+  { id: 'ch6', category: 'bedroom', title: { en: 'Bedside Lamps', fr: 'Lampes de chevet' }, price: 20, collected: 0, icon: Lamp },
+
+  // SALLE DE BAIN
+  { id: 'sb1', category: 'bathroom', title: { en: 'Bath Towels 100x150', fr: 'linge de bain 100 * 150' }, price: 100, collected: 0, icon: Bath },
+  { id: 'sb2', category: 'bathroom', title: { en: 'Hand Towels 40x60', fr: 'serviettes toilette 40 * 60' }, price: 1, collected: 0, icon: Bath },
+  { id: 'sb3', category: 'bathroom', title: { en: 'Laundry Basket', fr: 'panier à linge' }, price: 50, collected: 0, icon: Box },
 ];
 
 export default function Registry() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   
   // State for Gift Data
   const [gifts, setGifts] = useState(INITIAL_GIFTS);
@@ -66,7 +118,9 @@ export default function Registry() {
         
         if (data && data.items) {
           setGifts(prevGifts => prevGifts.map(gift => {
-             const collected = data.items[gift.title] || 0;
+             // Match by English title for consistency with backend, or ID if possible. 
+             // Using English title as key for now based on previous implementation
+             const collected = data.items[gift.title.en] || data.items[gift.title.fr] || 0;
              return { ...gift, collected };
           }));
         }
@@ -119,7 +173,7 @@ export default function Registry() {
           type: 'registry',
           name: formData.name,
           email: formData.email,
-          item: selectedGift.title,
+          item: selectedGift.title.en, // Always send English title to backend for consistency
           amount: formData.amount,
           message: `Ref Code: ${code} | User Message: ${formData.message}`
         }),
@@ -150,7 +204,17 @@ export default function Registry() {
     toast.success(t('registry.copied'));
   };
 
-
+  // Group gifts by category
+  const giftsByCategory = useMemo(() => {
+    const grouped: Record<string, GiftItem[]> = {};
+    gifts.forEach(gift => {
+      if (!grouped[gift.category]) {
+        grouped[gift.category] = [];
+      }
+      grouped[gift.category].push(gift);
+    });
+    return grouped;
+  }, [gifts]);
 
   return (
     <section id="registry" className="py-12 md:py-20 px-4 sm:px-6 lg:px-8 bg-[url('https://images.unsplash.com/photo-1520013577341-a20c35ef294f?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center min-h-[600px] md:min-h-[800px] flex items-center">
@@ -179,61 +243,92 @@ export default function Registry() {
               </div>
             </DialogTrigger>
             
-            <DialogContent className="max-w-[95vw] md:max-w-[90vw] w-full max-h-[85vh] flex flex-col p-4 md:p-6 bg-neutral-50/95 backdrop-blur-3xl border-neutral-200">
-              <DialogHeader className="pb-4 border-b border-neutral-200/50 mb-4">
-                <DialogTitle className="text-3xl font-light text-center">{t('registry.browseBtn')}</DialogTitle>
-              </DialogHeader>
-              <div className="overflow-y-auto px-2 py-2 flex-1 scrollbar-hide">
-                 <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6">
-                   {gifts.map((gift) => {
-                     const isFullyFunded = gift.collected >= gift.price;
-                     const percent = Math.min((gift.collected / gift.price) * 100, 100);
-                     const Icon = gift.icon;
+            <DialogContent className="max-w-[95vw] w-full max-h-[90vh] flex flex-col p-0 bg-neutral-50/95 backdrop-blur-3xl border-neutral-200 overflow-hidden rounded-t-xl md:rounded-xl">
+              <div className="p-4 md:p-6 pb-2 border-b border-neutral-200/50 bg-white/50">
+                <DialogTitle className="text-2xl md:text-3xl font-light text-center font-serif">{t('registry.browseBtn')}</DialogTitle>
+              </div>
+              
+              <div className="flex-1 overflow-y-auto p-4 md:p-6 scrollbar-thin">
+                 
+                 {/* Categories Loop */}
+                 <div className="space-y-12">
+                   {CATEGORIES.map(category => (
+                     giftsByCategory[category.id] && giftsByCategory[category.id].length > 0 && (
+                       <div key={category.id}>
+                         <div className="flex items-center gap-3 mb-6">
+                           <div className="p-2 bg-rose-100 rounded-lg">
+                              <category.icon className="w-5 h-5 text-rose-500" />
+                           </div>
+                           <h3 className="text-xl md:text-2xl font-medium text-neutral-800">
+                             {category.label[language]}
+                           </h3>
+                           <div className="h-px bg-neutral-200 flex-1 ml-4" />
+                         </div>
 
-                     return (
-                       <div key={gift.id} className="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-6 flex flex-col border border-neutral-100 hover:border-neutral-300 hover:shadow-lg transition-all duration-300 relative overflow-hidden group">
-                          {isFullyFunded && (
-                            <div className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-green-100 text-green-700 text-[10px] sm:text-xs font-bold px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full flex items-center gap-1 shadow-sm z-10">
-                              <Check className="w-2 h-2 sm:w-3 sm:h-3" /> {t('registry.fullyFunded')}
-                            </div>
-                          )}
-                          
-                          <div className="w-10 h-10 sm:w-16 sm:h-16 bg-neutral-50 rounded-xl flex items-center justify-center mb-2 sm:mb-4 group-hover:scale-105 transition-transform duration-300">
-                             <Icon className={`w-5 h-5 sm:w-8 sm:h-8 ${isFullyFunded ? 'text-green-500' : 'text-neutral-600'}`} />
-                          </div>
-                          
-                          <div className="flex-1">
-                            <h4 className="font-medium text-xs sm:text-lg mb-1 leading-tight">{gift.title}</h4>
-                            <p className="text-[10px] sm:text-sm text-neutral-500 mb-2 sm:mb-4 line-clamp-2">{gift.description}</p>
-                          </div>
+                         <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+                           {giftsByCategory[category.id].map((gift) => {
+                             const isFullyFunded = gift.collected >= gift.price;
+                             const percent = Math.min((gift.collected / gift.price) * 100, 100);
+                             const Icon = gift.icon;
 
-                          <div className="mt-2 sm:mt-4 space-y-1 sm:space-y-2">
-                             <div className="flex justify-between text-[10px] sm:text-xs font-medium text-neutral-900 flex-col sm:flex-row gap-0.5">
-                                <span>{isFullyFunded ? t('registry.fullyFunded') : `${t('registry.raised')} CHF ${gift.collected}`}</span>
-                                <span>{t('registry.goal')} CHF {gift.price}</span>
-                             </div>
-                             <Progress value={percent} className={`h-1.5 sm:h-2 ${isFullyFunded ? 'bg-green-100' : 'bg-neutral-100'}`} indicatorClassName={isFullyFunded ? 'bg-green-500' : 'bg-neutral-900'} />
-                          </div>
+                             return (
+                               <div key={gift.id} className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 flex flex-col border border-neutral-100 hover:border-neutral-300 hover:shadow-xl transition-all duration-300 relative overflow-hidden group">
+                                  {isFullyFunded && (
+                                    <div className="absolute top-3 right-3 bg-green-100 text-green-700 text-[10px] sm:text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1 shadow-sm z-10">
+                                      <Check className="w-3 h-3" /> {t('registry.fullyFunded')}
+                                    </div>
+                                  )}
+                                  
+                                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-neutral-50 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 self-start">
+                                     <Icon className={`w-6 h-6 sm:w-8 sm:h-8 ${isFullyFunded ? 'text-green-500' : 'text-neutral-600'}`} />
+                                  </div>
+                                  
+                                  <div className="flex-1 min-h-[60px]">
+                                    <h4 className="font-medium text-sm sm:text-base md:text-lg mb-1 leading-snug">{gift.title[language]}</h4>
+                                    <div className="text-lg md:text-xl font-light text-neutral-900 mt-2">
+                                      CHF {gift.price}
+                                    </div>
+                                  </div>
 
-                          <Button
-                            size="sm"
-                            disabled={isFullyFunded}
-                            className={`mt-2 sm:mt-4 w-full h-8 text-xs sm:h-9 sm:text-sm ${isFullyFunded ? 'bg-green-50 text-green-700 hover:bg-green-100 opacity-100' : 'bg-neutral-900 hover:bg-neutral-800'}`}
-                            onClick={() => !isFullyFunded && handleOpenPledge(gift)}
-                          >
-                            {isFullyFunded ? t('registry.fullyFunded') : t('registry.pledgeBtn')}
-                          </Button>
+                                  <div className="mt-4 sm:mt-6 pt-4 border-t border-neutral-100">
+                                     {/* Progress Bar (Only nice to have, maybe cleaner without for modern look? keeping for utility) */}
+                                     {gift.collected > 0 && !isFullyFunded && (
+                                       <div className="mb-3">
+                                         <div className="flex justify-between text-[10px] sm:text-xs font-medium text-neutral-500 mb-1">
+                                            <span>{Math.round(percent)}%</span>
+                                            <span>CHF {gift.collected} {t('registry.raised').toLowerCase()}</span>
+                                         </div>
+                                         <Progress value={percent} className="h-1.5 bg-neutral-100" />
+                                       </div>
+                                     )}
+
+                                     <Button
+                                       size="sm"
+                                       disabled={isFullyFunded}
+                                       className={`w-full ${isFullyFunded 
+                                         ? 'bg-neutral-100 text-neutral-400 hover:bg-neutral-100 cursor-default' 
+                                         : 'bg-neutral-900 text-white hover:bg-neutral-800'}`}
+                                       onClick={() => !isFullyFunded && handleOpenPledge(gift)}
+                                     >
+                                       {isFullyFunded ? t('registry.fullyFunded') : t('registry.pledgeBtn')}
+                                     </Button>
+                                  </div>
+                               </div>
+                             );
+                           })}
+                         </div>
                        </div>
-                     );
-                   })}
+                     )
+                   ))}
                  </div>
+
               </div>
             </DialogContent>
           </Dialog>
 
           {/* OPTION 2: CASH FUND */}
           <div 
-             onClick={() => handleOpenPledge({ title: 'Cash Fund', description: t('registry.cashDesc'), suggestedAmounts: [20, 50, 100] })}
+             onClick={() => handleOpenPledge({ title: { en: 'Cash Fund', fr: 'Cagnotte de Mariage' }, description: t('registry.cashDesc'), suggestedAmounts: [20, 50, 100] })}
              className="group bg-white/70 backdrop-blur-xl border border-white/50 p-4 md:p-12 rounded-2xl md:rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer flex flex-col items-center justify-center text-center items-center h-[200px] md:h-[450px] transform hover:-translate-y-2"
           >
             <div className="w-12 h-12 md:w-32 md:h-32 bg-[#FA8072]/10 rounded-full flex items-center justify-center mb-3 md:mb-8 group-hover:scale-110 transition-transform duration-500 group-hover:bg-[#FA8072]/20">
@@ -255,7 +350,7 @@ export default function Registry() {
                 <DialogHeader>
                   <DialogTitle>{t('registry.pledgeTitle')}</DialogTitle>
                   <DialogDescription>
-                   {t('registry.pledgeSubtitle')} <span className="font-medium text-neutral-900">{selectedGift.title}</span>
+                   {t('registry.pledgeSubtitle')} <span className="font-medium text-neutral-900">{selectedGift.title[language] || selectedGift.title}</span>
                   </DialogDescription>
                 </DialogHeader>
 
@@ -264,19 +359,24 @@ export default function Registry() {
                   <div className="space-y-3">
                     <Label>{t('registry.amountLabel')}</Label>
                     <div className="flex flex-wrap gap-2">
-                      {selectedGift.suggestedAmounts ? selectedGift.suggestedAmounts.map((amt: number) => (
-                         <Button
-                           key={amt}
-                           type="button"
-                           variant={formData.amount === amt.toString() && amountType === 'suggested' ? 'default' : 'outline'}
-                           onClick={() => {
-                             setFormData({ ...formData, amount: amt.toString() });
-                             setAmountType('suggested');
-                           }}
-                         >
-                           CHF {amt}
-                         </Button>
-                      )) : null}
+                       {/* If gift has partial contributions allowed logic (not implemented fully on simple list but generic amounts helpful) */}
+                       {/* For specific items, maybe defaults aren't needed unless it's cash fund. */}
+                       {/* We can offer the full price as a shortcut if it's not too high? Or just standard chips */}
+                       
+                       {[20, 50, 100, selectedGift.price].sort((a,b) => a-b).filter(val => val && val > 0 && val <= (selectedGift.price || 1000)).map((amt: number) => (
+                           <Button
+                             key={amt}
+                             type="button"
+                             variant={formData.amount === amt.toString() && amountType === 'suggested' ? 'default' : 'outline'}
+                             onClick={() => {
+                               setFormData({ ...formData, amount: amt.toString() });
+                               setAmountType('suggested');
+                             }}
+                           >
+                             CHF {amt}
+                           </Button>
+                        ))}
+                      
                       <Button
                         type="button"
                         variant={amountType === 'custom' ? 'default' : 'outline'}
