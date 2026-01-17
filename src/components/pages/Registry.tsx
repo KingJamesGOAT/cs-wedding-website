@@ -275,7 +275,7 @@ export default function Registry() {
                                   {isFullyFunded && (
                                     <div className="absolute top-2 right-2 md:top-3 md:right-3 bg-green-100 text-green-700 text-[10px] sm:text-xs font-bold px-1.5 py-0.5 md:px-2 md:py-1 rounded-full flex items-center gap-1 shadow-sm z-10">
                                       <Check className="w-2.5 h-2.5 md:w-3 md:h-3" /> <span className="hidden sm:inline">{t('registry.fullyFunded')}</span>
-                                      <span className="sm:hidden">Done</span>
+                                      <span className="sm:hidden">Complet</span>
                                     </div>
                                   )}
                                   
@@ -310,7 +310,7 @@ export default function Registry() {
                                          : 'bg-neutral-900 text-white hover:bg-neutral-800'}`}
                                        onClick={() => !isFullyFunded && handleOpenPledge(gift)}
                                      >
-                                       {isFullyFunded ? (language === 'en' ? 'Funded' : 'Financé') : t('registry.pledgeBtn')}
+                                       {isFullyFunded ? (language === 'en' ? 'Completed' : 'Complet') : t('registry.pledgeBtn')}
                                      </Button>
                                   </div>
                                </div>
