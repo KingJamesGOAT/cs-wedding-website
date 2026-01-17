@@ -233,6 +233,8 @@ const translations: Record<string, Record<Language, string>> = {
   'registry.pledgeSubtitle': { en: 'Contributing towards: ', fr: 'Participation pour : ' },
   'registry.nameLabel': { en: 'Your Name', fr: 'Votre Nom' },
   'registry.emailLabel': { en: 'Your Email', fr: 'Votre Email' },
+  'registry.addressLabel': { en: 'Living Address', fr: 'Adresse postale' },
+  'registry.addressExplan': { en: 'So we can thank you!', fr: 'Pour vous remercier !' },
   'registry.amountLabel': { en: 'Amount (CHF)', fr: 'Montant (CHF)' },
   'registry.customAmount': { en: 'Custom Amount', fr: 'Montant libre' },
   'registry.messageLabel': { en: 'Short Message (Optional)', fr: 'Petit message (Optionnel)' },

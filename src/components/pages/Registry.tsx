@@ -102,6 +102,7 @@ export default function Registry() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    address: '',
     amount: '',
     message: ''
   });
@@ -174,7 +175,9 @@ export default function Registry() {
           email: formData.email,
           item: selectedGift.title.en, // Always send English title to backend for consistency
           amount: formData.amount,
-          message: `Ref Code: ${code} | User Message: ${formData.message}`
+          address: formData.address,
+          message: formData.message,
+          refCode: code
         }),
       });
 
@@ -446,6 +449,19 @@ export default function Registry() {
                          placeholder="john@example.com"
                        />
                     </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="address">{t('registry.addressLabel')}</Label>
+                    <Textarea
+                      id="address"
+                      value={formData.address}
+                      onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                      required
+                      placeholder="Street, City, Zip..."
+                      className="min-h-[80px]"
+                    />
+                    <p className="text-xs text-neutral-500 italic">{t('registry.addressExplan')}</p>
                   </div>
 
                   <div className="space-y-2">
