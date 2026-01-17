@@ -141,7 +141,7 @@ export default function Registry() {
   const handleOpenPledge = (gift: any) => {
     setSelectedGift(gift);
     setPledgeStep('form');
-    setFormData({ name: '', email: '', amount: '', message: '' });
+    setFormData({ name: '', email: '', address: '', amount: '', message: '' });
     setAmountType('suggested');
   };
 
