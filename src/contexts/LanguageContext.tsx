@@ -116,8 +116,11 @@ const translations: Record<string, Record<Language, string>> = {
     fr: "Merci pour votre réponse ! Nous avons bien reçu votre confirmation."
   },
   'rsvp.goToGifts': { en: 'Go to Gifts', fr: 'Aller aux Cadeaux' },
-  'rsvp.aperoQuestion': { en: 'Would you like to bring something for the Apero for 10 people', fr: 'Souhaitez-vous apporter quelque chose pour l\'Apéro pour 10 personnes' },
-  'rsvp.aperoYes': { en: 'Yes, I will bring something', fr: 'Oui, j\'apporte quelque chose' },
+  'rsvp.aperoQuestion': { 
+    en: "I would like to bring something for the Apero (Quantity: 50 bites)", 
+    fr: "Je souhaite apporter quelque chose pour l'apéro, quantité 50 bouchées" 
+  },
+  'rsvp.aperoYes': { en: 'Yes, I will bring something', fr: 'Oui, je participe' },
   'rsvp.aperoNo': { en: 'No, I will just enjoy', fr: 'Non, je viendrai juste profiter' },
   'rsvp.aperoWarningTitle': { en: 'Important Timing Info', fr: 'Information Importante' },
   'rsvp.aperoWarning.intro': { 
@@ -129,8 +132,8 @@ const translations: Record<string, Record<Language, string>> = {
     fr: '13h00 à la Ferme Guglerahof Guglera 6, 1735 Giffers pour le dépôt' 
   },
   'rsvp.aperoWarning.outro': { 
-    en: ' (Ceremony starts at 14:00).', 
-    fr: ' (La cérémonie commence à 14h00).' 
+    en: ' (Ceremony starts at 14:00). Please label your plate/dish so we know what it is.', 
+    fr: ' (La cérémonie commence à 14h00). Merci d\'étiqueter votre plat pour que nous sachions ce que c\'est.' 
   },
   'rsvp.aperoTypeLabel': { en: 'What type of food?', fr: 'Quel type de nourriture ?' },
   'rsvp.typeSavory': { en: 'Savory (Salty)', fr: 'Salé' },

@@ -23,41 +23,35 @@ import FloralTitle from '../ui/FloralTitle';
 import flower5 from '../../assets/flowers/5.svg';
 import flower6 from '../../assets/flowers/6.svg';
 
-// Defined Lists
+// Defined Lists with Limits
 const SAVORY_OPTIONS = [
-  "Quiche / Tart",
-  "Puff Pastry Twists (Flûtes)",
-  "Mini Pizzas",
-  "Cheese Platter / Cubes",
-  "Charcuterie / Saucisson",
-  "Vegetable Sticks & Dip",
-  "Tapenade & Crackers",
-  "Mini Sandwiches",
-  "Tortilla / Spanish Omelet",
-  "Cherry Tomatoes & Mozzarella",
-  "Savory Cake (Cake Salé)",
-  "Hummus & Pita",
-  "Gougères (Cheese Puffs)",
-  "Deviled Eggs (Oeufs Mimosa)",
-  "Bruschetta"
+  { label: "Croissants jambon", limit: 2 },
+  { label: "Mini sandwichs jambon fromage", limit: 2 },
+  { label: "Wraps roulés saumon / Philadelphia", limit: 1 },
+  { label: "Dips légumes + sauces", limit: 2 },
+  { label: "Mini sandwichs faux gras", limit: 1 },
+  { label: "Blinis substitut saumon", limit: 1 },
+  { label: "Petits cakes légumes", limit: 2 },
+  { label: "Mini chaussons épinards", limit: 1 },
+  { label: "Blinis faux-saumon", limit: 1 },
+  { label: "Petits cakes lardons fromage", limit: 2 },
+  { label: "Blinis saumon", limit: 1 },
+  { label: "Brochettes Tomates + Mozarella", limit: 1 },
+  { label: "Brochettes melon–jambon cru", limit: 1 },
 ];
 
 const SWEET_OPTIONS = [
-  "Chocolate Brownies",
-  "Homemade Cookies",
-  "Fruit Salad / Skewers",
-  "Apple Tart",
-  "Muffins / Cupcakes",
-  "Lemon Tart",
-  "Madeleines",
-  "Macarons",
-  "Swiss Roll",
-  "Mini Donuts",
-  "Cheesecake Bites",
-  "Chocolate Mousse",
-  "Tiramisu",
-  "Banana Bread",
-  "Meringues"
+  { label: "Brochettes de fruits", limit: 1 },
+  { label: "Brownies", limit: 1 },
+  { label: "Mini muffins", limit: 1 },
+  { label: "Tartelettes citron", limit: 1 },
+  { label: "Grosse pastèque coupées triangle", limit: 1 },
+  { label: "Choux garnis", limit: 1 },
+  { label: "Biscuits fait maison", limit: 1 },
+  { label: "Mini cookies", limit: 1 },
+  { label: "Sablés", limit: 1 },
+  { label: "Mini Cupcake", limit: 1 },
+  { label: "Verrines fruits", limit: 1 },
 ];
 
 export default function RSVP() {
@@ -222,6 +216,8 @@ export default function RSVP() {
           aperoItem: '',
           aperoDetails: ''
         });
+        setTakenItems([]); // Allow re-submission? Or should we refetch?
+        // Refetching would be better but not critical for this specific flow immediately.
         setSubmitted(false);
       }, 5000); 
     } catch (error) {
@@ -245,7 +241,11 @@ export default function RSVP() {
     );
   }
 
-
+  // Calculate if an item is fully taken
+  const isTaken = (label: string, limit: number) => {
+      const count = takenItems.filter(item => item === label).length;
+      return count >= limit;
+  };
 
   return (
     <section id="rsvp" className="py-20 px-4 sm:px-6 lg:px-8">
@@ -503,17 +503,23 @@ export default function RSVP() {
                                     </SelectTrigger>
                                     <SelectContent className="max-h-[300px]">
                                        {formData.aperoType === 'Savory' ? (
-                                          SAVORY_OPTIONS.map((opt) => (
-                                            <SelectItem key={opt} value={opt} disabled={takenItems.includes(opt)}>
-                                              {opt} {takenItems.includes(opt) ? t('rsvp.taken') : ''}
-                                            </SelectItem>
-                                          ))
+                                          SAVORY_OPTIONS.map((opt) => {
+                                            const taken = isTaken(opt.label, opt.limit);
+                                            return (
+                                              <SelectItem key={opt.label} value={opt.label} disabled={taken}>
+                                                {opt.label} {taken ? t('rsvp.taken') : ''}
+                                              </SelectItem>
+                                            );
+                                          })
                                        ) : (
-                                          SWEET_OPTIONS.map((opt) => (
-                                            <SelectItem key={opt} value={opt} disabled={takenItems.includes(opt)}>
-                                              {opt} {takenItems.includes(opt) ? t('rsvp.taken') : ''}
-                                            </SelectItem>
-                                          ))
+                                          SWEET_OPTIONS.map((opt) => {
+                                            const taken = isTaken(opt.label, opt.limit);
+                                            return (
+                                              <SelectItem key={opt.label} value={opt.label} disabled={taken}>
+                                                {opt.label} {taken ? t('rsvp.taken') : ''}
+                                              </SelectItem>
+                                            );
+                                          })
                                        )}
                                        <SelectItem value="custom" className="font-bold border-t border-neutral-100 mt-1 pt-1">
                                           {t('rsvp.aperoChoiceCustom')}
