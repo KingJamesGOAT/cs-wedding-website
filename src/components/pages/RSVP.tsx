@@ -539,7 +539,7 @@ export default function RSVP() {
                         {/* Add Buttons */}
                         <div className="flex gap-3 pt-2">
                            <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
-                              <div className="flex gap-3 w-full">
+                              <div className="flex flex-col sm:flex-row gap-3 w-full">
                                 <Button type="button" onClick={() => openAddDialog('Savory')} className="flex-1 bg-white border border-neutral-300 text-neutral-900 hover:bg-neutral-50">
                                   <Plus className="h-4 w-4 mr-2" />
                                   {t('rsvp.addSavory')}
