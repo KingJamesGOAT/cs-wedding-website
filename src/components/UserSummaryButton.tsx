@@ -113,11 +113,15 @@ export default function UserSummaryButton({ activeSection }: UserSummaryButtonPr
                
                h-auto max-h-[55vh]
 
-               ${isExpanded ? 'sm:h-[85vh]' : 'sm:h-auto sm:max-h-[55vh]'}
+               /* Transition properties */
+               transition-[all] duration-500 ease-in-out
+
+               /* Positioning & Sizing Logic */
+               ${isExpanded 
+                  ? 'sm:w-[90vw] sm:max-w-4xl sm:h-[85vh] sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:right-auto' 
+                  : 'w-[90vw] sm:max-w-md sm:h-auto sm:max-h-[55vh] top-1/2 -translate-y-1/2 right-2 sm:right-6'
+               }
                
-               transition-[height,max-height] duration-500 ease-in-out
-               top-1/2 -translate-y-1/2 
-               right-2 sm:right-6 
                p-0 overflow-hidden
                data-[state=open]:!slide-in-from-right-0 data-[state=closed]:!slide-out-to-right-0
                data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0
@@ -144,7 +148,11 @@ export default function UserSummaryButton({ activeSection }: UserSummaryButtonPr
                   </button>
                </SheetHeader>
 
-               <div className="flex-1 overflow-y-auto px-6">
+                <div className={`
+                   flex-1 overflow-y-auto px-6
+                   transition-all duration-500
+                   ${isExpanded ? '[&_h3]:text-xl [&_p]:text-base [&_.text-sm]:text-base [&_.text-xs]:text-sm' : ''}
+                `}>
                   <div className="space-y-8 py-6">
                      
                      {/* RSVP SECTION */}
