@@ -7,7 +7,7 @@ import { Textarea } from '../ui/textarea';
 import { Progress } from '../ui/progress';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from '../ui/dialog';
 import { 
-  Smartphone, Building2, Copy, Check, Loader2, 
+  Smartphone, Building2, Copy, Check, Loader2, CreditCard, ExternalLink,
   Plane, ShoppingBag, ChefHat, Zap, Utensils, Bed, Coffee, Wine, 
   Hammer, Bath, Box, Sofa, Armchair, Lamp 
 } from 'lucide-react';
@@ -16,6 +16,7 @@ import { toast } from 'sonner';
 import FloralTitle from '../ui/FloralTitle';
 import flower7 from '../../assets/flowers/7.svg';
 import flower8 from '../../assets/flowers/8.svg';
+import revolutQr from '../../assets/revolut-qr.jpg';
 
 // Categories
 type Category = 'kitchen' | 'living' | 'bedroom' | 'bathroom';
@@ -474,7 +475,7 @@ export default function Registry() {
                     />
                   </div>
 
-                  <Button type="submit" className="w-full bg-neutral-900 hover:bg-neutral-800" disabled={isSubmitting}>
+                  <Button type="submit" className="w-full bg-neutral-900 hover:bg-neutral-800" disabled={isSubmitting || !formData.amount || Number(formData.amount) <= 0}>
                     {isSubmitting ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -531,6 +532,59 @@ export default function Registry() {
                                    <button onClick={() => copyToClipboard('+41786350307')} className="p-1 hover:bg-neutral-100 rounded">
                                       <Copy className="h-3 w-3 text-neutral-400" />
                                    </button>
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+
+                       {/* Revolut Option */}
+                       <div className="flex items-start gap-4 p-4 border rounded-lg bg-white">
+                          <div className="flex-shrink-0 p-2 bg-blue-50 rounded">
+                             <CreditCard className="h-6 w-6 text-blue-600" />
+                          </div>
+                          <div className="flex-1">
+                             <h4 className="font-medium mb-1">Revolut</h4>
+                             <div className="flex flex-col mt-1 gap-2">
+                                <span className="text-xs text-neutral-500">{t('registry.revolutInstruction')}</span>
+                                
+                                <a 
+                                  href="https://revolut.me/steveben" 
+                                  target="_blank" 
+                                  rel="noopener noreferrer" 
+                                  className="text-sm text-blue-600 hover:text-blue-800 hover:underline flex items-center gap-1 font-medium"
+                                >
+                                   revolut.me/steveben
+                                   <ExternalLink className="h-3 w-3" />
+                                </a>
+
+                                <div className="flex items-center gap-3">
+                                  <Dialog>
+                                    <DialogTrigger asChild>
+                                      <div className="relative group cursor-pointer w-24 h-24">
+                                        <div className="w-full h-full bg-neutral-100 rounded-lg overflow-hidden border border-neutral-200 transition-all group-hover:border-blue-300 shadow-sm">
+                                            <img src={revolutQr} alt="Revolut QR" className="w-full h-full object-cover" />
+                                        </div>
+                                        <div className="absolute inset-0 bg-black/5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                            <span className="bg-white/90 text-[10px] px-2 py-1 rounded-full shadow-sm text-neutral-900 font-medium">{t('registry.zoomLabel')}</span>
+                                        </div>
+                                      </div>
+                                    </DialogTrigger>
+                                    <DialogContent className="sm:max-w-md bg-white p-6 border-0 shadow-2xl flex flex-col items-center">
+                                        <DialogHeader>
+                                            <DialogTitle>{t('registry.scanQrTitle')}</DialogTitle>
+                                        </DialogHeader>
+                                        <div className="w-full max-w-[300px] aspect-square bg-white rounded-xl overflow-hidden shadow-sm border border-neutral-100 mt-2">
+                                            <img src={revolutQr} alt="Revolut QR" className="w-full h-full object-contain" />
+                                        </div>
+                                        <p className="text-center text-sm text-neutral-500 mt-4">
+                                            {t('registry.scanQrDialog')}
+                                        </p>
+                                    </DialogContent>
+                                  </Dialog>
+                                  
+                                  <span className="text-xs text-neutral-400 italic max-w-[150px]">
+                                     {t('registry.zoomQr')}
+                                  </span>
                                 </div>
                              </div>
                           </div>

@@ -247,6 +247,14 @@ const translations: Record<string, Record<Language, string>> = {
     fr: "Pour finaliser, merci d'envoyer le montant via Twint ou virement avec le code ci-dessous." 
   },
   'registry.sendTo': { en: 'Send to Steve:', fr: 'Envoyer à Steve :' },
+  'registry.revolutInstruction': { en: 'Scan QR or use link', fr: 'Scannez le QR ou utilisez le lien' },
+  'registry.zoomQr': { en: '(Click image to enlarge)', fr: '(Cliquez pour agrandir)' },
+  'registry.zoomLabel': { en: 'Zoom', fr: 'Zoom' },
+  'registry.scanQrTitle': { en: 'Scan QR Code', fr: 'Scanner le QR Code' },
+  'registry.scanQrDialog': { 
+    en: 'Scan with the Revolut app or your camera.', 
+    fr: 'Scannez avec l\'application Revolut ou votre caméra.' 
+  },
   'registry.refCode': { 
     en: 'Reference Code (Please add this to your payment message)', 
     fr: 'Code de référence (À mettre dans le message de paiement)' 
