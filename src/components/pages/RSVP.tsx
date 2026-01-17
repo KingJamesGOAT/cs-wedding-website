@@ -215,10 +215,22 @@ export default function RSVP() {
        if (!isDinnerGuest) finalData.dinnerAttendance = '';
 
        if (finalData.aperoContribution === 'no') {
-          finalData.aperoType = '';
-          finalData.aperoItem = '';
-          finalData.aperoDetails = '';
-       } else {
+          // Robustness Check: If user added items but the radio button says "no" (ui desync), update it.
+          if (selectedItems.length > 0) {
+              finalData.aperoContribution = 'yes';
+              // Fall through to the 'else' block logic below by duplicating or refactoring?
+              // Easier to just change the if condition above or re-evaluate.
+          } else {
+              finalData.aperoType = '';
+              finalData.aperoItem = '';
+              finalData.aperoDetails = '';
+          }
+       } 
+       
+       if (finalData.aperoContribution === 'yes' || selectedItems.length > 0) {
+          // Ensure flag is yes logic
+          finalData.aperoContribution = 'yes';
+
           // Format the multiple items into the legacy fields
           const savoryCount = selectedItems.filter(i => i.type === 'Savory').length;
           const sweetCount = selectedItems.filter(i => i.type === 'Sweet').length;

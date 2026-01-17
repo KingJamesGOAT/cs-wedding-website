@@ -47,7 +47,8 @@ export default function UserSummaryButton({ activeSection }: UserSummaryButtonPr
 
   const hasRsvp = userData && userData.rsvp;
   const hasGifts = userData && userData.gifts && userData.gifts.length > 0;
-  const hasApero = userData && userData.rsvp && userData.rsvp.aperoContribution === 'yes';
+  // Check both the flag AND if there are selected items, to be safe.
+  const hasApero = userData && userData.rsvp && (userData.rsvp.aperoContribution === 'yes' || (userData.rsvp.selectedItems && userData.rsvp.selectedItems.length > 0));
 
   return (
     <div className="fixed top-32 right-0 z-40 animate-in slide-in-from-right-10 duration-700">
@@ -123,10 +124,13 @@ export default function UserSummaryButton({ activeSection }: UserSummaryButtonPr
                                        <span className="text-neutral-400 block text-[10px] uppercase tracking-wider mb-0.5">{t('summary.rsvp.guestCount')}</span>
                                        <span className="font-medium text-neutral-900">{userData.rsvp.guests}</span>
                                     </div>
-                                    <div className="bg-neutral-50 p-2 rounded-lg">
-                                       <span className="text-neutral-400 block text-[10px] uppercase tracking-wider mb-0.5">{t('summary.rsvp.dinner')}</span>
-                                       <span className="font-medium text-neutral-900">{userData.rsvp.dinnerAttendance === 'Yes' ? 'Yes' : 'No'}</span>
-                                    </div>
+                                    {/* Only show dinner if explicitly set (Yes/No) */}
+                                    {userData.rsvp.dinnerAttendance && (
+                                       <div className="bg-neutral-50 p-2 rounded-lg">
+                                          <span className="text-neutral-400 block text-[10px] uppercase tracking-wider mb-0.5">{t('summary.rsvp.dinner')}</span>
+                                          <span className="font-medium text-neutral-900">{userData.rsvp.dinnerAttendance === 'Yes' ? 'Yes' : 'No'}</span>
+                                       </div>
+                                    )}
                                  </div>
                                  {userData.rsvp.dietary && (
                                     <div className="text-sm bg-yellow-50/50 p-3 rounded-lg border border-yellow-100/50 ml-2">
