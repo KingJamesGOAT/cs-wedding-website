@@ -137,6 +137,12 @@ export default function UserSummaryButton({ activeSection }: UserSummaryButtonPr
                                        <p className="text-neutral-800 text-sm italic">"{userData.rsvp.dietary}"</p>
                                     </div>
                                  )}
+                                 
+                                 <div className="mt-3 pt-3 border-t border-neutral-100/50">
+                                   <p className="text-[10px] text-neutral-400 italic text-center">
+                                     {t('summary.rsvp.updateHint')}
+                                   </p>
+                                 </div>
                                </>
                              )}
                           </div>

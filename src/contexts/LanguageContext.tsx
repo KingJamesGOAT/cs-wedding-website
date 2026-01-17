@@ -174,9 +174,10 @@ const translations: Record<string, Record<Language, string>> = {
   'summary.rsvp.apero': { en: 'Apero Contributions', fr: 'Contributions Apéro' },
   'summary.rsvp.aperoWarning': { en: 'Please drop off at Guglerahof Farm (12:30-13:30) before the ceremony.', fr: 'Merci de déposer à la Ferme Guglerahof (12h30-13h30) avant la cérémonie.' },
   'summary.gifts.title': { en: 'Your Pledged Gifts', fr: 'Vos Cadeaux' },
-  'summary.gifts.none': { en: 'No gifts pledged yet.', fr: 'Aucun cadeau promis pour le moment.' },
+  'summary.gifts.none': { en: 'No gifts pledged yet.', fr: 'Aucun cadeau.' },
   'summary.gifts.refCode': { en: 'Ref Code', fr: 'Code Ref' },
   'summary.gifts.amount': { en: 'Amount', fr: 'Montant' },
+  'summary.rsvp.updateHint': { en: 'Mistake? Refill RSVP using the same email to update.', fr: 'Une erreur ? Remplissez à nouveau le RSVP avec le même email pour mettre à jour.' },
 
   
   // Registry
