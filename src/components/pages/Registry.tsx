@@ -458,7 +458,7 @@ export default function Registry() {
                       value={formData.address}
                       onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                       required
-                      placeholder="Street, City, Zip..."
+                      placeholder={t('registry.addressPlaceholder')}
                       className="min-h-[80px]"
                     />
                     <p className="text-xs text-neutral-500 italic">{t('registry.addressExplan')}</p>

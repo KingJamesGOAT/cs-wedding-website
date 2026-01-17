@@ -235,6 +235,7 @@ const translations: Record<string, Record<Language, string>> = {
   'registry.emailLabel': { en: 'Your Email', fr: 'Votre Email' },
   'registry.addressLabel': { en: 'Living Address', fr: 'Adresse postale' },
   'registry.addressExplan': { en: 'So we can thank you!', fr: 'Pour vous remercier !' },
+  'registry.addressPlaceholder': { en: 'Street, City, Zip...', fr: 'Rue, Ville, Code Postal...' },
   'registry.amountLabel': { en: 'Amount (CHF)', fr: 'Montant (CHF)' },
   'registry.customAmount': { en: 'Custom Amount', fr: 'Montant libre' },
   'registry.messageLabel': { en: 'Short Message (Optional)', fr: 'Petit message (Optionnel)' },
