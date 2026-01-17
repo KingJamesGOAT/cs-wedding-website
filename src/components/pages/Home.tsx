@@ -13,7 +13,7 @@ interface HomeProps {
 }
 
 export default function Home({ onHeroTitleVisibilityChange }: HomeProps) {
-  const { language, t } = useLanguage();
+  const { language } = useLanguage();
   const ref = useRef(null);
   const titleRef = useRef(null);
   
@@ -58,7 +58,7 @@ export default function Home({ onHeroTitleVisibilityChange }: HomeProps) {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
-    <section ref={ref} id="home" className="min-h-screen relative flex items-center justify-center overflow-hidden">
+    <section ref={ref} id="home" className="min-h-screen relative flex flex-col justify-between overflow-hidden">
       {/* Hero Background Image */}
       <motion.div 
         style={{ y, opacity }}
@@ -86,60 +86,36 @@ export default function Home({ onHeroTitleVisibilityChange }: HomeProps) {
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60" />
       </motion.div>
 
-      {/* Content */}
-      <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 pt-32 pb-20 md:py-20">
+      {/* Top Content: Names & Date */}
+      <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 pt-24 w-full">
         <div className="max-w-4xl mx-auto">
-          {/* Names & Date */}
-          <div className="mb-12">
-            <motion.h1 
-              ref={titleRef}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.2 }}
-              className="text-4xl sm:text-7xl lg:text-9xl text-white mb-6 font-serif tracking-in-expand hero-text-shadow"
-            >
-              Cynthia & Steve
-            </motion.h1>
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.6 }}
-              className="inline-block border-y border-white/30 py-4 px-8 backdrop-blur-sm bg-white/5"
-            >
-              <p className="text-2xl sm:text-3xl text-white tracking-widest uppercase font-serif">
-                {language === 'en' ? 'June 27, 2026' : '27 juin 2026'}
-              </p>
-            </motion.div>
-          </div>
-
-          {/* Welcome Message */}
-          <motion.div 
-             initial={{ opacity: 0 }}
-             animate={{ opacity: 1 }}
-             transition={{ duration: 1, delay: 1 }}
-             className="mb-16 max-w-2xl mx-auto"
+          <motion.h1 
+            ref={titleRef}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="text-4xl sm:text-7xl lg:text-9xl text-white mb-6 font-serif tracking-in-expand hero-text-shadow"
           >
-            <p className="md:hidden text-lg sm:text-xl text-white leading-relaxed font-normal md:font-semibold italic text-edge-glow">
-              {t('home.welcome_mobile')}
+            Cynthia & Steve
+          </motion.h1>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.6 }}
+            className="inline-block border-y border-white/30 py-4 px-8 backdrop-blur-sm bg-white/5"
+          >
+            <p className="text-2xl sm:text-3xl text-white tracking-widest uppercase font-serif">
+              {language === 'en' ? 'June 27, 2026' : '27 juin 2026'}
             </p>
-            <p className="hidden md:block text-lg sm:text-xl text-white leading-relaxed font-normal md:font-semibold italic text-edge-glow">
-              {t('home.welcome')}
-            </p>
-            
-            <div className="mt-12">
-              <p className="md:hidden text-xl sm:text-3xl text-white font-serif italic mb-1 tracking-wide text-edge-glow leading-relaxed whitespace-pre-line">
-                "{t('home.quote_mobile')}"
-              </p>
-              <p className="hidden md:block text-xl sm:text-3xl text-white font-serif italic mb-2 tracking-wide text-edge-glow leading-relaxed">
-                "{t('home.quote')}"
-              </p>
-              <p className="text-base sm:text-lg text-white/90 text-edge-glow font-medium">
-                ~ {t('home.quoteAuthor')}
-              </p>
-            </div>
           </motion.div>
+        </div>
+      </div>
 
-          {/* Countdown Timer */}
+      {/* Middle Spacer (implicit with justify-between) */}
+
+      {/* Bottom Content: Countdown Timer */}
+      <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 pb-32 w-full">
+        <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -155,7 +131,7 @@ export default function Home({ onHeroTitleVisibilityChange }: HomeProps) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
       >
         <motion.div 
           animate={{ y: [0, 10, 0] }}

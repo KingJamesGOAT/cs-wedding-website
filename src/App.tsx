@@ -7,7 +7,10 @@ import { Toaster } from './components/ui/sonner';
 import { TooltipProvider } from './components/ui/tooltip';
 import LoadingSpinner from './components/ui/LoadingSpinner';
 
+
+
 // Lazy load heavy components
+const Welcome = lazy(() => import('./components/pages/Welcome'));
 const Venue = lazy(() => import('./components/pages/Venue'));
 const Details = lazy(() => import('./components/pages/Details'));
 const RSVP = lazy(() => import('./components/pages/RSVP'));
@@ -82,6 +85,10 @@ export default function App() {
         <main>
           <Home key={homeKey} onHeroTitleVisibilityChange={setIsHeroTitleVisible} />
           
+          <Suspense fallback={<LoadingSpinner />}>
+            <Welcome />
+          </Suspense>
+
           <Suspense fallback={<LoadingSpinner />}>
             <Venue />
           </Suspense>
