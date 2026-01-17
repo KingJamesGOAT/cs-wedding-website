@@ -118,7 +118,7 @@ const translations: Record<string, Record<Language, string>> = {
   'rsvp.goToGifts': { en: 'Go to Gifts', fr: 'Aller aux Cadeaux' },
   'rsvp.aperoQuestion': { 
     en: "I would like to bring something for the Apero (Quantity: 50 bites)", 
-    fr: "Je souhaite apporter quelque chose pour l'apéro, quantité 50 bouchées" 
+    fr: "Je souhaite apporter quelque chose pour l’apéritif (environ 50 bouchées)." 
   },
   'rsvp.aperoYes': { en: 'Yes, I will bring something', fr: 'Oui, je participe' },
   'rsvp.aperoNo': { en: 'No, I will just enjoy', fr: 'Non, je viendrai juste profiter' },
