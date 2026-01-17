@@ -151,7 +151,7 @@ const translations: Record<string, Record<Language, string>> = {
   'rsvp.bites': { en: 'bites', fr: 'bouchées' },
   'rsvp.remove': { en: 'Remove', fr: 'Retirer' },
   'rsvp.noItems': { en: 'No items selected yet', fr: 'Aucun article sélectionné' },
-  'rsvp.customItemPlaceholder': { en: 'Item Name & Quantity', fr: 'Nom de l\'article & Quantité' },
+  'rsvp.customItemPlaceholder': { en: 'Item Name', fr: 'Nom de l\'article' },
   'rsvp.maxReached': { en: 'Max limit reached', fr: 'Limite atteinte' },
   'rsvp.dinnerQuestion': { 
     en: "We'd love for you to join us for the Evening Dinner! Will you be staying for the evening?", 

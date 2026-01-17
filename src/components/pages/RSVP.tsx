@@ -172,7 +172,7 @@ export default function RSVP() {
         id: Date.now().toString(),
         label: 'Custom',
         type: 'Custom',
-        quantity: 1, // Custom doesn't really have a 'limit' in the same way
+        quantity: parseInt(tempQuantity), // Allow quantity for custom too
         customDetails: tempCustomDetails
       };
       setSelectedItems([...selectedItems, newItem]);
@@ -238,10 +238,13 @@ export default function RSVP() {
           else if (hasCustom) typeStr = 'Custom';
           finalData.aperoType = typeStr;
 
-          // Build Item String
+          // Build Item String (All Items)
           const itemStrings = selectedItems.map(item => {
             if (item.label === 'Custom') {
-              return `${item.customDetails} (Custom)`;
+              // For custom items: "Name (x2) (Custom)"
+              return item.quantity > 1 
+                ? `${item.customDetails} (x${item.quantity}) (Custom)` 
+                : `${item.customDetails} (Custom)`;
             }
             if (item.quantity > 1) {
               return `${item.label} (x${item.quantity})`;
@@ -249,7 +252,16 @@ export default function RSVP() {
             return item.label;
           });
           finalData.aperoItem = itemStrings.join(', ');
-          finalData.aperoDetails = finalData.aperoItem; // Redundant backup
+          
+          // Build Details String (ONLY Custom Items)
+          const customStrings = selectedItems
+            .filter(item => item.label === 'Custom')
+            .map(item => item.quantity > 1 
+              ? `${item.customDetails} (x${item.quantity})` 
+              : item.customDetails
+            );
+          
+          finalData.aperoDetails = customStrings.length > 0 ? customStrings.join(', ') : '';
        }
     }
 
@@ -581,7 +593,10 @@ export default function RSVP() {
                                           placeholder={t('rsvp.customItemPlaceholder')}
                                         />
                                      </div>
-                                  ) : tempItem && (
+                                  ) : null}
+
+                                  {/* Quantity Selection for BOTH Custom and Standard */}
+                                  {tempItem && (
                                      <div className="space-y-2">
                                         <Label>{t('rsvp.quantity')}</Label>
                                         <div className="flex items-center gap-4">
@@ -593,12 +608,26 @@ export default function RSVP() {
                                               <div className="text-xs text-neutral-500">Standard Portion</div>
                                            </div>
                                            
-                                           {/* Only show 100 bites option if limit allows and enough remaining */}
+                                           {/* Show 100 bites option if:
+                                               1. Custom Item (Always allow?) => Let's allow for now.
+                                               2. Standard Item => Only if limit allows and enough remaining
+                                           */}
                                            {(() => {
+                                              if (tempItem === 'custom') {
+                                                return (
+                                                  <div className={`
+                                                      flex-1 p-3 border rounded-lg cursor-pointer transition-all
+                                                      ${tempQuantity === '2' ? 'border-neutral-900 bg-neutral-50 ring-1 ring-neutral-900' : 'border-neutral-200 hover:border-neutral-300'}
+                                                  `} onClick={() => setTempQuantity('2')}>
+                                                      <div className="font-medium">100 {t('rsvp.bites')}</div>
+                                                      <div className="text-xs text-neutral-500">Double Portion</div>
+                                                  </div>
+                                                );
+                                              }
+
                                               const opt = currentOptions.find(o => o.label === tempItem);
                                               if (!opt || opt.limit < 2) return null;
-                                              const takenCount = getTakenCount(opt.label); // Note: this includes current user's *committed* items, but we are in a dialog
-                                              // We need to permit selecting 2 if remaining >= 2
+                                              const takenCount = getTakenCount(opt.label); 
                                               const remaining = opt.limit - takenCount;
                                               if (remaining < 2) return null;
 
