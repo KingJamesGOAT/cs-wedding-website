@@ -120,7 +120,7 @@ export default function RSVP() {
   useEffect(() => {
     const fetchTakenItems = async () => {
       try {
-         const response = await fetch('https://script.google.com/macros/s/AKfycbz06IfaoPFh1kpwyfANLVt4YUPDBa6jODhf9AEufCUcAVWL_WVJNCtbscP5eTuakLHo/exec');
+         const response = await fetch('https://script.google.com/macros/s/AKfycbxpq_jKgykf6Ss1U-5kSybzOq3Fz1-yuhADQyy-Fp2WJJNin7KYbD5qr4KKEyVhDuTM/exec');
          const data = await response.json();
          if (data && data.takenAperoItems) {
             setTakenItems(data.takenAperoItems);
@@ -180,7 +180,7 @@ export default function RSVP() {
     }
 
     try {
-      await fetch('https://script.google.com/macros/s/AKfycbz06IfaoPFh1kpwyfANLVt4YUPDBa6jODhf9AEufCUcAVWL_WVJNCtbscP5eTuakLHo/exec', {
+      await fetch('https://script.google.com/macros/s/AKfycbxpq_jKgykf6Ss1U-5kSybzOq3Fz1-yuhADQyy-Fp2WJJNin7KYbD5qr4KKEyVhDuTM/exec', {
         method: 'POST',
         mode: 'no-cors',
         headers: {
