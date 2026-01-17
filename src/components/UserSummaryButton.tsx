@@ -109,14 +109,13 @@ export default function UserSummaryButton({ activeSection }: UserSummaryButtonPr
                bg-white/95 backdrop-blur-xl border border-neutral-200 
                shadow-2xl 
                rounded-2xl 
+               rounded-2xl 
                
-               /* Mobile: Fixed 55vh, Auto height (up to limit) */
                h-auto max-h-[55vh]
 
-               /* Desktop: Expands from 55vh to 85vh */
-               ${isExpanded ? 'sm:max-h-[85vh]' : 'sm:max-h-[55vh]'}
+               ${isExpanded ? 'sm:h-[85vh]' : 'sm:h-auto sm:max-h-[55vh]'}
                
-               transition-[max-height] duration-500 ease-in-out
+               transition-[height,max-height] duration-500 ease-in-out
                top-1/2 -translate-y-1/2 
                right-2 sm:right-6 
                p-0 overflow-hidden
