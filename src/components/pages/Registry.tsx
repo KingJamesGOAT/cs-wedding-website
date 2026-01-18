@@ -263,7 +263,7 @@ export default function Registry() {
           {/* OPTION 1: BROWSE GIFTS */}
           <Dialog open={isBrowseOpen} onOpenChange={setIsBrowseOpen}>
             <DialogTrigger asChild>
-              <div className="group bg-white/70 backdrop-blur-xl border border-white/50 p-4 md:p-12 rounded-2xl md:rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer flex flex-col items-center justify-center text-center items-center h-[160px] md:h-[320px] transform hover:-translate-y-2 w-full">
+              <div className="group bg-white/70 backdrop-blur-xl border border-white/50 p-4 md:p-12 rounded-2xl md:rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer flex flex-col items-center justify-center text-center items-center h-[180px] md:h-[350px] transform hover:-translate-y-2 w-full">
                 <div className="w-12 h-12 md:w-32 md:h-32 bg-rose-100/50 rounded-full flex items-center justify-center mb-3 md:mb-8 group-hover:scale-110 transition-transform duration-500 group-hover:bg-rose-100">
                   <ShoppingBag className="w-6 h-6 md:w-16 md:h-16 text-rose-500" />
                 </div>
@@ -359,7 +359,7 @@ export default function Registry() {
           {/* OPTION 2: CASH FUND */}
           <div 
              onClick={() => handleOpenPledge({ title: { en: 'Honeymoon Fund', fr: 'Voyage de noces' }, description: t('registry.cashDesc'), suggestedAmounts: [20, 50, 100] })}
-             className="group bg-white/70 backdrop-blur-xl border border-white/50 p-4 md:p-12 rounded-2xl md:rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer flex flex-col items-center justify-center text-center items-center h-[160px] md:h-[320px] transform hover:-translate-y-2 w-full"
+             className="group bg-white/70 backdrop-blur-xl border border-white/50 p-4 md:p-12 rounded-2xl md:rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer flex flex-col items-center justify-center text-center items-center h-[180px] md:h-[350px] transform hover:-translate-y-2 w-full"
           >
             <div className="w-10 h-10 md:w-28 md:h-28 bg-[#FA8072]/10 rounded-full flex items-center justify-center mb-2 md:mb-6 group-hover:scale-110 transition-transform duration-500 group-hover:bg-[#FA8072]/20">
                <Plane className="w-5 h-5 md:w-14 md:h-14 text-[#FA8072]" />
@@ -372,7 +372,7 @@ export default function Registry() {
 
         {/* PLEDGE DIALOG (Handles both flows) */}
         <Dialog open={!!selectedGift} onOpenChange={(open: boolean) => !open && setSelectedGift(null)}>
-          <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto">
+          <DialogContent className="sm:max-w-lg max-h-[60vh] md:max-h-[85vh] overflow-y-auto">
             
             {/* STATE 1: FORM */}
             {pledgeStep === 'form' && selectedGift && (
