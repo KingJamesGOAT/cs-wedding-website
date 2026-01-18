@@ -305,7 +305,7 @@ export default function UserSummaryButton({ activeSection }: UserSummaryButtonPr
                </div>
                
                <div className="p-4 border-t border-neutral-100 bg-neutral-50/50 text-center text-[10px] text-neutral-400 shrink-0">
-                  Dashboard auto-updates when you submit new forms.
+                  {t('summary.autoUpdate')}
                </div>
              </div>
            
