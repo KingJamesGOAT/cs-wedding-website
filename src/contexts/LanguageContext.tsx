@@ -184,6 +184,7 @@ const translations: Record<string, Record<Language, string>> = {
   'summary.gifts.refCode': { en: 'Ref Code', fr: 'Code Ref' },
   'summary.gifts.amount': { en: 'Amount', fr: 'Montant' },
   'summary.rsvp.updateHint': { en: 'Mistake? Refill RSVP using the same email to update.', fr: 'Une erreur ? Remplissez à nouveau le RSVP avec le même email pour mettre à jour.' },
+  'summary.autoUpdate': { en: 'Dashboard auto-updates when you submit new forms.', fr: 'Le tableau de bord se met à jour automatiquement après chaque soumission.' },
   
   // Savory Options
   'food.savory.croissants': { en: 'Ham Croissants', fr: 'Croissants jambon' },
