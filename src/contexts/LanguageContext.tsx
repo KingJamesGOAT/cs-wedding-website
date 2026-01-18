@@ -40,7 +40,7 @@ const translations: Record<string, Record<Language, string>> = {
     fr: "Aimer, c'est tout donner et se donner soi-même." 
   },
   'home.quote_mobile': {
-    en: "To love is to give everything and\nto give oneself.",
+    en: "To love is to give everything\nand to give oneself.",
     fr: "Aimer, c'est tout donner et\nse donner soi-même."
   },
   'home.quoteAuthor': { en: 'St Thérèse of Lisieux', fr: 'Ste Thérèse de Lisieux' },
