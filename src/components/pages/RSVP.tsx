@@ -361,6 +361,9 @@ export default function RSVP() {
             <CheckCircle2 className="w-16 h-16 text-green-600 mx-auto mb-4" />
             <h2 className="text-2xl mb-2">{t('rsvp.title')}</h2>
             <p className="text-green-800">{t('rsvp.success')}</p>
+            <p className="text-green-700/80 text-sm mt-4 max-w-sm mx-auto">
+              {t('rsvp.successCheckDashboard')}
+            </p>
           </div>
         </div>
       </section>

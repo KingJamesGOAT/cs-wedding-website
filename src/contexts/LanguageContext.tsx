@@ -115,6 +115,10 @@ const translations: Record<string, Record<Language, string>> = {
     en: "Thank you for your RSVP! We've received your response.",
     fr: "Merci pour votre réponse ! Nous avons bien reçu votre confirmation."
   },
+  'rsvp.successCheckDashboard': { 
+    en: "If you want to check your details, you can view the dashboard on the right side of the screen.",
+    fr: "Si vous souhaitez vérifier vos informations, le tableau de bord est disponible sur la droite de l'écran."
+  },
   'rsvp.goToGifts': { en: 'Go to Gifts', fr: 'Aller aux Cadeaux' },
   'rsvp.aperoQuestion': { 
     en: "I would like to bring something for the Apero (Quantity: 50 bites)", 
