@@ -138,14 +138,16 @@ export default function Venue() {
 
           {/* Info Connector (Mobile/Desktop) */}
           <div className="lg:absolute lg:top-[28%] lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 z-20 w-full lg:w-auto flex justify-center py-4 lg:py-0">
-             <div className="bg-white/80 backdrop-blur-md border border-neutral-200 shadow-sm rounded-full px-4 py-2 flex items-center gap-2 text-xs font-medium text-neutral-500 whitespace-nowrap">
-                <span className="text-[10px] uppercase tracking-wider mr-1 font-semibold text-neutral-400">
+             <div className="bg-white/80 backdrop-blur-md border border-neutral-200 shadow-sm rounded-2xl px-5 py-2 flex flex-col items-center justify-center gap-0.5 text-xs font-medium text-neutral-500 z-20">
+                <span className="text-[10px] uppercase tracking-wider font-semibold text-neutral-400">
                   {t('venue.commuteLabel')}
                 </span>
-                <Car className="w-4 h-4 text-neutral-400" />
-                <span>~9 km</span>
-                <span className="w-1 h-1 bg-neutral-300 rounded-full"></span>
-                <span>~15 min</span>
+                <div className="flex items-center gap-2">
+                  <Car className="w-4 h-4 text-neutral-400" />
+                  <span>~9 km</span>
+                  <span className="w-1 h-1 bg-neutral-300 rounded-full"></span>
+                  <span>~15 min</span>
+                </div>
              </div>
           </div>
 
