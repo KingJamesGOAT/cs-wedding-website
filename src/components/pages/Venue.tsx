@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { Button } from '../ui/button';
 import { MapPin, Church, Home, Copy, Check, Navigation, Car } from 'lucide-react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../ui/dialog';
+import { Dialog, DialogContent } from '../ui/dialog';
 import ceremonyImage from '../../assets/hero-desktop-large-2.png';
 import receptionImage from '../../assets/hero-mobile-large.png';
 
