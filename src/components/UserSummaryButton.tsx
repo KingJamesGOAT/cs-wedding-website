@@ -73,7 +73,7 @@ export default function UserSummaryButton({ activeSection }: UserSummaryButtonPr
   }, []);
 
   // Hide on Home and Gallery sections
-  if (activeSection === 'home' || activeSection === 'gallery') {
+  if (activeSection === 'home' || activeSection === 'welcome' || activeSection === 'gallery') {
     return null;
   }
 

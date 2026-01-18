@@ -70,13 +70,13 @@ export default function Header({ activeSection, onNavigate, isHeroTitleVisible =
                 key={item.key}
                 onClick={() => onNavigate(item.key)}
                 className={`relative text-sm uppercase tracking-widest transition-colors hover:text-opacity-80 ${
-                  activeSection === item.key 
+                  (activeSection === item.key || (item.key === 'home' && activeSection === 'welcome'))
                     ? (isScrolled ? 'text-gray-900 font-semibold' : 'text-white font-semibold')
                     : (isScrolled ? 'text-gray-600' : 'text-white/80')
                 }`}
               >
                 {item.label}
-                {activeSection === item.key && (
+                {(activeSection === item.key || (item.key === 'home' && activeSection === 'welcome')) && (
                   <motion.span 
                     layoutId="underline"
                     className={`absolute -bottom-1 left-0 right-0 h-0.5 ${isScrolled ? 'bg-gray-900' : 'bg-white'}`} 
@@ -129,8 +129,8 @@ export default function Header({ activeSection, onNavigate, isHeroTitleVisible =
                       // Small delay to allow menu to close/start closing before scrolling
                       setTimeout(() => onNavigate(item.key), 100);
                     }}
-                    className={`block w-full text-center px-4 py-4 text-sm uppercase tracking-widest transition-colors cursor-pointer ${
-                      activeSection === item.key
+                      className={`block w-full text-center px-4 py-4 text-sm uppercase tracking-widest transition-colors cursor-pointer ${
+                      (activeSection === item.key || (item.key === 'home' && activeSection === 'welcome'))
                         ? 'bg-gray-50 text-gray-900 font-semibold'
                         : 'text-gray-600 hover:bg-gray-50'
                     }`}

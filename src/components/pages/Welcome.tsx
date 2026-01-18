@@ -15,7 +15,7 @@ export default function Welcome() {
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
   return (
-    <section ref={ref} className="py-24 md:py-32 bg-stone-50 overflow-hidden">
+    <section ref={ref} id="welcome" className="py-24 md:py-32 bg-stone-50 overflow-hidden">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div 
           style={{ opacity, y }}

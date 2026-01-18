@@ -46,11 +46,11 @@ export default function App() {
     }
   };
 
-  // Performance: Use IntersectionObserver instead of scroll listener
+  // Performance: Use IntersectionObserver with MutationObserver to handle lazy loaded sections
   useEffect(() => {
     const observerOptions = {
       root: null,
-      rootMargin: '-50% 0px -50% 0px', // Active when element is in the middle of viewport
+      rootMargin: '-45% 0px -45% 0px', // Active when element is in the middle of viewport
       threshold: 0
     };
 
@@ -63,19 +63,32 @@ export default function App() {
     };
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
-    const sections = ['home', 'venue', 'details', 'rsvp', 'registry', 'gallery'];
+    const sections = ['home', 'welcome', 'venue', 'details', 'rsvp', 'registry', 'gallery'];
 
-    // Small delay to ensure DOM elements are mounted largely irrelevant with React but safe for ref-less integration
-    const timeoutId = setTimeout(() => {
+    // Function to observe elements
+    const observeSections = () => {
       sections.forEach(id => {
         const element = document.getElementById(id);
         if (element) observer.observe(element);
       });
-    }, 100);
+    };
+
+    // Initial observation
+    observeSections();
+
+    // Use MutationObserver to watch for lazy-loaded DOM changes
+    const mutationObserver = new MutationObserver(() => {
+        observeSections();
+    });
+
+    const mainElement = document.querySelector('main');
+    if (mainElement) {
+        mutationObserver.observe(mainElement, { childList: true, subtree: true });
+    }
 
     return () => {
       observer.disconnect();
-      clearTimeout(timeoutId);
+      mutationObserver.disconnect();
     };
   }, []);
 
