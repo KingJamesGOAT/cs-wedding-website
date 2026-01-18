@@ -137,8 +137,11 @@ export default function Venue() {
           </div>
 
           {/* Info Connector (Mobile/Desktop) */}
-          <div className="lg:absolute lg:top-[50%] lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 z-20 w-full lg:w-auto flex justify-center py-4 lg:py-0">
+          <div className="lg:absolute lg:top-[28%] lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 z-20 w-full lg:w-auto flex justify-center py-4 lg:py-0">
              <div className="bg-white/80 backdrop-blur-md border border-neutral-200 shadow-sm rounded-full px-4 py-2 flex items-center gap-2 text-xs font-medium text-neutral-500 whitespace-nowrap">
+                <span className="lg:hidden text-[10px] uppercase tracking-wider mr-1 font-semibold text-neutral-400">
+                  Ceremony to Apero
+                </span>
                 <Car className="w-4 h-4 text-neutral-400" />
                 <span>~9 km</span>
                 <span className="w-1 h-1 bg-neutral-300 rounded-full"></span>

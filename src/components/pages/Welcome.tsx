@@ -39,7 +39,7 @@ export default function Welcome() {
 
           {/* Quote */}
           <div>
-            <p className="md:hidden text-xl text-stone-800 font-serif italic mb-4 leading-relaxed">
+            <p className="md:hidden text-xl text-stone-800 font-serif italic mb-4 leading-relaxed whitespace-pre-line">
               "{t('home.quote_mobile')}"
             </p>
             <p className="hidden md:block text-2xl md:text-3xl text-stone-800 font-serif italic mb-6 leading-relaxed">
