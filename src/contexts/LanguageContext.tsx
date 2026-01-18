@@ -65,7 +65,7 @@ const translations: Record<string, Record<Language, string>> = {
   'details.qa.transport.question': { en: 'Parking & Transport', fr: 'Parking et Transport' },
   'details.qa.transport.answer': { 
     en: 'Free parking at Guglerahof. Taxis available from Fribourg.', 
-    fr: 'Parking gratuit au Guglerahof. Taxis disponibles depuis Fribourg.' 
+    fr: 'Parking gratuit au Guglerahof et vers la Basilique Notre-Dame.' 
   },
   'details.qa.children.question': { en: 'Are children invited?', fr: 'Les enfants sont-ils invités ?' },
   'details.qa.children.answer': { 
