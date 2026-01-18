@@ -251,6 +251,10 @@ const translations: Record<string, Record<Language, string>> = {
     en: 'Drinks, apero, dinner, and dancing will be at this location.',
     fr: 'L\'apéro, le dîner et la soirée dansante auront lieu à cette adresse.'
   },
+  'venue.commuteLabel': {
+    en: 'Ceremony to Apero',
+    fr: "Cérémonie vers l'Apéro"
+  },
   
   // Gallery
   'gallery.title': { en: 'Photo Gallery', fr: 'Galerie Photos' },
