@@ -90,7 +90,7 @@ export default function UserSummaryButton({ activeSection }: UserSummaryButtonPr
                 bg-gradient-to-br from-rose-50 via-white to-rose-100/50
                 backdrop-blur-md border border-rose-200/60 border-r-0
                 shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_8px_30px_rgb(255,228,230,0.5)] transition-all 
-                py-8 pl-3 pr-2 rounded-l-2xl
+                py-3 md:py-16 pl-3 pr-2 rounded-l-2xl
                 flex flex-col items-center gap-1
                 group
                 hover:pr-4
