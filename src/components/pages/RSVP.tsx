@@ -69,9 +69,7 @@ interface SelectedItem {
 export default function RSVP() {
   const { t, language } = useLanguage();
 
-  useEffect(() => {
-    import('../../services/EmailService').then(({ initEmailService }) => initEmailService());
-  }, []);
+  /* EmailService initialized implicitly */
 
   const [formData, setFormData] = useState({
     attending: 'yes',

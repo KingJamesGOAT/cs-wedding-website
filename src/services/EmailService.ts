@@ -5,11 +5,6 @@ const SERVICE_ID = 'service_8o2jqdr'; // Provided by user
 const PUBLIC_KEY = 'HJF2n6CK_DGo8ImBf'; // Provided by user
 const TEMPLATE_ID = 'template_hpuv9lp'; // Updated with user's ID
 
-// Initialize EmailJS
-export const initEmailService = () => {
-  emailjs.init(PUBLIC_KEY);
-};
-
 // INTERFACES
 interface BaseEmailData {
   language: 'en' | 'fr';
@@ -51,8 +46,7 @@ export const EmailService = {
       amount: data.amount,
       ref_code: data.ref_code,
       
-      // Payment Info (Static or Dynamic based on language can be handled here or in template)
-      // We will send pre-formatted HTML sections to the template for simplicity
+      // Payment Info
       payment_info: data.language === 'fr' 
         ? `
           <strong>IBAN:</strong> CH12 3456 7890 1234 5678 9 <br>
@@ -66,7 +60,18 @@ export const EmailService = {
         `
     };
 
-    return emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams as unknown as Dictionary);
+    console.log('[EmailService] Sending Registry Email:', templateParams);
+    
+    // Pass PUBLIC_KEY explicitly as 4th argument
+    return emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams as unknown as Dictionary, PUBLIC_KEY)
+      .then(response => {
+         console.log('[EmailService] SUCCESS!', response.status, response.text);
+         return response;
+      })
+      .catch(err => {
+         console.error('[EmailService] FAILED...', err);
+         throw err;
+      });
   },
 
   /**
@@ -86,6 +91,17 @@ export const EmailService = {
       apero_summary: data.apero_summary
     };
 
-    return emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams as unknown as Dictionary);
+    console.log('[EmailService] Sending RSVP Email:', templateParams);
+
+    // Pass PUBLIC_KEY explicitly as 4th argument
+    return emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams as unknown as Dictionary, PUBLIC_KEY)
+      .then(response => {
+         console.log('[EmailService] SUCCESS!', response.status, response.text);
+         return response;
+      })
+      .catch(err => {
+         console.error('[EmailService] FAILED...', err);
+         throw err;
+      });
   }
 };

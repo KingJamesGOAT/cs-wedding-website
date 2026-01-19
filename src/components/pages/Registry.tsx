@@ -89,14 +89,9 @@ const INITIAL_GIFTS: GiftItem[] = [
 export default function Registry() {
   const { t, language } = useLanguage();
 
-  useEffect(() => {
-    import('../../services/EmailService').then(({ initEmailService }) => initEmailService());
-  }, []);
+  /* EmailService initialized implicitly */
 
-  useEffect(() => {
-    // Initialize EmailJS
-    import('@/services/EmailService').then(({ initEmailService }) => initEmailService());
-  }, []);
+  /* EmailService initialized implicitly */
   
   // State for Gift Data
   const [gifts, setGifts] = useState(INITIAL_GIFTS);
