@@ -58,20 +58,22 @@ export const EmailService = {
 
     const payment_info = isFrench 
       ? `
-          <strong>IBAN:</strong> CH12 3456 7890 1234 5678 9 <br>
-          <strong>TWINT:</strong> 079 123 45 67 (Steve) <br>
+          <strong>IBAN:</strong> CH54 0024 3243 5109 5140 Q (Monsieur Steve Benjamin)<br>
+          <strong>BIC:</strong> UBSWCHZH80A <br>
+          <strong>Twint:</strong> +41 78 635 03 07 <br>
+          <strong>Revolut:</strong> <a href="https://revolut.me/steveben">revolut.me/steveben</a> <br>
           <strong>Ref Code:</strong> ${data.ref_code}
         `
       : `
-          <strong>IBAN:</strong> CH12 3456 7890 1234 5678 9 <br>
-          <strong>TWINT:</strong> 079 123 45 67 (Steve) <br>
+          <strong>IBAN:</strong> CH54 0024 3243 5109 5140 Q (Monsieur Steve Benjamin)<br>
+          <strong>BIC:</strong> UBSWCHZH80A <br>
+          <strong>Twint:</strong> +41 78 635 03 07 <br>
+          <strong>Revolut:</strong> <a href="https://revolut.me/steveben">revolut.me/steveben</a> <br>
           <strong>Ref Code:</strong> ${data.ref_code}
         `;
 
     const footer = "Cynthia & Steve <br> 27.06.2026";
-    const footer_note = isFrench 
-      ? "Vous avez fait une erreur ? Pas de souci ! Remplissez simplement le formulaire à nouveau sur le site avec la même adresse email."
-      : "Did you make a mistake? No problem! Simply fill out the form on the website again with the same email.";
+    // Footer note removed for Registry email as requested
 
     // Send simple HTML blob to the template
     // Title color changed to #333 (Dark Grey/Black) from #d14444
@@ -86,11 +88,7 @@ export const EmailService = {
               ${payment_info}
           </div>
           <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
-          <p style="text-align: center; font-size: 0.9em; color: #888;">
-            ${footer_note}
-            <br><br>
-            ${footer}
-          </p>
+          <p style="text-align: center; font-size: 0.9em; color: #888;">${footer}</p>
       </div>
     `;
 
