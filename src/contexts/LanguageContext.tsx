@@ -129,6 +129,10 @@ const translations: Record<string, Record<Language, string>> = {
     en: "If you want to check your details, you can view the dashboard on the right side of the screen.",
     fr: "Si vous souhaitez vérifier vos informations, le tableau de bord est disponible sur la droite de l'écran."
   },
+  'rsvp.emailConfirmation': {
+    en: "You will receive an email confirmation shortly.",
+    fr: "Vous recevrez bientôt un email de confirmation."
+  },
   'rsvp.goToGifts': { en: 'Go to Gifts', fr: 'Aller aux Cadeaux' },
   'rsvp.aperoQuestion': { 
     en: "I would like to bring something for the Apero (Quantity: 50 bites)", 
@@ -171,8 +175,8 @@ const translations: Record<string, Record<Language, string>> = {
     en: "We'd love for you to join us for the Evening Dinner! Will you be staying for the evening?", 
     fr: "Nous serions ravis que vous vous joigniez à nous pour le souper ! Restez-vous pour la soirée ?" 
   },
-  'rsvp.dinnerYes': { en: "Yes, I/We will stay for dinner", fr: "Oui, je/nous restons pour le souper" },
-  'rsvp.dinnerNo': { en: "No, unfortunately I/We can't stay", fr: "Non, malheureusement je/nous ne pouvons pas rester" },
+  'rsvp.dinnerYes': { en: "Yes, I/We will stay for dinner", fr: "Oui, je/nous reste/restons pour le souper" },
+  'rsvp.dinnerNo': { en: "No, unfortunately I/We can't stay", fr: "Non, malheureusement je/nous ne peux/pouvons pas rester" },
 
   // User Summary Panel
   'dashboard.button': { en: 'Dashboard', fr: 'Tableau de bord' },
