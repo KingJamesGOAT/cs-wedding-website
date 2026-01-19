@@ -33,7 +33,7 @@ export default function UserSummaryButton({ activeSection }: UserSummaryButtonPr
   // Verify User Status Function
   const verifyUserStatus = async (email: string) => {
       try {
-          const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxKHGqmUIf74mgwBRcIERhlCKEWrFmvpp9QNQS_7u6CITTW7X60BY8Sh3dZ9oCULho/exec';
+          const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzBkHsNMU9XCdofn1c7xmj9B-r9IkaSmTuZnYOfUb_1rfhqQey1d3xQxbqUSAl-CJ5p/exec';
           
           // Use POST to verify
           const response = await fetch(SCRIPT_URL, {

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { EmailService } from '../../services/EmailService';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
@@ -67,6 +68,11 @@ interface SelectedItem {
 
 export default function RSVP() {
   const { t, language } = useLanguage();
+
+  useEffect(() => {
+    import('../../services/EmailService').then(({ initEmailService }) => initEmailService());
+  }, []);
+
   const [formData, setFormData] = useState({
     attending: 'yes',
     firstName: '',
@@ -117,7 +123,7 @@ export default function RSVP() {
   useEffect(() => {
     const fetchTakenItems = async () => {
       try {
-         const response = await fetch('https://script.google.com/macros/s/AKfycbxKHGqmUIf74mgwBRcIERhlCKEWrFmvpp9QNQS_7u6CITTW7X60BY8Sh3dZ9oCULho/exec');
+         const response = await fetch('https://script.google.com/macros/s/AKfycbzBkHsNMU9XCdofn1c7xmj9B-r9IkaSmTuZnYOfUb_1rfhqQey1d3xQxbqUSAl-CJ5p/exec');
          const data = await response.json();
          if (data && data.takenAperoItems) {
             setTakenItems(data.takenAperoItems);
@@ -274,7 +280,7 @@ export default function RSVP() {
     }
 
     try {
-      await fetch('https://script.google.com/macros/s/AKfycbxKHGqmUIf74mgwBRcIERhlCKEWrFmvpp9QNQS_7u6CITTW7X60BY8Sh3dZ9oCULho/exec', {
+      await fetch('https://script.google.com/macros/s/AKfycbzBkHsNMU9XCdofn1c7xmj9B-r9IkaSmTuZnYOfUb_1rfhqQey1d3xQxbqUSAl-CJ5p/exec', {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
@@ -295,6 +301,48 @@ export default function RSVP() {
           aperoDetails: finalData.aperoDetails
         }),
       });
+
+      // 2. Send Confirmation Email (Frontend)
+      try {
+        const isFrench = language === 'fr';
+        
+        // Prepare Apero Summary
+        let aperoSummary = '';
+        if (finalData.aperoContribution === 'yes') {
+          const warning = isFrench 
+            ? "Important : Merci d'apporter votre plat entre 12h30 et 13h30 à la Ferme Guglerahof. N'oubliez pas d'étiqueter votre plat."
+            : "Important: Please drop off your dish between 12:30 and 13:30 at Guglerahof Farm. Please label your dish.";
+          
+          const itemLabel = finalData.aperoItem || (isFrench ? 'Surprise' : 'Surprise');
+          const detailsLabel = finalData.aperoDetails ? (isFrench ? `Détails: ${finalData.aperoDetails}` : `Details: ${finalData.aperoDetails}`) : '';
+          
+          aperoSummary = `
+            <p><strong>${isFrench ? 'Contribution Apéro' : 'Apero Contribution'}:</strong> ${itemLabel}</p>
+            ${detailsLabel ? `<p>${detailsLabel}</p>` : ''}
+            <p style="color: #856404; background-color: #fff3cd; padding: 10px; border-radius: 4px;">${warning}</p>
+          `;
+        }
+
+        await EmailService.sendRSVPConfirmation({
+          language,
+          to_name: `${finalData.firstName} ${finalData.lastName}`,
+          to_email: finalData.email,
+          attending_status: finalData.attending === 'yes' 
+            ? (isFrench ? 'Présent(e)' : 'Joyfully Accept') 
+            : (isFrench ? 'Absent(e)' : 'Regretfully Decline'),
+          guests_count: parseInt(finalData.guests) + 1, // +1 for self
+          children_count: parseInt(finalData.children),
+          dinner_status: finalData.dinnerAttendance === 'yes' 
+            ? (isFrench ? 'Oui' : 'Yes') 
+            : (finalData.dinnerAttendance === 'no' ? (isFrench ? 'Non' : 'No') : 'N/A'),
+          dietary_info: finalData.dietaryType !== 'none' 
+            ? `${finalData.dietaryType} ${finalData.dietary ? `(${finalData.dietary})` : ''}` 
+            : (isFrench ? 'Aucune' : 'None'),
+          apero_summary: aperoSummary
+        });
+      } catch (emailError) {
+        console.error("EmailJS Error:", emailError);
+      }
 
       setSubmitted(true);
 

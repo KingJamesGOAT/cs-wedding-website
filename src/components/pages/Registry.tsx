@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { EmailService } from '../../services/EmailService';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
@@ -87,6 +88,15 @@ const INITIAL_GIFTS: GiftItem[] = [
 
 export default function Registry() {
   const { t, language } = useLanguage();
+
+  useEffect(() => {
+    import('../../services/EmailService').then(({ initEmailService }) => initEmailService());
+  }, []);
+
+  useEffect(() => {
+    // Initialize EmailJS
+    import('@/services/EmailService').then(({ initEmailService }) => initEmailService());
+  }, []);
   
   // State for Gift Data
   const [gifts, setGifts] = useState(INITIAL_GIFTS);
@@ -115,7 +125,7 @@ export default function Registry() {
   useEffect(() => {
     const fetchTotals = async () => {
       try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbxKHGqmUIf74mgwBRcIERhlCKEWrFmvpp9QNQS_7u6CITTW7X60BY8Sh3dZ9oCULho/exec');
+        const response = await fetch('https://script.google.com/macros/s/AKfycbzBkHsNMU9XCdofn1c7xmj9B-r9IkaSmTuZnYOfUb_1rfhqQey1d3xQxbqUSAl-CJ5p/exec');
         const data = await response.json();
         
         if (data && data.items) {
@@ -185,7 +195,7 @@ export default function Registry() {
     setReferenceCode(code);
 
     try {
-      await fetch('https://script.google.com/macros/s/AKfycbxKHGqmUIf74mgwBRcIERhlCKEWrFmvpp9QNQS_7u6CITTW7X60BY8Sh3dZ9oCULho/exec', {
+      await fetch('https://script.google.com/macros/s/AKfycbzBkHsNMU9XCdofn1c7xmj9B-r9IkaSmTuZnYOfUb_1rfhqQey1d3xQxbqUSAl-CJ5p/exec', {
         method: 'POST',
         mode: 'no-cors',
         headers: {
@@ -203,6 +213,21 @@ export default function Registry() {
           refCode: code
         }),
       });
+
+      // 2. Send Confirmation Email (Frontend)
+      try {
+        await EmailService.sendRegistryConfirmation({
+          language,
+          to_name: formData.name,
+          to_email: formData.email,
+          item_name: selectedGift.title[language] || selectedGift.title.en,
+          amount: formData.amount,
+          ref_code: code
+        });
+      } catch (emailError) {
+        console.error("EmailJS Error:", emailError);
+      }
+
 
       // Optimistic UI Update: Immediately update local state
       const pledgedAmount = parseFloat(formData.amount);
