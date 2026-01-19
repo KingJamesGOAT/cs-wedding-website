@@ -73,7 +73,7 @@ const translations: Record<string, Record<Language, string>> = {
     fr: 'Oui ! Les enfants sont les bienvenus. Nous avons hâte de célébrer avec toute la famille.' 
   },
   'details.qa.rsvp.question': { en: 'When should I RSVP?', fr: 'Quand répondre ?' },
-  'details.qa.rsvp.answer': { en: 'Please RSVP before April 19th, 2026.', fr: 'Merci de répondre avant le 19 avril 2026.' },
+  'details.qa.rsvp.answer': { en: 'Replying as early as possible helps our organization; otherwise, by April 19th.', fr: "Le plus tôt possible facilite l'organisation et dans tous les cas, le 19 avril." },
   'details.qa.apero.question': { en: 'Where can I specify what I would like to bring for the Apero?', fr: 'Où indiquer ce que je voudrais apporter pour l\'Apéro ?' },
   'details.qa.apero.answer': { 
     en: 'You can specify this in the RSVP section. Please plan for a quantity of around 50 bites.', 
@@ -245,12 +245,12 @@ const translations: Record<string, Record<Language, string>> = {
     fr: 'Apéro à suivre à 16h00'
   },
   'venue.receptionNote.standard': {
-    en: 'Drinks and apero will be at this location.',
-    fr: 'Les boissons et l\'apéro auront lieu à cette adresse.'
+    en: 'You are all cordially invited to the aperitif following the ceremony.',
+    fr: "Vous êtes tous cordialement conviés à l'apéritif qui suivra la cérémonie."
   },
   'venue.receptionNote.dinner': {
-    en: 'Drinks, apero, dinner, and dancing will be at this location.',
-    fr: 'L\'apéro, le dîner et la soirée dansante auront lieu à cette adresse.'
+    en: 'You are all cordially invited to the aperitif and dinner following the ceremony.',
+    fr: "Vous êtes tous cordialement conviés à l'apéritif et au souper qui suivront la cérémonie."
   },
   'venue.commuteLabel': {
     en: 'Ceremony to Apero',
