@@ -109,6 +109,7 @@ export default function Registry() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [referenceCode, setReferenceCode] = useState('');
+  const [validationError, setValidationError] = useState<string | null>(null);
 
   // Fetch current totals from Google Sheet
   useEffect(() => {
@@ -144,6 +145,7 @@ export default function Registry() {
     setPledgeStep('form');
     setFormData({ name: '', email: '', address: '', amount: '', message: '' });
     setAmountType('suggested');
+    setValidationError(null);
   };
 
   const generateRefCode = () => {
@@ -161,22 +163,23 @@ export default function Registry() {
 
     // Validation
     if (!formData.amount || Number(formData.amount) <= 0) {
-      toast.error(t('registry.error.missingAmount'));
+      setValidationError(t('registry.error.missingAmount'));
       return;
     }
     if (!formData.name.trim()) {
-      toast.error(t('registry.error.missingName'));
+      setValidationError(t('registry.error.missingName'));
       return;
     }
     if (!formData.email.trim()) {
-      toast.error(t('registry.error.missingEmail'));
+      setValidationError(t('registry.error.missingEmail'));
       return;
     }
     if (!formData.address.trim()) {
-      toast.error(t('registry.error.missingAddress'));
+      setValidationError(t('registry.error.missingAddress'));
       return;
     }
 
+    setValidationError(null);
     setIsSubmitting(true);
     const code = generateRefCode();
     setReferenceCode(code);
@@ -518,6 +521,12 @@ export default function Registry() {
                        placeholder="Best wishes..."
                     />
                   </div>
+
+                  {validationError && (
+                    <div className="text-red-500 text-sm font-medium text-center bg-red-50 p-2 rounded">
+                      {validationError}
+                    </div>
+                  )}
 
                   <Button type="submit" className="w-full bg-neutral-900 hover:bg-neutral-800" disabled={isSubmitting}>
                     {isSubmitting ? (
