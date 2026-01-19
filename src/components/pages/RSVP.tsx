@@ -66,7 +66,7 @@ interface SelectedItem {
 }
 
 export default function RSVP() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [formData, setFormData] = useState({
     attending: 'yes',
     firstName: '',
@@ -117,7 +117,7 @@ export default function RSVP() {
   useEffect(() => {
     const fetchTakenItems = async () => {
       try {
-         const response = await fetch('https://script.google.com/macros/s/AKfycbyfVDsivhWotNQbGJN65SzF2xwFlzulSjD2WaVYb2Hx8hKG118J-JzoO5tMCjye1JVb/exec');
+         const response = await fetch('https://script.google.com/macros/s/AKfycbxKHGqmUIf74mgwBRcIERhlCKEWrFmvpp9QNQS_7u6CITTW7X60BY8Sh3dZ9oCULho/exec');
          const data = await response.json();
          if (data && data.takenAperoItems) {
             setTakenItems(data.takenAperoItems);
@@ -274,11 +274,13 @@ export default function RSVP() {
     }
 
     try {
-      await fetch('https://script.google.com/macros/s/AKfycbyfVDsivhWotNQbGJN65SzF2xwFlzulSjD2WaVYb2Hx8hKG118J-JzoO5tMCjye1JVb/exec', {
+      await fetch('https://script.google.com/macros/s/AKfycbxKHGqmUIf74mgwBRcIERhlCKEWrFmvpp9QNQS_7u6CITTW7X60BY8Sh3dZ9oCULho/exec', {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          type: 'rsvp', // Identify request type
+          language, // Send language for email confirmation
           attending: finalData.attending,
           firstName: finalData.firstName,
           lastName: finalData.lastName,

@@ -115,7 +115,7 @@ export default function Registry() {
   useEffect(() => {
     const fetchTotals = async () => {
       try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbyfVDsivhWotNQbGJN65SzF2xwFlzulSjD2WaVYb2Hx8hKG118J-JzoO5tMCjye1JVb/exec');
+        const response = await fetch('https://script.google.com/macros/s/AKfycbxKHGqmUIf74mgwBRcIERhlCKEWrFmvpp9QNQS_7u6CITTW7X60BY8Sh3dZ9oCULho/exec');
         const data = await response.json();
         
         if (data && data.items) {
@@ -185,7 +185,7 @@ export default function Registry() {
     setReferenceCode(code);
 
     try {
-      await fetch('https://script.google.com/macros/s/AKfycbyfVDsivhWotNQbGJN65SzF2xwFlzulSjD2WaVYb2Hx8hKG118J-JzoO5tMCjye1JVb/exec', {
+      await fetch('https://script.google.com/macros/s/AKfycbxKHGqmUIf74mgwBRcIERhlCKEWrFmvpp9QNQS_7u6CITTW7X60BY8Sh3dZ9oCULho/exec', {
         method: 'POST',
         mode: 'no-cors',
         headers: {
@@ -193,6 +193,7 @@ export default function Registry() {
         },
         body: JSON.stringify({
           type: 'registry',
+          language, // Send language for email confirmation
           name: formData.name,
           email: formData.email,
           item: selectedGift.title.en, // Always send English title to backend for consistency
