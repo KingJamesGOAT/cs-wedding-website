@@ -256,6 +256,14 @@ const translations: Record<string, Record<Language, string>> = {
     en: 'Ceremony to Apero',
     fr: "Cérémonie vers l'Apéro"
   },
+  'venue.routeFromCeremony': { en: 'Route from Ceremony', fr: 'Itinéraire depuis la cérémonie' },
+  'venue.openInMaps': { en: 'Open in Maps', fr: 'Ouvrir dans Maps' },
+  'venue.copyAddress': { en: 'Copy Address', fr: "Copier l'adresse" },
+  'venue.receptionLocation': { en: 'Guglerahof Farm', fr: 'Ferme Guglerahof' },
+  'venue.ceremonyAddress': { en: 'Rue de Morat 12, 1700 Fribourg, Switzerland', fr: 'Rue de Morat 12, 1700 Fribourg, Suisse' },
+  'venue.ceremonyCity': { en: '1700 Fribourg, Switzerland', fr: '1700 Fribourg, Suisse' },
+  'venue.receptionAddress': { en: 'Guglerahof, Guglera 6, 1735 Giffers, Switzerland', fr: 'Guglerahof, Guglera 6, 1735 Giffers, Suisse' },
+  'venue.receptionCity': { en: '1735 Giffers, Switzerland', fr: '1735 Giffers, Suisse' },
   
   // Gallery
   'gallery.title': { en: 'Photo Gallery', fr: 'Galerie Photos' },

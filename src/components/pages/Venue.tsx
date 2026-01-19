@@ -11,7 +11,7 @@ import flower1 from '../../assets/flowers/1.svg';
 import flower2 from '../../assets/flowers/2.svg';
 
 export default function Venue() {
-  const { language, t } = useLanguage();
+  const { t } = useLanguage();
   const [activeMap, setActiveMap] = useState<'ceremony' | 'reception' | null>(null);
   const [isDinnerGuest, setIsDinnerGuest] = useState(false);
 
@@ -34,12 +34,12 @@ export default function Venue() {
   const maps = {
     ceremony: {
       title: 'Basilique Notre-Dame de Fribourg',
-      address: 'Basilique Notre-Dame de Fribourg, Rue de Morat 12, 1700 Fribourg, Switzerland',
+      address: t('venue.ceremonyAddress'),
       coords: '46.8064,7.1620' // Approx coords
     },
     reception: {
-      title: language === 'en' ? 'Guglerahof Farm' : 'Ferme Guglerahof',
-      address: 'Guglerahof, Guglera 6, 1735 Giffers, Switzerland',
+      title: t('venue.receptionLocation'),
+      address: t('venue.receptionAddress'),
       coords: '46.7589,7.2144' // Approx coords
     }
   };
@@ -92,12 +92,12 @@ export default function Venue() {
               <div className="flex items-start justify-between gap-4 mb-6">
                 <div className="space-y-1">
                   <p className="text-neutral-900 font-medium text-lg leading-snug">Rue de Morat 12</p>
-                  <p className="text-neutral-500">1700 Fribourg, Switzerland</p>
+                  <p className="text-neutral-500">{t('venue.ceremonyCity')}</p>
                 </div>
                 <button
-                  onClick={() => handleCopy("Rue de Morat 12, 1700 Fribourg, Switzerland", "ceremony")}
+                  onClick={() => handleCopy(t('venue.ceremonyAddress'), "ceremony")}
                   className="p-2.5 bg-neutral-50 hover:bg-neutral-100 rounded-xl transition-colors text-neutral-500 hover:text-neutral-900 focus:outline-none border border-neutral-100"
-                  title="Copy Address"
+                  title={t('venue.copyAddress')}
                 >
                   {copiedId === 'ceremony' ? (
                     <Check className="w-5 h-5 text-green-600" />
@@ -130,7 +130,7 @@ export default function Venue() {
                     onClick={() => openDirections('ceremony')}
                   >
                     <Navigation className="w-4 h-4 mr-2" />
-                    Open in Maps
+                    {t('venue.openInMaps')}
                   </Button>
               </div>
             </div>
@@ -156,7 +156,7 @@ export default function Venue() {
             <div className="h-64 sm:h-72 relative overflow-hidden shrink-0">
               <img
                 src={receptionImage}
-                alt="Guglerahof Farm"
+                alt={t('venue.receptionLocation')}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent transition-opacity duration-300" />
@@ -166,7 +166,7 @@ export default function Venue() {
                     {t('venue.reception')}
                  </div>
                  <h3 className="text-xl sm:text-2xl font-serif">
-                   {language === 'en' ? 'Guglerahof Farm' : 'Ferme Guglerahof'}
+                   {t('venue.receptionLocation')}
                  </h3>
               </div>
             </div>
@@ -175,12 +175,12 @@ export default function Venue() {
               <div className="flex items-start justify-between gap-4 mb-6">
                 <div className="space-y-1">
                   <p className="text-neutral-900 font-medium text-lg leading-snug">Guglera 6</p>
-                  <p className="text-neutral-500">1735 Giffers, Switzerland</p>
+                  <p className="text-neutral-500">{t('venue.receptionCity')}</p>
                 </div>
                 <button
-                  onClick={() => handleCopy("Guglera 6, 1735 Giffers, Switzerland", "reception")}
+                  onClick={() => handleCopy(t('venue.receptionAddress'), "reception")}
                   className="p-2.5 bg-neutral-50 hover:bg-neutral-100 rounded-xl transition-colors text-neutral-500 hover:text-neutral-900 focus:outline-none border border-neutral-100"
-                  title="Copy Address"
+                  title={t('venue.copyAddress')}
                 >
                   {copiedId === 'reception' ? (
                     <Check className="w-5 h-5 text-green-600" />
@@ -213,7 +213,7 @@ export default function Venue() {
                     onClick={openRoute}
                   >
                     <Car className="w-4 h-4 mr-2" />
-                    Route from Ceremony
+                    {t('venue.routeFromCeremony')}
                   </Button>
               </div>
             </div>
