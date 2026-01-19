@@ -7,7 +7,7 @@ import {
   AccordionTrigger,
 } from '../ui/accordion';
 import { Button } from '../ui/button';
-import { ExternalLink, Car, Baby, Clock, Shirt, Utensils } from 'lucide-react';
+import { ExternalLink, Car, Baby, Clock, Shirt, Utensils, Phone, Mail } from 'lucide-react';
 
 import FloralTitle from '../ui/FloralTitle';
 import flower3 from '../../assets/flowers/3.svg';
@@ -174,7 +174,23 @@ export default function Details() {
                   </span>
                 </AccordionTrigger>
                 <AccordionContent className="text-neutral-600 leading-relaxed">
-                  {t('details.qa.contactQuestions.answer')}
+                  <div className="flex flex-col gap-3 py-2">
+                    <span className="font-medium text-neutral-900">Cynthia</span>
+                    <div className="flex flex-col gap-2 text-sm">
+                      <a href="tel:+41764691098" className="flex items-center gap-2.5 text-neutral-600 hover:text-neutral-900 w-fit transition-colors group">
+                        <div className="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center group-hover:bg-neutral-200 transition-colors">
+                          <Phone className="w-4 h-4" />
+                        </div>
+                        <span>076 469 10 98</span>
+                      </a>
+                      <a href="mailto:cyn16san@gmail.com" className="flex items-center gap-2.5 text-neutral-600 hover:text-neutral-900 w-fit transition-colors group">
+                         <div className="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center group-hover:bg-neutral-200 transition-colors">
+                          <Mail className="w-4 h-4" />
+                        </div>
+                        <span>cyn16san@gmail.com</span>
+                      </a>
+                    </div>
+                  </div>
                 </AccordionContent>
               </AccordionItem>
 
@@ -186,7 +202,23 @@ export default function Details() {
                   </span>
                 </AccordionTrigger>
                 <AccordionContent className="text-neutral-600 leading-relaxed">
-                  {t('details.qa.contactHelp.answer')}
+                   <div className="flex flex-col gap-3 py-2">
+                    <span className="font-medium text-neutral-900">Cynthia</span>
+                    <div className="flex flex-col gap-2 text-sm">
+                      <a href="tel:+41764691098" className="flex items-center gap-2.5 text-neutral-600 hover:text-neutral-900 w-fit transition-colors group">
+                        <div className="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center group-hover:bg-neutral-200 transition-colors">
+                          <Phone className="w-4 h-4" />
+                        </div>
+                        <span>076 469 10 98</span>
+                      </a>
+                      <a href="mailto:cyn16san@gmail.com" className="flex items-center gap-2.5 text-neutral-600 hover:text-neutral-900 w-fit transition-colors group">
+                         <div className="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center group-hover:bg-neutral-200 transition-colors">
+                          <Mail className="w-4 h-4" />
+                        </div>
+                        <span>cyn16san@gmail.com</span>
+                      </a>
+                    </div>
+                  </div>
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
