@@ -159,6 +159,24 @@ export default function Registry() {
     e.preventDefault();
     if (!selectedGift) return;
 
+    // Validation
+    if (!formData.amount || Number(formData.amount) <= 0) {
+      toast.error(t('registry.error.missingAmount'));
+      return;
+    }
+    if (!formData.name.trim()) {
+      toast.error(t('registry.error.missingName'));
+      return;
+    }
+    if (!formData.email.trim()) {
+      toast.error(t('registry.error.missingEmail'));
+      return;
+    }
+    if (!formData.address.trim()) {
+      toast.error(t('registry.error.missingAddress'));
+      return;
+    }
+
     setIsSubmitting(true);
     const code = generateRefCode();
     setReferenceCode(code);
@@ -501,7 +519,7 @@ export default function Registry() {
                     />
                   </div>
 
-                  <Button type="submit" className="w-full bg-neutral-900 hover:bg-neutral-800" disabled={isSubmitting || !formData.amount || Number(formData.amount) <= 0}>
+                  <Button type="submit" className="w-full bg-neutral-900 hover:bg-neutral-800" disabled={isSubmitting}>
                     {isSubmitting ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />

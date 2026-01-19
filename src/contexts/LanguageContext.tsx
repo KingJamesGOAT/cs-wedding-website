@@ -321,7 +321,7 @@ const translations: Record<string, Record<Language, string>> = {
   'registry.pledgeBtn': { en: 'Contribute', fr: 'Contribuer' },
   'registry.pledgeTitle': { en: 'Make a Contribution', fr: 'Faire un don' },
   'registry.pledgeSubtitle': { en: 'Contributing towards: ', fr: 'Participation pour : ' },
-  'registry.nameLabel': { en: 'Your Name', fr: 'Votre Nom' },
+  'registry.nameLabel': { en: 'Your Name', fr: 'Nom Prénom' },
   'registry.emailLabel': { en: 'Your Email', fr: 'Votre Email' },
   'registry.addressLabel': { en: 'Living Address', fr: 'Adresse postale' },
   'registry.addressExplan': { en: 'So we can thank you!', fr: 'Pour vous remercier !' },
@@ -354,6 +354,10 @@ const translations: Record<string, Record<Language, string>> = {
   'registry.fullyFunded': { en: 'Fully Contributed', fr: 'Entièrement financé' },
   'registry.goal': { en: 'Goal', fr: 'Objectif' },
   'registry.raised': { en: 'Raised', fr: 'Récolté' },
+  'registry.error.missingAmount': { en: 'Please select or enter an amount.', fr: 'Veuillez sélectionner ou saisir un montant.' },
+  'registry.error.missingName': { en: 'Please enter your name.', fr: 'Veuillez entrer votre nom.' },
+  'registry.error.missingEmail': { en: 'Please enter your email.', fr: 'Veuillez entrer votre email.' },
+  'registry.error.missingAddress': { en: 'Please enter your address.', fr: 'Veuillez entrer votre adresse.' },
   
   // Footer
   'footer.contact': { en: 'Contact Us', fr: 'Nous contacter' },
