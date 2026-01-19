@@ -39,13 +39,13 @@ export const EmailService = {
   sendRegistryConfirmation: async (data: PledgeData) => {
     const isFrench = data.language === 'fr';
 
-    // Pre-calculate localized strings here (Logic-Heavy)
     const title = isFrench ? 'Mariage de Cynthia & Steve' : "Cynthia & Steve's Wedding";
     const greeting = isFrench ? `Bonjour ${data.to_name},` : `Hi ${data.to_name},`;
     
+    // Explicit confirmation message
     const message_body = isFrench 
-      ? "Merci infiniment pour votre contribution à notre liste de mariage !" 
-      : "Thank you so much for your contribution to our wedding registry!";
+      ? "Nous avons bien reçu votre souhait de contribuer à notre liste de mariage ! Merci infiniment." 
+      : "We have received your pledge to contribute to our wedding registry. Thank you so much!";
 
     const details_section = `
       <div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px; border: 1px solid #eee;">
@@ -68,12 +68,16 @@ export const EmailService = {
           <strong>Ref Code:</strong> ${data.ref_code}
         `;
 
-    const footer = "Cynthia & Steve <br> 13.06.2026";
+    const footer = "Cynthia & Steve <br> 27.06.2026";
+    const footer_note = isFrench 
+      ? "Vous avez fait une erreur ? Pas de souci ! Remplissez simplement le formulaire à nouveau sur le site avec la même adresse email."
+      : "Did you make a mistake? No problem! Simply fill out the form on the website again with the same email.";
 
     // Send simple HTML blob to the template
+    // Title color changed to #333 (Dark Grey/Black) from #d14444
     const main_content = `
       <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #d14444; text-align: center;">${title}</h2>
+          <h2 style="color: #333; text-align: center;">${title}</h2>
           <p>${greeting}</p>
           <p>${message_body}</p>
           ${details_section}
@@ -82,7 +86,11 @@ export const EmailService = {
               ${payment_info}
           </div>
           <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
-          <p style="text-align: center; font-size: 0.9em; color: #888;">${footer}</p>
+          <p style="text-align: center; font-size: 0.9em; color: #888;">
+            ${footer_note}
+            <br><br>
+            ${footer}
+          </p>
       </div>
     `;
 
@@ -90,7 +98,7 @@ export const EmailService = {
       to_email: data.to_email,
       to_name: data.to_name,
       subject: isFrench ? `Confirmation - ${title}` : `Confirmation - ${title}`,
-      email_content: main_content // One big variable for the template
+      email_content: main_content 
     };
 
     console.log('[EmailService] Sending Registry Email:', templateParams);
@@ -112,37 +120,59 @@ export const EmailService = {
   sendRSVPConfirmation: async (data: RSVPData) => {
     const isFrench = data.language === 'fr';
 
-    // Pre-calculate localized strings here
     const title = isFrench ? 'Mariage de Cynthia & Steve' : "Cynthia & Steve's Wedding";
     const greeting = isFrench ? `Bonjour ${data.to_name},` : `Hi ${data.to_name},`;
     
+    // Explicit confirmation message
     const message_body = isFrench 
-      ? "Nous avons bien reçu votre réponse. Voici un récapitulatif :" 
-      : "We have received your response. Here is a summary:";
+      ? "Nous avons bien reçu votre confirmation. Voici un récapitulatif :" 
+      : "We have received your confirmation. Here is a summary:";
+
+    // Conditional Fields Logic
+    let dinnerLine = '';
+    // Show if NOT N/A and NOT empty
+    if (data.dinner_status && data.dinner_status !== 'N/A') {
+       dinnerLine = `<p><strong>${isFrench ? 'Souper' : 'Dinner'}:</strong> ${data.dinner_status}</p>`;
+    }
+
+    let dietaryLine = '';
+    // Check against localized "None" / "Aucune" or raw values
+    const isNone = data.dietary_info.toLowerCase().includes('none') || data.dietary_info.toLowerCase().includes('aucune');
+    if (!isNone && data.dietary_info.trim() !== '') {
+       dietaryLine = `<p><strong>${isFrench ? 'Régime' : 'Dietary'}:</strong> ${data.dietary_info}</p>`;
+    }
 
     const details_section = `
       <div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px; border: 1px solid #eee;">
           <p><strong>Status:</strong> ${data.attending_status}</p>
           <p><strong>${isFrench ? 'Invités' : 'Guests'}:</strong> ${data.guests_count} | <strong>${isFrench ? 'Enfants' : 'Children'}:</strong> ${data.children_count}</p>
-          <p><strong>${isFrench ? 'Souper' : 'Dinner'}:</strong> ${data.dinner_status}</p>
-          <p><strong>${isFrench ? 'Régime' : 'Dietary'}:</strong> ${data.dietary_info}</p>
+          ${dinnerLine}
+          ${dietaryLine}
       </div>
     `;
 
     // Apero summary is already pre-formatted HTML from the component
     
-    const footer = "Cynthia & Steve <br> 13.06.2026";
+    const footer = "Cynthia & Steve <br> 27.06.2026";
+    const footer_note = isFrench 
+      ? "Vous avez fait une erreur ? Pas de souci ! Remplissez simplement le formulaire à nouveau sur le site avec la même adresse email."
+      : "Did you make a mistake? No problem! Simply fill out the form on the website again with the same email.";
 
     // Send simple HTML blob to the template
+    // Title color changed to #333 (Dark Grey/Black)
     const main_content = `
       <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #d14444; text-align: center;">${title}</h2>
+          <h2 style="color: #333; text-align: center;">${title}</h2>
           <p>${greeting}</p>
           <p>${message_body}</p>
           ${details_section}
           ${data.apero_summary || ''}
           <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
-          <p style="text-align: center; font-size: 0.9em; color: #888;">${footer}</p>
+          <p style="text-align: center; font-size: 0.9em; color: #888;">
+            ${footer_note}
+            <br><br>
+            ${footer}
+          </p>
       </div>
     `;
 
@@ -150,7 +180,7 @@ export const EmailService = {
       to_email: data.to_email,
       to_name: data.to_name,
       subject: isFrench ? `Confirmation RSVP - ${title}` : `RSVP Confirmation - ${title}`,
-      email_content: main_content // One big variable for the template
+      email_content: main_content
     };
 
     console.log('[EmailService] Sending RSVP Email:', templateParams);
