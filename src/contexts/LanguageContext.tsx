@@ -79,6 +79,16 @@ const translations: Record<string, Record<Language, string>> = {
     en: 'You can specify this in the RSVP section. Please plan for a quantity of around 50 bites.', 
     fr: 'Vous pouvez l\'indiquer dans la section RSVP. Merci de prévoir une quantité pour environ 50 bouchées.' 
   },
+  'details.qa.contactQuestions.question': { en: 'Who should I contact if I have questions?', fr: 'A qui m\'adresser en cas de questions ?' },
+  'details.qa.contactQuestions.answer': { 
+    en: 'Cynthia 076 469 10 98 cyn16san@gmail.com', 
+    fr: 'Cynthia 076 469 10 98 cyn16san@gmail.com' 
+  },
+  'details.qa.contactHelp.question': { en: 'Who should I contact to offer help?', fr: 'Qui contacter pour proposer mon aide ?' },
+  'details.qa.contactHelp.answer': { 
+    en: 'Cynthia 076 469 10 98 cyn16san@gmail.com', 
+    fr: 'Cynthia 076 469 10 98 cyn16san@gmail.com' 
+  },
 
   // RSVP Page
   'rsvp.title': { en: 'RSVP', fr: 'RSVP' },

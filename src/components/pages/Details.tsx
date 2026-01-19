@@ -165,6 +165,30 @@ export default function Details() {
                   {t('details.qa.transport.answer')}
                 </AccordionContent>
               </AccordionItem>
+
+              <AccordionItem value="contact-questions">
+                <AccordionTrigger>
+                  <span className="flex items-center gap-3">
+                    <ExternalLink className="w-5 h-5 text-neutral-500" />
+                    {t('details.qa.contactQuestions.question')}
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="text-neutral-600 leading-relaxed">
+                  {t('details.qa.contactQuestions.answer')}
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="contact-help">
+                <AccordionTrigger>
+                  <span className="flex items-center gap-3">
+                    <ExternalLink className="w-5 h-5 text-neutral-500" />
+                    {t('details.qa.contactHelp.question')}
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="text-neutral-600 leading-relaxed">
+                  {t('details.qa.contactHelp.answer')}
+                </AccordionContent>
+              </AccordionItem>
             </Accordion>
           </motion.div>
         </div>
