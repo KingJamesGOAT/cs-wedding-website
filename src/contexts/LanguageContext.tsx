@@ -406,12 +406,12 @@ const translations: Record<string, Record<Language, string>> = {
     fr: "Apéro à suivre à 16h00",
   },
   "venue.receptionNote.standard": {
-    en: "You are all cordially invited to the aperitif following the ceremony.",
-    fr: "Vous êtes tous cordialement conviés à l'apéritif qui suivra la cérémonie.",
+    en: "You are all cordially invited to the Vin d'honneur and Apero following the ceremony.",
+    fr: "Vous êtes tous cordialement conviés au vin d'honneur et à l'apéritif qui suivront la cérémonie."
   },
   "venue.receptionNote.dinner": {
-    en: "You are all cordially invited to the aperitif and dinner following the ceremony.",
-    fr: "Vous êtes tous cordialement conviés à l'apéritif et au souper qui suivront la cérémonie.",
+    en: "You are all cordially invited to the Vin d'honneur, Apero, and Dinner following the ceremony.",
+    fr: "Vous êtes tous cordialement conviés au vin d'honneur, à l'apéritif et au souper qui suivront la cérémonie."
   },
   "venue.commuteLabel": {
     en: "Journey from Ceremony to Apero",
