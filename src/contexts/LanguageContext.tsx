@@ -441,6 +441,29 @@ const translations: Record<string, Record<Language, string>> = {
     fr: "1735 Giffers, Suisse",
   },
 
+  // Ceremony Details
+  "ceremony.title": { en: "The Traditional Latin Mass", fr: "La Messe Traditionnelle en Latin" },
+  "ceremony.subtitle": { en: "An ancient rite of beauty and silence.", fr: "Un rite ancien de beauté et de silence." },
+  "ceremony.atmosphere": {
+    en: "A High Mass will be celebrated, featuring a full choir and traditional Gregorian chant. This ancient rite invites you into a space of deep prayer and timeless beauty.",
+    fr: "Une messe chantée sera célébrée, accompagnée d'une chorale et de chants grégoriens. Ce rite ancien vous invite à un moment de prière profonde et de beauté intemporelle."
+  },
+  "ceremony.videoCaption": {
+    en: "A beautiful overview of the ceremony.",
+    fr: "Un bel aperçu de la cérémonie."
+  },
+  "ceremony.attireTitle": { en: "Attire", fr: "Tenue" },
+  "ceremony.attire": {
+    en: "To honor the sacred nature of the Basilica, we kindly suggest attire that covers the shoulders and knees. Your presence is our greatest gift.",
+    fr: "Par respect pour le caractère sacré de la Basilique, nous suggérons une tenue couvrant les épaules et les genoux. Votre présence est notre plus beau cadeau."
+  },
+  "ceremony.missaletteTitle": { en: "Missalette", fr: "Livret de Messe" },
+  "ceremony.missalette": {
+    en: "A bilingual missalette (Latin-English / Latin-French) will be provided at the entrance to help you follow the prayers and chants.",
+    fr: "Un livret de messe bilingue (Latin-Anglais / Latin-Français) vous sera remis à l'entrée pour vous permettre de suivre les prières et les chants."
+  },
+  "ceremony.learnMore": { en: "The Ceremony", fr: "La Cérémonie" },
+
   // Parking Modal
   "parking.modalTitle": { en: "Parking near Basilique Notre-Dame", fr: "Parkings près de la Basilique" },
   "parking.viewMap": { en: "View Map", fr: "Voir la carte" },

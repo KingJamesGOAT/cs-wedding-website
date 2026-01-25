@@ -45,7 +45,7 @@ export default function Header({ activeSection, onNavigate, isHeroTitleVisible =
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled || isMenuOpen ? 'glass-header py-2' : 'bg-transparent py-6 md:py-4'
-      } ${!isMenuOpen && isHeroTitleVisible ? 'md:opacity-0 md:-translate-y-full md:pointer-events-none' : 'md:opacity-100 md:translate-y-0'}`}
+      }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 relative z-50">
@@ -57,14 +57,15 @@ export default function Header({ activeSection, onNavigate, isHeroTitleVisible =
             }}
             className={`text-2xl font-serif tracking-widest transition-all duration-500
               ${isScrolled || isMenuOpen ? 'text-gray-900' : 'text-white'}
-              ${!isMenuOpen && isHeroTitleVisible ? 'opacity-0 pointer-events-none md:opacity-100 md:pointer-events-auto' : 'opacity-100 hover:opacity-70'}
+              ${!isMenuOpen && isHeroTitleVisible ? 'opacity-0 pointer-events-none' : 'opacity-100 hover:opacity-70'}
+              ${activeSection === 'home' && !isScrolled ? 'md:opacity-0 md:pointer-events-none' : 'md:opacity-100'}
             `}
           >
             Cynthia & Steve
           </button>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className={`hidden md:flex items-center gap-8 transition-opacity duration-300 ${activeSection === 'home' && !isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
             {navItems.map((item) => (
               <button
                 key={item.key}

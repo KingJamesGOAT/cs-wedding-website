@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, Suspense, lazy } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { Button } from '../ui/button';
-import { MapPin, Church, Home, Copy, Check, Navigation, Car } from 'lucide-react';
+import { MapPin, Church, Home, Copy, Check, Navigation, Car, BookOpen } from 'lucide-react';
 import { Dialog, DialogContent } from '../ui/dialog';
 import ceremonyImage from '../../assets/hero-desktop-large-2.png';
 import receptionImage from '../../assets/hero-mobile-large.png';
@@ -10,9 +10,12 @@ import FloralTitle from '../ui/FloralTitle';
 import flower1 from '../../assets/flowers/1.svg';
 import flower2 from '../../assets/flowers/2.svg';
 
+const CeremonyDetails = lazy(() => import('../CeremonyDetails'));
+
 export default function Venue() {
   const { t } = useLanguage();
   const [activeMap, setActiveMap] = useState<'ceremony' | 'reception' | null>(null);
+  const [showCeremonyDetails, setShowCeremonyDetails] = useState(false);
   const [isDinnerGuest, setIsDinnerGuest] = useState(false);
 
   // Check for Magic Link (?invite=dinner)
@@ -116,6 +119,15 @@ export default function Venue() {
               </div>
               
               <div className="mt-auto space-y-3">
+                  <Button
+                    variant="outline"
+                    className="w-full h-11 border-stone-300 text-stone-700 hover:bg-stone-50 hover:text-stone-900 font-serif"
+                    onClick={() => setShowCeremonyDetails(true)}
+                  >
+                    <BookOpen className="w-4 h-4 mr-2" />
+                    {t('ceremony.learnMore')}
+                  </Button>
+
                   <Button
                     className="w-full bg-neutral-900 hover:bg-neutral-800 h-11"
                     onClick={() => setActiveMap('ceremony')}
@@ -227,7 +239,6 @@ export default function Venue() {
              <h3 className="font-medium text-neutral-900 truncate max-w-[200px] sm:max-w-md">
                 {activeMap && maps[activeMap].title}
              </h3>
-             {/* Close button handled by Dialog default but we can add actions here if needed */}
           </div>
 
           <div className="flex-1 w-full h-full bg-neutral-100">
@@ -245,6 +256,10 @@ export default function Venue() {
           </div>
         </DialogContent>
       </Dialog>
+    
+      <Suspense fallback={null}>
+         <CeremonyDetails open={showCeremonyDetails} onOpenChange={setShowCeremonyDetails} />
+      </Suspense>
     </section>
   );
 }
