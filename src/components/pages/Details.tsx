@@ -180,19 +180,19 @@ export default function Details() {
                 </AccordionTrigger>
                 <AccordionContent className="text-neutral-600 leading-relaxed">
                   <div className="flex flex-col gap-3 py-2">
-                    <span className="font-medium text-neutral-900">Cynthia</span>
+                    <span className="font-medium text-neutral-900">Chris Benjamin</span>
                     <div className="flex flex-col gap-2 text-sm">
-                      <a href="tel:+41764691098" className="flex items-center gap-2.5 text-neutral-600 hover:text-neutral-900 w-fit transition-colors group">
+                      <a href="tel:+41789495191" className="flex items-center gap-2.5 text-neutral-600 hover:text-neutral-900 w-fit transition-colors group">
                         <div className="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center group-hover:bg-neutral-200 transition-colors">
                           <Phone className="w-4 h-4" />
                         </div>
-                        <span>076 469 10 98</span>
+                        <span>078 949 51 91</span>
                       </a>
-                      <a href="mailto:cyn16san@gmail.com" className="flex items-center gap-2.5 text-neutral-600 hover:text-neutral-900 w-fit transition-colors group">
+                      <a href="mailto:cbchrisbenjamin@gmail.com" className="flex items-center gap-2.5 text-neutral-600 hover:text-neutral-900 w-fit transition-colors group">
                          <div className="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center group-hover:bg-neutral-200 transition-colors">
                           <Mail className="w-4 h-4" />
                         </div>
-                        <span>cyn16san@gmail.com</span>
+                        <span>cbchrisbenjamin@gmail.com</span>
                       </a>
                     </div>
                   </div>
@@ -208,19 +208,19 @@ export default function Details() {
                 </AccordionTrigger>
                 <AccordionContent className="text-neutral-600 leading-relaxed">
                    <div className="flex flex-col gap-3 py-2">
-                    <span className="font-medium text-neutral-900">Cynthia</span>
+                    <span className="font-medium text-neutral-900">Chris Benjamin</span>
                     <div className="flex flex-col gap-2 text-sm">
-                      <a href="tel:+41764691098" className="flex items-center gap-2.5 text-neutral-600 hover:text-neutral-900 w-fit transition-colors group">
+                      <a href="tel:+41789495191" className="flex items-center gap-2.5 text-neutral-600 hover:text-neutral-900 w-fit transition-colors group">
                         <div className="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center group-hover:bg-neutral-200 transition-colors">
                           <Phone className="w-4 h-4" />
                         </div>
-                        <span>076 469 10 98</span>
+                        <span>078 949 51 91</span>
                       </a>
-                      <a href="mailto:cyn16san@gmail.com" className="flex items-center gap-2.5 text-neutral-600 hover:text-neutral-900 w-fit transition-colors group">
+                      <a href="mailto:cbchrisbenjamin@gmail.com" className="flex items-center gap-2.5 text-neutral-600 hover:text-neutral-900 w-fit transition-colors group">
                          <div className="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center group-hover:bg-neutral-200 transition-colors">
                           <Mail className="w-4 h-4" />
                         </div>
-                        <span>cyn16san@gmail.com</span>
+                        <span>cbchrisbenjamin@gmail.com</span>
                       </a>
                     </div>
                   </div>

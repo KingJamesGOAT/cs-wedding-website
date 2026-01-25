@@ -149,14 +149,7 @@ export default function CeremonyDetails({
              </motion.div>
           </div>
           
-           {/* Footer decorative element */}
-           <motion.div variants={itemVariants} className="flex justify-center pt-8 pb-12 opacity-40">
-              <div className="flex gap-2">
-                 <div className="w-1.5 h-1.5 rounded-full bg-stone-400"></div>
-                 <div className="w-1.5 h-1.5 rounded-full bg-stone-400"></div>
-                 <div className="w-1.5 h-1.5 rounded-full bg-stone-400"></div>
-              </div>
-           </motion.div>
+
 
         </motion.div>
       </div>
