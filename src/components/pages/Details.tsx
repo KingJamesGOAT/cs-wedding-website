@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../contexts/LanguageContext';
 import {
@@ -13,8 +14,11 @@ import FloralTitle from '../ui/FloralTitle';
 import flower3 from '../../assets/flowers/3.svg';
 import flower4 from '../../assets/flowers/4.svg';
 
+import ParkingModal from './ParkingModal';
+
 export default function Details() {
   const { t, language } = useLanguage();
+  const [isParkingModalOpen, setIsParkingModalOpen] = useState(false);
 
   const hotels = [
     {
@@ -154,16 +158,17 @@ export default function Details() {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="transport">
-                <AccordionTrigger>
-                  <span className="flex items-center gap-3">
-                    <Car className="w-5 h-5 text-neutral-500" />
-                    {t('details.qa.transport.question')}
-                  </span>
-                </AccordionTrigger>
-                <AccordionContent className="text-neutral-600 leading-relaxed">
-                  {t('details.qa.transport.answer')}
-                </AccordionContent>
+              <AccordionItem value="transport" className="border-b-0">
+                 <div
+                    onClick={() => setIsParkingModalOpen(true)}
+                    className="flex flex-1 items-center justify-between gap-4 py-4 text-sm font-medium transition-all hover:underline cursor-pointer text-left"
+                 >
+                    <span className="flex items-center gap-3">
+                      <Car className="w-5 h-5 text-neutral-500 shrink-0" />
+                      {t('details.qa.transport.question')}
+                    </span>
+                    <ExternalLink className="h-4 w-4 shrink-0 transition-transform duration-200 text-neutral-500" />
+                 </div>
               </AccordionItem>
 
               <AccordionItem value="contact-questions">
@@ -225,6 +230,7 @@ export default function Details() {
           </motion.div>
         </div>
       </div>
+      <ParkingModal isOpen={isParkingModalOpen} onClose={() => setIsParkingModalOpen(false)} />
     </section>
   );
 }

@@ -84,8 +84,8 @@ const translations: Record<string, Record<Language, string>> = {
     fr: "Parking et Transport",
   },
   "details.qa.transport.answer": {
-    en: "Free parking at Guglerahof. Taxis available from Fribourg.",
-    fr: "Parking gratuit au Guglerahof et vers la Basilique Notre-Dame.",
+    en: "Free parking available at the reception venue (Guglerahof). For the ceremony (Basilica), please use the nearby public parking (paid).",
+    fr: "Parking gratuit disponible sur le lieu de réception (Ferme Guglerahof). Pour la cérémonie (Basilique), veuillez utiliser les parkings publics à proximité (payants).",
   },
   "details.qa.children.question": {
     en: "Are children invited?",
@@ -440,6 +440,50 @@ const translations: Record<string, Record<Language, string>> = {
     en: "1735 Giffers, Switzerland",
     fr: "1735 Giffers, Suisse",
   },
+
+  // Parking Modal
+  "parking.modalTitle": { en: "Parking near Basilique Notre-Dame", fr: "Parkings près de la Basilique" },
+  "parking.viewMap": { en: "View Map", fr: "Voir la carte" },
+  "parking.closeMap": { en: "Close Map", fr: "Fermer la carte" },
+  "parking.walkingDistance": { en: "Walking distance", fr: "Temps de marche" },
+  "parking.openMap": { en: "Open in Maps", fr: "Ouvrir dans Maps" },
+
+  // Parking 1: Place Notre-Dame
+  "parking.p1.title": { en: "Place Notre-Dame / Arcades", fr: "Place Notre-Dame / Arcades" },
+  "parking.p1.type": { en: "Outdoor parking, directly on the square.", fr: "Parking extérieur, sur la place." },
+  "parking.p1.typeLabel": { en: "Type", fr: "Type" },
+  "parking.p1.dist": { en: "0 min (on site)", fr: "0 min (sur place)" },
+  "parking.p1.ideal": { en: "Short visits, drop-off, attending mass.", fr: "Courtes visites, dépose-minute, messe." },
+  "parking.p1.idealLabel": { en: "Best for", fr: "Idéal pour" },
+  "parking.p1.note": { en: "Limited spaces, often busy.", fr: "Nombre de places limité, souvent complet." },
+  "parking.p1.noteLabel": { en: "Note", fr: "Remarque" },
+  "parking.p1.address": { en: "Place Notre-Dame, 1700 Fribourg", fr: "Place Notre-Dame, 1700 Fribourg" },
+
+  // Parking 2: Parking des Alpes
+  "parking.p2.title": { en: "Parking des Alpes", fr: "Parking des Alpes" },
+  "parking.p2.type": { en: "Underground / covered car park.", fr: "Parking souterrain / couvert." },
+  "parking.p2.dist": { en: "5–7 min walk", fr: "5–7 min à pied" },
+  "parking.p2.ideal": { en: "Longer visits, central location.", fr: "Visites plus longues, centre-ville." },
+  "parking.p2.note": { en: "Open 24/7, more spaces available.", fr: "Ouvert en continu, plus de places." },
+  "parking.p2.noteLabel": { en: "Advantages", fr: "Avantages" },
+  "parking.p2.address": { en: "Square des Places 7, 1700 Fribourg", fr: "Square des Places 7, 1700 Fribourg" },
+
+  // Parking 3: Fribourg Centre
+  "parking.p3.title": { en: "Parking Fribourg Centre", fr: "Parking Fribourg Centre" },
+  "parking.p3.type": { en: "Shopping mall underground parking.", fr: "Parking souterrain du centre commercial." },
+  "parking.p3.dist": { en: "8–10 min walk", fr: "8–10 min à pied" },
+  "parking.p3.ideal": { en: "Shopping + Basilica, long stays.", fr: "Shopping + Basilique, longue durée." },
+  "parking.p3.note": { en: "Large capacity, direct mall access.", fr: "Grand nombre de places, accès centre." },
+  "parking.p3.address": { en: "Av. de la Gare 10, 1700 Fribourg", fr: "Av. de la Gare 10, 1700 Fribourg" },
+
+  // Public Transport
+  "parking.p4.title": { en: "Train Station & Bus", fr: "Gare & Bus" },
+  "parking.p4.type": { en: "Public Transport from Fribourg Gare", fr: "Transports publics depuis la Gare" },
+  "parking.p4.dist": { en: "~7 min (Bus 1, 2, or 6)", fr: "~7 min (Bus 1, 2 ou 6)" },
+  "parking.p4.ideal": { en: "Arrival by train.", fr: "Arrivée en train." },
+  "parking.p4.note": { en: "Bus stop 'Tilleul' or 'Pont-Murat'", fr: "Arrêt 'Tilleul' ou 'Pont-Murat'" },
+  "parking.p4.address": { en: "Gare de Fribourg, 1700 Fribourg", fr: "Gare de Fribourg, 1700 Fribourg" },
+
 
   // Gallery
   "gallery.title": { en: "Photo Gallery", fr: "Galerie Photos" },
