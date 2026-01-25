@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useIsMobile } from "./ui/use-mobile";
 import { motion, Variants } from "framer-motion";
-import { X, Info, BookOpen, Music } from "lucide-react";
+import { X, Shirt, BookOpen, Music } from "lucide-react";
 
 import {
   Dialog,
@@ -121,7 +121,7 @@ export default function CeremonyDetails({
             {/* Attire Card */}
              <motion.div variants={itemVariants} className="bg-white p-6 rounded-xl border border-stone-200 shadow-sm flex flex-col items-start gap-4 hover:border-stone-300 transition-colors">
                 <div className="bg-stone-100 p-2.5 rounded-full text-stone-600">
-                   <Info className="w-5 h-5" />
+                   <Shirt className="w-5 h-5" />
                 </div>
                 <div>
                   <h3 className="font-serif text-xl text-stone-800 mb-2">

@@ -71,7 +71,7 @@ export default function Venue() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 relative">
           
           {/* Connecting Line (Desktop) */}
-          <div className="hidden lg:block absolute top-[28%] left-1/2 -translate-x-1/2 w-16 h-[2px] bg-neutral-200 z-0"></div>
+          <div className="hidden lg:block absolute top-[12%] left-1/2 -translate-x-1/2 w-16 h-[2px] bg-neutral-200 z-0"></div>
           
           {/* Ceremony */}
           <div className="group bg-white rounded-2xl border border-neutral-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 z-10 flex flex-col h-full">
@@ -149,7 +149,7 @@ export default function Venue() {
           </div>
 
           {/* Info Connector (Mobile/Desktop) */}
-          <div className="lg:absolute lg:top-[28%] lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 z-20 w-full lg:w-auto flex justify-center py-4 lg:py-0">
+          <div className="lg:absolute lg:top-[12%] lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 z-20 w-full lg:w-auto flex justify-center py-4 lg:py-0">
              <div className="bg-white/80 backdrop-blur-md border border-neutral-200 shadow-sm rounded-2xl px-5 py-2 flex flex-col items-center justify-center gap-0.5 text-xs font-medium text-neutral-500 z-20">
                 <span className="text-[10px] uppercase tracking-wider font-semibold text-neutral-400">
                   {t('venue.commuteLabel')}

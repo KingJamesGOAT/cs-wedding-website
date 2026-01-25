@@ -398,20 +398,20 @@ const translations: Record<string, Record<Language, string>> = {
     fr: "27 juin 2026 à 14h00",
   },
   "venue.ceremonyNote": {
-    en: "Ceremony will begin promptly at 14:00 (please arrive 10 minutes early).",
-    fr: "La cérémonie débutera à 14h00 précises (merci d'arriver 10 minutes en avance).",
+    en: "Ceremony will begin promptly at 14:00 (please arrive 15 minutes early).",
+    fr: "La cérémonie débutera à 14h00 précise (merci d'arriver 15 minutes en avance).",
   },
   "venue.receptionTime": {
     en: "Apéro to follow at 16:00",
     fr: "Apéro à suivre à 16h00",
   },
   "venue.receptionNote.standard": {
-    en: "You are all cordially invited to the Vin d'honneur and Apero following the ceremony.",
-    fr: "Vous êtes tous cordialement conviés au vin d'honneur et à l'apéritif qui suivront la cérémonie."
+    en: "You are cordially invited to the Vin d'honneur and Apero following the ceremony.",
+    fr: "Vous êtes cordialement conviés au vin d'honneur et à l'apéritif qui suivront la cérémonie."
   },
   "venue.receptionNote.dinner": {
-    en: "You are all cordially invited to the Vin d'honneur, Apero, and Dinner following the ceremony.",
-    fr: "Vous êtes tous cordialement conviés au vin d'honneur, à l'apéritif et au souper qui suivront la cérémonie."
+    en: "You are cordially invited to the Vin d'honneur, Apero, and Dinner following the ceremony.",
+    fr: "Vous êtes cordialement conviés au vin d'honneur, à l'apéritif et au souper qui suivront la cérémonie."
   },
   "venue.commuteLabel": {
     en: "Journey from Ceremony to Apero",
@@ -454,15 +454,15 @@ const translations: Record<string, Record<Language, string>> = {
   },
   "ceremony.attireTitle": { en: "Attire", fr: "Tenue" },
   "ceremony.attire": {
-    en: "To honor the sacred nature of the Basilica, we kindly suggest attire that covers the shoulders and knees. Your presence is our greatest gift.",
-    fr: "Par respect pour le caractère sacré de la Basilique, nous suggérons une tenue couvrant les épaules et les genoux. Votre présence est notre plus beau cadeau."
+    en: "To honor the sacred nature of the Basilica, we kindly suggest attire that covers the shoulders and knees.",
+    fr: "Par respect pour le caractère sacré de la Basilique, nous suggérons une tenue couvrant les épaules et les genoux."
   },
   "ceremony.missaletteTitle": { en: "Missalette", fr: "Livret de Messe" },
   "ceremony.missalette": {
     en: "A bilingual missalette (Latin-English / Latin-French) will be provided at the entrance to help you follow the prayers and chants.",
     fr: "Un livret de messe bilingue (Latin-Anglais / Latin-Français) vous sera remis à l'entrée pour vous permettre de suivre les prières et les chants."
   },
-  "ceremony.learnMore": { en: "The Ceremony", fr: "La Cérémonie" },
+  "ceremony.learnMore": { en: "The Mass", fr: "La Messe" },
 
   // Parking Modal
   "parking.modalTitle": { en: "Parking near Basilique Notre-Dame", fr: "Parkings près de la Basilique" },
