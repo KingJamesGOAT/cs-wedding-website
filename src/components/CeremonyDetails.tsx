@@ -16,7 +16,6 @@ import {
   DrawerClose,
   DrawerTitle, // Keeping for a11y
 } from "./ui/drawer";
-import { ScrollArea } from "./ui/scroll-area";
 import { Button } from "./ui/button";
 
 interface CeremonyDetailsProps {
@@ -67,7 +66,7 @@ export default function CeremonyDetails({
 
   const Content = (
     <div className="flex flex-col h-full bg-stone-50">
-      <ScrollArea className="flex-1 px-6 pb-6 pt-2">
+      <div className="flex-1 overflow-y-auto px-6 pb-6 pt-2">
         <motion.div
           className="max-w-3xl mx-auto space-y-10 pb-10"
           variants={containerVariants}
@@ -154,7 +153,7 @@ export default function CeremonyDetails({
            </motion.div>
 
         </motion.div>
-      </ScrollArea>
+      </div>
       
       {/* Mobile Close Button (Fixed at bottom) */}
       {isMobile && (
