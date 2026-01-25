@@ -447,6 +447,10 @@ const translations: Record<string, Record<Language, string>> = {
   "parking.closeMap": { en: "Close Map", fr: "Fermer la carte" },
   "parking.walkingDistance": { en: "Walking distance", fr: "Temps de marche" },
   "parking.openMap": { en: "Open in Maps", fr: "Ouvrir dans Maps" },
+  "parking.noteLabel": { en: "Note", fr: "Remarque" },
+  "parking.backToList": { en: "Back to List", fr: "Retour à la liste" },
+
+  // Parking 1: Place Notre-Dame
 
   // Parking 1: Place Notre-Dame
   "parking.p1.title": { en: "Place Notre-Dame / Arcades", fr: "Place Notre-Dame / Arcades" },

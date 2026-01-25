@@ -1,9 +1,8 @@
-
 import { useState, useEffect } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../ui/dialog';
 import { Button } from '../ui/button';
-import { Clock, Car, Map as MapIcon, X } from 'lucide-react';
+import { Clock, Car, Map as MapIcon, X, ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface ParkingModalProps {
@@ -21,6 +20,7 @@ export default function ParkingModal({ isOpen, onClose }: ParkingModalProps) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
+      setActiveParking(null); // Reset visibility on close
     }
     return () => {
       document.body.style.overflow = '';
@@ -76,26 +76,38 @@ export default function ParkingModal({ isOpen, onClose }: ParkingModalProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-[95vw] sm:max-w-[85vw] w-full max-h-[70vh] flex flex-col p-0 bg-neutral-50/95 backdrop-blur-3xl border-neutral-200 overflow-hidden rounded-xl">
-        <DialogHeader className="px-6 py-4 bg-white border-b border-neutral-100 flex-shrink-0">
-          <DialogTitle className="text-xl md:text-2xl font-serif text-neutral-900">
-            {t('parking.modalTitle')}
+      <DialogContent className="max-w-[95vw] sm:max-w-[85vw] w-full max-h-[85vh] flex flex-col p-0 bg-neutral-50/95 backdrop-blur-3xl border-neutral-200 overflow-hidden rounded-xl">
+        <DialogHeader className="px-6 py-4 bg-white border-b border-neutral-100 flex-shrink-0 flex flex-row items-center gap-4 space-y-0">
+          {activeParking && (
+            <button 
+              onClick={() => setActiveParking(null)}
+              className="md:hidden p-2 -ml-2 hover:bg-neutral-100 rounded-full transition-colors"
+            >
+              <ArrowLeft className="w-5 h-5 text-neutral-600" />
+            </button>
+          )}
+          <DialogTitle className="text-xl md:text-2xl font-serif text-neutral-900 flex-1">
+            {activeParking && window.innerWidth < 768 ? t('parking.viewMap') : t('parking.modalTitle')}
           </DialogTitle>
         </DialogHeader>
 
-        <div className="flex-1 overflow-hidden flex flex-col md:flex-row">
-          {/* List Section */}
-          <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-4">
+        <div className="flex-1 overflow-hidden flex flex-col md:flex-row relative">
+          
+          {/* List Section: Hidden on Mobile if Parking Active */}
+          <div className={`
+             flex-1 overflow-y-auto p-4 md:p-6 space-y-4 bg-neutral-50
+             ${activeParking ? 'hidden md:block' : 'block'}
+          `}>
             {parkings.map((pkg) => (
               <motion.div
                 key={pkg.id}
                 layoutId={`card-${pkg.id}`}
                 onClick={() => setActiveParking(pkg.id)}
                 className={`
-                  relative p-4 rounded-xl border-2 transition-all cursor-pointer bg-white group
+                  relative p-4 rounded-xl border-2 transition-all cursor-pointer bg-white group hover:border-neutral-300
                   ${activeParking === pkg.id 
                     ? 'border-neutral-900 shadow-md ring-1 ring-neutral-900/5' 
-                    : 'border-transparent hover:border-neutral-200 shadow-sm'}
+                    : 'border-transparent shadow-sm'}
                 `}
               >
                 <div className="flex justify-between items-start mb-2">
@@ -120,11 +132,24 @@ export default function ParkingModal({ isOpen, onClose }: ParkingModalProps) {
                   </div>
 
                   <div className="pl-6 pt-1 text-xs text-neutral-500 space-y-1">
-                     <p><span className="font-medium text-neutral-700">{t('parking.p1.noteLabel')}:</span> {pkg.note}</p>
+                     <p><span className="font-medium text-neutral-700">{t('parking.noteLabel')}:</span> {pkg.note}</p>
                   </div>
                 </div>
 
-                <div className="mt-4 flex gap-2">
+                <div className="mt-4 flex gap-2 md:hidden">
+                   <Button
+                      size="sm"
+                      className="w-full text-xs h-9 bg-neutral-900 text-white hover:bg-neutral-800"
+                      onClick={(e) => {
+                         e.stopPropagation();
+                         setActiveParking(pkg.id);
+                      }}
+                   >
+                      {t('parking.viewMap')}
+                   </Button>
+                </div>
+                {/* Desktop Buttons */}
+                <div className="mt-4 hidden md:flex gap-2">
                    <Button 
                      size="sm" 
                      variant="outline" 
@@ -139,7 +164,7 @@ export default function ParkingModal({ isOpen, onClose }: ParkingModalProps) {
                    <Button
                       size="sm"
                       variant={activeParking === pkg.id ? "default" : "secondary"}
-                      className="w-full text-xs h-8 md:hidden"
+                      className="w-full text-xs h-8"
                       onClick={(e) => {
                          e.stopPropagation();
                          setActiveParking(pkg.id);
@@ -152,22 +177,13 @@ export default function ParkingModal({ isOpen, onClose }: ParkingModalProps) {
             ))}
           </div>
 
-          {/* Map Section */}
+          {/* Map Section: Full Cover on Mobile if Active */}
           <div className={`
             md:flex-1 bg-neutral-100 relative
-            ${activeParking ? 'block' : 'hidden md:block'}
-            md:block h-[40vh] md:h-auto border-l border-neutral-200
-            absolute md:relative inset-0 md:inset-auto z-10 md:z-0
+            ${activeParking ? 'block flex-1 h-full' : 'hidden md:block'}
+            md:block md:h-auto border-l border-neutral-200
+            md:relative
           `}>
-             {activeParking && (
-                <button 
-                  onClick={() => setActiveParking(null)}
-                  className="absolute top-4 right-4 z-20 md:hidden bg-white/90 backdrop-blur p-2 rounded-full shadow-lg border border-neutral-200 text-neutral-500"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-             )}
-
              <iframe
                 width="100%"
                 height="100%"
@@ -182,13 +198,6 @@ export default function ParkingModal({ isOpen, onClose }: ParkingModalProps) {
                 }
                 className="w-full h-full grayscale opacity-90 hover:opacity-100 transition-opacity"
              />
-             
-             {/* If no API key, fallback to standard embed which doesn't support easy directions in embed without key. 
-                 Using standard embed for 'place' is default. 
-                 Workaround for directions in embed: Use the old 'saddr' & 'daddr' format which sometimes works in standard iframes?
-                 Actually, standard iframe embed directions often require user interaction. 
-                 Let's try the saddr/daddr format for the src which forces "Directions" mode in the view.
-             */}
              
              {!activeParking && (
                <div className="absolute inset-0 flex items-center justify-center bg-black/5 pointer-events-none">
