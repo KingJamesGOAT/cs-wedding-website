@@ -76,8 +76,8 @@ const translations: Record<string, Record<Language, string>> = {
     fr: "Quel est le dress code ?",
   },
   "details.qa.dressCode.answer": {
-    en: "Cocktail Attire.",
-    fr: "Tenue de cocktail.",
+    en: "To honor the sacred nature of the Basilica, we kindly suggest attire that covers the shoulders and knees.",
+    fr: "Par respect pour le caractère sacré de la Basilique, nous suggérons une tenue couvrant les épaules et les genoux.",
   },
   "details.qa.transport.question": {
     en: "Parking & Transport",
@@ -116,16 +116,16 @@ const translations: Record<string, Record<Language, string>> = {
     fr: "A qui m'adresser en cas de questions ?",
   },
   "details.qa.contactQuestions.answer": {
-    en: "Cynthia 076 469 10 98 cyn16san@gmail.com",
-    fr: "Cynthia 076 469 10 98 cyn16san@gmail.com",
+    en: "Chris Benjamin 078 949 51 91 cbchrisbenjamin@gmail.com",
+    fr: "Chris Benjamin 078 949 51 91 cbchrisbenjamin@gmail.com",
   },
   "details.qa.contactHelp.question": {
     en: "Who should I contact to offer help?",
     fr: "Qui contacter pour proposer mon aide ?",
   },
   "details.qa.contactHelp.answer": {
-    en: "Cynthia 076 469 10 98 cyn16san@gmail.com",
-    fr: "Cynthia 076 469 10 98 cyn16san@gmail.com",
+    en: "Chris Benjamin 078 949 51 91 cbchrisbenjamin@gmail.com",
+    fr: "Chris Benjamin 078 949 51 91 cbchrisbenjamin@gmail.com",
   },
 
   // RSVP Page
