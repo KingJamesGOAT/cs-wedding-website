@@ -101,7 +101,7 @@ const translations: Record<string, Record<Language, string>> = {
   },
   "details.qa.rsvp.answer": {
     en: "Replying as early as possible helps our organization; otherwise, by April 19th.",
-    fr: "Le plus tôt possible facilite l'organisation et dans tous les cas, le 19 avril.",
+    fr: "Le plus tôt possible facilite l'organisation et dans tous les cas, avant le 19 avril.",
   },
   "details.qa.apero.question": {
     en: "Where can I specify what I would like to bring for the Apero?",
