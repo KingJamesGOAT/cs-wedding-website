@@ -529,7 +529,7 @@ export default function RSVP() {
                       <SelectValue placeholder="Select number" />
                     </SelectTrigger>
                     <SelectContent>
-                      {[0, 1, 2, 3, 4, 5].map((num) => (
+                      {Array.from({ length: 11 }, (_, i) => i).map((num) => (
                         <SelectItem key={num} value={num.toString()}>{num}</SelectItem>
                       ))}
                     </SelectContent>
