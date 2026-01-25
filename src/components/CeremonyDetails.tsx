@@ -64,17 +64,23 @@ export default function CeremonyDetails({
     },
   };
 
+  /* 
+     Fixing scrolling: 
+     1. Ensure parent container allows scrolling with touch support
+     2. Add overscroll-contain to prevent body scroll chaining
+     3. Ensure flex layout correctly constrains height
+  */
   const Content = (
-    <div className="flex flex-col h-full bg-stone-50">
-      <div className="flex-1 overflow-y-auto px-6 pb-6 pt-2">
+    <div className="flex flex-col h-full bg-stone-50 overflow-hidden rounded-2xl">
+      <div className="flex-1 overflow-y-auto overscroll-y-contain px-5 pb-10 pt-4" style={{ WebkitOverflowScrolling: 'touch' }}>
         <motion.div
-          className="max-w-3xl mx-auto space-y-10 pb-10"
+          className="max-w-3xl mx-auto space-y-8"
           variants={containerVariants}
           initial="hidden"
           animate={active ? "visible" : "hidden"}
         >
           {/* Header */}
-          <motion.div variants={itemVariants} className="text-center space-y-3 mt-4">
+          <motion.div variants={itemVariants} className="text-center space-y-3 mt-2">
             <h2 className="text-3xl md:text-4xl font-serif text-stone-800 tracking-tight">
               {t("ceremony.title")}
             </h2>
@@ -144,7 +150,7 @@ export default function CeremonyDetails({
           </div>
           
            {/* Footer decorative element */}
-           <motion.div variants={itemVariants} className="flex justify-center pt-8 opacity-40">
+           <motion.div variants={itemVariants} className="flex justify-center pt-8 pb-12 opacity-40">
               <div className="flex gap-2">
                  <div className="w-1.5 h-1.5 rounded-full bg-stone-400"></div>
                  <div className="w-1.5 h-1.5 rounded-full bg-stone-400"></div>
@@ -157,7 +163,7 @@ export default function CeremonyDetails({
       
       {/* Mobile Close Button (Fixed at bottom) */}
       {isMobile && (
-          <div className="p-4 border-t border-stone-200 bg-white/80 backdrop-blur-sm">
+          <div className="p-4 border-t border-stone-200 bg-white/80 backdrop-blur-sm z-10 shrink-0">
             <DrawerClose asChild>
                 <Button variant="outline" className="w-full text-stone-600 border-stone-300 hover:bg-stone-50">
                     Close
@@ -171,7 +177,7 @@ export default function CeremonyDetails({
   if (isMobile) {
     return (
       <Drawer open={open} onOpenChange={onOpenChange}>
-        <DrawerContent className="h-[92vh] bg-stone-50 rounded-t-[20px]">
+        <DrawerContent className="h-[92vh] bg-stone-50 rounded-t-[20px] flex flex-col max-h-[96vh] mt-24 is-drawer-content">
            <div className="sr-only"><DrawerTitle>{t("ceremony.title")}</DrawerTitle></div>
            <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-stone-300 my-4" />
           {Content}
@@ -182,7 +188,7 @@ export default function CeremonyDetails({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-4xl h-[85vh] p-0 overflow-hidden bg-stone-50 border-none shadow-2xl rounded-2xl">
+      <DialogContent className="block p-0 overflow-hidden bg-stone-50 border-none shadow-2xl rounded-2xl max-w-4xl h-[85vh] flex flex-col">
          <div className="sr-only"><DialogTitle>{t("ceremony.title")}</DialogTitle></div>
          <DialogClose className="absolute right-4 top-4 z-50 rounded-full bg-white/80 p-2 text-stone-500 hover:text-stone-900 transition-colors backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-stone-400">
             <X className="h-4 w-4" />
