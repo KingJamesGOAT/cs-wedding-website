@@ -407,11 +407,11 @@ const translations: Record<string, Record<Language, string>> = {
   },
   "venue.receptionNote.standard": {
     en: "You are cordially invited to the Vin d'honneur and Apero following the ceremony.",
-    fr: "Vous êtes cordialement conviés au vin d'honneur et à l'apéritif qui suivront la cérémonie."
+    fr: "Vous êtes cordialement conviés au vin d'honneur et à l'apéritif qui suivront la cérémonie.",
   },
   "venue.receptionNote.dinner": {
     en: "You are cordially invited to the Vin d'honneur, Apero, and Dinner following the ceremony.",
-    fr: "Vous êtes cordialement conviés au vin d'honneur, à l'apéritif et au souper qui suivront la cérémonie."
+    fr: "Vous êtes cordialement conviés au vin d'honneur, à l'apéritif et au souper qui suivront la cérémonie.",
   },
   "venue.commuteLabel": {
     en: "Journey from Ceremony to Apero",
@@ -442,30 +442,39 @@ const translations: Record<string, Record<Language, string>> = {
   },
 
   // Ceremony Details
-  "ceremony.title": { en: "The Traditional Latin Mass", fr: "La Messe Traditionnelle en Latin" },
-  "ceremony.subtitle": { en: "An ancient rite of beauty and silence.", fr: "Un rite ancien de beauté et de silence." },
+  "ceremony.title": {
+    en: "The Traditional Latin Mass",
+    fr: "La Messe Traditionnelle en Latin",
+  },
+  "ceremony.subtitle": {
+    en: "An ancient rite of beauty and silence.",
+    fr: "Un rite ancien de beauté et de silence.",
+  },
   "ceremony.atmosphere": {
-    en: "A High Mass will be celebrated, featuring a full choir and traditional Gregorian chant. This ancient rite invites you into a space of deep prayer and timeless beauty.",
-    fr: "Une messe chantée sera célébrée, accompagnée d'une chorale et de chants grégoriens. Ce rite ancien vous invite à un moment de prière profonde et de beauté intemporelle."
+    en: "The wedding ceremony will be a traditional Catholic Latin Mass. This sacred rite follows the centuries old liturgy of the Church, offered in the universal language of Latin to emphasize the timeless nature of the sacrament. A High Mass will be celebrated, featuring a full choir and traditional Gregorian chant. This ancient rite invites you into a space of deep prayer and timeless beauty.",
+    fr: "La cérémonie de mariage sera une messe catholique latine traditionnelle. Ce rite sacré suit la liturgie séculaire de l'Église, célébrée dans la langue universelle du latin pour souligner la nature intemporelle du sacrement. Une messe chantée sera célébrée, accompagnée d'une chorale et de chants grégoriens. Ce rite ancien vous invite à un moment de prière profonde et de beauté intemporelle.",
   },
   "ceremony.videoCaption": {
     en: "A beautiful overview of the ceremony.",
-    fr: "Un bel aperçu de la cérémonie."
+    fr: "Un bel aperçu de la cérémonie.",
   },
   "ceremony.attireTitle": { en: "Attire", fr: "Tenue" },
   "ceremony.attire": {
     en: "To honor the sacred nature of the Basilica, we kindly suggest attire that covers the shoulders and knees.",
-    fr: "Par respect pour le caractère sacré de la Basilique, nous suggérons une tenue couvrant les épaules et les genoux."
+    fr: "Par respect pour le caractère sacré de la Basilique, nous suggérons une tenue couvrant les épaules et les genoux.",
   },
   "ceremony.missaletteTitle": { en: "Missalette", fr: "Livret de Messe" },
   "ceremony.missalette": {
     en: "A bilingual missalette (Latin-English / Latin-French) will be provided at the entrance to help you follow the prayers and chants.",
-    fr: "Un livret de messe bilingue (Latin-Anglais / Latin-Français) vous sera remis à l'entrée pour vous permettre de suivre les prières et les chants."
+    fr: "Un livret de messe bilingue (Latin-Anglais / Latin-Français) vous sera remis à l'entrée pour vous permettre de suivre les prières et les chants.",
   },
   "ceremony.learnMore": { en: "The Mass", fr: "La Messe" },
 
   // Parking Modal
-  "parking.modalTitle": { en: "Parking near Basilique Notre-Dame", fr: "Parkings près de la Basilique" },
+  "parking.modalTitle": {
+    en: "Parking near Basilique Notre-Dame",
+    fr: "Parkings près de la Basilique",
+  },
   "parking.viewMap": { en: "View Map", fr: "Voir la carte" },
   "parking.closeMap": { en: "Close Map", fr: "Fermer la carte" },
   "parking.walkingDistance": { en: "Walking distance", fr: "Temps de marche" },
@@ -476,41 +485,94 @@ const translations: Record<string, Record<Language, string>> = {
   // Parking 1: Place Notre-Dame
 
   // Parking 1: Place Notre-Dame
-  "parking.p1.title": { en: "Place Notre-Dame / Arcades", fr: "Place Notre-Dame / Arcades" },
-  "parking.p1.type": { en: "Outdoor parking, directly on the square.", fr: "Parking extérieur, sur la place." },
+  "parking.p1.title": {
+    en: "Place Notre-Dame / Arcades",
+    fr: "Place Notre-Dame / Arcades",
+  },
+  "parking.p1.type": {
+    en: "Outdoor parking, directly on the square.",
+    fr: "Parking extérieur, sur la place.",
+  },
   "parking.p1.typeLabel": { en: "Type", fr: "Type" },
   "parking.p1.dist": { en: "0 min (on site)", fr: "0 min (sur place)" },
-  "parking.p1.ideal": { en: "Short visits, drop-off, attending mass.", fr: "Courtes visites, dépose-minute, messe." },
+  "parking.p1.ideal": {
+    en: "Short visits, drop-off, attending mass.",
+    fr: "Courtes visites, dépose-minute, messe.",
+  },
   "parking.p1.idealLabel": { en: "Best for", fr: "Idéal pour" },
-  "parking.p1.note": { en: "Limited spaces, often busy.", fr: "Nombre de places limité, souvent complet." },
+  "parking.p1.note": {
+    en: "Limited spaces, often busy.",
+    fr: "Nombre de places limité, souvent complet.",
+  },
   "parking.p1.noteLabel": { en: "Note", fr: "Remarque" },
-  "parking.p1.address": { en: "Place Notre-Dame, 1700 Fribourg", fr: "Place Notre-Dame, 1700 Fribourg" },
+  "parking.p1.address": {
+    en: "Place Notre-Dame, 1700 Fribourg",
+    fr: "Place Notre-Dame, 1700 Fribourg",
+  },
 
   // Parking 2: Parking des Alpes
   "parking.p2.title": { en: "Parking des Alpes", fr: "Parking des Alpes" },
-  "parking.p2.type": { en: "Underground / covered car park.", fr: "Parking souterrain / couvert." },
+  "parking.p2.type": {
+    en: "Underground / covered car park.",
+    fr: "Parking souterrain / couvert.",
+  },
   "parking.p2.dist": { en: "5–7 min walk", fr: "5–7 min à pied" },
-  "parking.p2.ideal": { en: "Longer visits, central location.", fr: "Visites plus longues, centre-ville." },
-  "parking.p2.note": { en: "Open 24/7, more spaces available.", fr: "Ouvert en continu, plus de places." },
+  "parking.p2.ideal": {
+    en: "Longer visits, central location.",
+    fr: "Visites plus longues, centre-ville.",
+  },
+  "parking.p2.note": {
+    en: "Open 24/7, more spaces available.",
+    fr: "Ouvert en continu, plus de places.",
+  },
   "parking.p2.noteLabel": { en: "Advantages", fr: "Avantages" },
-  "parking.p2.address": { en: "Square des Places 7, 1700 Fribourg", fr: "Square des Places 7, 1700 Fribourg" },
+  "parking.p2.address": {
+    en: "Square des Places 7, 1700 Fribourg",
+    fr: "Square des Places 7, 1700 Fribourg",
+  },
 
   // Parking 3: Fribourg Centre
-  "parking.p3.title": { en: "Parking Fribourg Centre", fr: "Parking Fribourg Centre" },
-  "parking.p3.type": { en: "Shopping mall underground parking.", fr: "Parking souterrain du centre commercial." },
+  "parking.p3.title": {
+    en: "Parking Fribourg Centre",
+    fr: "Parking Fribourg Centre",
+  },
+  "parking.p3.type": {
+    en: "Shopping mall underground parking.",
+    fr: "Parking souterrain du centre commercial.",
+  },
   "parking.p3.dist": { en: "8–10 min walk", fr: "8–10 min à pied" },
-  "parking.p3.ideal": { en: "Shopping + Basilica, long stays.", fr: "Shopping + Basilique, longue durée." },
-  "parking.p3.note": { en: "Large capacity, direct mall access.", fr: "Grand nombre de places, accès centre." },
-  "parking.p3.address": { en: "Av. de la Gare 10, 1700 Fribourg", fr: "Av. de la Gare 10, 1700 Fribourg" },
+  "parking.p3.ideal": {
+    en: "Shopping + Basilica, long stays.",
+    fr: "Shopping + Basilique, longue durée.",
+  },
+  "parking.p3.note": {
+    en: "Large capacity, direct mall access.",
+    fr: "Grand nombre de places, accès centre.",
+  },
+  "parking.p3.address": {
+    en: "Av. de la Gare 10, 1700 Fribourg",
+    fr: "Av. de la Gare 10, 1700 Fribourg",
+  },
 
   // Public Transport
   "parking.p4.title": { en: "Train Station & Bus", fr: "Gare & Bus" },
-  "parking.p4.type": { en: "Public Transport from Fribourg Gare", fr: "Transports publics depuis la Gare" },
-  "parking.p4.dist": { en: "~7 min (Bus 1, 2, or 6)", fr: "~7 min (Bus 1, 2 ou 6)" },
+  "parking.p4.type": {
+    en: "Public Transport from Fribourg Gare",
+    fr: "Transports publics depuis la Gare",
+  },
+  "parking.p4.dist": {
+    en: "~7 min (Bus 1, 2, or 6)",
+    fr: "~7 min (Bus 1, 2 ou 6)",
+  },
   "parking.p4.ideal": { en: "Arrival by train.", fr: "Arrivée en train." },
-  "parking.p4.note": { en: "Bus stop 'Tilleul' or 'Pont-Murat'", fr: "Arrêt 'Tilleul' ou 'Pont-Murat'" },
-  "parking.p4.address": { en: "Gare de Fribourg, 1700 Fribourg", fr: "Gare de Fribourg, 1700 Fribourg" },
-
+  "parking.p4.note": {
+    en: "Bus stop 'Tilleul' or 'Pont-Murat'",
+    fr: "Arrêt 'Tilleul' ou 'Pont-Murat'",
+  },
+  "parking.p4.address": {
+    en: "Gare de Fribourg, 1700 Fribourg",
+    fr: "Gare de Fribourg, 1700 Fribourg",
+  },
 
   // Gallery
   "gallery.title": { en: "Photo Gallery", fr: "Galerie Photos" },
