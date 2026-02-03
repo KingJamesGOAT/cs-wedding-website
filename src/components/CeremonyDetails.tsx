@@ -87,6 +87,9 @@ export default function CeremonyDetails({
             <p className="text-stone-500 font-medium italic text-lg">
               {t("ceremony.subtitle")}
             </p>
+            <p className="text-stone-600 font-serif leading-relaxed px-4 pt-2">
+              {t("ceremony.intro")}
+            </p>
             <div className="w-16 h-0.5 bg-stone-300 mx-auto rounded-full mt-6" />
           </motion.div>
 

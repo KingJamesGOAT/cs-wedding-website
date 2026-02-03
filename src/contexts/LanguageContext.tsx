@@ -451,8 +451,12 @@ const translations: Record<string, Record<Language, string>> = {
     fr: "Un rite ancien de beauté et de silence.",
   },
   "ceremony.atmosphere": {
-    en: "The wedding ceremony will be a traditional Catholic Latin Mass. This sacred rite follows the centuries old liturgy of the Church, offered in the universal language of Latin to emphasize the timeless nature of the sacrament. A High Mass will be celebrated, featuring a full choir and traditional Gregorian chant. This ancient rite invites you into a space of deep prayer and timeless beauty.",
-    fr: "La cérémonie de mariage sera une messe catholique latine traditionnelle. Ce rite sacré suit la liturgie séculaire de l'Église, célébrée dans la langue universelle du latin pour souligner la nature intemporelle du sacrement. Une messe chantée sera célébrée, accompagnée d'une chorale et de chants grégoriens. Ce rite ancien vous invite à un moment de prière profonde et de beauté intemporelle.",
+    en: "A High Mass will be celebrated, featuring a full choir and traditional Gregorian chant. This ancient rite invites you into a space of deep prayer and timeless beauty.",
+    fr: "Une messe chantée sera célébrée, accompagnée d'une chorale et de chants grégoriens. Ce rite ancien vous invite à un moment de prière profonde et de beauté intemporelle."
+  },
+  "ceremony.intro": {
+    en: "The wedding ceremony will be a traditional Catholic Latin Mass. This sacred rite follows the centuries old liturgy of the Church, offered in the universal language of Latin to emphasize the timeless nature of the sacrament.",
+    fr: "La cérémonie de mariage sera une messe catholique latine traditionnelle. Ce rite sacré suit la liturgie séculaire de l'Église, célébrée dans la langue universelle du latin pour souligner la nature intemporelle du sacrement."
   },
   "ceremony.videoCaption": {
     en: "A beautiful overview of the ceremony.",
