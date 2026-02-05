@@ -131,6 +131,10 @@ export default function App() {
           </Suspense>
         </main>
 
+        <footer className="py-8 text-center text-xs text-neutral-400 font-sans tracking-wide">
+          © 2026 Steve Benjamin
+        </footer>
+
         <Toaster />
       </div>
       </TooltipProvider>
