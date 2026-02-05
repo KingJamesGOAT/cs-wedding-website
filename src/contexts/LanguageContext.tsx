@@ -21,6 +21,8 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
 const translations: Record<string, Record<Language, string>> = {
   // Navigation
   "nav.home": { en: "Home", fr: "Accueil" },
+  "common.yes": { en: "Yes", fr: "Oui" },
+  "common.no": { en: "No", fr: "Non" },
   "nav.details": { en: "Details", fr: "Infos Pratiques" },
   "nav.rsvp": { en: "RSVP", fr: "RSVP" },
   "nav.registry": { en: "Gifts", fr: "Cadeaux" },
@@ -293,6 +295,10 @@ const translations: Record<string, Record<Language, string>> = {
   "summary.rsvp.aperoWarning": {
     en: "Please drop off at Guglerahof Farm (12:30-13:30) before the ceremony.",
     fr: "Merci de déposer à la Ferme Guglerahof (12h30-13h30) avant la cérémonie.",
+  },
+  "summary.rsvp.bringingApero": {
+    en: "Bringing apero contributions.",
+    fr: "J'apporte quelque chose pour l'apéro.",
   },
   "summary.gifts.title": { en: "Your Gifts", fr: "Vos Cadeaux" },
   "summary.gifts.none": { en: "No gifts pledged yet.", fr: "Aucun cadeau." },

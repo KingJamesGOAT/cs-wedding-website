@@ -197,7 +197,7 @@ export default function UserSummaryButton({ activeSection }: UserSummaryButtonPr
                                     {userData.rsvp.dinnerAttendance && (
                                        <div className="bg-neutral-50 p-2 rounded-lg">
                                           <span className="text-neutral-400 block text-[10px] uppercase tracking-wider mb-0.5">{t('summary.rsvp.dinner')}</span>
-                                          <span className="font-medium text-neutral-900">{userData.rsvp.dinnerAttendance === 'Yes' ? 'Yes' : 'No'}</span>
+                                          <span className="font-medium text-neutral-900">{userData.rsvp.dinnerAttendance === 'Yes' ? t('common.yes') : t('common.no')}</span>
                                        </div>
                                     )}
                                  </div>
@@ -250,13 +250,13 @@ export default function UserSummaryButton({ activeSection }: UserSummaryButtonPr
                                              {item.label === 'Custom' ? item.customDetails : item.label}
                                           </span>
                                           <span className="text-[10px] font-bold bg-amber-100 text-amber-800 px-2 py-1 rounded-md shrink-0">
-                                             {item.quantity * 50} bites
+                                             {item.quantity * 50} {t('rsvp.bites')}
                                           </span>
                                        </div>
                                     ))}
                                  </div>
                               ) : (
-                                 <p className="text-sm text-neutral-500 italic">Bringing apero contributions.</p>
+                                 <p className="text-sm text-neutral-500 italic">{t('summary.rsvp.bringingApero')}</p>
                               )}
 
                               <div className="flex gap-2 items-start text-xs text-amber-800 bg-amber-100/40 p-3 rounded-lg border border-amber-100/50">
