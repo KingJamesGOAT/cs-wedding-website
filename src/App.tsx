@@ -131,7 +131,7 @@ export default function App() {
           </Suspense>
         </main>
 
-        <footer className="py-8 text-center text-xs text-neutral-400 font-sans tracking-wide">
+        <footer className="bg-neutral-900 py-8 text-center text-xs text-stone-300 font-sans tracking-wide">
           © 2026 Steve Benjamin
         </footer>
 
