@@ -425,8 +425,8 @@ const translations: Record<string, Record<Language, string>> = {
   "venue.copyAddress": { en: "Copy Address", fr: "Copier l'adresse" },
   "venue.receptionLocation": { en: "Guglerahof Farm", fr: "Ferme Guglerahof" },
   "venue.ceremonyAddress": {
-    en: "Rue de Morat 12, 1700 Fribourg, Switzerland",
-    fr: "Rue de Morat 12, 1700 Fribourg, Suisse",
+    en: "Pl. de Notre Dame 1, 1700 Fribourg Switzerland",
+    fr: "Pl. de Notre Dame 1, 1700 Fribourg, Suisse",
   },
   "venue.ceremonyCity": {
     en: "1700 Fribourg, Switzerland",
@@ -510,8 +510,8 @@ const translations: Record<string, Record<Language, string>> = {
   },
   "parking.p1.noteLabel": { en: "Note", fr: "Remarque" },
   "parking.p1.address": {
-    en: "Place Notre-Dame, 1700 Fribourg",
-    fr: "Place Notre-Dame, 1700 Fribourg",
+    en: "Pl. de Notre Dame 1, 1700 Fribourg",
+    fr: "Pl. de Notre Dame 1, 1700 Fribourg",
   },
 
   // Parking 2: Parking des Alpes

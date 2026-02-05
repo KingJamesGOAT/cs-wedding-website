@@ -94,7 +94,7 @@ export default function Venue() {
             <div className="p-6 md:p-8 flex flex-col flex-grow">
               <div className="flex items-start justify-between gap-4 mb-6">
                 <div className="space-y-1">
-                  <p className="text-neutral-900 font-medium text-lg leading-snug">Rue de Morat 12</p>
+                  <p className="text-neutral-900 font-medium text-lg leading-snug">Pl. de Notre Dame 1</p>
                   <p className="text-neutral-500">{t('venue.ceremonyCity')}</p>
                 </div>
                 <button
