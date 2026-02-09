@@ -523,13 +523,15 @@ export default function RSVP() {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <Label htmlFor="guests">{t('rsvp.guests')} {t('rsvp.includingYou')}</Label>
+                  <Label htmlFor="guests">
+                    <span dangerouslySetInnerHTML={{ __html: t('rsvp.guestsLabel') }} />
+                  </Label>
                   <Select value={formData.guests} onValueChange={(value: string) => setFormData({ ...formData, guests: value })}>
                     <SelectTrigger className="w-full" disabled={isSubmitting}>
                       <SelectValue placeholder="Select number" />
                     </SelectTrigger>
                     <SelectContent>
-                      {Array.from({ length: 11 }, (_, i) => i).map((num) => (
+                      {Array.from({ length: 10 }, (_, i) => i + 1).map((num) => (
                         <SelectItem key={num} value={num.toString()}>{num}</SelectItem>
                       ))}
                     </SelectContent>

@@ -153,6 +153,10 @@ const translations: Record<string, Record<Language, string>> = {
     fr: "Vous avez fait une erreur ? Pas de souci ! Soumettez simplement le formulaire à nouveau avec la même adresse email pour mettre à jour votre réponse.",
   },
   "rsvp.guests": { en: "Number of Guests", fr: "Nombre d'invités" },
+  "rsvp.guestsLabel": {
+    en: "<strong>Total</strong> Number of Guests (<strong>Including you</strong>)",
+    fr: "<strong>Nombre total</strong> d'invités (<strong>Vous inclus</strong>)",
+  },
   "rsvp.includingYou": { en: "(Including you)", fr: "(Vous inclus)" },
   "rsvp.children": {
     en: "Number of Children",
