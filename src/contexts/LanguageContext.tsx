@@ -289,8 +289,8 @@ const translations: Record<string, Record<Language, string>> = {
     fr: "Contributions Apéro",
   },
   "summary.rsvp.aperoWarning": {
-    en: "Please drop off at Guglerahof Farm (12:30-13:30) before the ceremony.",
-    fr: "Merci de déposer à la Ferme Guglerahof (12h30-13h30) avant la cérémonie.",
+    en: "Important: You will be informed by email in advance regarding the location and time to drop off your apero contribution before the ceremony. Please label your dish.",
+    fr: "Important : Vous serez informés par mail à l'avance pour l'endroit et l'heure à laquelle apporter votre apéritif avant la cérémonie. Merci d'étiqueter votre plat.",
   },
   "summary.rsvp.bringingApero": {
     en: "Bringing apero contributions.",

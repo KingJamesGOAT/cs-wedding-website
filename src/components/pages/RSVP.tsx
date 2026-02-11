@@ -328,8 +328,24 @@ export default function RSVP() {
           attending_status: finalData.attending === 'yes' 
             ? (isFrench ? 'Présent(e)' : 'Joyfully Accept') 
             : (isFrench ? 'Absent(e)' : 'Regretfully Decline'),
-          guests_count: parseInt(finalData.guests) + 1, // +1 for self
-          children_count: parseInt(finalData.children),
+        const totalGuests = parseInt(finalData.guests); // User already included
+        const childrenCount = parseInt(finalData.children);
+        const adultCount = totalGuests - childrenCount;
+        
+        // Format: "6 (3 Adults, 3 Children)" or "6 (3 Adultes, 3 Enfants)"
+        const guestsString = isFrench 
+          ? `${totalGuests} (${adultCount} Adulte${adultCount > 1 ? 's' : ''}, ${childrenCount} Enfant${childrenCount > 1 ? 's' : ''})`
+          : `${totalGuests} (${adultCount} Adult${adultCount > 1 ? 's' : ''}, ${childrenCount} Child${childrenCount > 1 ? 'ren' : ''})`;
+
+        await EmailService.sendRSVPConfirmation({
+          language,
+          to_name: `${finalData.firstName} ${finalData.lastName}`,
+          to_email: finalData.email,
+          attending_status: finalData.attending === 'yes' 
+            ? (isFrench ? 'Présent(e)' : 'Joyfully Accept') 
+            : (isFrench ? 'Absent(e)' : 'Regretfully Decline'),
+          guests_count: guestsString, // Sending formatted string instead of number
+          children_count: parseInt(finalData.children), // Kept for reference or removed if template doesn't need it separate
           dinner_status: finalData.dinnerAttendance === 'yes' 
             ? (isFrench ? 'Oui' : 'Yes') 
             : (finalData.dinnerAttendance === 'no' ? (isFrench ? 'Non' : 'No') : 'N/A'),
@@ -521,12 +537,12 @@ export default function RSVP() {
           {formData.attending !== 'no' && (
             <div className="space-y-8 pt-6 border-t border-neutral-100 animate-in fade-in slide-in-from-top-4 duration-500">
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
                 <div className="space-y-2">
-                  <Label htmlFor="guests">
+                  <Label htmlFor="guests" className="h-10 flex items-end pb-1">
                     <span dangerouslySetInnerHTML={{ __html: t('rsvp.guestsLabel') }} />
                   </Label>
-                  <Select value={formData.guests} onValueChange={(value: string) => setFormData({ ...formData, guests: value })}>
+                  <Select value={formData.guests} onValueChange={(value: string) => setFormData({ ...formData, guests: value, children: '0' })}>
                     <SelectTrigger className="w-full" disabled={isSubmitting}>
                       <SelectValue placeholder="Select number" />
                     </SelectTrigger>
@@ -538,15 +554,16 @@ export default function RSVP() {
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="children">
+                  <Label htmlFor="children" className="h-10 flex items-end pb-1">
                      <span dangerouslySetInnerHTML={{ __html: t('rsvp.children') }} />
                   </Label>
                   <Select 
                     value={formData.children} 
                     onValueChange={(value: string) => setFormData({ ...formData, children: value })}
+                    disabled={isSubmitting || formData.guests === '0'}
                   >
-                    <SelectTrigger className="w-full" disabled={isSubmitting}>
-                      <SelectValue placeholder="0" />
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder={formData.guests === '0' ? "Select guests first" : "0"} />
                     </SelectTrigger>
                     <SelectContent>
                       {Array.from({ length: parseInt(formData.guests) + 1 }, (_, i) => i).map((num) => (
@@ -554,6 +571,9 @@ export default function RSVP() {
                       ))}
                     </SelectContent>
                   </Select>
+                  {formData.guests === '0' && (
+                    <p className="text-[10px] text-amber-600 font-medium">Please select total guests first</p>
+                  )}
                 </div>
               </div>
 
