@@ -483,6 +483,11 @@ const translations: Record<string, Record<Language, string>> = {
     fr: "Un livret de messe bilingue (Latin-Anglais / Latin-Français) vous sera remis à l'entrée pour vous permettre de suivre les prières et les chants.",
   },
   "ceremony.learnMore": { en: "The Mass", fr: "La Messe" },
+  "ceremony.offeringTitle": { en: "Offering", fr: "Offrande" },
+  "ceremony.offering": {
+    en: "A cash offering will be collected during the Holy Mass to support the Basilica. This is entirely voluntary.",
+    fr: "Une quête (offrande en espèces) sera faite pendant la Sainte Messe pour soutenir la Basilique. Ceci est entièrement libre et non obligatoire."
+  },
 
   // Parking Modal
   "parking.modalTitle": {
@@ -494,6 +499,7 @@ const translations: Record<string, Record<Language, string>> = {
   "parking.walkingDistance": { en: "Walking distance", fr: "Temps de marche" },
   "parking.openMap": { en: "Open in Maps", fr: "Ouvrir dans Maps" },
   "parking.noteLabel": { en: "Note", fr: "Remarque" },
+  "parking.bestFor": { en: "Best for", fr: "Idéal pour" },
   "parking.backToList": { en: "Back to List", fr: "Retour à la liste" },
 
   // Parking 1: Place Notre-Dame
@@ -510,13 +516,13 @@ const translations: Record<string, Record<Language, string>> = {
   "parking.p1.typeLabel": { en: "Type", fr: "Type" },
   "parking.p1.dist": { en: "0 min (on site)", fr: "0 min (sur place)" },
   "parking.p1.ideal": {
-    en: "Short visits, drop-off, attending mass.",
-    fr: "Courtes visites, dépose-minute, messe.",
+    en: "Best Man & Family",
+    fr: "Témoins & Famille",
   },
-  "parking.p1.idealLabel": { en: "Best for", fr: "Idéal pour" },
+  "parking.p1.idealLabel": { en: "Reserved for", fr: "Réservé pour" },
   "parking.p1.note": {
-    en: "Limited spaces, often busy.",
-    fr: "Nombre de places limité, souvent complet.",
+    en: "Please park at the other proposed parkings.",
+    fr: "Merci de vous garer aux autres parkings proposés.",
   },
   "parking.p1.noteLabel": { en: "Note", fr: "Remarque" },
   "parking.p1.address": {

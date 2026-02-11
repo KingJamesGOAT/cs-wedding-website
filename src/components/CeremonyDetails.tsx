@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useIsMobile } from "./ui/use-mobile";
 import { motion, Variants } from "framer-motion";
-import { X, Shirt, BookOpen, Music } from "lucide-react";
+import { X, Shirt, BookOpen, Music, HeartHandshake } from "lucide-react";
 
 import {
   Dialog,
@@ -147,6 +147,21 @@ export default function CeremonyDetails({
                   </h3>
                   <p className="text-stone-600 leading-relaxed text-sm">
                     {t("ceremony.missalette")}
+                  </p>
+                </div>
+             </motion.div>
+             
+            {/* Offering Card */}
+            <motion.div variants={itemVariants} className="bg-white p-6 rounded-xl border border-stone-200 shadow-sm flex flex-col items-start gap-4 hover:border-stone-300 transition-colors md:col-span-2">
+                <div className="bg-stone-100 p-2.5 rounded-full text-stone-600">
+                   <HeartHandshake className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="font-serif text-xl text-stone-800 mb-2">
+                    {t("ceremony.offeringTitle")}
+                  </h3>
+                  <p className="text-stone-600 leading-relaxed text-sm">
+                    {t("ceremony.offering")}
                   </p>
                 </div>
              </motion.div>
