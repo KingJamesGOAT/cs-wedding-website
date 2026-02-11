@@ -157,6 +157,10 @@ const translations: Record<string, Record<Language, string>> = {
     en: "<strong>Total</strong> Number of Guests (<strong>Including you and children</strong>)",
     fr: "<strong>Nombre total</strong> d'invités (<strong>Vous et les enfants inclus</strong>)",
   },
+  "rsvp.selectGuestsFirst": {
+    en: "Please select total guests first",
+    fr: "Veuillez d'abord sélectionner le nombre total d'invités",
+  },
   "rsvp.includingYou": { en: "(Including you)", fr: "(Vous inclus)" },
   "rsvp.children": {
     en: "Number of Children (<strong>under 12 years old</strong>)",

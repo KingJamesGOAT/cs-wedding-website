@@ -565,7 +565,7 @@ export default function RSVP() {
                     </SelectContent>
                   </Select>
                   {formData.guests === '0' && (
-                    <p className="text-[10px] text-amber-600 font-medium">Please select total guests first</p>
+                    <p className="text-[10px] text-amber-600 font-medium">{t('rsvp.selectGuestsFirst')}</p>
                   )}
                 </div>
               </div>
