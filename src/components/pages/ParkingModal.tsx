@@ -18,14 +18,24 @@ export default function ParkingModal({ isOpen, onClose }: ParkingModalProps) {
   /* Force Body Scroll Lock to prevent background scrolling */
   useEffect(() => {
     if (isOpen) {
+      // Lock both body and html to ensure no background scrolling on all devices
       document.body.style.overflow = 'hidden';
+      document.body.style.overscrollBehavior = 'none';
+      document.documentElement.style.overflow = 'hidden';
+      document.documentElement.style.overscrollBehavior = 'none';
     } else {
       document.body.style.overflow = '';
+      document.body.style.overscrollBehavior = '';
+      document.documentElement.style.overflow = '';
+      document.documentElement.style.overscrollBehavior = '';
       setActiveParking(null); // Reset on close
       setShowMapMobile(false);
     }
     return () => {
       document.body.style.overflow = '';
+      document.body.style.overscrollBehavior = '';
+      document.documentElement.style.overflow = '';
+      document.documentElement.style.overscrollBehavior = '';
     };
   }, [isOpen]);
 
@@ -101,7 +111,7 @@ export default function ParkingModal({ isOpen, onClose }: ParkingModalProps) {
           
           {/* List Section */}
           <div className={`
-             flex-1 overflow-y-auto p-4 md:p-6 space-y-4 bg-neutral-50
+             flex-1 overflow-y-auto p-4 md:p-6 space-y-4 bg-neutral-50 overscroll-contain
              ${showMapMobile ? 'hidden md:block' : 'block'}
              md:max-w-[400px] lg:max-w-[450px]
           `}>
