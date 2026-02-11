@@ -24,7 +24,7 @@ interface PledgeData extends BaseEmailData {
 
 interface RSVPData extends BaseEmailData {
   attending_status: string; // "Joyfully Accept" or "Regretfully Decline" (Localized)
-  guests_count: number;
+  guests_count: string | number;
   children_count: number;
   dinner_status: string;
   dietary_info: string;
@@ -143,7 +143,8 @@ export const EmailService = {
     const details_section = `
       <div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px; border: 1px solid #eee;">
           <p><strong>Status:</strong> ${data.attending_status}</p>
-          <p><strong>${isFrench ? 'Invités' : 'Guests'}:</strong> ${data.guests_count} | <strong>${isFrench ? 'Enfants' : 'Children'}:</strong> ${data.children_count}</p>
+          <p><strong>${isFrench ? 'Invités' : 'Guests'}:</strong> ${data.guests_count}</p>
+
           ${dinnerLine}
           ${dietaryLine}
       </div>
