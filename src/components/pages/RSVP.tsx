@@ -321,13 +321,6 @@ export default function RSVP() {
           `;
         }
 
-        await EmailService.sendRSVPConfirmation({
-          language,
-          to_name: `${finalData.firstName} ${finalData.lastName}`,
-          to_email: finalData.email,
-          attending_status: finalData.attending === 'yes' 
-            ? (isFrench ? 'Présent(e)' : 'Joyfully Accept') 
-            : (isFrench ? 'Absent(e)' : 'Regretfully Decline'),
         const totalGuests = parseInt(finalData.guests); // User already included
         const childrenCount = parseInt(finalData.children);
         const adultCount = totalGuests - childrenCount;
