@@ -308,8 +308,8 @@ export default function RSVP() {
         let aperoSummary = '';
         if (finalData.aperoContribution === 'yes') {
           const warning = isFrench 
-            ? "Important : Merci d'apporter votre plat entre 12h30 et 13h30 à la Ferme Guglerahof. N'oubliez pas d'étiqueter votre plat."
-            : "Important: Please drop off your dish between 12:30 and 13:30 at Guglerahof Farm. Please label your dish.";
+            ? "Important : Vous serez informés par mail à l'avance pour l'endroit et l'heure à laquelle apporter votre apéritif avant la cérémonie. Merci d'étiqueter votre plat."
+            : "Important: You will be informed by email in advance regarding the location and time to drop off your apero contribution before the ceremony. Please label your dish.";
           
           const itemLabel = finalData.aperoItem || (isFrench ? 'Surprise' : 'Surprise');
           const detailsLabel = finalData.aperoDetails ? (isFrench ? `Détails: ${finalData.aperoDetails}` : `Details: ${finalData.aperoDetails}`) : '';
@@ -538,8 +538,22 @@ export default function RSVP() {
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="children">{t('rsvp.children')}</Label>
-                  <Input id="children" type="number" min="0" value={formData.children} onChange={(e) => setFormData({ ...formData, children: e.target.value })} className="w-full" disabled={isSubmitting} />
+                  <Label htmlFor="children">
+                     <span dangerouslySetInnerHTML={{ __html: t('rsvp.children') }} />
+                  </Label>
+                  <Select 
+                    value={formData.children} 
+                    onValueChange={(value: string) => setFormData({ ...formData, children: value })}
+                  >
+                    <SelectTrigger className="w-full" disabled={isSubmitting}>
+                      <SelectValue placeholder="0" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {Array.from({ length: parseInt(formData.guests) + 1 }, (_, i) => i).map((num) => (
+                        <SelectItem key={num} value={num.toString()}>{num}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
 
@@ -590,9 +604,7 @@ export default function RSVP() {
                           <AlertTriangle className="h-4 w-4 text-amber-600" />
                           <AlertTitle className="text-amber-800 font-semibold ml-2">{t('rsvp.aperoWarningTitle')}</AlertTitle>
                           <AlertDescription className="text-amber-700 ml-2 mt-1">
-                            {t('rsvp.aperoWarning.intro')}
-                            <strong>{t('rsvp.aperoWarning.bold')}</strong>
-                            {t('rsvp.aperoWarning.outro')}
+                            {t('rsvp.aperoWarning.text')}
                           </AlertDescription>
                         </Alert>
 

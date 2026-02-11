@@ -154,13 +154,13 @@ const translations: Record<string, Record<Language, string>> = {
   },
   "rsvp.guests": { en: "Number of Guests", fr: "Nombre d'invités" },
   "rsvp.guestsLabel": {
-    en: "<strong>Total</strong> Number of Guests (<strong>Including you</strong>)",
-    fr: "<strong>Nombre total</strong> d'invités (<strong>Vous inclus</strong>)",
+    en: "<strong>Total</strong> Number of Guests (<strong>Including you and children</strong>)",
+    fr: "<strong>Nombre total</strong> d'invités (<strong>Vous et les enfants inclus</strong>)",
   },
   "rsvp.includingYou": { en: "(Including you)", fr: "(Vous inclus)" },
   "rsvp.children": {
-    en: "Number of Children",
-    fr: "Nombre d'enfants",
+    en: "Number of Children (<strong>under 12 years old</strong>)",
+    fr: "Nombre d'enfants (<strong>moins de 12 ans</strong>)",
   },
   "rsvp.dietary": {
     en: "Dietary Restrictions",
@@ -171,8 +171,8 @@ const translations: Record<string, Record<Language, string>> = {
     fr: "Préférences alimentaires",
   },
   "rsvp.dietaryType.none": { en: "None", fr: "Aucune" },
-  "rsvp.dietaryType.vegetarian": { en: "Vegetarian", fr: "Végé (lacto-ovo)" },
-  "rsvp.dietaryType.vegan": { en: "Vegan", fr: "Végétalien" },
+  "rsvp.dietaryType.vegetarian": { en: "Vegetarian", fr: "Végétarien" },
+  "rsvp.dietaryType.vegan": { en: "Vegan", fr: "Vegan" },
   "rsvp.dietaryType.glutenFree": { en: "Gluten-Free", fr: "Sans gluten" },
   "rsvp.dietaryType.nutAllergy": { en: "Nut Allergy", fr: "Allergie aux noix" },
   "rsvp.dietaryType.other": {
@@ -206,20 +206,12 @@ const translations: Record<string, Record<Language, string>> = {
     fr: "Non, je viendrai juste profiter",
   },
   "rsvp.aperoWarningTitle": {
-    en: "Important Timing Info",
-    fr: "Information Importante",
+    en: "Important Information",
+    fr: "Information importante",
   },
-  "rsvp.aperoWarning.intro": {
-    en: "Since you are bringing food, please arrive ",
-    fr: "Comme vous apportez de la nourriture, merci d'arriver ",
-  },
-  "rsvp.aperoWarning.bold": {
-    en: "between 12:30 and 13:30 at Guglerahof Farm Guglera 6, 1735 Giffers to drop it off",
-    fr: "entre 12h30 et 13h30 à la Ferme Guglerahof Guglera 6, 1735 Giffers pour le dépôt",
-  },
-  "rsvp.aperoWarning.outro": {
-    en: " (Ceremony starts at 14:00 at Basilique Notre-Dame de Fribourg). Please label your plate.",
-    fr: " (La cérémonie commence à 14h00 à Basilique Notre-Dame de Fribourg). Merci d'étiqueter votre plat.",
+  "rsvp.aperoWarning.text": {
+    en: "You will be informed by email in advance regarding the location and time to drop off your apero contribution before the ceremony. Please label your dish.",
+    fr: "Vous serez informés par mail à l'avance pour l'endroit et l'heure à laquelle apporter votre apéritif avant la cérémonie. Merci d'étiqueter votre plat.",
   },
   "rsvp.aperoTypeLabel": {
     en: "What type of food?",
