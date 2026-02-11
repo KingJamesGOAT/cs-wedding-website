@@ -402,14 +402,14 @@ const translations: Record<string, Record<Language, string>> = {
   "venue.title": { en: "Venue Information", fr: "Lieux" },
   "venue.ceremony": { en: "Ceremony", fr: "Cérémonie" },
   "venue.reception": { en: "Apéro", fr: "Apéro" },
-  "venue.directions": { en: "Get Directions", fr: "Itinéraire" },
+  "venue.directions": { en: "Location", fr: "Localisation" },
   "venue.ceremonyTime": {
     en: "June 27, 2026 at 14:00",
     fr: "27 juin 2026 à 14h00",
   },
   "venue.ceremonyNote": {
-    en: "Ceremony will begin promptly at 14:00 (please arrive 15 minutes early).",
-    fr: "La cérémonie débutera à 14h00 précise (merci d'arriver 15 minutes en avance).",
+    en: "Ceremony will begin promptly at 14:00 (please arrive early).",
+    fr: "La cérémonie débutera à 14h00 précise (merci d'arriver en avance).",
   },
   "venue.receptionTime": {
     en: "Apéro to follow at 16:00",
@@ -431,7 +431,7 @@ const translations: Record<string, Record<Language, string>> = {
     en: "Route from Ceremony",
     fr: "Itinéraire depuis la cérémonie",
   },
-  "venue.openInMaps": { en: "Open in Maps", fr: "Ouvrir dans Maps" },
+  "venue.openInMaps": { en: "Open in Maps", fr: "Ouvrir l'itinéraire dans Maps" },
   "venue.copyAddress": { en: "Copy Address", fr: "Copier l'adresse" },
   "venue.receptionLocation": { en: "Guglerahof Farm", fr: "Ferme Guglerahof" },
   "venue.ceremonyAddress": {

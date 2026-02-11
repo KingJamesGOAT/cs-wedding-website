@@ -158,7 +158,7 @@ export default function Venue() {
                   <Car className="w-4 h-4 text-neutral-400" />
                   <span>~9 km</span>
                   <span className="w-1 h-1 bg-neutral-300 rounded-full"></span>
-                  <span>~15 min</span>
+                  <span>~20 min</span>
                 </div>
              </div>
           </div>
