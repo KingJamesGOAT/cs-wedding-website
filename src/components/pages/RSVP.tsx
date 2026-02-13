@@ -640,7 +640,7 @@ export default function RSVP() {
                                       {item.label === 'Custom' ? item.customDetails : item.label}
                                     </div>
                                     <div className="text-xs text-neutral-500 mt-0.5">
-                                      {item.label === 'Custom' ? 'Custom' : item.type} • {item.quantity * 50} {t('rsvp.bites')}
+                                      {item.label === 'Custom' ? 'Custom' : item.type} • {item.quantity * 40} {t('rsvp.bites')}
                                     </div>
                                   </div>
                                   <Button
@@ -695,7 +695,7 @@ export default function RSVP() {
                                             const isFullyTaken = remaining <= 0;
                                             return (
                                               <SelectItem key={opt.label} value={opt.label} disabled={isFullyTaken}>
-                                                {opt.label} {isFullyTaken ? t('rsvp.taken') : (remaining === 1 && opt.limit > 1 ? '(50 bites left)' : '')}
+                                                {opt.label} {isFullyTaken ? t('rsvp.taken') : (remaining === 1 && opt.limit > 1 ? '(40 bites left)' : '')}
                                               </SelectItem>
                                             );
                                          })}
@@ -726,11 +726,11 @@ export default function RSVP() {
                                               flex-1 p-3 border rounded-lg cursor-pointer transition-all
                                               ${tempQuantity === '1' ? 'border-neutral-900 bg-neutral-50 ring-1 ring-neutral-900' : 'border-neutral-200 hover:border-neutral-300'}
                                            `} onClick={() => setTempQuantity('1')}>
-                                              <div className="font-medium">50 {t('rsvp.bites')}</div>
+                                              <div className="font-medium">40 {t('rsvp.bites')}</div>
                                               <div className="text-xs text-neutral-500">Standard Portion</div>
                                            </div>
                                            
-                                           {/* Show 100 bites option if:
+                                           {/* Show 80 bites option if:
                                                1. Custom Item (Always allow?) => Let's allow for now.
                                                2. Standard Item => Only if limit allows and enough remaining
                                            */}
@@ -741,7 +741,7 @@ export default function RSVP() {
                                                       flex-1 p-3 border rounded-lg cursor-pointer transition-all
                                                       ${tempQuantity === '2' ? 'border-neutral-900 bg-neutral-50 ring-1 ring-neutral-900' : 'border-neutral-200 hover:border-neutral-300'}
                                                   `} onClick={() => setTempQuantity('2')}>
-                                                      <div className="font-medium">100 {t('rsvp.bites')}</div>
+                                                      <div className="font-medium">80 {t('rsvp.bites')}</div>
                                                       <div className="text-xs text-neutral-500">Double Portion</div>
                                                   </div>
                                                 );
@@ -758,7 +758,7 @@ export default function RSVP() {
                                                     flex-1 p-3 border rounded-lg cursor-pointer transition-all
                                                     ${tempQuantity === '2' ? 'border-neutral-900 bg-neutral-50 ring-1 ring-neutral-900' : 'border-neutral-200 hover:border-neutral-300'}
                                                 `} onClick={() => setTempQuantity('2')}>
-                                                    <div className="font-medium">100 {t('rsvp.bites')}</div>
+                                                    <div className="font-medium">80 {t('rsvp.bites')}</div>
                                                     <div className="text-xs text-neutral-500">Double Portion</div>
                                                 </div>
                                               );

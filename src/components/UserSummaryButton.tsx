@@ -250,7 +250,7 @@ export default function UserSummaryButton({ activeSection }: UserSummaryButtonPr
                                              {item.label === 'Custom' ? item.customDetails : item.label}
                                           </span>
                                           <span className="text-[10px] font-bold bg-amber-100 text-amber-800 px-2 py-1 rounded-md shrink-0">
-                                             {item.quantity * 50} {t('rsvp.bites')}
+                                             {item.quantity * 40} {t('rsvp.bites')}
                                           </span>
                                        </div>
                                     ))}

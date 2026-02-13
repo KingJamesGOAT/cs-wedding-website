@@ -110,8 +110,8 @@ const translations: Record<string, Record<Language, string>> = {
     fr: "Où indiquer ce que je voudrais apporter pour l'Apéro ?",
   },
   "details.qa.apero.answer": {
-    en: "You can specify this in the RSVP section. Please plan for a quantity of around 50 bites.",
-    fr: "Vous pouvez l'indiquer dans la section RSVP. Merci de prévoir une quantité pour environ 50 bouchées.",
+    en: "You can specify this in the RSVP section. Please plan for a quantity of around 40 bites.",
+    fr: "Vous pouvez l'indiquer dans la section RSVP. Merci de prévoir une quantité pour environ 40 bouchées.",
   },
   "details.qa.contactQuestions.question": {
     en: "Who should I contact if I have questions?",
@@ -198,8 +198,8 @@ const translations: Record<string, Record<Language, string>> = {
   },
   "rsvp.goToGifts": { en: "Go to Gifts", fr: "Aller aux Cadeaux" },
   "rsvp.aperoQuestion": {
-    en: "I would like to bring something for the Apero (Quantity: 50 bites)",
-    fr: "Je souhaite apporter quelque chose pour l’apéritif (environ 50 bouchées).",
+    en: "I would like to bring something for the Apero (Quantity: 40 bites)",
+    fr: "Je souhaite apporter quelque chose pour l’apéritif (environ 40 bouchées).",
   },
   "rsvp.aperoYes": {
     en: "Yes, I will bring something",
