@@ -18,6 +18,8 @@ import ParkingModal from './ParkingModal';
 
 export default function Details() {
   const { t, language } = useLanguage();
+  // Simple URL parameter check since we don't use a router
+  const inviteType = new URLSearchParams(window.location.search).get('invite');
   const [isParkingModalOpen, setIsParkingModalOpen] = useState(false);
 
   const hotels = [
@@ -226,6 +228,30 @@ export default function Details() {
                   </div>
                 </AccordionContent>
               </AccordionItem>
+
+              {inviteType === 'dinner' && (
+                <AccordionItem value="evening-contribution">
+                  <AccordionTrigger>
+                    <span className="flex items-center gap-3">
+                      <ExternalLink className="w-5 h-5 text-neutral-500" />
+                      {t('details.qa.contribute.question')}
+                    </span>
+                  </AccordionTrigger>
+                  <AccordionContent className="text-neutral-600 leading-relaxed">
+                    <div className="flex flex-col gap-3 py-2">
+                       <span className="font-medium text-neutral-900">Loïc Michoud</span>
+                       <div className="flex flex-col gap-2 text-sm">
+                        <a href="tel:+41787143325" className="flex items-center gap-2.5 text-neutral-600 hover:text-neutral-900 w-fit transition-colors group">
+                           <div className="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center group-hover:bg-neutral-200 transition-colors">
+                              <Phone className="w-4 h-4" />
+                           </div>
+                           <span>+41 78 714 33 25</span>
+                        </a>
+                       </div>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              )}
             </Accordion>
           </motion.div>
         </div>

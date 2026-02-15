@@ -129,6 +129,14 @@ const translations: Record<string, Record<Language, string>> = {
     en: "Chris Benjamin 078 949 51 91 cbchrisbenjamin@gmail.com",
     fr: "Chris Benjamin 078 949 51 91 cbchrisbenjamin@gmail.com",
   },
+  "details.qa.contribute.question": {
+    en: "If you wish to contribute to the evening activities",
+    fr: "Si vous souhaitez contribuer aux activités de la soirée",
+  },
+  "details.qa.contribute.answer": {
+    en: "Loïc Michoud : +41 78 714 33 25",
+    fr: "Loïc Michoud : +41 78 714 33 25",
+  },
 
   // RSVP Page
   "rsvp.title": { en: "RSVP", fr: "RSVP" },
