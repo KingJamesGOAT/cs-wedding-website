@@ -76,7 +76,7 @@ export default function RSVP() {
     firstName: '',
     lastName: '',
     email: '',
-    guests: '0',
+    guests: '1',
     children: '0',
     dietaryType: 'none',
     dietary: '',
@@ -390,7 +390,7 @@ export default function RSVP() {
           firstName: '', 
           lastName: '', 
           email: '', 
-          guests: '0', 
+          guests: '1', 
           children: '0', 
           dietaryType: 'none', 
           dietary: '',
@@ -497,7 +497,7 @@ export default function RSVP() {
             <Label className="text-lg font-medium block">{t('rsvp.attending')}</Label>
             <RadioGroup 
               value={formData.attending} 
-              onValueChange={(value: string) => setFormData({ ...formData, attending: value })}
+              onValueChange={(value: string) => setFormData({ ...formData, attending: value, guests: value === 'yes' ? '1' : '0' })}
               className="flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-8"
             >
               <div className="flex items-center space-x-3">
