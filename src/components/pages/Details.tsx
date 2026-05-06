@@ -144,7 +144,8 @@ export default function Details() {
                   </span>
                 </AccordionTrigger>
                 <AccordionContent className="text-neutral-600 leading-relaxed">
-                  {t('details.qa.dressCode.answer')}
+                  <p className="font-medium text-neutral-800 mb-2">🎨 {t('details.qa.dressCode.colorful')}</p>
+                  <p>{t('details.qa.dressCode.answer')}</p>
                 </AccordionContent>
               </AccordionItem>
 

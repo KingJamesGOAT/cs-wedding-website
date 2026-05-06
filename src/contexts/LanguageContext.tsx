@@ -77,6 +77,10 @@ const translations: Record<string, Record<Language, string>> = {
     en: "What is the dress code?",
     fr: "Quel est le dress code ?",
   },
+  "details.qa.dressCode.colorful": {
+    en: "Colorful attire encouraged",
+    fr: "Tenue colorée encouragée",
+  },
   "details.qa.dressCode.answer": {
     en: "To honor the sacred nature of the Basilica, we kindly suggest attire that covers the shoulders and knees.",
     fr: "Par respect pour le caractère sacré de la Basilique, nous suggérons une tenue couvrant les épaules et les genoux.",
