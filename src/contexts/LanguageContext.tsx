@@ -603,14 +603,14 @@ const translations: Record<string, Record<Language, string>> = {
   },
 
   // Gallery
-  "gallery.title": { en: "Photo Gallery", fr: "Galerie Photos" },
+  "gallery.title": { en: "Civil wedding photos", fr: "Photos du mariage civil" },
   "gallery.subtitle": {
-    en: "A collection of our favorite moments",
-    fr: "Une collection de nos moments préférés",
+    en: "24 April 2026",
+    fr: "24 avril 2026",
   },
   "gallery.officialPhotos": {
-    en: "Official photos arriving after the wedding!",
-    fr: "Les photos officielles arriveront après le mariage !",
+    en: "",
+    fr: "",
   },
   "gallery.comingSoon": {
     en: "Photo Coming Soon",
