@@ -71,12 +71,14 @@ export default function Gallery() {
               onClick={() => setSelectedImage(src)}
             >
               {/* Inner container scales up to overlap other images without shifting the grid layout */}
-              <div className="w-full h-full relative transition-all duration-300 sm:group-hover:scale-110 sm:group-hover:shadow-[0_10px_40px_rgba(0,0,0,0.8)] rounded-xl overflow-hidden bg-neutral-800">
+              <div className="w-full h-full relative transition-all duration-300 sm:group-hover:scale-110 sm:group-hover:shadow-[0_10px_40px_rgba(0,0,0,0.8)] rounded-xl overflow-hidden bg-neutral-800 transform-gpu will-change-transform">
                 <img
                   src={src}
                   alt={`Wedding moment ${i + 1}`}
-                  loading="lazy"
-                  className="w-full h-full object-cover"
+                  loading={i < 6 ? "eager" : "lazy"}
+                  fetchPriority={i < 6 ? "high" : "auto"}
+                  decoding="async"
+                  className="w-full h-full object-cover transform-gpu will-change-transform"
                 />
                 <div className="absolute inset-0 bg-black/20 opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
               </div>
