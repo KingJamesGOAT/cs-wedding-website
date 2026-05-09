@@ -1,14 +1,17 @@
+import { useState } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X } from 'lucide-react';
 
 export default function Gallery() {
   const { t } = useLanguage();
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   
   // Generate array for images 001.JPG to 014.JPG
   const images = Array.from({ length: 14 }, (_, i) => `/gallery/${String(i + 1).padStart(3, '0')}.JPG`);
 
   return (
-    <section id="gallery" className="py-20 px-4 sm:px-6 lg:px-8 bg-neutral-900 text-white overflow-hidden">
+    <section id="gallery" className="py-20 px-4 sm:px-6 lg:px-8 bg-neutral-900 text-white overflow-hidden relative">
       <div className="max-w-7xl mx-auto">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -33,20 +36,63 @@ export default function Gallery() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: (i % 5) * 0.1 }}
               viewport={{ once: true }}
-              className="break-inside-avoid mb-4 sm:mb-6 relative group rounded-xl overflow-hidden bg-neutral-800"
+              className="break-inside-avoid mb-4 sm:mb-6 relative group rounded-xl overflow-hidden bg-neutral-800 cursor-pointer sm:hover:shadow-[0_0_30px_rgba(0,0,0,0.5)] sm:hover:z-10 transition-all duration-300"
+              onClick={() => setSelectedImage(src)}
             >
               <img
                 src={src}
                 alt={`Wedding moment ${i + 1}`}
                 loading="lazy"
-                className="w-full h-auto object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
+                className="w-full h-auto object-cover transition-transform duration-700 ease-in-out sm:group-hover:scale-105"
               />
-              {/* Subtle hover overlay to focus the image */}
-              <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              {/* Subtle hover overlay to focus the image on desktop */}
+              <div className="absolute inset-0 bg-black/20 opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
             </motion.div>
           ))}
         </div>
       </div>
+
+      {/* Lightbox Overlay */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4 sm:p-8"
+            onClick={() => setSelectedImage(null)}
+          >
+            {/* Close Button */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedImage(null);
+              }}
+              className="absolute top-4 right-4 sm:top-8 sm:right-8 p-2 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full backdrop-blur-sm transition-all z-50"
+              aria-label="Close image"
+            >
+              <X className="w-6 h-6 sm:w-8 sm:h-8" />
+            </button>
+
+            {/* Image Container */}
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              className="relative max-w-[95vw] max-h-[90vh] sm:max-w-[85vw] sm:max-h-[85vh]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={selectedImage}
+                alt="Enlarged wedding moment"
+                className="w-full h-full object-contain rounded-lg shadow-2xl"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
