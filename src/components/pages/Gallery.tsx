@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 // Array of aspect ratios mapped perfectly to the specific images requested
 const aspectClasses = [
@@ -23,22 +23,44 @@ const aspectClasses = [
 
 export default function Gallery() {
   const { t } = useLanguage();
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   
   // Generate array for images 001.JPG to 014.JPG
   const images = Array.from({ length: 14 }, (_, i) => `/gallery/${String(i + 1).padStart(3, '0')}.JPG`);
 
-  // Prevent background scrolling when lightbox is open
+  const handleNext = () => {
+    if (selectedIndex !== null) {
+      setSelectedIndex((selectedIndex + 1) % images.length);
+    }
+  };
+
+  const handlePrev = () => {
+    if (selectedIndex !== null) {
+      setSelectedIndex((selectedIndex - 1 + images.length) % images.length);
+    }
+  };
+
+  // Keyboard navigation and background scroll lock
   useEffect(() => {
-    if (selectedImage) {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (selectedIndex === null) return;
+      if (e.key === 'ArrowRight') handleNext();
+      if (e.key === 'ArrowLeft') handlePrev();
+      if (e.key === 'Escape') setSelectedIndex(null);
+    };
+
+    if (selectedIndex !== null) {
       document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', handleKeyDown);
     } else {
       document.body.style.overflow = 'unset';
     }
+
     return () => {
       document.body.style.overflow = 'unset';
+      window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [selectedImage]);
+  }, [selectedIndex]);
 
   return (
     <section id="gallery" className="py-20 px-4 sm:px-6 lg:px-8 bg-neutral-900 text-white overflow-hidden relative">
@@ -68,7 +90,7 @@ export default function Gallery() {
               transition={{ duration: 0.5, delay: (i % 5) * 0.1 }}
               viewport={{ once: true }}
               className={`break-inside-avoid mb-4 sm:mb-6 relative group cursor-pointer sm:hover:z-50 ${aspectClasses[i]}`}
-              onClick={() => setSelectedImage(src)}
+              onClick={() => setSelectedIndex(i)}
             >
               {/* Inner container scales up to overlap other images without shifting the grid layout */}
               <div className="w-full h-full relative transition-all duration-300 sm:group-hover:scale-110 sm:group-hover:shadow-[0_10px_40px_rgba(0,0,0,0.8)] rounded-xl overflow-hidden bg-neutral-800 transform-gpu will-change-transform">
@@ -87,22 +109,22 @@ export default function Gallery() {
         </div>
       </div>
 
-      {/* Lightbox Overlay */}
+      {/* Lightbox Carousel Overlay */}
       <AnimatePresence>
-        {selectedImage && (
+        {selectedIndex !== null && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4 sm:p-8"
-            onClick={() => setSelectedImage(null)}
+            onClick={() => setSelectedIndex(null)}
           >
             {/* Close Button */}
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                setSelectedImage(null);
+                setSelectedIndex(null);
               }}
               className="absolute top-4 right-4 sm:top-8 sm:right-8 p-2 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full backdrop-blur-sm transition-all z-50"
               aria-label="Close image"
@@ -110,17 +132,54 @@ export default function Gallery() {
               <X className="w-6 h-6 sm:w-8 sm:h-8" />
             </button>
 
-            {/* Image Container */}
+            {/* Prev Button (Desktop) */}
+            <button
+              onClick={(e) => { e.stopPropagation(); handlePrev(); }}
+              className="hidden sm:flex absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 p-2 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full backdrop-blur-sm transition-all z-50"
+            >
+              <ChevronLeft className="w-8 h-8" />
+            </button>
+
+            {/* Next Button (Desktop) */}
+            <button
+              onClick={(e) => { e.stopPropagation(); handleNext(); }}
+              className="hidden sm:flex absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 p-2 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full backdrop-blur-sm transition-all z-50"
+            >
+              <ChevronRight className="w-8 h-8" />
+            </button>
+
+            {/* Image Container with Swipe Support */}
             <motion.img
+              key={`lightbox-img-${selectedIndex}`}
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              src={selectedImage}
+              src={images[selectedIndex]}
               alt="Enlarged wedding moment"
-              className="max-w-[95vw] max-h-[80vh] sm:max-w-[85vw] sm:max-h-[85vh] object-contain rounded-lg shadow-2xl"
+              className="max-w-[95vw] max-h-[80vh] sm:max-w-[85vw] sm:max-h-[85vh] object-contain rounded-lg shadow-2xl cursor-grab active:cursor-grabbing"
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.2}
+              onDragEnd={(e, { offset }) => {
+                const swipe = offset.x;
+                if (swipe < -50) handleNext();
+                else if (swipe > 50) handlePrev();
+              }}
               onClick={(e) => e.stopPropagation()}
             />
+
+            {/* Progress Dots */}
+            <div className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 flex items-center space-x-2 z-50" onClick={(e) => e.stopPropagation()}>
+              {images.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setSelectedIndex(idx)}
+                  className={`transition-all duration-300 rounded-full ${selectedIndex === idx ? 'w-3 h-3 bg-white' : 'w-2 h-2 bg-white/40 hover:bg-white/80'}`}
+                  aria-label={`Go to image ${idx + 1}`}
+                />
+              ))}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
