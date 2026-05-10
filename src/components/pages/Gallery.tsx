@@ -89,7 +89,7 @@ export default function Gallery() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: (i % 5) * 0.1 }}
               viewport={{ once: true }}
-              className={`break-inside-avoid mb-4 sm:mb-6 relative group cursor-pointer sm:hover:z-50 ${aspectClasses[i]}`}
+              className={`break-inside-avoid mb-4 sm:mb-6 relative group cursor-pointer sm:hover:z-40 ${aspectClasses[i]}`}
               onClick={() => setSelectedIndex(i)}
             >
               {/* Inner container scales up to overlap other images without shifting the grid layout */}
@@ -150,7 +150,6 @@ export default function Gallery() {
 
             {/* Image Container with Swipe Support */}
             <motion.img
-              key={`lightbox-img-${selectedIndex}`}
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
